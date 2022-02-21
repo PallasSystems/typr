@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>typing-service-runnable</module>
+    </modules>
     <parent>
         <groupId>uk.pallas</groupId>
         <artifactId>parent</artifactId>
@@ -16,6 +19,7 @@
         <repository_name>typing-service</repository_name>
         <!-- Project build dependencies. -->
         <uk.pallas.freeman.bom.version>1.0.0</uk.pallas.freeman.bom.version>
+        <org.springframework.boot.version>2.6.3</org.springframework.boot.version>
     </properties>
     
     <dependencyManagement>
@@ -27,6 +31,46 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${org.springframework.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+            <!-- <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${org.springframework.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${org.springframework.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <version>${org.springframework.boot.version}</version>
+                <scope>runtime</scope>
+                <optional>true</optional>
+            </dependency> -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.28</version>
+                <scope>runtime</scope>
+            </dependency>
+           <!-- <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${org.springframework.boot.version}</version>
+                <scope>test</scope>
+            </dependency> -->
         </dependencies>
     </dependencyManagement>
 </project>
