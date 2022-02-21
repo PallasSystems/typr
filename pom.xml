@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>uk.pallas</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.0.1</version>
+    </parent>
+    <groupId>uk.pallas.typing</groupId>
+    <artifactId>parent</artifactId>
+    <name>Typing Library</name>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <repository_name>typing-service</repository_name>
+        <!-- Project build dependencies. -->
+        <uk.pallas.freeman.bom.version>1.0.0</uk.pallas.freeman.bom.version>
+    </properties>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>uk.pallas.freeman</groupId>
+                <artifactId>freeman-bom</artifactId>
+                <version>${uk.pallas.freeman.bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

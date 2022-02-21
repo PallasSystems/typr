@@ -1,0 +1,74 @@
+name: Release Maven project
+
+on:
+  create:
+    branches:
+      - release/*
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-
+
+      - name: Extract branch name
+        id: extract_branch
+        if: ${{ contains(github.ref, 'refs/heads/release') }}
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / - | sed 's/release-*//')" >> $GITHUB_ENV
+
+      - name: Setup Git Email
+        run: git config --global user.email "github@crobar.uk"
+      - name: Setup Git User
+        run: git config --global user.name "GitHub Action"
+
+      - name: Prepare Release with Maven
+        if: ${{ contains(github.ref, 'refs/heads/release') }}
+        run: mvn --batch-mode --settings .github/maven_settings.xml --file pom.xml release:prepare -DreleaseVersion=${{ env.BRANCH_NAME }}
+        env:
+          GITHUB_USER: ${{ secrets.RELEASE_USER }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Release with Maven
+        if: ${{ contains(github.ref, 'refs/heads/release') }}
+        run: mvn --batch-mode --settings .github/maven_settings.xml --file pom.xml release:perform -DreleaseVersion=${{ env.BRANCH_NAME }} -Dusername=${{ secrets.RELEASE_USER }} -Dpassword=${{ secrets.RELEASE_TOKEN }} -Dgoals=clean,jacoco:prepare-agent,deploy,jacoco:report,spotbugs:spotbugs,pmd:pmd,pmd:cpd,org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        env:
+          GITHUB_USER: ${{ secrets.RELEASE_USER }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Fetch all Branches
+        if: ${{ contains(github.ref, 'refs/heads/release') }}
+        run: git fetch --all
+
+      - name: Switch to main branch
+        if: ${{ contains(github.ref, 'refs/heads/release') }}
+        run: git checkout main
+
+      - name: Merge release banch into main
+        if: ${{ contains(github.ref, 'refs/heads/release') }}
+        run: git merge origin/release/${{ env.BRANCH_NAME }}
+
+      - name: Merge release banch into main
+        if: ${{ contains(github.ref, 'refs/heads/release') }}
+        run: git push origin main
