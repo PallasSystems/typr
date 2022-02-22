@@ -17,7 +17,7 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
   private String name;
 
   /** Can you describe what the field concerns? */
-  @Column
+  @Column(length=4096)
   private String description;
 
   /** Is the validation optional? Does failing the validation mean we should not ingest the data? */
