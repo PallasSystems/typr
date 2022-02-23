@@ -1,6 +1,6 @@
-package uk.pallas.typing.domain.entities;
+package uk.pallas.typing.entities.v1.domain;
 
-import uk.pallas.freeman.common.structured.definitions.StringFieldDefinition;
+import uk.pallas.typing.entities.v1.StringFieldDefinition;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,18 +8,18 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "stringDefs")
+@Table(name = "string_type_definitions")
 public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain implements StringFieldDefinition {
 
   /** As this is a String type, assumption is we apply Regular Express to validate the string. */
-  @Column
+  @Column(nullable = true)
   private String regex;
 
   /**
    * Default constructor, sets everything to null and makes validation optional.
    */
   public StringFieldDefinitionDomain() {
-    this(null, null, null, true);
+    this(null, null, null);
   }
 
   /**
@@ -27,11 +27,9 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
    * @param regularExp the Regular expression to apply to this field.
    * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
    * @param desc Can you describe what the field concerns?
-   * @param optionalValidation Is the validation optional?
    */
-  public StringFieldDefinitionDomain(final String regularExp, final String fieldName, final String desc,
-                                   final boolean optionalValidation) {
-    super(fieldName, desc, optionalValidation);
+  public StringFieldDefinitionDomain(final String regularExp, final String fieldName, final String desc) {
+    super(fieldName, desc);
 
     this.regex = regularExp;
   }
@@ -114,9 +112,7 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
   public boolean isValid(final Object toTest) {
     final boolean result;
 
-    if (this.isValidationOptional()) {
-      result = toTest instanceof String;
-    } else if (toTest instanceof String) {
+    if (toTest instanceof String) {
       // Use to string as it leaves things the most flexible in our regex comparison.
       result = this.isValid((String)toTest);
     } else {
@@ -139,9 +135,7 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
   public boolean isValid(final String toTest) {
     final boolean result;
 
-    if (this.isValidationOptional()) {
-      result = null != toTest;
-    } else if (null == toTest) {
+    if (null == toTest) {
       result = false;
     } else {
       result = toTest.matches(this.getRegex());

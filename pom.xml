@@ -3,6 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>typing-service-runnable</module>
+        <module>typing-service-core</module>
+        <module>typing-service-jackson</module>
+        <module>typing-service-hibernate</module>
     </modules>
     <parent>
         <groupId>uk.pallas</groupId>

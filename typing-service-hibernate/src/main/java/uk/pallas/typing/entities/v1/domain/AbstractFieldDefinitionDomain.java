@@ -1,6 +1,6 @@
-package uk.pallas.typing.domain.entities;
+package uk.pallas.typing.entities.v1.domain;
 
-import uk.pallas.freeman.common.structured.definitions.FieldDefinition;
+import uk.pallas.typing.entities.v1.FieldDefinition;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -17,18 +17,14 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
   private String name;
 
   /** Can you describe what the field concerns? */
-  @Column(length=4096)
+  @Column(length=4096, nullable = true)
   private String description;
-
-  /** Is the validation optional? Does failing the validation mean we should not ingest the data? */
-  @Column(nullable = false)
-  private boolean validationOptional;
 
   /**
    * Default constructor, sets everything to null and makes validation optional.
    */
   protected AbstractFieldDefinitionDomain() {
-    this(null, null, true);
+    this(null, null);
   }
 
   /**
@@ -38,11 +34,8 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
   protected AbstractFieldDefinitionDomain(final FieldDefinition data) {
     super();
 
-    if (null == data) {
-      this.validationOptional = true;
-    } else {
+    if (null != data) {
       this.description = data.getDescription();
-      this.validationOptional = data.isValidationOptional();
       this.name = data.getName();
     }
   }
@@ -52,14 +45,12 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
    * Constructor, allows us to set the internal abstract fields
    * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
    * @param desc Can you describe what the field concerns?
-   * @param optionalValidation Is the validation optional?
    */
-  protected AbstractFieldDefinitionDomain(final String fieldName, final String desc, final boolean optionalValidation) {
+  protected AbstractFieldDefinitionDomain(final String fieldName, final String desc) {
     super();
 
     this.name = fieldName;
     this.description = desc;
-    this.validationOptional = optionalValidation;
   }
 
   /**
@@ -78,8 +69,7 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
       result = true;
     } else if (toCompare instanceof FieldDefinition) {
       final var that = (FieldDefinition) toCompare;
-      result = this.isValidationOptional() == that.isValidationOptional()
-                   && Objects.equals(this.getName(), that.getName())
+      result = Objects.equals(this.getName(), that.getName())
                    && Objects.equals(this.getDescription(), that.getDescription());
     } else {
       result = false;
@@ -94,7 +84,7 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
    */
   @Override
   public int hashCode() {
-    return Objects.hash(this.getName(), this.getDescription(), this.isValidationOptional());
+    return Objects.hash(this.getName(), this.getDescription());
   }
 
   public int getId() {
@@ -136,23 +126,4 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
   public void setDescription(final String detailedDescription) {
     this.description = detailedDescription;
   }
-
-  /**
-   * Flag to allow us to configure if validation is required for this field definition (perhaps a lot of the data
-   * is non conforming). If this is set to true then we do not need to validate the field, if false .. we do.
-   *
-   * @return true/false on if the regular expression associated is actually used to test the object.
-   */
-  public boolean isValidationOptional() {
-    return this.validationOptional;
-  }
-
-  /**
-   * This allows us to set the flag to configure if the DTO will test the incoming data object.
-   * @param validationOptional is the validation of the field .. optional?
-   */
-  public void setValidationOptional(final boolean validationOptional) {
-    this.validationOptional = validationOptional;
-  }
-
 }

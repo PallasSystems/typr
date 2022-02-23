@@ -9,15 +9,19 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-
     <artifactId>typing-service-runnable</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>uk.pallas.freeman.common</groupId>
-            <artifactId>structured</artifactId>
-            <version>1.0.4</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>typing-service-hibernate</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>typing-service-jackson</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -27,12 +31,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
