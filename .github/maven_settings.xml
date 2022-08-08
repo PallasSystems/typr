@@ -13,6 +13,12 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <gpg.keyname>${env.GPG_KEY_ID}</gpg.keyname>
+                <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
+                <username>${env.GITHUB_USER}</username>
+                <password>${env.GITHUB_TOKEN}</password>
+            </properties>
             <repositories>
                 <repository>
                     <id>github</id>
