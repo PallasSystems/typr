@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <modules>
-        <module>typing-service-runnable</module>
-        <module>typing-service-core</module>
-        <module>typing-service-jackson</module>
-        <module>typing-service-hibernate</module>
-    </modules>
     <parent>
-        <groupId>uk.pallas</groupId>
+        <groupId>uk.pallas.freeman</groupId>
         <artifactId>parent</artifactId>
-        <version>0.0.1</version>
+        <version>0.0.4-SNAPSHOT</version>
     </parent>
     <groupId>uk.pallas.typing</groupId>
     <artifactId>parent</artifactId>
@@ -18,11 +12,30 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>typing-service-runnable</module>
+        <module>typing-service-core</module>
+        <module>typing-service-jackson</module>
+        <module>typing-service-hibernate</module>
+    </modules>
+
     <properties>
         <repository_name>typing-service</repository_name>
         <!-- Project build dependencies. -->
         <uk.pallas.freeman.bom.version>1.0.0</uk.pallas.freeman.bom.version>
         <org.springframework.boot.version>2.6.3</org.springframework.boot.version>
+
+        <!-- Plugin versions. -->
+        <maven-site-plugin-version>4.0.0-M1</maven-site-plugin-version>
+        <maven-project-info-reports-plugin-version>3.3.0</maven-project-info-reports-plugin-version>
+        <maven-scm-publish-plugin-version>3.1.0</maven-scm-publish-plugin-version>
+        <maven-changelog-plugin-version>2.3</maven-changelog-plugin-version>
+        <taglist-maven-plugin-version>3.0.0</taglist-maven-plugin-version>
+        <maven-resources-plugin-version>3.2.0</maven-resources-plugin-version>
+        <!-- Used to generate the website. -->
+        <project.docs.directory>${project.basedir}/docs</project.docs.directory>
+        <project.build.interim.minified.directory>${project.build.directory}/minified</project.build.interim.minified.directory>
+        <project.build.interim.site.directory>${project.build.directory}/docs-site</project.build.interim.site.directory>
     </properties>
     
     <dependencyManagement>
@@ -56,4 +69,85 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin-version}</version>
+                    <configuration>
+                        <siteDirectory>${project.build.interim.site.directory}</siteDirectory>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-markdown-into-target</id>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.docs.directory}/</directory>
+                                    <includes>
+                                        <include>**/*.md</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.interim.site.directory}/markdown/</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-resources-into-target</id>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.docs.directory}/</directory>
+                                    <excludes>
+                                        <exclude>**/*.md</exclude>
+                                        <exclude>site.xml</exclude>
+                                    </excludes>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.interim.site.directory}/resources/</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-sitexml-into-target</id>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.docs.directory}/</directory>
+                                    <includes>
+                                        <include>site.xml</include>
+                                    </includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.interim.site.directory}/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
