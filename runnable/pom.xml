@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>typing-service-runnable</artifactId>
+    <artifactId>runnable</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>

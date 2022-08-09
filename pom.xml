@@ -14,10 +14,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>typing-service-runnable</module>
-        <module>typing-service-core</module>
-        <module>typing-service-jackson</module>
-        <module>typing-service-hibernate</module>
+        <module>runnable</module>
+        <module>core</module>
+        <module>jackson</module>
+        <module>hibernate</module>
     </modules>
 
     <properties>
