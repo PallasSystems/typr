@@ -38,6 +38,10 @@ jobs:
         run: git config --global user.email "pallas-ci@pallas.uk"
       - name: Setup Git User
         run: git config --global user.name "GitHub Action"
+      - name: Setup GPG Autosign
+        run: git config --global commit.gpgsign false
+      - name: Setup GPG Autosign Key
+        run: git config --global user.signingkey ${{ secrets.GPG_PRIVATE_KEYNAME }}
 
       - name: Prepare Release with Maven
         if: ${{ contains(github.ref, 'refs/heads/release') }}

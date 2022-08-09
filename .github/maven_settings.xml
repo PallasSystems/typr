@@ -18,6 +18,7 @@
                 <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
                 <username>${env.GITHUB_USER}</username>
                 <password>${env.GITHUB_TOKEN}</password>
+                <signTag>true</signTag>
             </properties>
             <repositories>
                 <repository>
