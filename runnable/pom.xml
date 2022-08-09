@@ -15,12 +15,12 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>typing-service-hibernate</artifactId>
+            <artifactId>hibernate</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>typing-service-jackson</artifactId>
+            <artifactId>jackson</artifactId>
             <version>${project.version}</version>
         </dependency>
 

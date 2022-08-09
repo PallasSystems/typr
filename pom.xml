@@ -14,10 +14,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>runnable</module>
         <module>core</module>
         <module>jackson</module>
         <module>hibernate</module>
+        <module>runnable</module>
     </modules>
 
     <properties>
