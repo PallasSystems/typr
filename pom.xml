@@ -21,13 +21,10 @@
     </modules>
 
     <properties>
-        <repository_name>typr</repository_name>
+        <github_repository_name>typr</github_repository_name>
         <!-- Project build dependencies. -->
         <uk.pallas.freeman.bom.version>1.0.0</uk.pallas.freeman.bom.version>
         <org.springframework.boot.version>2.6.3</org.springframework.boot.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.release>11</maven.compiler.release>
-        <maven.compiler.target>11</maven.compiler.target>
     </properties>
     
     <dependencyManagement>
