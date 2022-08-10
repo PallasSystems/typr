@@ -1,8 +1,6 @@
 package uk.pallas.typr.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import uk.pallas.typr.domain.DoubleFieldDefinitionRepository;
 import uk.pallas.typr.domain.LongFieldDefinitionRepository;
@@ -20,7 +18,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 @Service
-public class FieldDefinitionServices {
+public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
 
   @Autowired
   private DoubleFieldDefinitionRepository doubleDAO;
