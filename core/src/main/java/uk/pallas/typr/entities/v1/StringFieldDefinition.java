@@ -3,16 +3,28 @@ package uk.pallas.typr.entities.v1;
 public interface StringFieldDefinition extends FieldDefinition {
 
     /**
-     *  The regular Expression to apply to a string defined by this field definition.
+     * The regular Expression to apply to a string defined by this field definition, to confirm a given string is valid.
      * @return non null regular expression that can be used by Java Regex system.
      */
-    String getRegex();
+    String getDetectRegex();
 
     /**
-     * Allows us to set the regular expression associated with the field definition.
+     * The regular Expression to apply to a string defined by this field definition, to confirm a given string is valid.
      * @param validation a valid regular expression string.
      */
-    void setRegex(final String validation);
+    void setDetectRegex(final String validation);
+
+    /**
+     * The regular Expression to extract a matching regex string from a text block.
+     * @return non null regular expression that can be used by Java Regex system.
+     */
+    String getExtractRegex();
+
+    /**
+     * Allows us to set the regular expression to extract the term from a text block.
+     * @param validation a valid regular expression string.
+     */
+    void setExtractRegex(final String validation);
 
     /**
      * Is the supplied test object something that matches against our field definition regular expression?

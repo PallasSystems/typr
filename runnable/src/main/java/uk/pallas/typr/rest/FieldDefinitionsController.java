@@ -1,7 +1,9 @@
 package uk.pallas.typr.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import uk.pallas.typr.entities.v1.*;
 import uk.pallas.typr.entities.v1.jackson.DoubleFieldDefinitionDTO;
 import uk.pallas.typr.entities.v1.jackson.LongFieldDefinitionDTO;
@@ -57,6 +59,17 @@ public class FieldDefinitionsController {
     }
 
     return results;
+  }
+
+  @GetMapping("/type/{name}")
+  public JacksonFieldDefinition getType(@RequestParam("name") final String name) {
+    final JacksonFieldDefinition result = this.getDTO(this.services.getFieldDefinition(name));
+
+    if (null == result) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No type definition found for:" + name);
+    }
+
+    return result;
   }
 
   @PutMapping("/type")

@@ -26,7 +26,22 @@
         <uk.pallas.freeman.bom.version>1.0.0</uk.pallas.freeman.bom.version>
         <org.springframework.boot.version>2.6.3</org.springframework.boot.version>
     </properties>
-    
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springdoc</groupId>
+                    <artifactId>springdoc-openapi-maven-plugin</artifactId>
+                    <version>1.4</version>
+                    <configuration>
+                        <attachArtifact>true</attachArtifact>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -54,7 +69,7 @@
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
-                <version>1.6.4</version>
+                <version>1.6.9</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

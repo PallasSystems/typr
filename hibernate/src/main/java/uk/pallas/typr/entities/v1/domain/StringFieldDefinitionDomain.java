@@ -13,7 +13,11 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
 
   /** As this is a String type, assumption is we apply Regular Express to validate the string. */
   @Column(nullable = true)
-  private String regex;
+  private String detectRegex;
+
+  /** As this is a String type, assumption is we apply Regular Express to extract entities from a string block. */
+  @Column(nullable = true)
+  private String extractRegex;
 
   /**
    * Default constructor, sets everything to null and makes validation optional.
@@ -24,14 +28,34 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
 
   /**
    * Constructor, allows us to set the internal abstract fields
+   * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
+   */
+  public StringFieldDefinitionDomain(final String fieldName) {
+    this(null, fieldName, null);
+  }
+
+  /**
+   * Constructor, allows us to set the internal abstract fields
    * @param regularExp the Regular expression to apply to this field.
    * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
    * @param desc Can you describe what the field concerns?
    */
   public StringFieldDefinitionDomain(final String regularExp, final String fieldName, final String desc) {
+    this(regularExp, null, fieldName, desc);
+  }
+
+  /**
+   * Constructor, allows us to set the internal abstract fields
+   * @param detect the Regular expression to apply to this field.
+   * @param extract the Regular expression to apply to this field.
+   * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
+   * @param desc Can you describe what the field concerns?
+   */
+  public StringFieldDefinitionDomain(final String detect, final String extract, final String fieldName, final String desc) {
     super(fieldName, desc);
 
-    this.regex = regularExp;
+    this.detectRegex = detect;
+    this.extractRegex = extract;
   }
 
   /**
@@ -42,9 +66,11 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
     super(data);
 
     if (null == data) {
-      this.regex = null;
+      this.detectRegex = null;
+      this.extractRegex = null;
     } else {
-      this.regex = data.getRegex();
+      this.detectRegex = data.getDetectRegex();
+      this.extractRegex = data.getExtractRegex();
     }
   }
 
@@ -65,7 +91,8 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
     } else if (toCompare instanceof StringFieldDefinition) {
       final var that = (StringFieldDefinition) toCompare;
       result = super.equals(toCompare)
-                   && Objects.equals(this.getRegex(), that.getRegex());
+                   && Objects.equals(this.getDetectRegex(), that.getDetectRegex())
+                   && Objects.equals(this.getExtractRegex(), that.getExtractRegex());
     } else {
       result = false;
     }
@@ -79,23 +106,39 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
    */
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), this.getRegex());
+    return Objects.hash(super.hashCode(), this.getDetectRegex(), this.getExtractRegex());
   }
 
   /**
-   *  The regular Expression to apply to a string defined by this field definition.
+   * The regular Expression to apply to a string defined by this field definition, to confirm a given string is valid.
    * @return non null regular expression that can be used by Java Regex system.
    */
-  public String getRegex() {
-    return this.regex;
+  public String getDetectRegex() {
+    return this.detectRegex;
   }
 
   /**
-   * Allows us to set the regular expression associated with the field definition.
+   * The regular Expression to apply to a string defined by this field definition, to confirm a given string is valid.
    * @param validation a valid regular expression string.
    */
-  public void setRegex(final String validation) {
-    this.regex = validation;
+  public void setDetectRegex(final String validation) {
+    this.detectRegex = validation;
+  }
+
+  /**
+   * The regular Expression to extract a matching regex string from a text block.
+   * @return non null regular expression that can be used by Java Regex system.
+   */
+  public String getExtractRegex() {
+    return this.extractRegex;
+  }
+
+  /**
+   * Allows us to set the regular expression to extract the term from a text block.
+   * @param validation a valid regular expression string.
+   */
+  public void setExtractRegex(final String validation) {
+    this.extractRegex = validation;
   }
 
   /**
@@ -138,7 +181,7 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
     if (null == toTest) {
       result = false;
     } else {
-      result = toTest.matches(this.getRegex());
+      result = toTest.matches(this.getDetectRegex());
     }
 
     return result;
