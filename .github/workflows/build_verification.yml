@@ -66,17 +66,21 @@ jobs:
         uses: jwgmeligmeyling/spotbugs-github-action@master
         with:
           path: '**/spotbugsXml.xml'
-          token: ${{ secrets.SCM_TOKEN }}
 
       - name: PMD
         run: mvn --batch-mode --settings .github/maven_settings.xml --file pom.xml pmd:pmd pmd:cpd
         env:
-          GITHUB_USER: ${{ secrets.BUILD_USER }}
-          GITHUB_TOKEN: ${{ secrets.BUILD_TOKEN }}
+          GITHUB_USER: ${{ secrets.SCM_USER }}
+          GITHUB_TOKEN: ${{ secrets.SCM_TOKEN }}
 
+      - name: PMD Annotation
+        uses: jwgmeligmeyling/pmd-github-action@master
+        with:
+          path: '**/pmd.xml'
+          
       - name: SonarCloud Analysis
         run: mvn --batch-mode --settings .github/maven_settings.xml --file pom.xml verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         env:
-          GITHUB_USER: ${{ secrets.BUILD_USER }}
-          GITHUB_TOKEN: ${{ secrets.BUILD_TOKEN }}
+          GITHUB_USER: ${{ secrets.SCM_USER }}
+          GITHUB_TOKEN: ${{ secrets.SCM_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
