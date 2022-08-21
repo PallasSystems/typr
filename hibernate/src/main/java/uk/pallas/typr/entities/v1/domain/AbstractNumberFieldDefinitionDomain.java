@@ -1,9 +1,11 @@
 package uk.pallas.typr.entities.v1.domain;
 
+import uk.pallas.typr.entities.v1.Category;
 import uk.pallas.typr.entities.v1.NumberFieldDefinition;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import java.util.Collection;
 import java.util.Objects;
 
 @MappedSuperclass
@@ -25,7 +27,7 @@ abstract class AbstractNumberFieldDefinitionDomain<N extends Number> extends Abs
      * Default constructor, sets everything to null and makes validation optional.
      */
     protected AbstractNumberFieldDefinitionDomain() {
-        this(null, null, null, null);
+        this(null, null, null, null, null);
     }
 
     /**
@@ -49,8 +51,9 @@ abstract class AbstractNumberFieldDefinitionDomain<N extends Number> extends Abs
      * @param fieldName          What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
      * @param desc               Can you describe what the field concerns?
      */
-    protected AbstractNumberFieldDefinitionDomain(final N max, final N min, final String fieldName, final String desc) {
-        super(fieldName, desc);
+    protected AbstractNumberFieldDefinitionDomain(final N max, final N min, final String fieldName,
+                                                  final String desc, final Collection<Category> values) {
+        super(fieldName, desc, values);
 
         this.maximumValue = max;
         this.minimumValue = min;

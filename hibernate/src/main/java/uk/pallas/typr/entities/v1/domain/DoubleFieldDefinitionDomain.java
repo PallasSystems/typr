@@ -1,10 +1,12 @@
 package uk.pallas.typr.entities.v1.domain;
 
+import uk.pallas.typr.entities.v1.Category;
 import uk.pallas.typr.entities.v1.DoubleFieldDefinition;
 import uk.pallas.typr.entities.v1.NumberFieldDefinition;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Collection;
 
 @Entity
 @Table(name = "double_type_definitions")
@@ -14,7 +16,7 @@ public class DoubleFieldDefinitionDomain extends AbstractNumberFieldDefinitionDo
      * Default constructor, sets everything to null and makes validation optional.
      */
     public DoubleFieldDefinitionDomain() {
-        this(null, null, null, null);
+        this(null, null, null, null, null);
     }
 
     /**
@@ -25,8 +27,9 @@ public class DoubleFieldDefinitionDomain extends AbstractNumberFieldDefinitionDo
      * @param fieldName          What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
      * @param desc               Can you describe what the field concerns?
      */
-    public DoubleFieldDefinitionDomain(final Double max, final Double min, final String fieldName, final String desc) {
-        super(max, min, fieldName, desc);
+    public DoubleFieldDefinitionDomain(final Double max, final Double min, final String fieldName,
+                                       final String desc, final Collection<Category> values) {
+        super(max, min, fieldName, desc, values);
     }
 
     /**

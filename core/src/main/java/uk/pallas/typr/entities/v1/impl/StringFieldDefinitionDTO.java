@@ -1,7 +1,9 @@
-package uk.pallas.typr.entities.v1.jackson;
+package uk.pallas.typr.entities.v1.impl;
 
+import uk.pallas.typr.entities.v1.Category;
 import uk.pallas.typr.entities.v1.StringFieldDefinition;
 
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -24,7 +26,7 @@ public class StringFieldDefinitionDTO extends AbstractFieldDefinitionDTO impleme
      * Default constructor, sets everything to null and makes validation optional.
      */
     public StringFieldDefinitionDTO() {
-        this(null, null, null);
+        this(null, null, null, null);
     }
 
     /**
@@ -33,8 +35,8 @@ public class StringFieldDefinitionDTO extends AbstractFieldDefinitionDTO impleme
      * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
      * @param desc Can you describe what the field concerns?
      */
-    public StringFieldDefinitionDTO(final String regularExp, final String fieldName, final String desc) {
-        this(regularExp, null, fieldName, desc);
+    public StringFieldDefinitionDTO(final String regularExp, final String fieldName, final String desc, final Collection<Category> values) {
+        this(regularExp, null, fieldName, desc, values);
     }
 
     /**
@@ -44,8 +46,8 @@ public class StringFieldDefinitionDTO extends AbstractFieldDefinitionDTO impleme
      * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
      * @param desc Can you describe what the field concerns?
      */
-    public StringFieldDefinitionDTO(final String detect, final String extract, final String fieldName, final String desc) {
-        super(fieldName, desc);
+    public StringFieldDefinitionDTO(final String detect, final String extract, final String fieldName, final String desc, final Collection<Category> fieldCats) {
+        super(fieldName, desc, fieldCats);
 
         this.detectRegex = detect;
         this.extractRegex = extract;
@@ -179,13 +181,5 @@ public class StringFieldDefinitionDTO extends AbstractFieldDefinitionDTO impleme
         }
 
         return result;
-    }
-
-    /**
-     * Defines the class type so we can associate with it.
-     * @return a valid field name for association.
-     */
-    public String getType() {
-        return StringFieldDefinition.class.getSimpleName();
     }
 }

@@ -1,7 +1,9 @@
-package uk.pallas.typr.entities.v1.jackson;
+package uk.pallas.typr.entities.v1.impl;
 
+import uk.pallas.typr.entities.v1.Category;
 import uk.pallas.typr.entities.v1.NumberFieldDefinition;
 
+import java.util.Collection;
 import java.util.Objects;
 
 abstract class AbstractNumberFieldDefinitionDTO<N extends Number> extends AbstractFieldDefinitionDTO implements NumberFieldDefinition<N> {
@@ -20,7 +22,7 @@ abstract class AbstractNumberFieldDefinitionDTO<N extends Number> extends Abstra
      * Default constructor, sets everything to null and makes validation optional.
      */
     protected AbstractNumberFieldDefinitionDTO() {
-        this(null, null, null, null);
+        this(null, null, null, null, null);
     }
 
     /**
@@ -44,8 +46,9 @@ abstract class AbstractNumberFieldDefinitionDTO<N extends Number> extends Abstra
      * @param fieldName          What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
      * @param desc               Can you describe what the field concerns?
      */
-    protected AbstractNumberFieldDefinitionDTO(final N max, final N min, final String fieldName, final String desc) {
-        super(fieldName, desc);
+    protected AbstractNumberFieldDefinitionDTO(final N max, final N min, final String fieldName,
+                                               final String desc, final Collection<Category> values) {
+        super(fieldName, desc, values);
 
         this.maximumValue = max;
         this.minimumValue = min;

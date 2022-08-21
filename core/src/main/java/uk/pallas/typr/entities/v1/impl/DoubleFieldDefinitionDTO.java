@@ -1,15 +1,18 @@
-package uk.pallas.typr.entities.v1.jackson;
+package uk.pallas.typr.entities.v1.impl;
 
-import uk.pallas.typr.entities.v1.LongFieldDefinition;
+import uk.pallas.typr.entities.v1.Category;
+import uk.pallas.typr.entities.v1.DoubleFieldDefinition;
 import uk.pallas.typr.entities.v1.NumberFieldDefinition;
 
-public class LongFieldDefinitionDTO extends AbstractNumberFieldDefinitionDTO<Long> implements LongFieldDefinition {
+import java.util.Collection;
+
+public class DoubleFieldDefinitionDTO extends AbstractNumberFieldDefinitionDTO<Double> implements DoubleFieldDefinition {
 
     /**
      * Default constructor, sets everything to null and makes validation optional.
      */
-    public LongFieldDefinitionDTO() {
-        this(null, null, null, null);
+    public DoubleFieldDefinitionDTO() {
+        this(null, null, null, null, null);
     }
 
     /**
@@ -20,15 +23,15 @@ public class LongFieldDefinitionDTO extends AbstractNumberFieldDefinitionDTO<Lon
      * @param fieldName          What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
      * @param desc               Can you describe what the field concerns?
      */
-    public LongFieldDefinitionDTO(final Long max, final Long min, final String fieldName, final String desc) {
-        super(max, min, fieldName, desc);
+    public DoubleFieldDefinitionDTO(final Double max, final Double min, final String fieldName, final String desc, final Collection<Category> values) {
+        super(max, min, fieldName, desc, values);
     }
 
     /**
      * Copy Constructor, passes up to parent Copy Constructor and sets Minimum/Maximum values.
      * @param data the object to create a duplicate off.
      */
-    public LongFieldDefinitionDTO(final NumberFieldDefinition<Long> data) {
+    public DoubleFieldDefinitionDTO(final NumberFieldDefinition<Double> data) {
         super(data);
     }
 
@@ -38,28 +41,20 @@ public class LongFieldDefinitionDTO extends AbstractNumberFieldDefinitionDTO<Lon
      * @param toConvert the object to test (if Number or a String holding a valid whole number.
      * @return null .. or a valid Number.
      */
-    protected Long getNumber(final Object toConvert) {
+    protected Double getNumber(final Object toConvert) {
 
-        Long result = null;
+        Double result = null;
 
         if (toConvert instanceof Number) {
-            result = ((Number) toConvert).longValue();
+            result = ((Number) toConvert).doubleValue();
         } else if (null != toConvert) {
             try {
-                result = Long.parseLong(toConvert.toString());
+                result = Double.parseDouble(toConvert.toString());
             } catch (final NumberFormatException exception) {
                 // TODO lets catch this fail and log it.
             }
         }
 
         return result;
-    }
-
-    /**
-     * Defines the class type so we can associate with it.
-     * @return a valid field name for association.
-     */
-    public String getType() {
-        return LongFieldDefinition.class.getSimpleName();
     }
 }

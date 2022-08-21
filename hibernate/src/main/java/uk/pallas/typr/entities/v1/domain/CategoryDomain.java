@@ -3,13 +3,15 @@ package uk.pallas.typr.entities.v1.domain;
 import uk.pallas.typr.entities.v1.Category;
 import uk.pallas.typr.entities.v1.FieldDefinition;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
-@MappedSuperclass
-public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition {
+@Entity
+@Table(name = "categories")
+public class CategoryDomain implements Category {
 
   /** What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc.. */
   @Id
@@ -20,15 +22,10 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
   @Column(length=4096, nullable = true)
   private String description;
 
-  /** Can you describe what the field concerns? */
-  @Column(nullable = true)
-  @ManyToMany
-  private Collection<CategoryDomain> categories;
-
   /**
    * Default constructor, sets everything to null and makes validation optional.
    */
-  protected AbstractFieldDefinitionDomain() {
+  protected CategoryDomain() {
     this(null, null);
   }
 
@@ -36,30 +33,26 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
    * Copy Constructor.
    * @param data object to copy from.
    */
-  protected AbstractFieldDefinitionDomain(final FieldDefinition data) {
-    this(null == data ? null : data.getName(), null == data ? null : data.getDescription(), null == data ? null : data.getCategories());
+  protected CategoryDomain(final Category data) {
+    super();
+
+    if (null != data) {
+      this.description = data.getDescription();
+      this.name = data.getName();
+    }
   }
+
 
   /**
    * Constructor, allows us to set the internal abstract fields
    * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
    * @param desc Can you describe what the field concerns?
    */
-  protected AbstractFieldDefinitionDomain(final String fieldName, final String desc) {
-    this(fieldName, desc, new ArrayList<>());
-  }
-
-  /**
-   * Constructor, allows us to set the internal abstract fields
-   * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
-   * @param desc Can you describe what the field concerns?
-   */
-  protected AbstractFieldDefinitionDomain(final String fieldName, final String desc, final Collection<Category> values) {
+  protected CategoryDomain(final String fieldName, final String desc) {
     super();
 
     this.name = fieldName;
     this.description = desc;
-    this.setCategories(values);
   }
 
   /**
@@ -76,8 +69,8 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
     final boolean result;
     if (this == toCompare) {
       result = true;
-    } else if (toCompare instanceof FieldDefinition) {
-      final var that = (FieldDefinition) toCompare;
+    } else if (toCompare instanceof Category) {
+      final var that = (Category) toCompare;
       result = Objects.equals(this.getName(), that.getName())
                    && Objects.equals(this.getDescription(), that.getDescription());
     } else {
@@ -110,35 +103,6 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
    */
   public void setName(final String identifier) {
     this.name = identifier;
-  }
-
-  /**
-   * List of categories assocaited with our type. These are additional ways to define a type for routing/managing a schema.
-   * @return an empty list if nothing is supplied.
-   */
-  @Override
-  public Collection<Category> getCategories() {
-    return new ArrayList<>(this.categories);
-  }
-
-  /**
-   * Sets the list of categories assocaited with our type. These are additional ways to define a type for routing/managing a schema.
-   * @param values all categories associated with the type.
-   */
-  @Override
-  public void setCategories(final Collection<Category> values) {
-
-    this.categories = new ArrayList<>();
-
-    if (null != values && !values.isEmpty()) {
-      for (final Category category : values) {
-        if (category instanceof CategoryDomain) {
-          this.categories.add((CategoryDomain)category);
-        } else if (category instanceof Category) {
-          this.categories.add(new CategoryDomain((Category)category));
-        }
-      }
-    }
   }
 
   /**

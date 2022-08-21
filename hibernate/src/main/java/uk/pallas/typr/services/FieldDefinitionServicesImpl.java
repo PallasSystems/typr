@@ -30,13 +30,30 @@ public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
   private StringFieldDefinitionRepository stringDAO;
 
   public Collection<FieldDefinition> getFieldDefinitions() {
+    return this.getFieldDefinitionsByType(null);
+  }
 
+  public Collection<FieldDefinition> getFieldDefinitionsByType(final String type) {
     final Collection<FieldDefinition> results = new HashSet<>();
-    results.addAll(this.doubleDAO.findAll());
-    results.addAll(this.longDAO.findAll());
-    results.addAll(this.stringDAO.findAll());
+
+    if (null == type || type.isBlank()) {
+      results.addAll(this.doubleDAO.findAll());
+      results.addAll(this.longDAO.findAll());
+      results.addAll(this.stringDAO.findAll());
+    } else if ("string".equalsIgnoreCase(type)) {
+      results.addAll(this.stringDAO.findAll());
+    } else if ("double".equalsIgnoreCase(type)) {
+      results.addAll(this.doubleDAO.findAll());
+    } else if ("long".equalsIgnoreCase(type)) {
+      results.addAll(this.longDAO.findAll());
+    } else if ("number".equalsIgnoreCase(type)) {
+      results.addAll(this.longDAO.findAll());
+      results.addAll(this.doubleDAO.findAll());
+    }
+
     return results;
   }
+
 
   public FieldDefinition getFieldDefinition(final String name) {
     final Collection<FieldDefinition> results = new HashSet<>();

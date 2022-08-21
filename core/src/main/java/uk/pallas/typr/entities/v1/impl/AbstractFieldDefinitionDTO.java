@@ -1,11 +1,13 @@
-package uk.pallas.typr.entities.v1.jackson;
+package uk.pallas.typr.entities.v1.impl;
 
+import uk.pallas.typr.entities.v1.Category;
 import uk.pallas.typr.entities.v1.FieldDefinition;
-import uk.pallas.typr.entities.v1.JacksonFieldDefinition;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
-abstract class AbstractFieldDefinitionDTO implements JacksonFieldDefinition {
+abstract class AbstractFieldDefinitionDTO implements FieldDefinition {
 
     /** What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc.. */
     private String name;
@@ -13,32 +15,31 @@ abstract class AbstractFieldDefinitionDTO implements JacksonFieldDefinition {
     /** Can you describe what the field concerns? */
     private String description;
 
+    /** Can you describe what the field concerns? */
+    private Collection<Category> categories;
+
     /**
      * Default constructor, sets everything to null and makes validation optional.
      */
     protected AbstractFieldDefinitionDTO() {
-        this(null, null);
+        this(null, null, null);
     }
 
-    /**
-     * Copy Constructor.
-     * @param data object to copy from.
-     */
     protected AbstractFieldDefinitionDTO(final FieldDefinition data) {
-        this(null == data ? null : data.getName(), null == data ? null : data.getDescription());
+        this(null == data ? null : data.getName(), null == data ? null : data.getDescription(), null == data ? null : data.getCategories());
     }
-
 
     /**
      * Constructor, allows us to set the internal abstract fields
      * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
      * @param desc Can you describe what the field concerns?
      */
-    protected AbstractFieldDefinitionDTO(final String fieldName, final String desc) {
+    protected AbstractFieldDefinitionDTO(final String fieldName, final String desc, final Collection<Category> fieldCats) {
         super();
 
         this.name = fieldName;
         this.description = desc;
+        this.categories = null == fieldCats ? new ArrayList<>() : new ArrayList<>(fieldCats);
     }
 
     /**
@@ -89,6 +90,22 @@ abstract class AbstractFieldDefinitionDTO implements JacksonFieldDefinition {
      */
     public void setName(final String identifier) {
         this.name = identifier;
+    }
+
+    /**
+     * List of categories assocaited with our type. These are additional ways to define a type for routing/managing a schema.
+     * @return an empty list if nothing is supplied.
+     */
+    public Collection<Category> getCategories() {
+        return this.categories;
+    }
+
+    /**
+     * Sets the list of categories assocaited with our type. These are additional ways to define a type for routing/managing a schema.
+     * @param values all categories associated with the type.
+     */
+    public void setCategories(final Collection<Category> values) {
+        this.categories = null == values ? new ArrayList<>() : values;
     }
 
     /**

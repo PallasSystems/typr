@@ -1,10 +1,12 @@
 package uk.pallas.typr.entities.v1.domain;
 
+import uk.pallas.typr.entities.v1.Category;
 import uk.pallas.typr.entities.v1.StringFieldDefinition;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -41,7 +43,7 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
    * @param desc Can you describe what the field concerns?
    */
   public StringFieldDefinitionDomain(final String regularExp, final String fieldName, final String desc) {
-    this(regularExp, null, fieldName, desc);
+    this(regularExp, null, fieldName, desc, null);
   }
 
   /**
@@ -51,7 +53,8 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
    * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
    * @param desc Can you describe what the field concerns?
    */
-  public StringFieldDefinitionDomain(final String detect, final String extract, final String fieldName, final String desc) {
+  public StringFieldDefinitionDomain(final String detect, final String extract, final String fieldName,
+                                     final String desc, final Collection<Category> values) {
     super(fieldName, desc);
 
     this.detectRegex = detect;

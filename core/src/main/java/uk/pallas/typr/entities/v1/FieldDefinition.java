@@ -1,5 +1,7 @@
 package uk.pallas.typr.entities.v1;
 
+import java.util.Collection;
+
 /**
  * This class defines Complex Structured Data field definitions we can assign to various structured data schema's.
  */
@@ -27,6 +29,18 @@ public interface FieldDefinition {
      * @param detailedDescription the description to attache (null is ok)
      */
     void setDescription(final String detailedDescription);
+
+    /**
+     * List of categories assocaited with our type. These are additional ways to define a type for routing/managing a schema.
+     * @return an empty list if nothing is supplied.
+     */
+    Collection<Category> getCategories();
+
+    /**
+     * Sets the list of categories assocaited with our type. These are additional ways to define a type for routing/managing a schema.
+     * @param values all categories associated with the type.
+     */
+    void setCategories(final Collection<Category> values);
 
     /**
      * Is the supplied test object something that matches against our field definition regular expression?
