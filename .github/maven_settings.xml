@@ -23,7 +23,7 @@
             <repositories>
                 <repository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/PallasUK/*</url>
+                    <url>https://maven.pkg.github.com/PallasSystems/*</url>
                     <releases>
                         <enabled>true</enabled>
                     </releases>
@@ -35,7 +35,7 @@
             <pluginRepositories>
                 <pluginRepository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/PallasUK/*</url>
+                    <url>https://maven.pkg.github.com/PallasSystems/*</url>
                     <releases>
                         <enabled>true</enabled>
                     </releases>
