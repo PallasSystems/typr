@@ -26,28 +26,34 @@ public class StringFieldDefinitionDTO extends AbstractFieldDefinitionDTO impleme
      * Default constructor, sets everything to null and makes validation optional.
      */
     public StringFieldDefinitionDTO() {
-        this(null, null, null, null);
+        this(null);
     }
 
     /**
      * Constructor, allows us to set the internal abstract fields
      * @param regularExp the Regular expression to apply to this field.
-     * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
+     * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc...
+     * @param shortName a shorted version of the Field Name (e.g. if the Field Name is Mobile Country Code the short name might be MCC).
      * @param desc Can you describe what the field concerns?
+     * @param values what categories should be associated with the field definition.
      */
-    public StringFieldDefinitionDTO(final String regularExp, final String fieldName, final String desc, final Collection<Category> values) {
-        this(regularExp, null, fieldName, desc, values);
+    public StringFieldDefinitionDTO(final String regularExp, final String fieldName, final String shortName,
+                                    final String desc, final Collection<Category> values) {
+        this(regularExp, null, fieldName, shortName, desc, values);
     }
 
     /**
      * Constructor, allows us to set the internal abstract fields
      * @param detect the Regular expression to apply to this field.
      * @param extract the Regular expression to apply to this field.
-     * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
+     * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc...
+     * @param shortName a shorted version of the Field Name (e.g. if the Field Name is Mobile Country Code the short name might be MCC).
      * @param desc Can you describe what the field concerns?
+     * @param values what categories should be associated with the field definition.
      */
-    public StringFieldDefinitionDTO(final String detect, final String extract, final String fieldName, final String desc, final Collection<Category> fieldCats) {
-        super(fieldName, desc, fieldCats);
+    public StringFieldDefinitionDTO(final String detect, final String extract, final String fieldName,
+                                    final String shortName, final String desc, final Collection<Category> values) {
+        super(fieldName, shortName, desc, values);
 
         this.detectRegex = detect;
         this.extractRegex = extract;
@@ -174,10 +180,10 @@ public class StringFieldDefinitionDTO extends AbstractFieldDefinitionDTO impleme
     public boolean isValid(final String toTest) {
         final boolean result;
 
-        if (null == toTest) {
+        if (null == toTest || toTest.isBlank()) {
             result = false;
         } else {
-            result = toTest.matches(this.getDetectRegex());
+            result = toTest.trim().matches(this.getDetectRegex());
         }
 
         return result;

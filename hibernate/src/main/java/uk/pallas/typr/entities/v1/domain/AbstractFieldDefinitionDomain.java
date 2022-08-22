@@ -2,11 +2,14 @@ package uk.pallas.typr.entities.v1.domain;
 
 import uk.pallas.typr.entities.v1.Category;
 import uk.pallas.typr.entities.v1.FieldDefinition;
+import uk.pallas.typr.entities.v1.impl.CategoryDTO;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @MappedSuperclass
 public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition {
@@ -20,10 +23,14 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
   @Column(length=4096, nullable = true)
   private String description;
 
+  /** Many field types can have a short name (e.g. Social Security Number is shortened to SSN), this is used for those types of objects. **/
+  @Column(nullable = true)
+  private String acronym;
+
   /** Can you describe what the field concerns? */
   @Column(nullable = true)
   @ManyToMany
-  private Collection<CategoryDomain> categories;
+  private final Collection<CategoryDomain> categories;
 
   /**
    * Default constructor, sets everything to null and makes validation optional.
@@ -37,7 +44,8 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
    * @param data object to copy from.
    */
   protected AbstractFieldDefinitionDomain(final FieldDefinition data) {
-    this(null == data ? null : data.getName(), null == data ? null : data.getDescription(), null == data ? null : data.getCategories());
+    this(null == data ? null : data.getName(), null == data ? null : data.getAcronym(),
+        null == data ? null : data.getDescription(), null == data ? null : data.getCategories());
   }
 
   /**
@@ -46,7 +54,7 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
    * @param desc Can you describe what the field concerns?
    */
   protected AbstractFieldDefinitionDomain(final String fieldName, final String desc) {
-    this(fieldName, desc, new ArrayList<>());
+    this(fieldName, null, desc, null);
   }
 
   /**
@@ -54,12 +62,19 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
    * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
    * @param desc Can you describe what the field concerns?
    */
-  protected AbstractFieldDefinitionDomain(final String fieldName, final String desc, final Collection<Category> values) {
+  protected AbstractFieldDefinitionDomain(final String fieldName, final String shortName, final String desc, final Collection<Category> fieldCats) {
     super();
 
     this.name = fieldName;
+    this.acronym = shortName;
     this.description = desc;
-    this.setCategories(values);
+    this.categories = new HashSet<>();
+    if (null != fieldCats) {
+      // Convert everything
+      this.categories.addAll(fieldCats.stream()
+          .map(value -> new CategoryDomain(value))
+          .collect(Collectors.toSet()));
+    }
   }
 
   /**
@@ -79,7 +94,9 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
     } else if (toCompare instanceof FieldDefinition) {
       final var that = (FieldDefinition) toCompare;
       result = Objects.equals(this.getName(), that.getName())
-                   && Objects.equals(this.getDescription(), that.getDescription());
+                   && Objects.equals(this.getAcronym(), that.getAcronym())
+                   && Objects.equals(this.getDescription(), that.getDescription())
+                   && (this.getCategories().containsAll(that.getCategories()) && that.getCategories().containsAll(this.getCategories()));
     } else {
       result = false;
     }
@@ -94,6 +111,22 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
   @Override
   public int hashCode() {
     return Objects.hash(this.getName(), this.getDescription());
+  }
+
+  /**
+   * Retrieves the shortened name (e.g. Acronym) of the field definition e.g. post code, uk mobile, IPv4, etc..
+   * @return non null value (if field definition is valid).
+   */
+  public String getAcronym() {
+    return this.acronym;
+  }
+
+  /**
+   * Sets the shortened name (e.g. Acronym) for the field definition e.g. Ipv6, MCC, etc...
+   * @param identifier the new name for the field definition value
+   */
+  public void setAcronym(final String identifier) {
+    this.acronym = identifier;
   }
 
   /**
@@ -127,16 +160,14 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
    */
   @Override
   public void setCategories(final Collection<Category> values) {
-
-    this.categories = new ArrayList<>();
-
-    if (null != values && !values.isEmpty()) {
-      for (final Category category : values) {
-        if (category instanceof CategoryDomain) {
-          this.categories.add((CategoryDomain)category);
-        } else if (category instanceof Category) {
-          this.categories.add(new CategoryDomain((Category)category));
-        }
+    if (null == values || values.isEmpty()) {
+      this.categories.clear();
+    } else {
+      if (null != values) {
+        // Convert everything
+        this.categories.addAll(values.stream()
+            .map(value -> new CategoryDomain(value))
+            .collect(Collectors.toSet()));
       }
     }
   }

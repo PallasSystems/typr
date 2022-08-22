@@ -23,7 +23,8 @@
         <github_repository_name>typr</github_repository_name>
         <!-- Project build dependencies. -->
         <uk.pallas.freeman.bom.version>1.0.0</uk.pallas.freeman.bom.version>
-        <org.springframework.boot.version>2.6.3</org.springframework.boot.version>
+        <org.springframework.boot.version>2.7.3</org.springframework.boot.version>
+        <org.springdoc.version>1.6.11</org.springdoc.version>
     </properties>
 
     <build>
@@ -35,6 +36,14 @@
                     <version>1.4</version>
                     <configuration>
                         <attachArtifact>true</attachArtifact>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.3.4.RELEASE</version>
+                    <configuration>
+                        <jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments>
                     </configuration>
                 </plugin>
             </plugins>
@@ -51,8 +60,8 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- Import dependency management from Spring Boot -->
             <dependency>
-                <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${org.springframework.boot.version}</version>
@@ -64,11 +73,21 @@
                 <artifactId>postgresql</artifactId>
                 <version>42.4.1</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>2.4.0</version>
+            </dependency>
+            <!-- Manages the view of the OpenAPI part. -->
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
-                <version>1.6.9</version>
+                <version>${org.springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-security</artifactId>
+                <version>${org.springdoc.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

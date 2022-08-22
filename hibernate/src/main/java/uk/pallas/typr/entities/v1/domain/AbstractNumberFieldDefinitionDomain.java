@@ -27,7 +27,7 @@ abstract class AbstractNumberFieldDefinitionDomain<N extends Number> extends Abs
      * Default constructor, sets everything to null and makes validation optional.
      */
     protected AbstractNumberFieldDefinitionDomain() {
-        this(null, null, null, null, null);
+        this(null);
     }
 
     /**
@@ -52,8 +52,8 @@ abstract class AbstractNumberFieldDefinitionDomain<N extends Number> extends Abs
      * @param desc               Can you describe what the field concerns?
      */
     protected AbstractNumberFieldDefinitionDomain(final N max, final N min, final String fieldName,
-                                                  final String desc, final Collection<Category> values) {
-        super(fieldName, desc, values);
+                                                  final String shortName, final String desc, final Collection<Category> values) {
+        super(fieldName, shortName, desc, values);
 
         this.maximumValue = max;
         this.minimumValue = min;

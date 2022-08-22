@@ -12,19 +12,22 @@ public class LongFieldDefinitionDTO extends AbstractNumberFieldDefinitionDTO<Lon
      * Default constructor, sets everything to null and makes validation optional.
      */
     public LongFieldDefinitionDTO() {
-        this(null, null, null, null, null);
+        this(null);
     }
 
     /**
      * Constructor, allows us to set the internal abstract fields
      *
-     * @param max                The upper bound allowed for the field
-     * @param min                the lower bound allowed for the field
-     * @param fieldName          What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
-     * @param desc               Can you describe what the field concerns?
+     * @param max The upper bound allowed for the field
+     * @param min The lower bound allowed for the field
+     * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc...
+     * @param shortName a shorted version of the Field Name (e.g. if the Field Name is Mobile Country Code the short name might be MCC).
+     * @param desc Can you describe what the field concerns?
+     * @param values what categories should be associated with the field definition.
      */
-    public LongFieldDefinitionDTO(final Long max, final Long min, final String fieldName, final String desc, final Collection<Category> values) {
-        super(max, min, fieldName, desc, values);
+    public LongFieldDefinitionDTO(final Long max, final Long min, final String fieldName,
+                                  final String shortName, final String desc, final Collection<Category> values) {
+        super(max, min, fieldName, shortName, desc, values);
     }
 
     /**

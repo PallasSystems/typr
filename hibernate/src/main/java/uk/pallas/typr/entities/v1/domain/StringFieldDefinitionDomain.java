@@ -39,7 +39,7 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
   /**
    * Constructor, allows us to set the internal abstract fields
    * @param regularExp the Regular expression to apply to this field.
-   * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
+   * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc...
    * @param desc Can you describe what the field concerns?
    */
   public StringFieldDefinitionDomain(final String regularExp, final String fieldName, final String desc) {
@@ -50,8 +50,9 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
    * Constructor, allows us to set the internal abstract fields
    * @param detect the Regular expression to apply to this field.
    * @param extract the Regular expression to apply to this field.
-   * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc..
+   * @param fieldName What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc...
    * @param desc Can you describe what the field concerns?
+   * @param values what categories should be associated with the field definition.
    */
   public StringFieldDefinitionDomain(final String detect, final String extract, final String fieldName,
                                      final String desc, final Collection<Category> values) {
