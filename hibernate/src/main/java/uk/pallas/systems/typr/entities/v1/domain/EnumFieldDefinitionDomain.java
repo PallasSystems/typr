@@ -1,22 +1,28 @@
-package uk.pallas.systems.typr.entities.v1.impl;
+package uk.pallas.systems.typr.entities.v1.domain;
 
 import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.EnumFieldDefinition;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 
-public class EnumFieldDefintionDTO extends AbstractFieldDefinitionDTO implements EnumFieldDefinition {
+@Entity
+@Table(name = "enum_type_definitions")
+public class EnumFieldDefinitionDomain extends AbstractFieldDefinitionDomain implements EnumFieldDefinition {
 
+  @Column(nullable = false)
   private final Collection<String> values;
 
 
   /**
    * Default constructor, sets everything to null and makes validation optional.
    */
-  public EnumFieldDefintionDTO() {
+  public EnumFieldDefinitionDomain() {
     this(null);
   }
 
@@ -27,8 +33,8 @@ public class EnumFieldDefintionDTO extends AbstractFieldDefinitionDTO implements
    * @param desc Can you describe what the field concerns?
    * @param fieldCats what categories should be associated with the field definition.
    */
-  public EnumFieldDefintionDTO(final String fieldName, final String shortName, final String desc,
-                               final Collection<String> enumerates, final Collection<Category> fieldCats) {
+  public EnumFieldDefinitionDomain(final String fieldName, final String shortName, final String desc,
+                                   final Collection<String> enumerates, final Collection<Category> fieldCats) {
     super(fieldName, shortName, desc, fieldCats);
 
     this.values = new HashSet<>(10);
@@ -41,7 +47,7 @@ public class EnumFieldDefintionDTO extends AbstractFieldDefinitionDTO implements
    * Copy Constructor, passes up to parent Copy Constructor.
    * @param data the object to create a duplicate off.
    */
-  public EnumFieldDefintionDTO(final EnumFieldDefinition data) {
+  public EnumFieldDefinitionDomain(final EnumFieldDefinition data) {
     this(null == data ? null : data.getName(), null == data ? null : data.getAcronym(),
          null == data ? null : data.getDescription(), null == data ? null : data.getValues(), null == data ? null : data.getCategories());
   }

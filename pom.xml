@@ -4,7 +4,7 @@
     <parent>
         <groupId>uk.pallas.systems</groupId>
         <artifactId>parent</artifactId>
-        <version>0.0.8</version>
+        <version>0.1.0</version>
     </parent>
     <groupId>uk.pallas.systems.typr</groupId>
     <artifactId>parent</artifactId>
@@ -17,6 +17,7 @@
         <module>core</module>
         <module>hibernate</module>
         <module>runnable</module>
+        <module>rest</module>
     </modules>
 
     <properties>
@@ -82,6 +83,11 @@
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${org.springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-javadoc</artifactId>
                 <version>${org.springdoc.version}</version>
             </dependency>
             <dependency>

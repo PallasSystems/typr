@@ -3,6 +3,7 @@ package uk.pallas.systems.typr.entities.v1.impl;
 import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.NumberFieldDefinition;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -11,11 +12,13 @@ abstract class AbstractNumberFieldDefinitionDTO<N extends Number> extends Abstra
     /**
      * Is there an upper range for valid value stored within the field?
      */
+    @NotNull
     private N maximumValue;
 
     /**
      * Is there an lower range for valid value stored within the field?
      */
+    @NotNull
     private N minimumValue;
 
     /**

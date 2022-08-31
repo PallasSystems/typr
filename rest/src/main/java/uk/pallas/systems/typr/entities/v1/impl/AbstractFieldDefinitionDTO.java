@@ -3,6 +3,9 @@ package uk.pallas.systems.typr.entities.v1.impl;
 import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -11,15 +14,18 @@ import java.util.stream.Collectors;
 abstract class AbstractFieldDefinitionDTO implements FieldDefinition {
 
     /** What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc.. */
+    @NotBlank
     private String name;
 
     /** Many field types can have a short name (e.g. Social Security Number is shortened to SSN), this is used for those types of objects. **/
     private String acronym;
 
     /** Can you describe what the field concerns? */
+    @Size(max=4096)
     private String description;
 
     /** Can you describe what the field concerns? */
+    @NotNull
     private Collection<Category> categories;
 
     /**

@@ -2,20 +2,15 @@ package uk.pallas.systems.typr.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.pallas.systems.typr.domain.DoubleFieldDefinitionRepository;
-import uk.pallas.systems.typr.domain.LongFieldDefinitionRepository;
-import uk.pallas.systems.typr.entities.v1.FieldDefinition;
-import uk.pallas.systems.typr.entities.v1.NumberFieldDefinition;
-import uk.pallas.systems.typr.entities.v1.StringFieldDefinition;
-import uk.pallas.systems.typr.entities.v1.domain.DoubleFieldDefinitionDomain;
-import uk.pallas.systems.typr.entities.v1.domain.LongFieldDefinitionDomain;
-import uk.pallas.systems.typr.domain.StringFieldDefinitionRepository;
-import uk.pallas.systems.typr.entities.v1.DoubleFieldDefinition;
-import uk.pallas.systems.typr.entities.v1.LongFieldDefinition;
-import uk.pallas.systems.typr.entities.v1.domain.StringFieldDefinitionDomain;
+import uk.pallas.systems.typr.domain.*;
+import uk.pallas.systems.typr.entities.v1.*;
+import uk.pallas.systems.typr.entities.v1.domain.*;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
@@ -24,28 +19,65 @@ public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
   private DoubleFieldDefinitionRepository doubleDAO;
 
   @Autowired
+  private CategoryRepository categoryDAO;
+
+  @Autowired
+  private EnumFieldDefinitionRepository enumDAO;
+
+  @Autowired
   private LongFieldDefinitionRepository longDAO;
 
   @Autowired
   private StringFieldDefinitionRepository stringDAO;
 
-  public Collection<FieldDefinition> getFieldDefinitions() {
-    return this.getFieldDefinitionsByType(null);
+  @Override
+  public Collection<Category> getCategories() {
+    final List<CategoryDomain> results = this.categoryDAO.findAll();
+    return results.stream().map(value -> (Category)value).collect(Collectors.toList());
   }
 
+  @Override
+  public Category getCategoryByName(final String name) {
+    final Optional<CategoryDomain> results =  this.categoryDAO.findById(name);
+    return results.isEmpty() ? null : results.get();
+  }
+
+  /**
+   *
+   * @return
+   */
+  public Collection<FieldDefinition> getFieldDefinitions() {
+    final Collection<FieldDefinition> results = new HashSet<>();
+
+    results.addAll(this.doubleDAO.findAll());
+    results.addAll(this.enumDAO.findAll());
+    results.addAll(this.longDAO.findAll());
+    results.addAll(this.stringDAO.findAll());
+
+    return results;
+  }
+
+  @Override
+  public Collection<FieldDefinition> getFieldDefinitionsByCategory(final String category) {
+    return null;
+  }
+
+  /**
+   *
+   * @param type
+   * @return
+   */
   public Collection<FieldDefinition> getFieldDefinitionsByType(final String type) {
     final Collection<FieldDefinition> results = new HashSet<>();
 
-    if (null == type || type.isBlank()) {
-      results.addAll(this.doubleDAO.findAll());
-      results.addAll(this.longDAO.findAll());
-      results.addAll(this.stringDAO.findAll());
-    } else if ("string".equalsIgnoreCase(type)) {
+    if ("string".equalsIgnoreCase(type)) {
       results.addAll(this.stringDAO.findAll());
     } else if ("double".equalsIgnoreCase(type)) {
       results.addAll(this.doubleDAO.findAll());
     } else if ("long".equalsIgnoreCase(type)) {
       results.addAll(this.longDAO.findAll());
+    } else if ("enum".equalsIgnoreCase(type)) {
+      results.addAll(this.enumDAO.findAll());
     } else if ("number".equalsIgnoreCase(type)) {
       results.addAll(this.longDAO.findAll());
       results.addAll(this.doubleDAO.findAll());
@@ -55,16 +87,39 @@ public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
   }
 
 
-  public FieldDefinition getFieldDefinition(final String name) {
-    final Collection<FieldDefinition> results = new HashSet<>();
+  /**
+   *
+   * @param name
+   * @return
+   */
+  public FieldDefinition getFieldDefinitionByName(final String name) {
+    final FieldDefinition result;
+    final Optional<DoubleFieldDefinitionDomain> dblResults = this.doubleDAO.findById(name);
+    if (dblResults.isEmpty()) {
+      final Optional<EnumFieldDefinitionDomain> enumResults = this.enumDAO.findById(name);
+      if (enumResults.isEmpty()) {
+        final Optional<LongFieldDefinitionDomain> longResults = this.longDAO.findById(name);
+        if (longResults.isEmpty()) {
+          final Optional<StringFieldDefinitionDomain> stringResults = this.stringDAO.findById(name);
+          result = stringResults.get();
+        } else {
+          result = longResults.get();
+        }
+      } else {
+        result = enumResults.get();
+      }
+    } else {
+      result = dblResults.get();
+    }
 
-    results.addAll(this.doubleDAO.findByName(name));
-    results.addAll(this.longDAO.findByName(name));
-    results.addAll(this.stringDAO.findByName(name));
-
-    return results.isEmpty() ? null : results.stream().findFirst().get();
+    return result;
   }
 
+  /**
+   *
+   * @param definition
+   * @return
+   */
   public FieldDefinition saveFieldDefintion(final FieldDefinition definition) {
 
     final FieldDefinition result;
@@ -75,6 +130,9 @@ public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
     } else if (definition instanceof DoubleFieldDefinition) {
       final DoubleFieldDefinitionDomain domain = new DoubleFieldDefinitionDomain((DoubleFieldDefinition)definition);
       result = this.doubleDAO.save(domain);
+    } else if (definition instanceof EnumFieldDefinition) {
+      final EnumFieldDefinitionDomain domain = new EnumFieldDefinitionDomain((EnumFieldDefinition)definition);
+      result = this.enumDAO.save(domain);
     } else if (definition instanceof LongFieldDefinition) {
       final LongFieldDefinitionDomain domain = new LongFieldDefinitionDomain((LongFieldDefinition)definition);
       result = this.longDAO.save(domain);

@@ -2,14 +2,18 @@ package uk.pallas.systems.typr.entities.v1.impl;
 
 import uk.pallas.systems.typr.entities.v1.Category;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class CategoryDTO implements Category {
 
   /** What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc.. */
+  @NotBlank
   private String name;
 
   /** Can you describe what the field concerns? */
+  @Size(max=4096)
   private String description;
 
   /**
@@ -24,12 +28,7 @@ public class CategoryDTO implements Category {
    * @param data object to copy from.
    */
   protected CategoryDTO(final Category data) {
-    super();
-
-    if (null != data) {
-      this.description = data.getDescription();
-      this.name = data.getName();
-    }
+    this(null == data ? null : data.getName(), null == data ? null : data.getDescription());
   }
 
 

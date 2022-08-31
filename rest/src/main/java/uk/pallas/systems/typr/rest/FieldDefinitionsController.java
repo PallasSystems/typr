@@ -16,18 +16,20 @@ import java.util.stream.Collectors;
 /**
  * This Defines an interface for retrieving Field Definitions stored within Typr.
  */
-@RestController
+@RestController("Typr API")
 @RequestMapping("api/type/v1")
 public class FieldDefinitionsController {
 
+  /** The backend service to retrieve. */
   @Autowired
   private FieldDefinitionServices services;
 
   /**
    * Retrieves all Field Definitions held within Typr.
-   * @return an empty collection if no definitions of the supplied type exist
+   * @return A collection of Long, Double, String, Enumerate, etc... field definitions.
    */
   @GetMapping("/types")
+  @ResponseStatus(code=HttpStatus.NOT_FOUND, reason="If no field definitions are found within the database.")
   public Collection<FieldDefinition> getTypes() {
 
     final Collection<FieldDefinition> definitions = this.services.getFieldDefinitions();
@@ -41,12 +43,14 @@ public class FieldDefinitionsController {
   }
 
   /**
-   * Retrieves all Field Definitions of a specific type within the system
-   * @param type the Field Definition type eg. string, enum, double, long, number
-   * @return A collection of definitions if the supplied type exist, or a NOT FOUND if nothing is found.
+   * Retrieves all Field Definitions of a specific type within the system.
+   * @param type The Type of Field Definitions you wish to retrieve (e.g. string, enum, double, long, number).
+   * @return A collection of definitions of a specific type.
    */
   @GetMapping("/types/type/{type}")
-  public Collection<FieldDefinition> getFieldDefinitionByType(@PathVariable("type") final String type) {
+  @ResponseStatus(code=HttpStatus.NOT_FOUND,
+                  reason="If no field definition is found for the supplied field definition type this will throw this error.")
+  public Collection<FieldDefinition> getFieldDefinitionByType(@PathVariable(name="type", required = true) final String type) {
 
     final Collection<FieldDefinition> definitions = this.services.getFieldDefinitionsByType(type);
     if (null == definitions || definitions.isEmpty()) {
@@ -59,13 +63,14 @@ public class FieldDefinitionsController {
   }
 
   /**
-   * Retrieves a Field Definition
-   * @param name the name of the field definition we want to retrieve from Typr.
-   * @return A definition if one exists, or a NOT FOUND if nothing is found.
+   * Retrieves a Field Definition based on the full length name.
+   * @param name The name of the field definition we want to retrieve from Typr.
+   * @return A valid Field definition object if one is found within the database.
    */
   @GetMapping("/type/name/{name}")
-  public FieldDefinition getFieldDefinitionByName(@PathVariable("name") final String name) {
-    final FieldDefinition result = this.getDTO(this.services.getFieldDefinition(name));
+  @ResponseStatus(code=HttpStatus.NOT_FOUND, reason="If no field definition is found for the supplied name this will throw this error.")
+  public FieldDefinition getFieldDefinitionByName(@PathVariable(name="name", required = true) final String name) {
+    final FieldDefinition result = this.getDTO(this.services.getFieldDefinitionByName(name));
 
     if (null == result) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No type definition found for:" + name);
@@ -76,19 +81,19 @@ public class FieldDefinitionsController {
 
   /**
    * Used to insert new Field Definitions into the Typr system.
-   * @param definition the definition to insert into the system.
-   * @return the stored version of the field definition.
+   * @param definition The definition to insert into the system.
+   * @return The stored version of the field definition.
    */
   @PutMapping("/type")
-  public FieldDefinition putType(@RequestBody final FieldDefinition definition) {
+  public FieldDefinition putType(@RequestBody(required = true) final FieldDefinition definition) {
     final FieldDefinition saved = this.services.saveFieldDefintion(definition);
     return this.getDTO(saved);
   }
 
   /**
-   * Used to convert the incoming object into a DTO for egress
-   * @param definition the definition to convert into a JACKON object
-   * @return null if the supplied object doesn't map to a DTO type.
+   * Used to convert the incoming object into a DTO for egress.
+   * @param definition The definition to convert into a JACKON object.
+   * @return Null if the supplied object doesn't map to a DTO type.
    */
   private FieldDefinition getDTO(final FieldDefinition definition) {
     final FieldDefinition result;
