@@ -4,6 +4,7 @@ import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.EnumFieldDefinition;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Collection;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class EnumFieldDefinitionDomain extends AbstractFieldDefinitionDomain implements EnumFieldDefinition {
 
   @Column(nullable = false)
+  @ElementCollection
   private final Collection<String> values;
 
 
