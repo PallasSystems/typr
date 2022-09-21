@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"uk.pallas.systems.typr.domain"},{"l":"uk.pallas.systems.typr.entities.v1.domain"},{"l":"uk.pallas.systems.typr.services"}];updateSearchResults();

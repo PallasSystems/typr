@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>FieldDefinitionsController.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">runnable</a> &gt; <a href="../index.html" class="el_bundle">rest</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.rest</a> &gt; <span class="el_source">FieldDefinitionsController.java</span></div><h1>FieldDefinitionsController.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.rest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import uk.pallas.systems.typr.entities.v1.*;
+import uk.pallas.systems.typr.entities.v1.impl.DoubleFieldDefinitionDTO;
+import uk.pallas.systems.typr.entities.v1.impl.LongFieldDefinitionDTO;
+import uk.pallas.systems.typr.entities.v1.impl.StringFieldDefinitionDTO;
+import uk.pallas.systems.typr.services.FieldDefinitionServices;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
+
+/**
+ * This Defines an interface for retrieving Field Definitions stored within Typr.
+ */
+@RestController(&quot;Typr API&quot;)
+@RequestMapping(&quot;api/type/v1&quot;)
+<span class="nc" id="L21">public class FieldDefinitionsController {</span>
+
+  /** The backend service to retrieve. */
+  @Autowired
+  private FieldDefinitionServices services;
+
+  /**
+   * Retrieves all Field Definitions held within Typr.
+   * @return A collection of Long, Double, String, Enumerate, etc... field definitions.
+   */
+  @GetMapping(&quot;/types&quot;)
+  @ResponseStatus(code=HttpStatus.NOT_FOUND, reason=&quot;If no field definitions are found within the database.&quot;)
+  public Collection&lt;FieldDefinition&gt; getTypes() {
+
+<span class="nc" id="L35">    final Collection&lt;FieldDefinition&gt; definitions = this.services.getFieldDefinitions();</span>
+<span class="nc bnc" id="L36" title="All 4 branches missed.">    if (null == definitions || definitions.isEmpty()) {</span>
+<span class="nc" id="L37">      throw new ResponseStatusException(HttpStatus.NOT_FOUND, &quot;No definitions stored within Typr&quot; );</span>
+    }
+
+<span class="nc bnc" id="L40" title="All 2 branches missed.">    return definitions.stream().filter(result -&gt; null != result)</span>
+<span class="nc" id="L41">                               .map(result -&gt; this.getDTO(result))</span>
+<span class="nc" id="L42">                               .collect(Collectors.toList());</span>
+  }
+
+  /**
+   * Retrieves all Field Definitions of a specific type within the system.
+   * @param type The Type of Field Definitions you wish to retrieve (e.g. string, enum, double, long, number).
+   * @return A collection of definitions of a specific type.
+   */
+  @GetMapping(&quot;/types/type/{type}&quot;)
+  @ResponseStatus(code=HttpStatus.NOT_FOUND,
+                  reason=&quot;If no field definition is found for the supplied field definition type this will throw this error.&quot;)
+  public Collection&lt;FieldDefinition&gt; getFieldDefinitionByType(@PathVariable(name=&quot;type&quot;, required = true) final String type) {
+
+<span class="nc" id="L55">    final Collection&lt;FieldDefinition&gt; definitions = this.services.getFieldDefinitionsByType(type);</span>
+<span class="nc bnc" id="L56" title="All 4 branches missed.">    if (null == definitions || definitions.isEmpty()) {</span>
+<span class="nc" id="L57">      throw new ResponseStatusException(HttpStatus.NOT_FOUND, &quot;No definitions for type:&quot; + type);</span>
+    }
+
+<span class="nc bnc" id="L60" title="All 2 branches missed.">    return definitions.stream().filter(result -&gt; null != result)</span>
+<span class="nc" id="L61">                               .map(result -&gt; this.getDTO(result))</span>
+<span class="nc" id="L62">                               .collect(Collectors.toList());</span>
+  }
+
+  /**
+   * Retrieves a Field Definition based on the full length name.
+   * @param name The name of the field definition we want to retrieve from Typr.
+   * @return A valid Field definition object if one is found within the database.
+   */
+  @GetMapping(&quot;/type/name/{name}&quot;)
+  @ResponseStatus(code=HttpStatus.NOT_FOUND, reason=&quot;If no field definition is found for the supplied name this will throw this error.&quot;)
+  public FieldDefinition getFieldDefinitionByName(@PathVariable(name=&quot;name&quot;, required = true) final String name) {
+<span class="nc" id="L73">    final FieldDefinition result = this.getDTO(this.services.getFieldDefinitionByName(name));</span>
+
+<span class="nc bnc" id="L75" title="All 2 branches missed.">    if (null == result) {</span>
+<span class="nc" id="L76">      throw new ResponseStatusException(HttpStatus.NOT_FOUND, &quot;No type definition found for:&quot; + name);</span>
+    }
+
+<span class="nc" id="L79">    return result;</span>
+  }
+
+  /**
+   * Used to insert new Field Definitions into the Typr system.
+   * @param definition The definition to insert into the system.
+   * @return The stored version of the field definition.
+   */
+  @PutMapping(&quot;/type&quot;)
+  public FieldDefinition putType(@RequestBody(required = true) final FieldDefinition definition) {
+<span class="nc" id="L89">    final FieldDefinition saved = this.services.saveFieldDefintion(definition);</span>
+<span class="nc" id="L90">    return this.getDTO(saved);</span>
+  }
+
+  /**
+   * Used to convert the incoming object into a DTO for egress.
+   * @param definition The definition to convert into a JACKON object.
+   * @return Null if the supplied object doesn't map to a DTO type.
+   */
+  private FieldDefinition getDTO(final FieldDefinition definition) {
+    final FieldDefinition result;
+
+<span class="nc bnc" id="L101" title="All 2 branches missed.">    if (definition instanceof StringFieldDefinition) {</span>
+<span class="nc" id="L102">      result = new StringFieldDefinitionDTO((StringFieldDefinition)definition);</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">    } else if (definition instanceof DoubleFieldDefinition) {</span>
+<span class="nc" id="L104">      result = new DoubleFieldDefinitionDTO((DoubleFieldDefinition)definition);</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">    } else if (definition instanceof LongFieldDefinition) {</span>
+<span class="nc" id="L106">      result = new LongFieldDefinitionDTO((LongFieldDefinition)definition);</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">    } else if (definition instanceof NumberFieldDefinition) {</span>
+<span class="nc" id="L108">      result = new DoubleFieldDefinitionDTO((NumberFieldDefinition)definition);</span>
+    } else {
+<span class="nc" id="L110">      result = null;</span>
+    }
+
+<span class="nc" id="L113">    return result;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

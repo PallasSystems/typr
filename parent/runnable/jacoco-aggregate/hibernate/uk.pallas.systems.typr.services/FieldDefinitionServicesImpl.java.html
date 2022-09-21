@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>FieldDefinitionServicesImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">runnable</a> &gt; <a href="../index.html" class="el_bundle">hibernate</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.services</a> &gt; <span class="el_source">FieldDefinitionServicesImpl.java</span></div><h1>FieldDefinitionServicesImpl.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import uk.pallas.systems.typr.domain.*;
+import uk.pallas.systems.typr.entities.v1.*;
+import uk.pallas.systems.typr.entities.v1.domain.*;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+<span class="nc" id="L16">public class FieldDefinitionServicesImpl implements FieldDefinitionServices {</span>
+
+  @Autowired
+  private DoubleFieldDefinitionRepository doubleDAO;
+
+  @Autowired
+  private CategoryRepository categoryDAO;
+
+  @Autowired
+  private EnumFieldDefinitionRepository enumDAO;
+
+  @Autowired
+  private LongFieldDefinitionRepository longDAO;
+
+  @Autowired
+  private StringFieldDefinitionRepository stringDAO;
+
+  @Override
+  public Collection&lt;Category&gt; getCategories() {
+<span class="nc" id="L35">    final List&lt;CategoryDomain&gt; results = this.categoryDAO.findAll();</span>
+<span class="nc" id="L36">    return results.stream().map(value -&gt; (Category)value).collect(Collectors.toList());</span>
+  }
+
+  @Override
+  public Category getCategoryByName(final String name) {
+<span class="nc" id="L41">    final Optional&lt;CategoryDomain&gt; results =  this.categoryDAO.findById(name);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">    return results.isEmpty() ? null : results.get();</span>
+  }
+
+  /**
+   *
+   * @return
+   */
+  public Collection&lt;FieldDefinition&gt; getFieldDefinitions() {
+<span class="nc" id="L50">    final Collection&lt;FieldDefinition&gt; results = new HashSet&lt;&gt;();</span>
+
+<span class="nc" id="L52">    results.addAll(this.doubleDAO.findAll());</span>
+<span class="nc" id="L53">    results.addAll(this.enumDAO.findAll());</span>
+<span class="nc" id="L54">    results.addAll(this.longDAO.findAll());</span>
+<span class="nc" id="L55">    results.addAll(this.stringDAO.findAll());</span>
+
+<span class="nc" id="L57">    return results;</span>
+  }
+
+  @Override
+  public Collection&lt;FieldDefinition&gt; getFieldDefinitionsByCategory(final String category) {
+<span class="nc" id="L62">    return null;</span>
+  }
+
+  /**
+   *
+   * @param type
+   * @return
+   */
+  public Collection&lt;FieldDefinition&gt; getFieldDefinitionsByType(final String type) {
+<span class="nc" id="L71">    final Collection&lt;FieldDefinition&gt; results = new HashSet&lt;&gt;();</span>
+
+<span class="nc bnc" id="L73" title="All 2 branches missed.">    if (&quot;string&quot;.equalsIgnoreCase(type)) {</span>
+<span class="nc" id="L74">      results.addAll(this.stringDAO.findAll());</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">    } else if (&quot;double&quot;.equalsIgnoreCase(type)) {</span>
+<span class="nc" id="L76">      results.addAll(this.doubleDAO.findAll());</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">    } else if (&quot;long&quot;.equalsIgnoreCase(type)) {</span>
+<span class="nc" id="L78">      results.addAll(this.longDAO.findAll());</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">    } else if (&quot;enum&quot;.equalsIgnoreCase(type)) {</span>
+<span class="nc" id="L80">      results.addAll(this.enumDAO.findAll());</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">    } else if (&quot;number&quot;.equalsIgnoreCase(type)) {</span>
+<span class="nc" id="L82">      results.addAll(this.longDAO.findAll());</span>
+<span class="nc" id="L83">      results.addAll(this.doubleDAO.findAll());</span>
+    }
+
+<span class="nc" id="L86">    return results;</span>
+  }
+
+
+  /**
+   *
+   * @param name
+   * @return
+   */
+  public FieldDefinition getFieldDefinitionByName(final String name) {
+    final FieldDefinition result;
+<span class="nc" id="L97">    final Optional&lt;DoubleFieldDefinitionDomain&gt; dblResults = this.doubleDAO.findById(name);</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">    if (dblResults.isEmpty()) {</span>
+<span class="nc" id="L99">      final Optional&lt;EnumFieldDefinitionDomain&gt; enumResults = this.enumDAO.findById(name);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">      if (enumResults.isEmpty()) {</span>
+<span class="nc" id="L101">        final Optional&lt;LongFieldDefinitionDomain&gt; longResults = this.longDAO.findById(name);</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (longResults.isEmpty()) {</span>
+<span class="nc" id="L103">          final Optional&lt;StringFieldDefinitionDomain&gt; stringResults = this.stringDAO.findById(name);</span>
+<span class="nc" id="L104">          result = stringResults.get();</span>
+<span class="nc" id="L105">        } else {</span>
+<span class="nc" id="L106">          result = longResults.get();</span>
+        }
+<span class="nc" id="L108">      } else {</span>
+<span class="nc" id="L109">        result = enumResults.get();</span>
+      }
+<span class="nc" id="L111">    } else {</span>
+<span class="nc" id="L112">      result = dblResults.get();</span>
+    }
+
+<span class="nc" id="L115">    return result;</span>
+  }
+
+  /**
+   *
+   * @param definition
+   * @return
+   */
+  public FieldDefinition saveFieldDefintion(final FieldDefinition definition) {
+
+    final FieldDefinition result;
+
+<span class="nc bnc" id="L127" title="All 2 branches missed.">    if (definition instanceof StringFieldDefinition) {</span>
+<span class="nc" id="L128">      final StringFieldDefinitionDomain domain = new StringFieldDefinitionDomain((StringFieldDefinition)definition);</span>
+<span class="nc" id="L129">      result = this.stringDAO.save(domain);</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">    } else if (definition instanceof DoubleFieldDefinition) {</span>
+<span class="nc" id="L131">      final DoubleFieldDefinitionDomain domain = new DoubleFieldDefinitionDomain((DoubleFieldDefinition)definition);</span>
+<span class="nc" id="L132">      result = this.doubleDAO.save(domain);</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">    } else if (definition instanceof EnumFieldDefinition) {</span>
+<span class="nc" id="L134">      final EnumFieldDefinitionDomain domain = new EnumFieldDefinitionDomain((EnumFieldDefinition)definition);</span>
+<span class="nc" id="L135">      result = this.enumDAO.save(domain);</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">    } else if (definition instanceof LongFieldDefinition) {</span>
+<span class="nc" id="L137">      final LongFieldDefinitionDomain domain = new LongFieldDefinitionDomain((LongFieldDefinition)definition);</span>
+<span class="nc" id="L138">      result = this.longDAO.save(domain);</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">    } else if (definition instanceof NumberFieldDefinition) {</span>
+<span class="nc" id="L140">      final DoubleFieldDefinitionDomain domain = new DoubleFieldDefinitionDomain((NumberFieldDefinition)definition);</span>
+<span class="nc" id="L141">      result = this.doubleDAO.save(domain);</span>
+<span class="nc" id="L142">    } else {</span>
+<span class="nc" id="L143">      result = null;</span>
+    }
+
+<span class="nc" id="L146">    return result;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
