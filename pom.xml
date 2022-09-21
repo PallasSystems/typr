@@ -4,14 +4,15 @@
     <parent>
         <groupId>uk.pallas.systems</groupId>
         <artifactId>parent</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.3</version>
     </parent>
     <groupId>uk.pallas.systems.typr</groupId>
     <artifactId>parent</artifactId>
-    <name>Typr</name>
-    <description>Typr is a simple webservice, its goal is simply to hold information about different fields types, Post Code (UK), Latitude (Decimal Degrees), Mobile Country Code, etc.. The goal is to hold a description for each field, validation information for the field and ideally some logic for translation. One of the key things is a "categories" which can be assigned to a type, this is so I can say something is a good 'edge' or this is 'geo' (comes in handy for downstream processing).</description>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <name>Typr</name>
+    <description>Typr is a simple webservice, its goal is simply to hold information about different fields types, Post Code (UK), Latitude (Decimal Degrees), Mobile Country Code, etc.. The goal is to hold a description for each field, validation information for the field and ideally some logic for translation. One of the key things is a "categories" which can be assigned to a type, this is so I can say something is a good 'edge' or this is 'geo' (comes in handy for downstream processing).</description>
 
     <modules>
         <module>core</module>
@@ -20,8 +21,15 @@
         <module>rest</module>
     </modules>
 
+    <scm>
+        <connection>scm:git:https://github.com/PallasSystems/typr.git</connection>
+        <developerConnection>scm:git:https://github.com/PallasSystems/typr.git</developerConnection>
+        <url>https://github.com/PallasSystems/typr</url>
+    </scm>
+
     <properties>
         <github_repository_name>typr</github_repository_name>
+        <scmpublish.content>${project.build.directory}/staging/parent</scmpublish.content>
         <!-- Plugin dependencies. -->
         <org.springdoc.maven.plugin.version>1.4</org.springdoc.maven.plugin.version>
         <spotbugs-maven-plugin.version>4.7.1.1</spotbugs-maven-plugin.version>
