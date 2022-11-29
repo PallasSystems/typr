@@ -7,7 +7,7 @@
     <skin>
         <groupId>io.github.stevecrox.maven.skins</groupId>
         <artifactId>bootstrap-site-skin</artifactId>
-        <version>1.0.6</version>
+        <version>1.0.7</version>
     </skin>
 
     <custom>
@@ -23,7 +23,7 @@
                 <style>page-footer font-small pt-4 bg-dark text-light</style>
             </footer>
             <gitHub>
-                <projectId>PallasUK/freeman-parent</projectId>
+                <projectId>PallasSystems/typr</projectId>
             </gitHub>
             <navbar>
                 <enabled>true</enabled>
