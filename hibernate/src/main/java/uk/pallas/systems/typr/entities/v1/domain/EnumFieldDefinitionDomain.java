@@ -3,22 +3,19 @@ package uk.pallas.systems.typr.entities.v1.domain;
 import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.EnumFieldDefinition;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "enum_type_definitions")
 public class EnumFieldDefinitionDomain extends AbstractFieldDefinitionDomain implements EnumFieldDefinition {
 
-  @Column(nullable = false)
-  @ElementCollection
-  private final Collection<String> values;
+  @OneToMany(orphanRemoval=true)
+  private final Collection<EnumerateValueDomain> values;
 
 
   /**
@@ -41,7 +38,8 @@ public class EnumFieldDefinitionDomain extends AbstractFieldDefinitionDomain imp
 
     this.values = new HashSet<>(10);
     if (null != enumerates) {
-      this.values.addAll(enumerates);
+      // Wrap enumerate values up in a table object for later reference.
+      this.values.addAll(enumerates.parallelStream().map(enumerate -> new EnumerateValueDomain(enumerate)).collect(Collectors.toSet()));
     }
   }
 
@@ -89,15 +87,17 @@ public class EnumFieldDefinitionDomain extends AbstractFieldDefinitionDomain imp
 
   @Override
   public Collection<String> getValues() {
-    return new HashSet<>(this.values);
+    return this.values.parallelStream().map(enumerate -> enumerate.getName()).collect(Collectors.toSet());
   }
 
   @Override
   public void setValues(final Collection<String> enumerates) {
-    if (null == enumerates || enumerates.isEmpty()) {
-      this.values.clear();
-    } else {
-      this.values.addAll(enumerates);
+
+    this.values.clear();
+    // Add out new values if they exist
+    if (null != enumerates && !enumerates.isEmpty()) {
+      // Wrap enumerate values up in a table object for later reference.
+      this.values.addAll(enumerates.parallelStream().map(enumerate -> new EnumerateValueDomain(enumerate)).collect(Collectors.toSet()));
     }
   }
 
