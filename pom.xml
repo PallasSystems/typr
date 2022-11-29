@@ -39,7 +39,7 @@
         <org.springdoc.version>1.6.11</org.springdoc.version>
         <!-- Database dependencies. -->
         <org.postgresql.version>42.4.1</org.postgresql.version>
-        <org.hsqldb.version>2.4.0</org.hsqldb.version>
+        <org.hsqldb.version>2.7.1</org.hsqldb.version>
     </properties>
 
     <build>
