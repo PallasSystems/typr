@@ -2,6 +2,9 @@ package uk.pallas.systems.typr.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import uk.pallas.systems.typr.entities.v1.*;
@@ -29,7 +32,6 @@ public class FieldDefinitionsController {
    * @return A collection of Long, Double, String, Enumerate, etc... field definitions.
    */
   @GetMapping("/types")
-  @ResponseStatus(code=HttpStatus.NOT_FOUND, reason="If no field definitions are found within the database.")
   public Collection<FieldDefinition> getTypes() {
 
     final Collection<FieldDefinition> definitions = this.services.getFieldDefinitions();
@@ -38,8 +40,8 @@ public class FieldDefinitionsController {
     }
 
     return definitions.stream().filter(result -> null != result)
-                               .map(result -> this.getDTO(result))
-                               .collect(Collectors.toList());
+        .map(result -> this.getDTO(result))
+        .collect(Collectors.toList());
   }
 
   /**
@@ -48,8 +50,6 @@ public class FieldDefinitionsController {
    * @return A collection of definitions of a specific type.
    */
   @GetMapping("/types/type/{type}")
-  @ResponseStatus(code=HttpStatus.NOT_FOUND,
-                  reason="If no field definition is found for the supplied field definition type this will throw this error.")
   public Collection<FieldDefinition> getFieldDefinitionByType(@PathVariable(name="type", required = true) final String type) {
 
     final Collection<FieldDefinition> definitions = this.services.getFieldDefinitionsByType(type);
@@ -68,7 +68,6 @@ public class FieldDefinitionsController {
    * @return A valid Field definition object if one is found within the database.
    */
   @GetMapping("/type/name/{name}")
-  @ResponseStatus(code=HttpStatus.NOT_FOUND, reason="If no field definition is found for the supplied name this will throw this error.")
   public FieldDefinition getFieldDefinitionByName(@PathVariable(name="name", required = true) final String name) {
     final FieldDefinition result = this.getDTO(this.services.getFieldDefinitionByName(name));
 
