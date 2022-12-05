@@ -1,11 +1,8 @@
 name: Build Verification of Maven project
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
+schedule:
+  cron:  '30 11 * * *'
   workflow_dispatch:
 
 jobs:

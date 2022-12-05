@@ -1,9 +1,6 @@
 name: Build Verification of Maven project
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
@@ -19,7 +16,7 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
-      - name: Set up JDK 11
+      - name: Set up JDK ${{ matrix.version }}
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
