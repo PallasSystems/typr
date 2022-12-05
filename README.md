@@ -1,15 +1,32 @@
-# Typing Service
+# Typr
+![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/apache/maven.svg?label=License)
 
-This contains a number of shared libraries used by the various freeman components, each one is focussed towards solving a specific problem and has documentation specific to it within its maven module.
+Typr is a webservice, its goal is simply to hold information about different fields types, Post Code (UK), Latitude (Decimal Degrees), Mobile Country Code, etc..
 
-curl -v http://localhost:8080/api/v1/types -X GET
+It then provides an API so other systems can request validation information for a field from it (allowing systems to use the same validation) and to also allow systems to supply a field and be informed on which types the provided field is valid for.
 
-Result:
-[{"type":"StringFieldDefinitionImpl","name":"UK Post Code","description":"Postal codes used in the United Kingdom, British Overseas Territories and Crown dependencies are known as postcodes (originally, postal codes).[1] They are alphanumeric and were adopted nationally between 11 October 1959 and 1974, having been devised by the General Post Office (Royal Mail).[2] A full postcode is known as a \"postcode unit\" and designates an area with several addresses or a single major delivery point.","validationOptional":true,"regex":"^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$"}]
+## Documentation
 
-Insert a rescord
+* [Overview](./docs/overview/welcome.md)
+  * [Getting Started](./docs/overview/getting_started.md)
+  * [Frequently Asked Questions](./docs/overview/faq.md)
+* [Development](./docs/documentation/developer/index.md)
+  * [Building Typr](./docs/developers/technical/building_project.md)
+  * Contributing
+  * [Design](./docs/documentation/developer/design.md)
+  * [Releasing Typr](./docs/developers/technical/release_project.md)
+* [Users](./docs/documentation/users/index.md)
 
-curl -v http://localhost:8080/api/v1/type -X PUT -H "Content-Type: application/json" -d '{"type":"StringFieldDefinitionImpl","name":"UK Post Code","description":"Postal codes used in the United Kingdom, British Overseas Territories and Crown dependencies are known as postcodes (originally, postal codes).[1] They are alphanumeric and were adopted nationally between 11 October 1959 and 1974, having been devised by the General Post Office (Royal Mail).[2] A full postcode is known as a \"postcode unit\" and designates an area with several addresses or a single major delivery point.","validationOptional":true,"regex":"^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$"}'
+## Contributing
 
-## Contents
-- [Contributing](./docs/software_development/software_development_plan.md)
+We welcome questions, ideas, issues and code contributions to this project.
+
+Use the [issues page](https://github.com/PallasSystems/typr/issues) to get in touch with the community.
+
+If you would like to make a code contribution please fork the repository and create a
+[GitHub pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests) to the `main` branch.
+
+## License
+![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/apache/maven.svg?label=License)
+
+See the included LICENSE file for details.
