@@ -4,7 +4,7 @@
     <parent>
         <groupId>uk.pallas.systems</groupId>
         <artifactId>parent</artifactId>
-        <version>0.1.3</version>
+        <version>0.1.6</version>
     </parent>
     <groupId>uk.pallas.systems.typr</groupId>
     <artifactId>parent</artifactId>
@@ -31,6 +31,7 @@
     <properties>
         <github_repository_name>typr</github_repository_name>
         <scmpublish.content>${project.build.directory}/staging/parent</scmpublish.content>
+
         <!-- Plugin dependencies. -->
         <org.springdoc.maven.plugin.version>1.4</org.springdoc.maven.plugin.version>
         <spotbugs-maven-plugin.version>4.7.1.1</spotbugs-maven-plugin.version>
