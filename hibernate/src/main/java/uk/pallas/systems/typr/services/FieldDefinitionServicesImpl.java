@@ -39,7 +39,7 @@ public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
   @Override
   public Category getCategoryByName(final String name) {
     final Optional<CategoryDomain> results =  this.categoryDAO.findById(name);
-    return results.isEmpty() ? null : results.get();
+    return results.isPresent() ? results.get() : null;
   }
 
   /**
@@ -95,21 +95,21 @@ public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
   public FieldDefinition getFieldDefinitionByName(final String name) {
     final FieldDefinition result;
     final Optional<DoubleFieldDefinitionDomain> dblResults = this.doubleDAO.findById(name);
-    if (dblResults.isEmpty()) {
+    if (dblResults.isPresent()) {
+      result = dblResults.get();
+    } else {
       final Optional<EnumFieldDefinitionDomain> enumResults = this.enumDAO.findById(name);
-      if (enumResults.isEmpty()) {
+      if (enumResults.isPresent()) {
+        result = enumResults.get();
+      } else {
         final Optional<LongFieldDefinitionDomain> longResults = this.longDAO.findById(name);
-        if (longResults.isEmpty()) {
+        if (longResults.isPresent()) {
+          result = longResults.get();
+        } else {
           final Optional<StringFieldDefinitionDomain> stringResults = this.stringDAO.findById(name);
           result = stringResults.get();
-        } else {
-          result = longResults.get();
         }
-      } else {
-        result = enumResults.get();
       }
-    } else {
-      result = dblResults.get();
     }
 
     return result;
