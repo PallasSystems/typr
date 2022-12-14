@@ -69,7 +69,7 @@ public class CategoryDomain implements Category {
     if (this == toCompare) {
       result = true;
     } else if (toCompare instanceof Category) {
-      final var that = (Category) toCompare;
+      final Category that = (Category) toCompare;
       result = Objects.equals(this.getName(), that.getName())
                    && Objects.equals(this.getDescription(), that.getDescription());
     } else {

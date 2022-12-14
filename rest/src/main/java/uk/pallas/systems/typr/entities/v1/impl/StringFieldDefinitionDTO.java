@@ -90,7 +90,7 @@ public class StringFieldDefinitionDTO extends AbstractFieldDefinitionDTO impleme
         if (this == toCompare) {
             result = true;
         } else if (toCompare instanceof StringFieldDefinition) {
-            final var that = (StringFieldDefinition) toCompare;
+            final StringFieldDefinition that = (StringFieldDefinition) toCompare;
             result = super.equals(toCompare)
                          && Objects.equals(this.getDetectRegex(), that.getDetectRegex())
                          && Objects.equals(this.getExtractRegex(), that.getExtractRegex());
@@ -180,7 +180,7 @@ public class StringFieldDefinitionDTO extends AbstractFieldDefinitionDTO impleme
     public boolean isValid(final String toTest) {
         final boolean result;
 
-        if (null == toTest || toTest.isBlank()) {
+        if (null == toTest || toTest.trim().isEmpty()) {
             result = false;
         } else {
             result = toTest.trim().matches(this.getDetectRegex());

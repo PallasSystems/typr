@@ -93,7 +93,7 @@ public class StringFieldDefinitionDomain extends AbstractFieldDefinitionDomain i
     if (this == toCompare) {
       result = true;
     } else if (toCompare instanceof StringFieldDefinition) {
-      final var that = (StringFieldDefinition) toCompare;
+      final StringFieldDefinition that = (StringFieldDefinition) toCompare;
       result = super.equals(toCompare)
                    && Objects.equals(this.getDetectRegex(), that.getDetectRegex())
                    && Objects.equals(this.getExtractRegex(), that.getExtractRegex());

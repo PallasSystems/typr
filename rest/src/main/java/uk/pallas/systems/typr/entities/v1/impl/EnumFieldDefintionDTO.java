@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class EnumFieldDefintionDTO extends AbstractFieldDefinitionDTO implements EnumFieldDefinition {
 
@@ -63,7 +64,7 @@ public class EnumFieldDefintionDTO extends AbstractFieldDefinitionDTO implements
     if (this == toCompare) {
       result = true;
     } else if (toCompare instanceof EnumFieldDefinition) {
-      final var that = (EnumFieldDefinition) toCompare;
+      final EnumFieldDefinition that = (EnumFieldDefinition) toCompare;
       result = super.equals(toCompare) && (this.getValues().containsAll(that.getValues()) && that.getValues().containsAll(this.getValues()));
     } else {
       result = false;
@@ -129,12 +130,12 @@ public class EnumFieldDefintionDTO extends AbstractFieldDefinitionDTO implements
   public boolean isValid(final String toTest) {
     final boolean result;
 
-    if (null == toTest || toTest.isBlank()) {
+    if (null == toTest || toTest.trim().isEmpty()) {
       result = false;
     } else {
       final String trimmed = toTest.trim();
       final Optional<String> match = this.getValues().parallelStream().filter(value -> trimmed.equalsIgnoreCase(value)).findFirst();
-      result = !match.isEmpty();
+      result = match.isPresent();
     }
 
     return result;

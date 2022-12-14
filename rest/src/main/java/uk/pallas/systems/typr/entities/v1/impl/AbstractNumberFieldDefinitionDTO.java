@@ -74,7 +74,7 @@ abstract class AbstractNumberFieldDefinitionDTO<N extends Number> extends Abstra
         if (this == toCompare) {
             result = true;
         } else if (toCompare instanceof NumberFieldDefinition) {
-            final var that = (NumberFieldDefinition<?>) toCompare;
+            final NumberFieldDefinition that = (NumberFieldDefinition<?>) toCompare;
             result = super.equals(toCompare)
                              && Objects.equals(this.getMaximumValue(), that.getMaximumValue())
                              && Objects.equals(this.getMinimumValue(), that.getMinimumValue());

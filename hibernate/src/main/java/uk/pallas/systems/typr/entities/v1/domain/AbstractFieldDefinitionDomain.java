@@ -91,7 +91,7 @@ public abstract class AbstractFieldDefinitionDomain  implements FieldDefinition 
     if (this == toCompare) {
       result = true;
     } else if (toCompare instanceof FieldDefinition) {
-      final var that = (FieldDefinition) toCompare;
+      final FieldDefinition that = (FieldDefinition) toCompare;
       result = Objects.equals(this.getName(), that.getName())
                    && Objects.equals(this.getAcronym(), that.getAcronym())
                    && Objects.equals(this.getDescription(), that.getDescription())

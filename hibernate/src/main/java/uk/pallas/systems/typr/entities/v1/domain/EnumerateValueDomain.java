@@ -63,7 +63,7 @@ public class EnumerateValueDomain {
     if (this == toCompare) {
       result = true;
     } else if (toCompare instanceof EnumerateValueDomain) {
-      final var that = (EnumerateValueDomain) toCompare;
+      final EnumerateValueDomain that = (EnumerateValueDomain) toCompare;
       result = Objects.equals(this.getName(), that.getName())
                    && Objects.equals(this.getOrdinal(), that.getOrdinal())
                    && Objects.equals(this.getDescription(), that.getDescription());
