@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="">
 <head><meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
 <title>AbstractFieldDefinitionDTO xref</title>
 <link type="text/css" rel="stylesheet" href="../../../../../../../stylesheet.css" />
@@ -89,7 +89,7 @@
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>          <strong class="jxr_keyword">if</strong> (<strong class="jxr_keyword">this</strong> == toCompare) {
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>              result = <strong class="jxr_keyword">true</strong>;
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>          } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (toCompare instanceof FieldDefinition) {
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>              <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">var</strong> that = (FieldDefinition) toCompare;
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>              <strong class="jxr_keyword">final</strong> FieldDefinition that = (FieldDefinition) toCompare;
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>              result = Objects.equals(<strong class="jxr_keyword">this</strong>.getName(), that.getName())
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>                               &amp;&amp; Objects.equals(<strong class="jxr_keyword">this</strong>.getAcronym(), that.getAcronym())
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>                               &amp;&amp; Objects.equals(<strong class="jxr_keyword">this</strong>.getDescription(), that.getDescription())

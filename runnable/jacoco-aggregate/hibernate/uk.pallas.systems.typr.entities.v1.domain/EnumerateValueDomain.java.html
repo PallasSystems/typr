@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>EnumerateValueDomain.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">runnable</a> &gt; <a href="../index.html" class="el_bundle">hibernate</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.entities.v1.domain</a> &gt; <span class="el_source">EnumerateValueDomain.java</span></div><h1>EnumerateValueDomain.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.entities.v1.domain;
+
+import uk.pallas.systems.typr.entities.v1.Category;
+import uk.pallas.systems.typr.entities.v1.FieldDefinition;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+@Entity
+@Table(name = &quot;enum_type_definitions_values&quot;)
+public class EnumerateValueDomain {
+
+  /** What is the name  of this kind of field, e.g. post code, uk mobile, IPv4, etc.. */
+  @Id
+  @Column(nullable = false)
+  private String name;
+
+  /** Can you describe what the field concerns? */
+  @Column(length=4096, nullable = true)
+  private String description;
+
+  @Column(nullable = true)
+  private Long ordinal;
+
+  public EnumerateValueDomain() {
+<span class="nc" id="L32">    this(null);</span>
+<span class="nc" id="L33">  }</span>
+
+  public EnumerateValueDomain(final String value) {
+<span class="nc" id="L36">    this(value, null);</span>
+<span class="nc" id="L37">  }</span>
+
+  public EnumerateValueDomain(final String value, final String description) {
+<span class="nc" id="L40">    this(value, description, null);</span>
+<span class="nc" id="L41">  }</span>
+
+  public EnumerateValueDomain(final String value, final String description, final Long ordinalValue){
+<span class="nc" id="L44">    super();</span>
+
+<span class="nc" id="L46">    this.name = value;</span>
+<span class="nc" id="L47">    this.description = description;</span>
+<span class="nc" id="L48">    this.ordinal = ordinalValue;</span>
+<span class="nc" id="L49">  }</span>
+
+  /**
+   * Compares the supplied object to this one, it checks the supplied object is a FieldDefinition and then checks
+   * the definition applies validation, its name and description to see if they are matching objects.
+   *
+   * @param toCompare the object to compare (can be null or a child class, etc..)
+   * @return false if the name/validation and description fields in a field definition are
+   *        different (or it isn't a field definition).
+   */
+  @Override
+  public boolean equals(final Object toCompare) {
+
+    final boolean result;
+<span class="nc bnc" id="L63" title="All 2 branches missed.">    if (this == toCompare) {</span>
+<span class="nc" id="L64">      result = true;</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">    } else if (toCompare instanceof EnumerateValueDomain) {</span>
+<span class="nc" id="L66">      final EnumerateValueDomain that = (EnumerateValueDomain) toCompare;</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">      result = Objects.equals(this.getName(), that.getName())</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                   &amp;&amp; Objects.equals(this.getOrdinal(), that.getOrdinal())</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">                   &amp;&amp; Objects.equals(this.getDescription(), that.getDescription());</span>
+<span class="nc" id="L70">    } else {</span>
+<span class="nc" id="L71">      result = false;</span>
+    }
+
+<span class="nc" id="L74">    return result;</span>
+  }
+
+  /**
+   * Generates a Unique hashcode for the field definition class.
+   * @return a valid integer representation of this object,
+   */
+  @Override
+  public int hashCode() {
+<span class="nc" id="L83">    return Objects.hash(this.getName(), this.getDescription(), this.getOrdinal());</span>
+  }
+
+  /**
+   * Retrieves the name of the field definition e.g. post code, uk mobile, IPv4, etc..
+   * @return non null value (if field definition is valid).
+   */
+  public String getName() {
+<span class="nc" id="L91">    return name;</span>
+  }
+
+  /**
+   * Sets the name for the field definition e.g. Post Code, Ipv6, MCC, etc...
+   * @param identifier the new name for the field definition value
+   */
+  public void setName(final String identifier) {
+<span class="nc" id="L99">    this.name = identifier;</span>
+<span class="nc" id="L100">  }</span>
+
+  /**
+   * Retrieves a hopefully detailed description of the field definition so we can understand what it is for and why it exists.
+   * @return a hopefull long valid string (null is possible).
+   */
+  public String getDescription() {
+<span class="nc" id="L107">    return description;</span>
+  }
+
+  /**
+   * Sets the description to attach to this field definition.
+   * @param detailedDescription the description to attache (null is ok)
+   */
+  public void setDescription(final String detailedDescription) {
+<span class="nc" id="L115">    this.description = detailedDescription;</span>
+<span class="nc" id="L116">  }</span>
+
+  public Long getOrdinal() {
+<span class="nc" id="L119">    return this.ordinal;</span>
+  }
+
+  public void setOrdinal(final Long value) {
+<span class="nc" id="L123">    this.ordinal = value;</span>
+<span class="nc" id="L124">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

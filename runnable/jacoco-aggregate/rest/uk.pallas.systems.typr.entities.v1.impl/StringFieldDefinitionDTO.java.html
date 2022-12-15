@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>StringFieldDefinitionDTO.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">runnable</a> &gt; <a href="../index.html" class="el_bundle">rest</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.entities.v1.impl</a> &gt; <span class="el_source">StringFieldDefinitionDTO.java</span></div><h1>StringFieldDefinitionDTO.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.entities.v1.impl;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>StringFieldDefinitionDTO.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">runnable</a> &gt; <a href="../index.html" class="el_bundle">rest</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.entities.v1.impl</a> &gt; <span class="el_source">StringFieldDefinitionDTO.java</span></div><h1>StringFieldDefinitionDTO.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.entities.v1.impl;
 
 import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.StringFieldDefinition;
@@ -90,7 +90,7 @@ public class StringFieldDefinitionDTO extends AbstractFieldDefinitionDTO impleme
 <span class="nc bnc" id="L90" title="All 2 branches missed.">        if (this == toCompare) {</span>
 <span class="nc" id="L91">            result = true;</span>
 <span class="nc bnc" id="L92" title="All 2 branches missed.">        } else if (toCompare instanceof StringFieldDefinition) {</span>
-<span class="nc" id="L93">            final var that = (StringFieldDefinition) toCompare;</span>
+<span class="nc" id="L93">            final StringFieldDefinition that = (StringFieldDefinition) toCompare;</span>
 <span class="nc bnc" id="L94" title="All 2 branches missed.">            result = super.equals(toCompare)</span>
 <span class="nc bnc" id="L95" title="All 2 branches missed.">                         &amp;&amp; Objects.equals(this.getDetectRegex(), that.getDetectRegex())</span>
 <span class="nc bnc" id="L96" title="All 2 branches missed.">                         &amp;&amp; Objects.equals(this.getExtractRegex(), that.getExtractRegex());</span>
@@ -180,7 +180,7 @@ public class StringFieldDefinitionDTO extends AbstractFieldDefinitionDTO impleme
     public boolean isValid(final String toTest) {
         final boolean result;
 
-<span class="nc bnc" id="L183" title="All 4 branches missed.">        if (null == toTest || toTest.isBlank()) {</span>
+<span class="nc bnc" id="L183" title="All 4 branches missed.">        if (null == toTest || toTest.trim().isEmpty()) {</span>
 <span class="nc" id="L184">            result = false;</span>
         } else {
 <span class="nc" id="L186">            result = toTest.trim().matches(this.getDetectRegex());</span>
