@@ -8,7 +8,7 @@
     <skin>
         <groupId>io.github.stevecrox.maven.skins</groupId>
         <artifactId>bootstrap-site-skin</artifactId>
-        <version>1.0.10</version>
+        <version>1.0.11</version>
     </skin>
 
     <version position="none"></version>
