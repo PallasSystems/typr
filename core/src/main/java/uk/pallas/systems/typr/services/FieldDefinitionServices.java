@@ -15,8 +15,6 @@ public interface FieldDefinitionServices {
 
   Collection<FieldDefinition> getFieldDefinitionsByCategory(final String category);
 
-  Collection<FieldDefinition> getFieldDefinitionsByType(final String type);
-
   FieldDefinition getFieldDefinitionByName(final String name);
 
   FieldDefinition saveFieldDefintion(final FieldDefinition definition);

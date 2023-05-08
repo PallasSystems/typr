@@ -5,9 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * Typr is a simple webservice, its goal is simply to hold information about different fields types, Post Code (UK), Latitude (Decimal Degrees),
@@ -16,9 +13,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * 'geo' (comes in handy for downstream processing).
  */
 @SpringBootApplication
-@EnableWebSecurity
 @EnableJpaRepositories("uk.pallas.systems.typr.domain")
-@EntityScan("uk.pallas.systems.typr.entities.v1.domain")
+@EntityScan(basePackages={"uk.pallas.systems.typr.domain.entities.v1", "uk.pallas.systems.typr.domain.entities.v1.validation", "uk.pallas.systems.typr.domain.entities.v1.validation.number"})
 @ComponentScan("uk.pallas.systems.typr")
 public class Application {
   /**

@@ -1,6 +1,10 @@
 package uk.pallas.systems.typr.entities.v1;
 
+import com.neovisionaries.i18n.CountryCode;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * This class defines Complex Structured Data field definitions we can assign to various structured data schema's.
