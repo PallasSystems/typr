@@ -1,52 +1,66 @@
-package uk.pallas.systems.typr.rest.entities.v1;
+package uk.pallas.systems.typr.domain.entities.v1;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.multi.CountryCodeRuleWrapperDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomain;
 import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.entities.v1.MultiValidationRuleFieldDefinition;
+import uk.pallas.systems.typr.entities.v1.SingleValidationRuleFieldDefinition;
+import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.multi.CountryCodeRuleWrapper;
 import uk.pallas.systems.typr.entities.v1.validation.multi.RuleWrapper;
-import uk.pallas.systems.typr.rest.entities.v1.validation.multi.CountryCodeRuleWrapperDTO;
+import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * The idea of a rule wrapper is to allow us to hold different rules for a field definition, for example postal code
  * is different within each country (e.g. UK Post Code, USA Zip Code, etc..). Similary some things are a construction
  * of other fields (e.g. Hostname will often have a Top Level Domain name included).
  *
+ * The wrapper is a base interface for these different combinations to extend.
  */
-@Schema(description = "The idea of a rule wrapper is to allow us to hold different rules for a field definition, "
-                      + "for example postal code is different within each country (e.g. UK Post Code, USA Zip Code, "
-                      + "etc..). Similary some things are a construction of other fields (e.g. Hostname will often "
-                      + "have a Top Level Domain name included).")
-public class MultiValidationRuleFieldDefinitionDTO extends AbstractFieldDefinitionDTO implements MultiValidationRuleFieldDefinition {
+@Entity
+public class MultiValidationRuleFieldDefinitionDomain extends AbstractFieldDefinitionDomain implements MultiValidationRuleFieldDefinition {
+    /**
+     * Static Logger for the class.
+     */
+    private static final Log LOGGER = LogFactory.getLog(MultiValidationRuleFieldDefinitionDomain.class);
 
     /**
      * List of Validation rules for the field definition.
      */
-    @ArraySchema(schema = @Schema(description = "List of Validation rules for the field definition.",
-                                  anyOf={ CountryCodeRuleWrapperDTO.class }),
-                 uniqueItems = true,
-                 minItems=1)
-    private Collection<RuleWrapper> rules;
+    @OneToMany
+    private Collection<CountryCodeRuleWrapperDomain> countryCodeRuleWrappers;
 
     /** Default Class Constructor. */
-    public MultiValidationRuleFieldDefinitionDTO() {
+    public MultiValidationRuleFieldDefinitionDomain() {
         this(null);
     }
 
     /** Copy Constructor */
-    public MultiValidationRuleFieldDefinitionDTO(final FieldDefinition data) {
+    public MultiValidationRuleFieldDefinitionDomain(final FieldDefinition data) {
         this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,
                 null != data ? data.getDescription() : null, null != data ? data.getName() : null,
                 null);
     }
 
     /** Copy Constructor */
-    public MultiValidationRuleFieldDefinitionDTO(final MultiValidationRuleFieldDefinition data) {
+    public MultiValidationRuleFieldDefinitionDomain(final MultiValidationRuleFieldDefinition data) {
         this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,
                 null != data ? data.getDescription() : null, null != data ? data.getName() : null,
                 null != data ? data.getRules() : null);
@@ -61,7 +75,7 @@ public class MultiValidationRuleFieldDefinitionDTO extends AbstractFieldDefiniti
      * @param name the name for the rule
      * @param theRulez the Validation rule to apply
      */
-    public MultiValidationRuleFieldDefinitionDTO(final String acryo, final Collection<Category> cats, final String desc,
+    public MultiValidationRuleFieldDefinitionDomain(final String acryo, final Collection<Category> cats, final String desc,
                                                  final String name, final Collection<RuleWrapper> theRulez) {
         super(acryo, cats, desc, name);
 
@@ -88,7 +102,6 @@ public class MultiValidationRuleFieldDefinitionDTO extends AbstractFieldDefiniti
      * @param toTest the object to test against the rules stored within this object
      * @return an empty list or a list of identifiers for rules.
      */
-    @JsonIgnore
     @Override
     public Collection<String> getRulesPassed(final Object toTest) {
         final Collection<String> results = new HashSet<>();
@@ -106,15 +119,20 @@ public class MultiValidationRuleFieldDefinitionDTO extends AbstractFieldDefiniti
 
     @Override
     public Collection<RuleWrapper> getRules() {
-        return new HashSet<>(this.rules);
+        return new HashSet<>(this.countryCodeRuleWrappers);
     }
 
     @Override
     public void setRules(final Collection<RuleWrapper> values) {
-        this.rules.clear();
+        this.countryCodeRuleWrappers.clear();
 
         if (null != values) {
-            this.rules.addAll(values);
+            final Collection<CountryCodeRuleWrapperDomain> countryCodes = values.stream()
+                    .filter(value -> (value instanceof CountryCodeRuleWrapper))
+                    .map(value -> new CountryCodeRuleWrapperDomain((CountryCodeRuleWrapper)value))
+                    .collect(Collectors.toSet());
+
+            this.countryCodeRuleWrappers.addAll(countryCodes);
         }
     }
 }

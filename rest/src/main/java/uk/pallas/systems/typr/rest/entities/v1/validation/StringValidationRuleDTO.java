@@ -16,11 +16,13 @@ public class StringValidationRuleDTO extends AbstractValidationRuleDTO implement
     /** As this is a String type, assumption is we apply Regular Express to validate the string. */
     @NotBlank
     @Size(min=0, max=4096)
-    @Schema(description = "As this is a String type, assumption is we apply Regular Express to validate the string.")
+    @Schema(description = "As this is a String type, assumption is we apply Regular Express to validate the string.",
+            example = "^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$")
     private String detectRegex;
 
     /** As this is a String type, assumption is we apply Regular Express to extract entities from a string block. */
-    @Schema(description = "As this is a String type, assumption is we apply Regular Express to extract entities from a string block.")
+    @Schema(description = "As this is a String type, assumption is we apply Regular Express to extract entities from a string block.",
+            example = "[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}")
     @Size(min=0, max=4096)
     private String extractRegex;
 

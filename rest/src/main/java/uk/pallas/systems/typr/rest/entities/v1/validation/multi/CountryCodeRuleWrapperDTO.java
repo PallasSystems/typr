@@ -19,9 +19,11 @@ import java.util.Objects;
 
 public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
 
+
     /** Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be country specific. */
     @Schema(example="UK", nullable = false,
-            description="Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be country specific.")
+            description="Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be "
+                    + "country specific.")
     private CountryCode countryCode;
 
     /** Countries can have . */
@@ -135,6 +137,26 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
     @Override
     public void setName(final String identifier) {
         this.name = identifier;
+    }
+
+    /**
+     * This method will supply the parameter into the Validation rule the wrapper holds, if no validation rule
+     * exists this will return false. Otherwise it will return with the rules response.
+     * @param toTest to test is valid
+     * @return false if the object is invalid, there is no rule or
+     */
+    @Override
+    @JsonIgnore
+    public boolean isValid(Object toTest) {
+        final boolean result;
+
+        if (null == this.getRule()) {
+            result = false;
+        } else {
+            result = this.getRule().isValid(toTest);
+        }
+
+        return result;
     }
 
     /**

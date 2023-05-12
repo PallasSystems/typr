@@ -14,12 +14,12 @@ import jakarta.validation.constraints.Size;
 public class CategoryDTO implements Category {
 
     /** Detailed description of the field definition. */
-    @Schema(description = "Detailed description of the field definition.")
+    @Schema(description = "Detailed description of the field definition.", example="Field represents a good Graph Edge")
     @Size(min=0, max=4096)
     private String description;
 
     /** Name of the field definition e.g. post code, uk mobile. */
-    @Schema(description = "Name of the category, this is", nullable = false)
+    @Schema(description = "Name of the category, this is", nullable = false, example="Edge")
     @Size(min=0, max=4096)
     private String name;
 

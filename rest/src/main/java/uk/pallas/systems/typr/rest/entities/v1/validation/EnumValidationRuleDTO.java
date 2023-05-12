@@ -17,7 +17,7 @@ import java.util.Objects;
 public class EnumValidationRuleDTO extends AbstractValidationRuleDTO implements EnumValidationRule {
 
     @ArraySchema(schema = @Schema(description = "List of enumerates, which are allowed.",
-            implementation= String.class))
+            implementation= String.class, example="UK"))
     private Collection< String > enumerates;
 
 

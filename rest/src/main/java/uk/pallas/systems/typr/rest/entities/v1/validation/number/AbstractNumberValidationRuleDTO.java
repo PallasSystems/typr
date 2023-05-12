@@ -12,14 +12,16 @@ public abstract class AbstractNumberValidationRuleDTO<N extends Number> extends 
      * Is there an upper range for valid value stored within the field?
      */
     @NotNull
-    @Schema(description = "Is there an upper range for valid value stored within the field?")
+    @Schema(description = "Is there an upper range for valid value stored within the field?",
+            example="999")
     private N maximumValue;
 
     /**
      * Is there a lower range for valid value stored within the field?
      */
     @NotNull
-    @Schema(description = "Is there a lower range for valid value stored within the field?")
+    @Schema(description = "Is there a lower range for valid value stored within the field?",
+            example="0")
     private N minimumValue;
 
     /**

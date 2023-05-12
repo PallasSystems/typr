@@ -1,34 +1,43 @@
-package uk.pallas.systems.typr.domain.entities.v1;
+package uk.pallas.systems.typr.domain.entities.v1.validation.multi;
 
+import com.neovisionaries.i18n.CountryCode;
+import jakarta.persistence.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.lang.NonNull;
+import uk.pallas.systems.typr.domain.entities.v1.SingleValidationRuleFieldDefinitionDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomain;
-import uk.pallas.systems.typr.entities.v1.Category;
-import uk.pallas.systems.typr.entities.v1.FieldDefinition;
-import uk.pallas.systems.typr.entities.v1.SingleValidationRuleFieldDefinition;
+import uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomain;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
-import uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomain;
-import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
+import uk.pallas.systems.typr.entities.v1.validation.multi.CountryCodeRuleWrapper;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
-import uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomain;
 
-import jakarta.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 
-/**
- * Used to define a single Field type and a rule to be associated with it. For example a Mobile Country Code
- * is an international type and so this could represent a MCC value.
- */
 @Entity
-public class SingleValidationRuleFieldDefinitionDomain extends AbstractFieldDefinitionDomain implements SingleValidationRuleFieldDefinition {
+public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
     /**
      * Static Logger for the class.
      */
-    private static final Log LOGGER = LogFactory.getLog(SingleValidationRuleFieldDefinitionDomain.class);
+    private static final Log LOGGER = LogFactory.getLog(CountryCodeRuleWrapperDomain.class);
+
+    /** Primary key for storing validation rules.*/
+    @Id
+    @GeneratedValue
+    private Long identifier;
+
+    /** Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be country specific. */
+    @Column(nullable = false)
+    private CountryCode countryCode;
+
+    /** Countries can have . */
+    @Column(length=4096, nullable = false)
+    private String name;
 
     /**
      * Validation for the field definition.
@@ -55,43 +64,44 @@ public class SingleValidationRuleFieldDefinitionDomain extends AbstractFieldDefi
     private LongValidationRuleDomain longRule;
 
     /**
-     * Default Class Constructor.
+     * Default constructor, sets the country code to undefined.
      */
-    public SingleValidationRuleFieldDefinitionDomain() {
-        this(null);
+    public CountryCodeRuleWrapperDomain() {
+        this(CountryCode.UNDEFINED, null);
     }
 
     /**
-     * Copy Constructor
+     * Copy constructor, creates a duplicate of the object supplied.
+     * @param wrapper the object to copy
      */
-    public SingleValidationRuleFieldDefinitionDomain(final FieldDefinition data) {
-        this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,
-                null != data ? data.getDescription() : null, null != data ? data.getName() : null, null);
+    public CountryCodeRuleWrapperDomain(final CountryCodeRuleWrapper wrapper) {
+        this(null == wrapper ? CountryCode.UNDEFINED : wrapper.getCountryCode(),
+                null == wrapper ? null : wrapper.getRule());
     }
 
     /**
-     * Copy Constructor
+     * Creates a new instance of the wrapper and populates it with the required settings
+     * @param code a country specific identifier for the rule
+     * @param rule the rule we need to wrap with a different identifier.
      */
-    public SingleValidationRuleFieldDefinitionDomain(final SingleValidationRuleFieldDefinition data) {
-        this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,
-                null != data ? data.getDescription() : null, null != data ? data.getName() : null,
-                null != data ? data.getRule() : null);
+    public CountryCodeRuleWrapperDomain(final CountryCode code, final ValidationRule rule) {
+        super();
+
+        if (null == code) {
+            this.countryCode = CountryCode.UNDEFINED;
+        } else {
+            this.countryCode = code;
+        }
+
+        this.setRule(rule);
     }
 
-    /**
-     * Class Constructor.
-     *
-     * @param acryo    The shortened name
-     * @param cats     The categories associated with our object
-     * @param desc     the description of the rule
-     * @param name     the name for the rule
-     * @param theRulez the Validation rules to apply
-     */
-    public SingleValidationRuleFieldDefinitionDomain(final String acryo, final Collection<Category> cats, final String desc, final String name,
-                                                     final ValidationRule theRulez) {
-        super(acryo, cats, desc, name);
+    public Long getIdentifier() {
+        return identifier;
+    }
 
-        this.setRule(theRulez);
+    public void setIdentifier(final Long id) {
+        this.identifier = id;
     }
 
     /**
@@ -100,7 +110,7 @@ public class SingleValidationRuleFieldDefinitionDomain extends AbstractFieldDefi
      *
      * @param toCompare the object to compare (can be null or a child class, etc..)
      * @return false if the name/validation and description fields in a field definition are
-     * different (or it isn't a field definition).
+     *        different (or it isn't a field definition).
      */
     @Override
     public boolean equals(final Object toCompare) {
@@ -108,9 +118,11 @@ public class SingleValidationRuleFieldDefinitionDomain extends AbstractFieldDefi
         final boolean result;
         if (this == toCompare) {
             result = true;
-        } else if (toCompare instanceof SingleValidationRuleFieldDefinition) {
-            final SingleValidationRuleFieldDefinition that = (SingleValidationRuleFieldDefinition) toCompare;
-            result = super.equals(toCompare) && Objects.equals(this.getRule(), that.getRule());
+        } else if (toCompare instanceof CountryCodeRuleWrapper) {
+            final CountryCodeRuleWrapper that = (CountryCodeRuleWrapper) toCompare;
+            result = super.equals(toCompare) && Objects.equals(this.getCountryCode(), that.getCountryCode())
+                    && Objects.equals(this.getName(), that.getName())
+                    && Objects.equals(this.getRule(), that.getRule());
         } else {
             result = false;
         }
@@ -120,12 +132,43 @@ public class SingleValidationRuleFieldDefinitionDomain extends AbstractFieldDefi
 
     /**
      * Generates a Unique hashcode for the field definition class.
-     *
      * @return a valid integer representation of this object,
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), this.getRule());
+        return super.hashCode() + Objects.hash(this.getCountryCode(), this.getName(), this.getRule());
+    }
+
+    @Override
+    public CountryCode getCountryCode() {
+        return this.countryCode;
+    }
+
+    @Override
+    public void setCountryCode(final CountryCode code) {
+        if (null == code) {
+             this.countryCode = CountryCode.UNDEFINED;
+        } else {
+            this.countryCode = code;
+        }
+    }
+
+    /**
+     * Retrieves the name of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
+     * @return non null value (if field definition is valid).
+     */
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Sets the name for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
+     * @param identifier the new name for the field definition value
+     */
+    @Override
+    public void setName(final String identifier) {
+        this.name = identifier;
     }
 
     /**
@@ -276,5 +319,14 @@ public class SingleValidationRuleFieldDefinitionDomain extends AbstractFieldDefi
         } else {
             LOGGER.warn(String.format("appendRule - Unsupported Rule Type supplied: %s", value));
         }
+    }
+
+    /**
+     * Defines the Country code and rule name under the to string and supplies Rule details.
+     * @return a valid String with field set assuming they are not null.
+     */
+    @Override
+    public String toString() {
+        return String.format("%s - %s with Rule: %s", this.getCountryCode(), this.getName(), this.getRule());
     }
 }

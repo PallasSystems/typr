@@ -3,6 +3,9 @@ package uk.pallas.systems.typr.domain.entities.v1;
 import jakarta.persistence.*;
 import uk.pallas.systems.typr.entities.v1.Category;
 
+/**
+ * This class defines Categories which can be associated with a definition.
+ */
 @Entity
 public class CategoryDomain implements Category {
 

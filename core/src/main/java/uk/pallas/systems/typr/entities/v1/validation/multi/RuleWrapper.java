@@ -12,6 +12,18 @@ import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 public interface RuleWrapper {
 
     /**
+     * Is the supplied test object something that matches against our field definition regular expression?
+     *
+     * If validation optional is set to true this will return true, if the supplied object is null, this will always
+     * return false. Otherwise this will call toString and then match the field definition regex tp confirm the object
+     * matches our desired value.
+     *
+     * @param toTest to test is valid
+     * @return false if the object fails the validation match.
+     */
+    boolean isValid(final Object toTest);
+
+    /**
      * Retrieves the rule of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
      * @return non null value (if field definition is valid).
      */

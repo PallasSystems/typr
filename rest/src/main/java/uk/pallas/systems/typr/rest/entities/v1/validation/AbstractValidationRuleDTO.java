@@ -7,7 +7,8 @@ import java.util.Objects;
 
 public abstract class AbstractValidationRuleDTO implements ValidationRule {
     /** Detailed description of the field definition. */
-    @Schema(description = "Detailed description of the field definition.")
+    @Schema(description = "Detailed description of the field definition.",
+            example = "This rule has been configured to apply a UK Postcode regular expression to the system")
     private String description;
 
     /** Default class constructor. */
