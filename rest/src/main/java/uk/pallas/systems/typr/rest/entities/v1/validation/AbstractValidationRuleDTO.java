@@ -1,11 +1,13 @@
 package uk.pallas.systems.typr.rest.entities.v1.validation;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 
 import java.util.Objects;
 
 public abstract class AbstractValidationRuleDTO implements ValidationRule {
     /** Detailed description of the field definition. */
+    @Schema(description = "Detailed description of the field definition.")
     private String description;
 
     /** Default class constructor. */

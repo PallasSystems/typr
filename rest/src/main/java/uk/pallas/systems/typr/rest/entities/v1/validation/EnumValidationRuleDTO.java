@@ -8,6 +8,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 
+/**
+ * Some field definitions have a limited number of allowed string values and so this definition allows us to maintain
+ * a list rather than a regular expression.
+ */
+@Schema(description = "Some field definitions have a limited number of allowed string values and so this definition "
+                      + "allows us to maintain a list rather than a regular expression. ")
 public class EnumValidationRuleDTO extends AbstractValidationRuleDTO implements EnumValidationRule {
 
     @ArraySchema(schema = @Schema(description = "List of enumerates, which are allowed.",

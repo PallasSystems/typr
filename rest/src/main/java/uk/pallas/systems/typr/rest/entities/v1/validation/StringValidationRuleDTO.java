@@ -7,6 +7,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import java.util.Objects;
 
+/**
+ * Defines regular expression rules for a field to confirm if the field is valid or not.
+ */
+@Schema(description="Defines regular expression rules for a field to confirm if the field is valid or not.")
 public class StringValidationRuleDTO extends AbstractValidationRuleDTO implements StringValidationRule {
 
     /** As this is a String type, assumption is we apply Regular Express to validate the string. */

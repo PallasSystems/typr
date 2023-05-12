@@ -12,8 +12,21 @@ import uk.pallas.systems.typr.rest.entities.v1.validation.multi.CountryCodeRuleW
 import java.util.Collection;
 import java.util.HashSet;
 
+/**
+ * The idea of a rule wrapper is to allow us to hold different rules for a field definition, for example postal code
+ * is different within each country (e.g. UK Post Code, USA Zip Code, etc..). Similary some things are a construction
+ * of other fields (e.g. Hostname will often have a Top Level Domain name included).
+ *
+ */
+@Schema(description = "The idea of a rule wrapper is to allow us to hold different rules for a field definition, "
+                      + "for example postal code is different within each country (e.g. UK Post Code, USA Zip Code, "
+                      + "etc..). Similary some things are a construction of other fields (e.g. Hostname will often "
+                      + "have a Top Level Domain name included).")
 public class MultiValidationRuleFieldDefinitionDTO extends AbstractFieldDefinitionDTO implements MultiValidationRuleFieldDefinition {
 
+    /**
+     * List of Validation rules for the field definition.
+     */
     @ArraySchema(schema = @Schema(description = "List of Validation rules for the field definition.",
                                   anyOf={ CountryCodeRuleWrapperDTO.class }),
                  uniqueItems = true,
@@ -70,6 +83,11 @@ public class MultiValidationRuleFieldDefinitionDTO extends AbstractFieldDefiniti
         return null != results && !results.isEmpty();
     }
 
+    /**
+     * Retrieves a list of all rules which have confirmed the incoming object is valid.
+     * @param toTest the object to test against the rules stored within this object
+     * @return an empty list or a list of identifiers for rules.
+     */
     @JsonIgnore
     @Override
     public Collection<String> getRulesPassed(final Object toTest) {
@@ -78,7 +96,7 @@ public class MultiValidationRuleFieldDefinitionDTO extends AbstractFieldDefiniti
         if (null != this.getRules()) {
             for (final RuleWrapper rule: this.getRules()) {
                 if (null != rule.getRule() && rule.getRule().isValid(toTest)) {
-                    results.add(rule.getId());
+                    results.add(rule.toString());
                 }
             }
         }

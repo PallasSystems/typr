@@ -4,12 +4,24 @@ import uk.pallas.systems.typr.entities.v1.validation.multi.RuleWrapper;
 
 import java.util.Collection;
 
+/**
+ * The idea of a rule wrapper is to allow us to hold different rules for a field definition, for example postal code
+ * is different within each country (e.g. UK Post Code, USA Zip Code, etc..). Similary some things are a construction
+ * of other fields (e.g. Hostname will often have a Top Level Domain name included).
+ *
+ * The wrapper is a base interface for these different combinations to extend.
+ */
 public interface MultiValidationRuleFieldDefinition extends FieldDefinition {
 
+    /**
+     * Retrieves a list of all rules which have confirmed the incoming object is valid.
+     * @param toTest the object to test against the rules stored within this object
+     * @return an empty list or a list of identifiers for rules.
+     */
     Collection<String> getRulesPassed(final Object toTest);
 
     /**
-     * Retrieves the rule of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
+     * A list of rules this field definition can validate.
      * @return non null value (if field definition is valid).
      */
     Collection<RuleWrapper> getRules();

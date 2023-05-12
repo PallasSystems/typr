@@ -2,6 +2,10 @@ package uk.pallas.systems.typr.entities.v1;
 
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 
+/**
+ * Used to define a single Field type and a rule to be associated with it. For example a Mobile Country Code
+ * is an international type and so this could represent a MCC value.
+ */
 public interface SingleValidationRuleFieldDefinition extends FieldDefinition {
 
     /**

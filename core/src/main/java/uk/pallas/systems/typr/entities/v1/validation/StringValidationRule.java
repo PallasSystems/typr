@@ -1,10 +1,13 @@
 package uk.pallas.systems.typr.entities.v1.validation;
 
+/**
+ * Defines regular expression rules for a field to confirm if the field is valid or not.
+ */
 public interface StringValidationRule extends ValidationRule {
 
     /**
      * The regular Expression to apply to a string defined by this field definition, to confirm a given string is valid.
-     * @return non null regular expression that can be used by Java Regex system.
+     * @return non-null regular expression that can be used by Java Regex system.
      */
     String getDetectRegex();
 

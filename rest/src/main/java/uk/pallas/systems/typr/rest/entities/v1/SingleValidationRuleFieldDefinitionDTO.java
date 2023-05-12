@@ -16,6 +16,12 @@ import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationR
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * Used to define a single Field type and a rule to be associated with it. For example a Mobile Country Code
+ * is an international type and so this could represent a MCC value.
+ */
+@Schema(description = "Used to define a single Field type and a rule to be associated with it. For example a Mobile "
+                      + "Country Code is an international type and so this could represent a MCC value.")
 public class SingleValidationRuleFieldDefinitionDTO extends AbstractFieldDefinitionDTO implements SingleValidationRuleFieldDefinition {
     /** Static Logger for the class. */
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFieldDefinitionDTO.class);

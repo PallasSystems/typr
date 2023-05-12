@@ -19,8 +19,7 @@ public class CategoryDTO implements Category {
     private String description;
 
     /** Name of the field definition e.g. post code, uk mobile. */
-    @Schema(description = "Name of the category, this is")
-    @NotNull
+    @Schema(description = "Name of the category, this is", nullable = false)
     @Size(min=0, max=4096)
     private String name;
 

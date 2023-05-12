@@ -23,7 +23,6 @@ public interface FieldDefinition {
      */
     void setAcronym(final String identifier);
 
-
     /**
      * List of categories assocaited with our type. These are additional ways to define a type for routing/managing a schema.
      * @return an empty list if nothing is supplied.

@@ -1,7 +1,7 @@
 package uk.pallas.systems.typr.entities.v1;
 
 /**
- * This class defines Categories which can be associated with a defintion.
+ * This class defines Categories which can be associated with a definition.
  */
 public interface Category {
     /**
