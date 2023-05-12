@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>EnumValidationRuleDomain.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">runnable</a> &gt; <a href="../index.html" class="el_bundle">hibernate</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.domain.entities.v1.validation</a> &gt; <span class="el_source">EnumValidationRuleDomain.java</span></div><h1>EnumValidationRuleDomain.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.domain.entities.v1.validation;
+
+import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
+
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Objects;
+
+@Entity
+public class EnumValidationRuleDomain extends AbstractValidationRuleDomain implements EnumValidationRule {
+
+<span class="nc" id="L14">    @ElementCollection</span>
+    private Collection&lt; String &gt; enumerates = new ArrayList&lt;&gt;();
+
+    /**
+     * Default constructor, sets everything to null and makes validation optional.
+     */
+    public EnumValidationRuleDomain() {
+<span class="nc" id="L21">        this(null, null);</span>
+<span class="nc" id="L22">    }</span>
+
+    /**
+     * Constructor, allows us to set the internal abstract fields
+     * @param detailedDescription the description of the rule
+     * @param data Enumerate values we need to support.
+     */
+    public EnumValidationRuleDomain(final String detailedDescription, final Collection&lt;String&gt; data) {
+<span class="nc" id="L30">        super(detailedDescription);</span>
+
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (null != data) {</span>
+<span class="nc" id="L33">            this.enumerates.addAll(data);</span>
+        }
+<span class="nc" id="L35">    }</span>
+
+    /**
+     * Copy Constructor, passes up to parent Copy Constructor.
+     * @param data the object to create a duplicate off.
+     */
+    public EnumValidationRuleDomain(final EnumValidationRule data) {
+<span class="nc bnc" id="L42" title="All 4 branches missed.">        this(null == data ? null : data.getDescription(), null == data ? null : data.getEnumerates());</span>
+<span class="nc" id="L43">    }</span>
+
+    /**
+     * Compares the supplied object to this one, it checks the supplied object is a FieldDefinition and then checks
+     * the definition applies validation, its name and description to see if they are matching objects.
+     *
+     * @param toCompare the object to compare (can be null or a child class, etc..)
+     * @return false if the name/validation and description fields in a field definition are
+     *        different (or it isn't a field definition).
+     */
+    @Override
+    public boolean equals(final Object toCompare) {
+
+        final boolean result;
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (this == toCompare) {</span>
+<span class="nc" id="L58">            result = true;</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        } else if (toCompare instanceof EnumValidationRule) {</span>
+<span class="nc" id="L60">            final EnumValidationRule that = (EnumValidationRule) toCompare;</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">            result = super.equals(toCompare)</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">                    &amp;&amp; this.getEnumerates().containsAll(that.getEnumerates())</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">                    &amp;&amp; that.getEnumerates().containsAll(this.getEnumerates());</span>
+<span class="nc" id="L64">        } else {</span>
+<span class="nc" id="L65">            result = false;</span>
+        }
+
+<span class="nc" id="L68">        return result;</span>
+    }
+
+    /**
+     * Generates a Unique hashcode for the field definition class.
+     * @return a valid integer representation of this object,
+     */
+    @Override
+    public int hashCode() {
+<span class="nc" id="L77">        return Objects.hash(super.hashCode(), this.getEnumerates());</span>
+    }
+
+
+    @Override
+    public Collection&lt;String&gt; getEnumerates() {
+<span class="nc" id="L83">        return new HashSet&lt;&gt;(this.enumerates);</span>
+    }
+
+    @Override
+    public void setEnumerates(Collection&lt;String&gt; enumerates) {
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        if (null == enumerates) {</span>
+<span class="nc" id="L89">            this.enumerates.clear();</span>
+        } else {
+<span class="nc" id="L91">            this.enumerates.clear();</span>
+<span class="nc" id="L92">            this.enumerates.addAll(enumerates);</span>
+        }
+<span class="nc" id="L94">    }</span>
+
+    @Override
+    public String getDetectRegex() {
+<span class="nc" id="L98">        return null;</span>
+    }
+
+    @Override
+    public void setDetectRegex(String validation) {
+
+<span class="nc" id="L104">    }</span>
+
+    @Override
+    public String getExtractRegex() {
+<span class="nc" id="L108">        return null;</span>
+    }
+
+    @Override
+    public void setExtractRegex(String validation) {
+
+<span class="nc" id="L114">    }</span>
+
+    /**
+     * Is the supplied test object something that matches against our field definition regular expression?
+     *
+     * If validation optional is set to true this will return true, if the supplied object is null, this will always
+     * return false. Otherwise this will call toString and then match the field definition regex tp confirm the object
+     * matches our desired value.
+     *
+     * @param toTest to test is valid
+     * @return false if the object fails the validation match.
+     */
+    @Override
+    public boolean isValid(final Object toTest) {
+        final boolean result;
+
+<span class="nc bnc" id="L130" title="All 2 branches missed.">        if (toTest instanceof String) {</span>
+            // Use to string as it leaves things the most flexible in our regex comparison.
+<span class="nc" id="L132">            result = this.isValid((String)toTest);</span>
+        } else {
+<span class="nc" id="L134">            result = false;</span>
+        }
+
+<span class="nc" id="L137">        return result;</span>
+    }
+
+    /**
+     * Is the supplied test object something that matches against our field definition regular expression?
+     *
+     * If validation optional is set to true this will return true, if the supplied object is null, this will always
+     * return false. Otherwise it will call matches on the supplied string.
+     *
+     * @param toTest to test is valid
+     * @return false if the object fails the validation match.
+     */
+    @Override
+    public boolean isValid(final String toTest) {
+        final boolean result;
+
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        if (null == toTest) {</span>
+<span class="nc" id="L154">            result = false;</span>
+        } else {
+<span class="nc" id="L156">            result = this.getEnumerates().contains(toTest);</span>
+        }
+
+<span class="nc" id="L159">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

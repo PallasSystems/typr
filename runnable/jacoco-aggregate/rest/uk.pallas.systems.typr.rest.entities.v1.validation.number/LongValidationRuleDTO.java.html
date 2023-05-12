@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>LongValidationRuleDTO.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">runnable</a> &gt; <a href="../index.html" class="el_bundle">rest</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.rest.entities.v1.validation.number</a> &gt; <span class="el_source">LongValidationRuleDTO.java</span></div><h1>LongValidationRuleDTO.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.rest.entities.v1.validation.number;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
+
+/**
+ * This is used for whole integer numbers when used in fields and allows us to validate that they are within an
+ * acceptable range. E.g. we would expect an Age (years) to have a minimum of 0 and a maximum of 150.
+ */
+@Schema(description = &quot;This is used for whole integer numbers when used in fields and allows us to validate that they&quot;
+                      + &quot; are within an acceptable range. E.g. we would expect an Age (years) to have a minimum of 0 &quot;
+                      + &quot;and a maximum of 150.&quot;)
+public class LongValidationRuleDTO extends AbstractNumberValidationRuleDTO&lt;Long&gt; implements LongValidationRule {
+
+
+    /**
+     * Default constructor, sets everything to null and makes validation optional.
+     */
+    public LongValidationRuleDTO() {
+<span class="nc" id="L20">        this(null);</span>
+<span class="nc" id="L21">    }</span>
+
+    /**
+     * Copy Constructor, passes up to parent Copy Constructor and sets Minimum/Maximum values.
+     * @param data the object to create a duplicate off.
+     */
+    public LongValidationRuleDTO(final LongValidationRule data) {
+<span class="nc bnc" id="L28" title="All 4 branches missed.">        this(null == data ? null : data.getMaximumValue(), null == data ? null : data.getMinimumValue(),</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">                null == data ? null : data.getDescription());</span>
+<span class="nc" id="L30">    }</span>
+
+    /**
+     * Constructor, allows us to set the internal abstract fields
+     *
+     * @param max                The upper bound allowed for the field
+     * @param min                the lower bound allowed for the field
+     */
+    public LongValidationRuleDTO(final Long max, final Long min, final String detailedDescription) {
+<span class="nc" id="L39">        super(max, min, detailedDescription);</span>
+<span class="nc" id="L40">    }</span>
+
+    /**
+     * Attempts to confirm the supplied value is a whole number and will return it is true.
+     *
+     * @param toConvert the object to test (if Number or a String holding a valid whole number.
+     * @return null .. or a valid Number.
+     */
+    @Override
+    protected Long getNumber(final Object toConvert) {
+
+<span class="nc" id="L51">        Long result = null;</span>
+
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (toConvert instanceof Number) {</span>
+<span class="nc" id="L54">            result = ((Number) toConvert).longValue();</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        } else if (null != toConvert) {</span>
+            try {
+<span class="nc" id="L57">                final Double value = Double.parseDouble(toConvert.toString());</span>
+<span class="nc" id="L58">                result = value.longValue();</span>
+<span class="nc" id="L59">            } catch (final NumberFormatException exception) {</span>
+                // TODO lets catch this fail and log it.
+<span class="nc" id="L61">            }</span>
+        }
+
+<span class="nc" id="L64">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

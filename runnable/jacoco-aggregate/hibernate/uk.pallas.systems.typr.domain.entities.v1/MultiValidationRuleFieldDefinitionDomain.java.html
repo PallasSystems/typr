@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>MultiValidationRuleFieldDefinitionDomain.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">runnable</a> &gt; <a href="../index.html" class="el_bundle">hibernate</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.domain.entities.v1</a> &gt; <span class="el_source">MultiValidationRuleFieldDefinitionDomain.java</span></div><h1>MultiValidationRuleFieldDefinitionDomain.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.domain.entities.v1;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.multi.CountryCodeRuleWrapperDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomain;
+import uk.pallas.systems.typr.entities.v1.Category;
+import uk.pallas.systems.typr.entities.v1.FieldDefinition;
+import uk.pallas.systems.typr.entities.v1.MultiValidationRuleFieldDefinition;
+import uk.pallas.systems.typr.entities.v1.SingleValidationRuleFieldDefinition;
+import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.multi.CountryCodeRuleWrapper;
+import uk.pallas.systems.typr.entities.v1.validation.multi.RuleWrapper;
+import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+/**
+ * The idea of a rule wrapper is to allow us to hold different rules for a field definition, for example postal code
+ * is different within each country (e.g. UK Post Code, USA Zip Code, etc..). Similary some things are a construction
+ * of other fields (e.g. Hostname will often have a Top Level Domain name included).
+ *
+ * The wrapper is a base interface for these different combinations to extend.
+ */
+@Entity
+public class MultiValidationRuleFieldDefinitionDomain extends AbstractFieldDefinitionDomain implements MultiValidationRuleFieldDefinition {
+    /**
+     * Static Logger for the class.
+     */
+<span class="nc" id="L42">    private static final Log LOGGER = LogFactory.getLog(MultiValidationRuleFieldDefinitionDomain.class);</span>
+
+    /**
+     * List of Validation rules for the field definition.
+     */
+    @OneToMany
+    private Collection&lt;CountryCodeRuleWrapperDomain&gt; countryCodeRuleWrappers;
+
+    /** Default Class Constructor. */
+    public MultiValidationRuleFieldDefinitionDomain() {
+<span class="nc" id="L52">        this(null);</span>
+<span class="nc" id="L53">    }</span>
+
+    /** Copy Constructor */
+    public MultiValidationRuleFieldDefinitionDomain(final FieldDefinition data) {
+<span class="nc bnc" id="L57" title="All 4 branches missed.">        this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,</span>
+<span class="nc bnc" id="L58" title="All 4 branches missed.">                null != data ? data.getDescription() : null, null != data ? data.getName() : null,</span>
+                null);
+<span class="nc" id="L60">    }</span>
+
+    /** Copy Constructor */
+    public MultiValidationRuleFieldDefinitionDomain(final MultiValidationRuleFieldDefinition data) {
+<span class="nc bnc" id="L64" title="All 4 branches missed.">        this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,</span>
+<span class="nc bnc" id="L65" title="All 4 branches missed.">                null != data ? data.getDescription() : null, null != data ? data.getName() : null,</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">                null != data ? data.getRules() : null);</span>
+<span class="nc" id="L67">    }</span>
+
+    /**
+     * Class Constructor.
+     *
+     * @param acryo The shortened name
+     * @param cats The categories associated with our object
+     * @param desc the description of the rule
+     * @param name the name for the rule
+     * @param theRulez the Validation rule to apply
+     */
+    public MultiValidationRuleFieldDefinitionDomain(final String acryo, final Collection&lt;Category&gt; cats, final String desc,
+                                                 final String name, final Collection&lt;RuleWrapper&gt; theRulez) {
+<span class="nc" id="L80">        super(acryo, cats, desc, name);</span>
+
+        //this.rule = DTOFactory.getValidationRuleDTO(theRulez);
+<span class="nc" id="L83">    }</span>
+    /**
+     * Is the supplied test object something that matches against our field definition regular expression?
+     *
+     * If validation optional is set to true this will return true, if the supplied object is null, this will always
+     * return false. Other-wise this will call toString and then match the field definition regex tp confirm the object
+     * matches our desired value.
+     *
+     * @param toTest to test is valid
+     * @return false if the object fails the validation match.
+     */
+    @Override
+    public boolean isValid(final Object toTest) {
+<span class="nc" id="L96">        final Collection&lt;String&gt; results = this.getRulesPassed(toTest);</span>
+<span class="nc bnc" id="L97" title="All 4 branches missed.">        return null != results &amp;&amp; !results.isEmpty();</span>
+    }
+
+    /**
+     * Retrieves a list of all rules which have confirmed the incoming object is valid.
+     * @param toTest the object to test against the rules stored within this object
+     * @return an empty list or a list of identifiers for rules.
+     */
+    @Override
+    public Collection&lt;String&gt; getRulesPassed(final Object toTest) {
+<span class="nc" id="L107">        final Collection&lt;String&gt; results = new HashSet&lt;&gt;();</span>
+
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        if (null != this.getRules()) {</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">            for (final RuleWrapper rule: this.getRules()) {</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">                if (rule.isValid(toTest)) {</span>
+<span class="nc" id="L112">                    results.add(rule.toString());</span>
+                }
+<span class="nc" id="L114">            }</span>
+        }
+
+<span class="nc" id="L117">        return results;</span>
+    }
+
+    @Override
+    public Collection&lt;RuleWrapper&gt; getRules() {
+<span class="nc" id="L122">        return new HashSet&lt;&gt;(this.countryCodeRuleWrappers);</span>
+    }
+
+    @Override
+    public void setRules(final Collection&lt;RuleWrapper&gt; values) {
+<span class="nc" id="L127">        this.countryCodeRuleWrappers.clear();</span>
+
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (null != values) {</span>
+<span class="nc" id="L130">            final Collection&lt;CountryCodeRuleWrapperDomain&gt; countryCodes = values.stream()</span>
+<span class="nc" id="L131">                    .filter(value -&gt; (value instanceof CountryCodeRuleWrapper))</span>
+<span class="nc" id="L132">                    .map(value -&gt; new CountryCodeRuleWrapperDomain((CountryCodeRuleWrapper)value))</span>
+<span class="nc" id="L133">                    .collect(Collectors.toSet());</span>
+
+<span class="nc" id="L135">            this.countryCodeRuleWrappers.addAll(countryCodes);</span>
+        }
+<span class="nc" id="L137">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

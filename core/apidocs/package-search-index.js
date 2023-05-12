@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"uk.pallas.systems.typr.entities.v1"},{"l":"uk.pallas.systems.typr.services"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"uk.pallas.systems.typr.entities.v1"},{"l":"uk.pallas.systems.typr.entities.v1.validation"},{"l":"uk.pallas.systems.typr.entities.v1.validation.multi"},{"l":"uk.pallas.systems.typr.entities.v1.validation.number"},{"l":"uk.pallas.systems.typr.services"}];updateSearchResults();

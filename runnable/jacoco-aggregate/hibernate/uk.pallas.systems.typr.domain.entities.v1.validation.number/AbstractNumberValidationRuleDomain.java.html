@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>AbstractNumberValidationRuleDomain.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">runnable</a> &gt; <a href="../index.html" class="el_bundle">hibernate</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.domain.entities.v1.validation.number</a> &gt; <span class="el_source">AbstractNumberValidationRuleDomain.java</span></div><h1>AbstractNumberValidationRuleDomain.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.domain.entities.v1.validation.number;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+import uk.pallas.systems.typr.domain.entities.v1.validation.AbstractValidationRuleDomain;
+import uk.pallas.systems.typr.entities.v1.validation.number.NumberValidationRule;
+
+import java.util.Objects;
+
+@MappedSuperclass
+abstract class AbstractNumberValidationRuleDomain&lt;N extends Number&gt; extends AbstractValidationRuleDomain implements NumberValidationRule&lt;N&gt; {
+    /**
+     * Is there an upper range for valid value stored within the field?
+     */
+    @Column(nullable = false)
+    private N maximumValue;
+
+    /**
+     * Is there a lower range for valid value stored within the field?
+     */
+    @Column(nullable = false)
+    private N minimumValue;
+
+    /**
+     * Default constructor, sets everything to null and makes validation optional.
+     */
+    protected AbstractNumberValidationRuleDomain() {
+<span class="nc" id="L28">        this(null);</span>
+<span class="nc" id="L29">    }</span>
+
+    /**
+     * Copy Constructor, passes up to parent Copy Constructor and sets Minimum/Maximum values.
+     * @param data the object to create a duplicate off.
+     */
+    protected AbstractNumberValidationRuleDomain(final NumberValidationRule&lt;N&gt; data) {
+<span class="nc bnc" id="L36" title="All 4 branches missed.">        this(null == data ? null : data.getMaximumValue(), null == data ? null : data.getMinimumValue(),</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">                null == data ? null : data.getDescription());</span>
+<span class="nc" id="L38">    }</span>
+
+    /**
+     * Constructor, allows us to set the internal abstract fields
+     *
+     * @param max                The upper bound allowed for the field
+     * @param min                the lower bound allowed for the field
+     */
+    protected AbstractNumberValidationRuleDomain(final N max, final N min, final String detailedDescription) {
+<span class="nc" id="L47">        super(detailedDescription);</span>
+
+<span class="nc" id="L49">        this.maximumValue = max;</span>
+<span class="nc" id="L50">        this.minimumValue = min;</span>
+<span class="nc" id="L51">    }</span>
+
+    /**
+     * Compares the supplied object to this one, it checks the supplied object is a FieldDefinition and then checks
+     * the definition applies validation, its name and description to see if they are matching objects.
+     *
+     * @param toCompare the object to compare (can be null or a child class, etc..)
+     * @return false if the name/validation and description fields in a field definition are
+     * different (or it isn't a field definition).
+     */
+    @Override
+    public boolean equals(final Object toCompare) {
+
+        final boolean result;
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (this == toCompare) {</span>
+<span class="nc" id="L66">            result = true;</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        } else if (toCompare instanceof NumberValidationRule) {</span>
+<span class="nc" id="L68">            final NumberValidationRule that = (NumberValidationRule&lt;?&gt;) toCompare;</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">            result = super.equals(toCompare)</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">                    &amp;&amp; Objects.equals(this.getMaximumValue(), that.getMaximumValue())</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                    &amp;&amp; Objects.equals(this.getMinimumValue(), that.getMinimumValue());</span>
+<span class="nc" id="L72">        } else {</span>
+<span class="nc" id="L73">            result = false;</span>
+        }
+
+<span class="nc" id="L76">        return result;</span>
+    }
+
+    /**
+     * Generates a Unique hashcode for the field definition class.
+     *
+     * @return a valid integer representation of this object,
+     */
+    @Override
+    public int hashCode() {
+<span class="nc" id="L86">        return Objects.hash(super.hashCode(), this.getMaximumValue(), this.getMinimumValue());</span>
+    }
+
+    /**
+     * Retrieves the maximum alue that the field definition allows.
+     *
+     * @return null is allowed (or a valid N value)
+     */
+    public N getMaximumValue() {
+<span class="nc" id="L95">        return this.maximumValue;</span>
+    }
+
+    /**
+     * Sets the maximum value (can be null) for the field definition to apply to the data field during validation.
+     *
+     * @param maximum the maximum possible value
+     */
+    public void setMaximumValue(final N maximum) {
+<span class="nc" id="L104">        this.maximumValue = maximum;</span>
+<span class="nc" id="L105">    }</span>
+
+    /**
+     * Retrieves the minimum value that the field definition allows.
+     *
+     * @return null is allowed (or a valid N value)
+     */
+    public N getMinimumValue() {
+<span class="nc" id="L113">        return minimumValue;</span>
+    }
+
+    /**
+     * Sets the mainimum value (can be null) for the field definition to apply to the data field during validation.
+     *
+     * @param minimum the minimum possible valid value
+     */
+    public void setMinimumValue(final N minimum) {
+<span class="nc" id="L122">        this.minimumValue = minimum;</span>
+<span class="nc" id="L123">    }</span>
+
+    /**
+     * This will compare the incoming object and see if it is a valid whole number and if the value is a valid
+     * number do we have a maximum or a minimum data range? If there is a upper or lower value (they can be null) then
+     * it tests the supplied object is less than/equal or greater than/equal as appropriate.
+     * &lt;p&gt;
+     * If validationOptional is set to true this will return true by default (no further checks).
+     *
+     * @param toTest to test is valid
+     * @return false if the object isn't a number or if it falls out the expected data range.
+     */
+    public boolean isValid(final Object toTest) {
+<span class="nc" id="L136">        final Number value = this.getNumber(toTest);</span>
+<span class="nc" id="L137">        return this.isValid(value);</span>
+    }
+
+    /**
+     * This will compare the incoming object and see if it is a valid whole number and if the value is a valid
+     * number do we have a maximum or a minimum data range? If there is a upper or lower value (they can be null) then
+     * it tests the supplied object is less than/equal or greater than/equal as appropriate.
+     * &lt;p&gt;
+     * If validationOptional is set to true this will return true by default (no further checks).
+     *
+     * @param toTest to test is valid
+     * @return false if the object isn't a number or if it falls out the expected data range.
+     */
+    public boolean isValid(final Number toTest) {
+        final boolean result;
+
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        if (null == toTest) {</span>
+            // The field should be numerical, it isn't ergo ... not valid
+<span class="nc" id="L155">            result = false;</span>
+        } else {
+
+            final boolean maxValComparison;
+<span class="nc bnc" id="L159" title="All 2 branches missed.">            if (null == this.getMaximumValue()) {</span>
+<span class="nc" id="L160">                maxValComparison = true;</span>
+            } else {
+<span class="nc bnc" id="L162" title="All 2 branches missed.">                maxValComparison = toTest.doubleValue() &lt;= this.getMaximumValue().doubleValue();</span>
+            }
+
+            final boolean minValComparison;
+<span class="nc bnc" id="L166" title="All 2 branches missed.">            if (null == this.getMinimumValue()) {</span>
+<span class="nc" id="L167">                minValComparison = true;</span>
+            } else {
+<span class="nc bnc" id="L169" title="All 2 branches missed.">                minValComparison = toTest.doubleValue() &gt;= this.getMinimumValue().doubleValue();</span>
+            }
+
+<span class="nc bnc" id="L172" title="All 4 branches missed.">            result = maxValComparison &amp;&amp; minValComparison;</span>
+        }
+
+<span class="nc" id="L175">        return result;</span>
+    }
+
+
+    /**
+     * Attempts to confirm the supplied value is a whole number and will return it is true.
+     *
+     * @param toConvert the object to test (if Number or a String holding a valid whole number.
+     * @return null .. or a valid Number.
+     */
+    protected abstract N getNumber(final Object toConvert);
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

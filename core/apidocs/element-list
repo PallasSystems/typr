@@ -1,2 +1,5 @@
 uk.pallas.systems.typr.entities.v1
+uk.pallas.systems.typr.entities.v1.validation
+uk.pallas.systems.typr.entities.v1.validation.multi
+uk.pallas.systems.typr.entities.v1.validation.number
 uk.pallas.systems.typr.services

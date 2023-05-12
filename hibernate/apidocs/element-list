@@ -1,3 +1,7 @@
 uk.pallas.systems.typr.domain
-uk.pallas.systems.typr.entities.v1.domain
+uk.pallas.systems.typr.domain.entities.v1
+uk.pallas.systems.typr.domain.entities.v1.utils
+uk.pallas.systems.typr.domain.entities.v1.validation
+uk.pallas.systems.typr.domain.entities.v1.validation.multi
+uk.pallas.systems.typr.domain.entities.v1.validation.number
 uk.pallas.systems.typr.services

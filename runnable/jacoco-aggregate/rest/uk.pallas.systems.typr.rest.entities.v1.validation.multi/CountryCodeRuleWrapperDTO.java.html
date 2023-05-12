@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CountryCodeRuleWrapperDTO.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">runnable</a> &gt; <a href="../index.html" class="el_bundle">rest</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.rest.entities.v1.validation.multi</a> &gt; <span class="el_source">CountryCodeRuleWrapperDTO.java</span></div><h1>CountryCodeRuleWrapperDTO.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.rest.entities.v1.validation.multi;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.neovisionaries.i18n.CountryCode;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.apache.logging.log4j.Logger;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.multi.CountryCodeRuleWrapper;
+import uk.pallas.systems.typr.rest.entities.v1.utils.DTOFactory;
+import uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTO;
+import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTO;
+import uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTO;
+import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTO;
+
+import java.util.Objects;
+
+public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
+
+
+    /** Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be country specific. */
+    @Schema(example=&quot;UK&quot;, nullable = false,
+            description=&quot;Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be &quot;
+                    + &quot;country specific.&quot;)
+    private CountryCode countryCode;
+
+    /** Countries can have . */
+    @Schema(description = &quot;Name of the field definition e.g. post code.&quot;,
+            example = &quot;Post Code&quot;,
+            nullable = false)
+    @Size(min=1, max=100)
+    private String name;
+
+    /** Validation for the field definition. */
+    @Schema(description = &quot;Validation for the field definition.&quot;,
+            anyOf={ DoubleValidationRuleDTO.class, EnumValidationRuleDTO.class, LongValidationRuleDTO.class,
+                    StringValidationRuleDTO.class })
+    private ValidationRule rule;
+
+    /**
+     * Default constructor, sets the country code to undefined.
+     */
+    public CountryCodeRuleWrapperDTO() {
+<span class="nc" id="L46">        this(CountryCode.UNDEFINED, null);</span>
+<span class="nc" id="L47">    }</span>
+
+    /**
+     * Copy constructor, creates a duplicate of the object supplied.
+     * @param wrapper the object to copy
+     */
+    public CountryCodeRuleWrapperDTO(final CountryCodeRuleWrapper wrapper) {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        this(null == wrapper ? CountryCode.UNDEFINED : wrapper.getCountryCode(),</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">                null == wrapper ? null : wrapper.getRule());</span>
+<span class="nc" id="L56">    }</span>
+
+    /**
+     * Creates a new instance of the wrapper and populates it with the required settings
+     * @param code a country specific identifier for the rule
+     * @param rule the rule we need to wrap with a different identifier.
+     */
+    public CountryCodeRuleWrapperDTO(final CountryCode code, final ValidationRule rule) {
+<span class="nc" id="L64">        super();</span>
+
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (null == code) {</span>
+<span class="nc" id="L67">            this.countryCode = CountryCode.UNDEFINED;</span>
+        } else {
+<span class="nc" id="L69">            this.countryCode = code;</span>
+        }
+
+<span class="nc" id="L72">        this.rule = rule;</span>
+<span class="nc" id="L73">    }</span>
+
+    /**
+     * Compares the supplied object to this one, it checks the supplied object is a FieldDefinition and then checks
+     * the definition applies validation, its name and description to see if they are matching objects.
+     *
+     * @param toCompare the object to compare (can be null or a child class, etc..)
+     * @return false if the name/validation and description fields in a field definition are
+     *        different (or it isn't a field definition).
+     */
+    @Override
+    public boolean equals(final Object toCompare) {
+
+        final boolean result;
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if (this == toCompare) {</span>
+<span class="nc" id="L88">            result = true;</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        } else if (toCompare instanceof CountryCodeRuleWrapper) {</span>
+<span class="nc" id="L90">            final CountryCodeRuleWrapper that = (CountryCodeRuleWrapper) toCompare;</span>
+<span class="nc bnc" id="L91" title="All 4 branches missed.">            result = super.equals(toCompare) &amp;&amp; Objects.equals(this.getCountryCode(), that.getCountryCode())</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">                    &amp;&amp; Objects.equals(this.getName(), that.getName())</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">                    &amp;&amp; Objects.equals(this.getRule(), that.getRule());</span>
+<span class="nc" id="L94">        } else {</span>
+<span class="nc" id="L95">            result = false;</span>
+        }
+
+<span class="nc" id="L98">        return result;</span>
+    }
+
+    /**
+     * Generates a Unique hashcode for the field definition class.
+     * @return a valid integer representation of this object,
+     */
+    @Override
+    public int hashCode() {
+<span class="nc" id="L107">        return super.hashCode() + Objects.hash(this.getCountryCode(), this.getName(), this.getRule());</span>
+    }
+
+    @Override
+    public CountryCode getCountryCode() {
+<span class="nc" id="L112">        return this.countryCode;</span>
+    }
+
+    @Override
+    public void setCountryCode(final CountryCode code) {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        if (null == code) {</span>
+<span class="nc" id="L118">             this.countryCode = CountryCode.UNDEFINED;</span>
+        } else {
+<span class="nc" id="L120">            this.countryCode = code;</span>
+        }
+<span class="nc" id="L122">    }</span>
+
+    /**
+     * Retrieves the name of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
+     * @return non null value (if field definition is valid).
+     */
+    @Override
+    public String getName() {
+<span class="nc" id="L130">        return this.name;</span>
+    }
+
+    /**
+     * Sets the name for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
+     * @param identifier the new name for the field definition value
+     */
+    @Override
+    public void setName(final String identifier) {
+<span class="nc" id="L139">        this.name = identifier;</span>
+<span class="nc" id="L140">    }</span>
+
+    /**
+     * This method will supply the parameter into the Validation rule the wrapper holds, if no validation rule
+     * exists this will return false. Otherwise it will return with the rules response.
+     * @param toTest to test is valid
+     * @return false if the object is invalid, there is no rule or
+     */
+    @Override
+    @JsonIgnore
+    public boolean isValid(Object toTest) {
+        final boolean result;
+
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        if (null == this.getRule()) {</span>
+<span class="nc" id="L154">            result = false;</span>
+        } else {
+<span class="nc" id="L156">            result = this.getRule().isValid(toTest);</span>
+        }
+
+<span class="nc" id="L159">        return result;</span>
+    }
+
+    /**
+     * Retrieves the rule of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
+     * @return non null value (if field definition is valid).
+     */
+    public ValidationRule getRule() {
+<span class="nc" id="L167">        return this.rule;</span>
+    }
+
+    /**
+     * Sets the validation for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
+     * @param value the rules to add to our field definition
+     */
+    public void setRule(final ValidationRule value) {
+<span class="nc" id="L175">        this.rule = DTOFactory.getValidationRuleDTO(value);</span>
+<span class="nc" id="L176">    }</span>
+
+    /**
+     * Defines the Country code and rule name under the to string and supplies Rule details.
+     * @return a valid String with field set assuming they are not null.
+     */
+    @Override
+    public String toString() {
+<span class="nc" id="L184">        return String.format(&quot;%s - %s with Rule: %s&quot;, this.getCountryCode(), this.getName(), this.getRule());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

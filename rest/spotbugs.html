@@ -35,28 +35,37 @@
 <section>
 <h1>SpotBugs Bug Detector Report</h1>
 <p>The following document contains the results of <a class="externalLink" href="https://spotbugs.github.io/">SpotBugs</a></p>
-<p>SpotBugs Version is <i>4.7.1</i></p>
+<p>SpotBugs Version is <i>4.7.3</i></p>
 <p>Threshold is <i>low</i></p>
 <p>Effort is <i>max</i></p></section><section>
 <h1>Summary</h1>
+<table class="table table-striped">
 <tr class="a">
 <th>Classes</th>
 <th>Bugs</th>
 <th>Errors</th>
 <th>Missing Classes</th></tr>
 <tr class="b">
-<td>8</td>
-<td>1</td>
+<td>13</td>
+<td>4</td>
 <td>0</td>
 <td>0</td></tr></table></section><section>
 <h1>Files</h1>
+<table class="table table-striped">
 <tr class="a">
 <th>Class</th>
 <th>Bugs</th></tr>
 <tr class="b">
-<td><a href="#uk.pallas.systems.typr.entities.v1.impl.AbstractFieldDefinitionDTO">uk.pallas.systems.typr.entities.v1.impl.AbstractFieldDefinitionDTO</a></td>
-<td>1</td></tr></table></section><a id="uk.pallas.systems.typr.entities.v1.impl.AbstractFieldDefinitionDTO"></a><section>
-<h2>uk.pallas.systems.typr.entities.v1.impl.AbstractFieldDefinitionDTO</h2>
+<td><a href="#uk.pallas.systems.typr.rest.entities.v1.MultiValidationRuleFieldDefinitionDTO">uk.pallas.systems.typr.rest.entities.v1.MultiValidationRuleFieldDefinitionDTO</a></td>
+<td>1</td></tr>
+<tr class="a">
+<td><a href="#uk.pallas.systems.typr.rest.entities.v1.SingleValidationRuleFieldDefinitionDTO">uk.pallas.systems.typr.rest.entities.v1.SingleValidationRuleFieldDefinitionDTO</a></td>
+<td>1</td></tr>
+<tr class="b">
+<td><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.multi.CountryCodeRuleWrapperDTO">uk.pallas.systems.typr.rest.entities.v1.validation.multi.CountryCodeRuleWrapperDTO</a></td>
+<td>2</td></tr></table></section><a name="uk.pallas.systems.typr.rest.entities.v1.MultiValidationRuleFieldDefinitionDTO"></a><section>
+<h2>uk.pallas.systems.typr.rest.entities.v1.MultiValidationRuleFieldDefinitionDTO</h2>
+<table class="table table-striped">
 <tr class="a">
 <th>Bug</th>
 <th>Category</th>
@@ -64,10 +73,44 @@
 <th>Line</th>
 <th>Priority</th></tr>
 <tr class="b">
-<td>Redundant nullcheck of values, which is known to be non-null in uk.pallas.systems.typr.entities.v1.impl.AbstractFieldDefinitionDTO.setCategories(Collection)</td>
+<td>Redundant nullcheck of results, which is known to be non-null in uk.pallas.systems.typr.rest.entities.v1.MultiValidationRuleFieldDefinitionDTO.isValid(Object)</td>
 <td>STYLE</td>
 <td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE">RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/entities/v1/impl/AbstractFieldDefinitionDTO.html#L153">153</a></td>
+<td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/MultiValidationRuleFieldDefinitionDTO.html#L83">83</a></td>
+<td>Low</td></tr></table></section><a name="uk.pallas.systems.typr.rest.entities.v1.SingleValidationRuleFieldDefinitionDTO"></a><section>
+<h2>uk.pallas.systems.typr.rest.entities.v1.SingleValidationRuleFieldDefinitionDTO</h2>
+<table class="table table-striped">
+<tr class="a">
+<th>Bug</th>
+<th>Category</th>
+<th>Details</th>
+<th>Line</th>
+<th>Priority</th></tr>
+<tr class="b">
+<td>uk.pallas.systems.typr.rest.entities.v1.SingleValidationRuleFieldDefinitionDTO.getRule() may expose internal representation by returning SingleValidationRuleFieldDefinitionDTO.rule</td>
+<td>MALICIOUS_CODE</td>
+<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#EI_EXPOSE_REP">EI_EXPOSE_REP</a></td>
+<td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/SingleValidationRuleFieldDefinitionDTO.html#L133">133</a></td>
+<td>Medium</td></tr></table></section><a name="uk.pallas.systems.typr.rest.entities.v1.validation.multi.CountryCodeRuleWrapperDTO"></a><section>
+<h2>uk.pallas.systems.typr.rest.entities.v1.validation.multi.CountryCodeRuleWrapperDTO</h2>
+<table class="table table-striped">
+<tr class="a">
+<th>Bug</th>
+<th>Category</th>
+<th>Details</th>
+<th>Line</th>
+<th>Priority</th></tr>
+<tr class="b">
+<td>uk.pallas.systems.typr.rest.entities.v1.validation.multi.CountryCodeRuleWrapperDTO.getRule() may expose internal representation by returning CountryCodeRuleWrapperDTO.rule</td>
+<td>MALICIOUS_CODE</td>
+<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#EI_EXPOSE_REP">EI_EXPOSE_REP</a></td>
+<td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/validation/multi/CountryCodeRuleWrapperDTO.html#L167">167</a></td>
+<td>Medium</td></tr>
+<tr class="a">
+<td>new uk.pallas.systems.typr.rest.entities.v1.validation.multi.CountryCodeRuleWrapperDTO(CountryCode, ValidationRule) may expose internal representation by storing an externally mutable object into CountryCodeRuleWrapperDTO.rule</td>
+<td>MALICIOUS_CODE</td>
+<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#EI_EXPOSE_REP2">EI_EXPOSE_REP2</a></td>
+<td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/validation/multi/CountryCodeRuleWrapperDTO.html#L72">72</a></td>
 <td>Medium</td></tr></table></section>
       </div>
     </main>
