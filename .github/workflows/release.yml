@@ -57,12 +57,14 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-      - name: Merge Release -> main
-        uses: devmasx/merge-branch@master
+      - name: Create pull request into main
+        uses: repo-sync/pull-request@v2
         with:
-          type: now
-          target_branch: main
+          source_branch: release/${{ env.BRANCH_NAME }}
+          destination_branch: "main"
           github_token: ${{ secrets.SCM_TOKEN }}
+          pr_title: "Merge Release back to main"
+          pr_body: "Performed successfull release, needs to be merged back into main branch"
 
       - name: Upload Release Artifacts
         uses: actions/upload-artifact@v3
