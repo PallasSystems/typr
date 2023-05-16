@@ -57,21 +57,12 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-      - name: Fetch all Branches
-        if: ${{ contains(github.ref, 'refs/heads/release') }}
-        run: git fetch --all
-
-      - name: Switch to main branch
-        if: ${{ contains(github.ref, 'refs/heads/release') }}
-        run: git checkout main
-
-      - name: Merge release banch into main
-        if: ${{ contains(github.ref, 'refs/heads/release') }}
-        run: git merge origin/release/${{ env.BRANCH_NAME }}
-
-      - name: Push from local into remote
-        if: ${{ contains(github.ref, 'refs/heads/release') }}
-        run: git push origin main
+      - name: Merge Release -> main
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: main
+          github_token: ${{ secrets.SCM_TOKEN }}
 
       - name: Upload Release Artifacts
         uses: actions/upload-artifact@v3
