@@ -6,6 +6,7 @@ import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule
 import jakarta.persistence.Entity;
 
 @Entity
+@Table(name="val_double_rules")
 public class DoubleValidationRuleDomain extends AbstractNumberValidationRuleDomain<Double> implements DoubleValidationRule {
 
     /**

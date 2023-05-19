@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name="val_string_rules")
 public class StringValidationRuleDomain extends AbstractValidationRuleDomain implements StringValidationRule {
 
     /** As this is a String type, assumption is we apply Regular Express to validate the string. */

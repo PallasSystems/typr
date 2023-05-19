@@ -6,6 +6,7 @@ import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 import jakarta.persistence.Entity;
 
 @Entity
+@Table(name="val_long_rules")
 public class LongValidationRuleDomain extends AbstractNumberValidationRuleDomain<Long> implements LongValidationRule {
 
 

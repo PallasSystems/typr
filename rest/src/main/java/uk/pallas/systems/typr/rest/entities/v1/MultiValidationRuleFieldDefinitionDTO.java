@@ -7,10 +7,12 @@ import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.entities.v1.MultiValidationRuleFieldDefinition;
 import uk.pallas.systems.typr.entities.v1.validation.multi.RuleWrapper;
+import uk.pallas.systems.typr.rest.entities.v1.utils.DTOFactory;
 import uk.pallas.systems.typr.rest.entities.v1.validation.multi.CountryCodeRuleWrapperDTO;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 /**
  * The idea of a rule wrapper is to allow us to hold different rules for a field definition, for example postal code
@@ -65,7 +67,11 @@ public class MultiValidationRuleFieldDefinitionDTO extends AbstractFieldDefiniti
                                                  final String name, final Collection<RuleWrapper> theRulez) {
         super(acryo, cats, desc, name);
 
-        //this.rule = DTOFactory.getValidationRuleDTO(theRulez);
+        if (null == theRulez) {
+            this.rules = new HashSet<>();
+        } else {
+            this.rules = theRulez.stream().map(rule -> DTOFactory.getRuleWrapperDTO(rule)).collect(Collectors.toSet());
+        }
     }
     /**
      * Is the supplied test object something that matches against our field definition regular expression?

@@ -3,6 +3,7 @@ package uk.pallas.systems.typr.domain.entities.v1;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomain;
@@ -35,6 +36,7 @@ import java.util.stream.Collectors;
  * The wrapper is a base interface for these different combinations to extend.
  */
 @Entity
+@Table(name="multi_field_def")
 public class MultiValidationRuleFieldDefinitionDomain extends AbstractFieldDefinitionDomain implements MultiValidationRuleFieldDefinition {
     /**
      * Static Logger for the class.

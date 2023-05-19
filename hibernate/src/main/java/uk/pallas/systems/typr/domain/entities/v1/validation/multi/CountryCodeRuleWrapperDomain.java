@@ -20,6 +20,7 @@ import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 import java.util.Objects;
 
 @Entity
+@Table(name="wrap_country_code")
 public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
     /**
      * Static Logger for the class.
@@ -33,7 +34,7 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
 
     /** Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be country specific. */
     @Column(nullable = false)
-    private CountryCode countryCode;
+    private int countryCode;
 
     /** Countries can have . */
     @Column(length=4096, nullable = false)
@@ -88,9 +89,9 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
         super();
 
         if (null == code) {
-            this.countryCode = CountryCode.UNDEFINED;
+            this.countryCode = CountryCode.UNDEFINED.getNumeric();
         } else {
-            this.countryCode = code;
+            this.countryCode = code.getNumeric();
         }
 
         this.setRule(rule);
@@ -141,15 +142,15 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
 
     @Override
     public CountryCode getCountryCode() {
-        return this.countryCode;
+        return CountryCode.getByCode(this.countryCode);
     }
 
     @Override
     public void setCountryCode(final CountryCode code) {
         if (null == code) {
-             this.countryCode = CountryCode.UNDEFINED;
+             this.countryCode = CountryCode.UNDEFINED.getNumeric();
         } else {
-            this.countryCode = code;
+            this.countryCode = code.getNumeric();
         }
     }
 

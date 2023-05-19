@@ -8,6 +8,8 @@ import uk.pallas.systems.typr.entities.v1.SingleValidationRuleFieldDefinition;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.multi.CountryCodeRuleWrapper;
+import uk.pallas.systems.typr.entities.v1.validation.multi.RuleWrapper;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 import uk.pallas.systems.typr.rest.entities.v1.AbstractFieldDefinitionDTO;
@@ -16,6 +18,7 @@ import uk.pallas.systems.typr.rest.entities.v1.SingleValidationRuleFieldDefiniti
 import uk.pallas.systems.typr.rest.entities.v1.validation.AbstractValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTO;
+import uk.pallas.systems.typr.rest.entities.v1.validation.multi.CountryCodeRuleWrapperDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTO;
 
@@ -38,6 +41,18 @@ public class DTOFactory {
         return result;
     }
 
+    public static RuleWrapper getRuleWrapperDTO(final RuleWrapper value) {
+        final RuleWrapper result;
+
+        if (value instanceof CountryCodeRuleWrapper) {
+            result = new CountryCodeRuleWrapperDTO((CountryCodeRuleWrapper)value);
+        } else {
+            result = null;
+            LOGGER.warn(String.format("getRuleWrapperDTO - Unsupported Rule Type supplied: %s", value));
+        }
+
+        return result;
+    }
 
     public static AbstractValidationRuleDTO getValidationRuleDTO(final ValidationRule value) {
         final AbstractValidationRuleDTO result;

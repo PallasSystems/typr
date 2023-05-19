@@ -21,7 +21,9 @@ public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
   private CategoryRepository categoryDAO;
 
   @Autowired
-  private FieldDefinitionRepository definitionDAO;
+  private SingleValidationRuleFieldDefinitionRepository singleDefinitionDAO;
+  @Autowired
+  private MultiValidationRuleFieldDefinitionRepository multiDefinitionDAO;
 
 
   @Override
@@ -43,7 +45,8 @@ public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
   public Collection<FieldDefinition> getFieldDefinitions() {
     final Collection<FieldDefinition> results = new HashSet<>();
 
-    results.addAll(this.definitionDAO.findAll());
+    results.addAll(this.singleDefinitionDAO.findAll());
+    results.addAll(this.multiDefinitionDAO.findAll());
 
     return results;
   }
@@ -61,7 +64,7 @@ public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
   public FieldDefinition getFieldDefinitionByName(final String name) {
     final FieldDefinition result;
 
-    final Optional<SingleValidationRuleFieldDefinitionDomain> defResults = this.definitionDAO.findById(name);
+    final Optional<SingleValidationRuleFieldDefinitionDomain> defResults = this.singleDefinitionDAO.findById(name);
     if (defResults.isPresent()) {
       result = defResults.get();
     } else {
@@ -82,7 +85,7 @@ public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
 
     if (definition instanceof FieldDefinition) {
       final SingleValidationRuleFieldDefinitionDomain domain = new SingleValidationRuleFieldDefinitionDomain((FieldDefinition)definition);
-      result = this.definitionDAO.save(domain);
+      result = this.singleDefinitionDAO.save(domain);
     } else {
       result = null;
     }

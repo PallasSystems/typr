@@ -1,12 +1,10 @@
 package uk.pallas.systems.typr.rest.entities.v1.validation.multi;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.neovisionaries.i18n.CountryCode;
-import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.apache.logging.log4j.Logger;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.multi.CountryCodeRuleWrapper;
 import uk.pallas.systems.typr.rest.entities.v1.utils.DTOFactory;
@@ -16,6 +14,7 @@ import uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidatio
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTO;
 
 import java.util.Objects;
+
 
 public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
 

@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Objects;
 
 @Entity
+@Table(name="val_enum_rules")
 public class EnumValidationRuleDomain extends AbstractValidationRuleDomain implements EnumValidationRule {
 
     @ElementCollection

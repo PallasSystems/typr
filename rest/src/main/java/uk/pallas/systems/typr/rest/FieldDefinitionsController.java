@@ -1,5 +1,8 @@
 package uk.pallas.systems.typr.rest;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
+import uk.pallas.systems.typr.rest.entities.v1.CategoryDTO;
 import uk.pallas.systems.typr.rest.entities.v1.utils.DTOFactory;
 import uk.pallas.systems.typr.rest.entities.v1.MultiValidationRuleFieldDefinitionDTO;
 import uk.pallas.systems.typr.rest.entities.v1.SingleValidationRuleFieldDefinitionDTO;
@@ -22,13 +27,15 @@ import java.util.stream.Collectors;
 /**
  * This Defines an interface for retrieving Field Definitions stored within Typr.
  */
-@RestController("Typr API")
+@RestController("Typr Field API")
 @RequestMapping("api/type/v1")
+@OpenAPIDefinition(info = @Info(title="Typr Field API"))
 public class FieldDefinitionsController {
 
   /** The backend service to retrieve. */
   @Autowired
   private FieldDefinitionServices services;
+
 
   public FieldDefinitionServices getServices() {
     return services;
@@ -72,6 +79,7 @@ public class FieldDefinitionsController {
    * @return A valid Field definition object if one is found within the database.
    */
   @GetMapping("/type/name/{name}")
+  @Operation(summary = "Retrieves a Field Definition based on the full length name.")
   @ApiResponses(value = {
           @ApiResponse(
                   responseCode = "200",
@@ -99,6 +107,7 @@ public class FieldDefinitionsController {
    * @return The stored version of the field definition.
    */
   @PutMapping("/type")
+  @Operation(summary = "Used to insert new Field Definitions into the Typr system.")
   @ApiResponses(value = {
           @ApiResponse(
                   responseCode = "200",

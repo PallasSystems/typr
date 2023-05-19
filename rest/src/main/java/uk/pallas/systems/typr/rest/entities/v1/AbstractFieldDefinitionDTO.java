@@ -8,9 +8,7 @@ import org.slf4j.LoggerFactory;
 import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import uk.pallas.systems.typr.rest.entities.v1.validation.multi.CountryCodeRuleWrapperDTO;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -24,7 +22,8 @@ public abstract class AbstractFieldDefinitionDTO implements FieldDefinition {
     /** The shortened name (e.g. Acronym) of the field definition e.g. post code, uk mobile, IPv4, etc.. */
     @Size(min=0, max=4096)
     @Schema(description = "The shortened name (e.g. Acronym) of the field definition e.g. post code, uk mobile, IPv4, etc..",
-            example="MCC")
+            example="MCC",
+            nullable = true)
     private String acronym;
 
     /** List of categories associated with our type. */

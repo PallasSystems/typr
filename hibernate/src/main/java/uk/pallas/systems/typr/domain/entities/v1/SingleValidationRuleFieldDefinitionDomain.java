@@ -24,6 +24,7 @@ import java.util.Objects;
  * is an international type and so this could represent a MCC value.
  */
 @Entity
+@Table(name="single_field_def")
 public class SingleValidationRuleFieldDefinitionDomain extends AbstractFieldDefinitionDomain implements SingleValidationRuleFieldDefinition {
     /**
      * Static Logger for the class.

@@ -7,6 +7,7 @@ import uk.pallas.systems.typr.entities.v1.Category;
  * This class defines Categories which can be associated with a definition.
  */
 @Entity
+@Table(name="Categories")
 public class CategoryDomain implements Category {
 
     /** Detailed description of the field definition. */
