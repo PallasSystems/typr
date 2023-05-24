@@ -22,7 +22,7 @@ public class DoubleValidationRuleDomain extends AbstractNumberValidationRuleDoma
      */
     public DoubleValidationRuleDomain(final DoubleValidationRule data) {
         this(null == data ? null : data.getMaximumValue(), null == data ? null : data.getMinimumValue(),
-                null == data ? null : data.getDescription());
+                null == data ? null : data.getDescription(), null == data ? null : data.getUnit());
     }
 
     /**
@@ -31,8 +31,9 @@ public class DoubleValidationRuleDomain extends AbstractNumberValidationRuleDoma
      * @param max                The upper bound allowed for the field
      * @param min                the lower bound allowed for the field
      */
-    protected DoubleValidationRuleDomain(final Double max, final Double min, final String detailedDescription) {
-        super(max, min, detailedDescription);
+    protected DoubleValidationRuleDomain(final Double max, final Double min, final String detailedDescription,
+                                         final String unitName) {
+        super(max, min, detailedDescription, unitName);
     }
 
     /**

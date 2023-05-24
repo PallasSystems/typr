@@ -25,7 +25,7 @@ public class DoubleValidationRuleDTO extends AbstractNumberValidationRuleDTO<Dou
      */
     public DoubleValidationRuleDTO(final DoubleValidationRule data) {
         this(null == data ? null : data.getMaximumValue(), null == data ? null : data.getMinimumValue(),
-                null == data ? null : data.getDescription());
+                null == data ? null : data.getDescription(), null == data ? null : data.getUnit());
     }
 
     /**
@@ -34,8 +34,9 @@ public class DoubleValidationRuleDTO extends AbstractNumberValidationRuleDTO<Dou
      * @param max                The upper bound allowed for the field
      * @param min                the lower bound allowed for the field
      */
-    public DoubleValidationRuleDTO(final Double max, final Double min, final String detailedDescription) {
-        super(max, min, detailedDescription);
+    public DoubleValidationRuleDTO(final Double max, final Double min, final String detailedDescription,
+                                   final String unitName) {
+        super(max, min, detailedDescription, unitName);
     }
 
     /**

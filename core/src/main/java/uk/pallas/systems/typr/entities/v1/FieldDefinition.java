@@ -1,10 +1,6 @@
 package uk.pallas.systems.typr.entities.v1;
 
-import com.neovisionaries.i18n.CountryCode;
-import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
-
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * This class defines Complex Structured Data field definitions we can assign to various structured data schema's.
@@ -63,7 +59,7 @@ public interface FieldDefinition {
      * Is the supplied test object something that matches against our field definition regular expression?
      *
      * If validation optional is set to true this will return true, if the supplied object is null, this will always
-     * return false. Otherwise this will call toString and then match the field definition regex tp confirm the object
+     * return false. Other-wise this will call toString and then match the field definition regex tp confirm the object
      * matches our desired value.
      *
      * @param toTest to test is valid

@@ -4,6 +4,10 @@ import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 
 public interface NumberValidationRule<N extends Number> extends ValidationRule {
 
+    String getUnit();
+
+    void setUnit(final String unit);
+
     /**
      * Retrieves the maximum alue that the field definition allows.
      * @return null is allowed (or a valid Long value)

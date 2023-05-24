@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class FieldDefinitionServicesImpl implements FieldDefinitionServices {
+public class FieldDefinitionServiceImpl implements FieldDefinitionService {
 
   @Autowired
   private CategoryRepository categoryDAO;

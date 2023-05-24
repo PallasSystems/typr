@@ -5,7 +5,7 @@ import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 
 import java.util.Collection;
 
-public interface FieldDefinitionServices {
+public interface FieldDefinitionService {
 
   Collection<Category> getCategories();
 

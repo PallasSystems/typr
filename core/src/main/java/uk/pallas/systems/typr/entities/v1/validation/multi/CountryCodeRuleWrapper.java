@@ -1,7 +1,7 @@
 package uk.pallas.systems.typr.entities.v1.validation.multi;
 
+
 import com.neovisionaries.i18n.CountryCode;
-import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 
 /**
  *  Some field definitions are country specific for example a postal code within the UK is difined differently

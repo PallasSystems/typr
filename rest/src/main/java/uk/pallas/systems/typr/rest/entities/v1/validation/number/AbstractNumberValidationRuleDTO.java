@@ -1,13 +1,21 @@
 package uk.pallas.systems.typr.rest.entities.v1.validation.number;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.beans.factory.annotation.Autowired;
 import uk.pallas.systems.typr.rest.entities.v1.validation.AbstractValidationRuleDTO;
 import uk.pallas.systems.typr.entities.v1.validation.number.NumberValidationRule;
 
 import jakarta.validation.constraints.NotNull;
+import uk.pallas.systems.typr.services.UnitsService;
+
 import java.util.Objects;
 
 public abstract class AbstractNumberValidationRuleDTO<N extends Number> extends AbstractValidationRuleDTO implements NumberValidationRule<N> {
+
+    @JsonIgnore
+    private UnitsService unitService = new UnitsService();
+
     /**
      * Is there an upper range for valid value stored within the field?
      */
@@ -24,6 +32,10 @@ public abstract class AbstractNumberValidationRuleDTO<N extends Number> extends 
             example="0")
     private N minimumValue;
 
+    @Schema(description = "Is there a lower range for valid value stored within the field?",
+            example="METRE_SECOND")
+    private String unit;
+
     /**
      * Default constructor, sets everything to null and makes validation optional.
      */
@@ -37,7 +49,7 @@ public abstract class AbstractNumberValidationRuleDTO<N extends Number> extends 
      */
     protected AbstractNumberValidationRuleDTO(final NumberValidationRule<N> data) {
         this(null == data ? null : data.getMaximumValue(), null == data ? null : data.getMinimumValue(),
-                null == data ? null : data.getDescription());
+                null == data ? null : data.getDescription(), null == data ? null : data.getUnit());
     }
 
     /**
@@ -46,11 +58,13 @@ public abstract class AbstractNumberValidationRuleDTO<N extends Number> extends 
      * @param max                The upper bound allowed for the field
      * @param min                the lower bound allowed for the field
      */
-    protected AbstractNumberValidationRuleDTO(final N max, final N min, final String detailedDescription) {
+    protected AbstractNumberValidationRuleDTO(final N max, final N min, final String detailedDescription,
+                                              final String unitName) {
         super(detailedDescription);
 
         this.maximumValue = max;
         this.minimumValue = min;
+        this.unit =  this.unitService.isValid(unitName) ? unitName : "N/A";
     }
 
     /**
@@ -71,7 +85,8 @@ public abstract class AbstractNumberValidationRuleDTO<N extends Number> extends 
             final NumberValidationRule that = (NumberValidationRule<?>) toCompare;
             result = super.equals(toCompare)
                     && Objects.equals(this.getMaximumValue(), that.getMaximumValue())
-                    && Objects.equals(this.getMinimumValue(), that.getMinimumValue());
+                    && Objects.equals(this.getMinimumValue(), that.getMinimumValue())
+                    && Objects.equals(this.getUnit(), that.getUnit());
         } else {
             result = false;
         }
@@ -86,7 +101,7 @@ public abstract class AbstractNumberValidationRuleDTO<N extends Number> extends 
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), this.getMaximumValue(), this.getMinimumValue());
+        return Objects.hash(super.hashCode(), this.getMaximumValue(), this.getMinimumValue(), this.getUnit());
     }
 
     /**
@@ -186,4 +201,12 @@ public abstract class AbstractNumberValidationRuleDTO<N extends Number> extends 
      * @return null .. or a valid Number.
      */
     protected abstract N getNumber(final Object toConvert);
+
+    public String getUnit() {
+        return this.unit;
+    }
+
+    public void setUnit(final String unitName) {
+        this.unit =  this.unitService.isValid(unitName) ? unitName : "N/A";
+    }
 }

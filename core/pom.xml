@@ -17,6 +17,11 @@
             <version>1.29</version>
         </dependency>
         <dependency>
+            <groupId>si.uom</groupId>
+            <artifactId>si-units</artifactId>
+            <version>2.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>

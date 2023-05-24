@@ -13,13 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
-import uk.pallas.systems.typr.rest.entities.v1.CategoryDTO;
 import uk.pallas.systems.typr.rest.entities.v1.utils.DTOFactory;
 import uk.pallas.systems.typr.rest.entities.v1.MultiValidationRuleFieldDefinitionDTO;
 import uk.pallas.systems.typr.rest.entities.v1.SingleValidationRuleFieldDefinitionDTO;
-import uk.pallas.systems.typr.services.FieldDefinitionServices;
+import uk.pallas.systems.typr.services.FieldDefinitionService;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -34,14 +32,14 @@ public class FieldDefinitionsController {
 
   /** The backend service to retrieve. */
   @Autowired
-  private FieldDefinitionServices services;
+  private FieldDefinitionService services;
 
 
-  public FieldDefinitionServices getServices() {
+  public FieldDefinitionService getServices() {
     return services;
   }
 
-  public void setServices(FieldDefinitionServices services) {
+  public void setServices(FieldDefinitionService services) {
     this.services = services;
   }
 

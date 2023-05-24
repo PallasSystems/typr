@@ -23,7 +23,7 @@ public class LongValidationRuleDomain extends AbstractNumberValidationRuleDomain
      */
     public LongValidationRuleDomain(final LongValidationRule data) {
         this(null == data ? null : data.getMaximumValue(), null == data ? null : data.getMinimumValue(),
-                null == data ? null : data.getDescription());
+                null == data ? null : data.getDescription(), null == data ? null : data.getUnit());
     }
 
     /**
@@ -32,8 +32,9 @@ public class LongValidationRuleDomain extends AbstractNumberValidationRuleDomain
      * @param max                The upper bound allowed for the field
      * @param min                the lower bound allowed for the field
      */
-    protected LongValidationRuleDomain(final Long max, final Long min, final String detailedDescription) {
-        super(max, min, detailedDescription);
+    protected LongValidationRuleDomain(final Long max, final Long min, final String detailedDescription,
+                                       final String unit) {
+        super(max, min, detailedDescription, unit);
     }
 
     /**

@@ -26,7 +26,7 @@ public class LongValidationRuleDTO extends AbstractNumberValidationRuleDTO<Long>
      */
     public LongValidationRuleDTO(final LongValidationRule data) {
         this(null == data ? null : data.getMaximumValue(), null == data ? null : data.getMinimumValue(),
-                null == data ? null : data.getDescription());
+                null == data ? null : data.getDescription(), null == data ? null : data.getUnit());
     }
 
     /**
@@ -35,8 +35,9 @@ public class LongValidationRuleDTO extends AbstractNumberValidationRuleDTO<Long>
      * @param max                The upper bound allowed for the field
      * @param min                the lower bound allowed for the field
      */
-    public LongValidationRuleDTO(final Long max, final Long min, final String detailedDescription) {
-        super(max, min, detailedDescription);
+    public LongValidationRuleDTO(final Long max, final Long min, final String detailedDescription,
+                                 final String unitName) {
+        super(max, min, detailedDescription, unitName);
     }
 
     /**

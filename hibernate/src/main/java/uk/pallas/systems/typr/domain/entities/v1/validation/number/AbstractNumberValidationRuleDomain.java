@@ -2,13 +2,22 @@ package uk.pallas.systems.typr.domain.entities.v1.validation.number;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
+import org.springframework.beans.factory.annotation.Autowired;
+import tech.units.indriya.unit.Units;
 import uk.pallas.systems.typr.domain.entities.v1.validation.AbstractValidationRuleDomain;
 import uk.pallas.systems.typr.entities.v1.validation.number.NumberValidationRule;
+import uk.pallas.systems.typr.services.UnitsService;
 
+import javax.measure.Unit;
 import java.util.Objects;
 
 @MappedSuperclass
 abstract class AbstractNumberValidationRuleDomain<N extends Number> extends AbstractValidationRuleDomain implements NumberValidationRule<N> {
+
+    @Transient
+    private UnitsService unitService = new UnitsService();
+
     /**
      * Is there an upper range for valid value stored within the field?
      */
@@ -20,6 +29,9 @@ abstract class AbstractNumberValidationRuleDomain<N extends Number> extends Abst
      */
     @Column(nullable = false)
     private N minimumValue;
+
+    @Column(nullable = true)
+    private String unit;
 
     /**
      * Default constructor, sets everything to null and makes validation optional.
@@ -34,7 +46,7 @@ abstract class AbstractNumberValidationRuleDomain<N extends Number> extends Abst
      */
     protected AbstractNumberValidationRuleDomain(final NumberValidationRule<N> data) {
         this(null == data ? null : data.getMaximumValue(), null == data ? null : data.getMinimumValue(),
-                null == data ? null : data.getDescription());
+                null == data ? null : data.getDescription(), null == data ? null : data.getUnit());
     }
 
     /**
@@ -43,11 +55,13 @@ abstract class AbstractNumberValidationRuleDomain<N extends Number> extends Abst
      * @param max                The upper bound allowed for the field
      * @param min                the lower bound allowed for the field
      */
-    protected AbstractNumberValidationRuleDomain(final N max, final N min, final String detailedDescription) {
+    protected AbstractNumberValidationRuleDomain(final N max, final N min, final String detailedDescription,
+                                                 final String unitName) {
         super(detailedDescription);
 
         this.maximumValue = max;
         this.minimumValue = min;
+        this.unit = this.unitService.isValid(unitName) ? unitName : "N/A";
     }
 
     /**
@@ -68,7 +82,8 @@ abstract class AbstractNumberValidationRuleDomain<N extends Number> extends Abst
             final NumberValidationRule that = (NumberValidationRule<?>) toCompare;
             result = super.equals(toCompare)
                     && Objects.equals(this.getMaximumValue(), that.getMaximumValue())
-                    && Objects.equals(this.getMinimumValue(), that.getMinimumValue());
+                    && Objects.equals(this.getMinimumValue(), that.getMinimumValue())
+                    && Objects.equals(this.getUnit(), that.getUnit());
         } else {
             result = false;
         }
@@ -83,7 +98,7 @@ abstract class AbstractNumberValidationRuleDomain<N extends Number> extends Abst
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), this.getMaximumValue(), this.getMinimumValue());
+        return Objects.hash(super.hashCode(), this.getMaximumValue(), this.getMinimumValue(), this.getUnit());
     }
 
     /**
@@ -183,4 +198,12 @@ abstract class AbstractNumberValidationRuleDomain<N extends Number> extends Abst
      * @return null .. or a valid Number.
      */
     protected abstract N getNumber(final Object toConvert);
+
+    public String getUnit() {
+        return this.unit;
+    }
+
+    public void setUnit(final String unitName) {
+        this.unit =  this.unitService.isValid(unitName) ? unitName : "N/A";
+    }
 }
