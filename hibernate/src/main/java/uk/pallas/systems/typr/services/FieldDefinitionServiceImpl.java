@@ -84,7 +84,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
     final FieldDefinition result;
 
     if (definition instanceof FieldDefinition) {
-      final SingleValidationRuleFieldDefinitionDomain domain = new SingleValidationRuleFieldDefinitionDomain((FieldDefinition)definition);
+      final SingleValidationRuleFieldDefinitionDomain domain = new SingleValidationRuleFieldDefinitionDomain(definition);
       result = this.singleDefinitionDAO.save(domain);
     } else {
       result = null;

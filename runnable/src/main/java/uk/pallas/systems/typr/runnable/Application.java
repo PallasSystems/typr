@@ -14,16 +14,18 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @SpringBootApplication
 @EnableJpaRepositories("uk.pallas.systems.typr.domain")
-@EntityScan(basePackages={"uk.pallas.systems.typr.domain.entities.v1", "uk.pallas.systems.typr.domain.entities.v1.validation", "uk.pallas.systems.typr.domain.entities.v1.validation.number"})
+@EntityScan(basePackages = {"uk.pallas.systems.typr.domain.entities.v1",
+  "uk.pallas.systems.typr.domain.entities.v1.validation",
+  "uk.pallas.systems.typr.domain.entities.v1.validation.number"})
 @ComponentScan("uk.pallas.systems.typr")
 public class Application {
   /**
    * Main entry point into Typr.
+   *
    * @param args these are ignored.
    */
   public static void main(final String[] args) {
 
-    
 
     SpringApplication.run(Application.class, args);
   }
