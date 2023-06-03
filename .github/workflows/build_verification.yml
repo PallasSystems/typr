@@ -55,13 +55,18 @@ jobs:
           GPG_KEY_ID: ${{ secrets.GPG_PRIVATE_KEYNAME }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
 
-      - name: Checkstyle analyse
-        uses: dbelyaev/action-checkstyle@v0.7.4
+      - name: Checkstyle
+        run: mvn --batch-mode --settings .github/maven_settings.xml org.apache.maven.plugins:maven-checkstyle-plugin:3.3.0:checkstyle-aggregate
+        env:
+          GITHUB_USER: ${{ secrets.SCM_USER }}
+          GITHUB_TOKEN: ${{ secrets.SCM_TOKEN }}
+          GPG_KEY_ID: ${{ secrets.GPG_PRIVATE_KEYNAME }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PRIVATE_KEY_PASSPHRASE }}
+
+      - name: Checkstyle Annotation
+        uses: jwgmeligmeyling/checkstyle-github-action@master
         with:
-          github_token: ${{ secrets.SCM_TOKEN }}
-          checkstyle_config: Checkstyle.xml
-          reporter: github-pr-review
-          level: warning
+          path: '**/checkstyle-result.xml'
 
       - name: SpotBugs
         run: mvn --batch-mode --settings .github/maven_settings.xml com.github.spotbugs:spotbugs-maven-plugin:4.6.0.0:spotbugs -Dspotbugs.xmlOutput=true -Dspotbugs.effort=max -Dspotbugs.failOnError=false -Dspotbugs.threshold=low
