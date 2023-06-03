@@ -1,15 +1,14 @@
-package uk.pallas.systems.typr.domain.entities.v1.validation.multi;
+package uk.pallas.systems.typr.domain.entities.v1.validation.wrapper;
 
 import com.neovisionaries.i18n.CountryCode;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Objects;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import uk.pallas.systems.typr.domain.entities.v1.validation.AbstractValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomain;
@@ -17,36 +16,23 @@ import uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidatio
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
-import uk.pallas.systems.typr.entities.v1.validation.multi.CountryCodeRuleWrapper;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
 
 @Entity
 @Table(name = "wrap_country_code")
-public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
+public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain implements CountryCodeWrapper {
   /**
    * Static Logger for the class.
    */
   private static final Log LOGGER = LogFactory.getLog(CountryCodeRuleWrapperDomain.class);
 
   /**
-   * Primary key for storing validation rules.
-   */
-  @Id
-  @GeneratedValue
-  private Long identifier;
-
-  /**
    * Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be country specific.
    */
   @Column(nullable = false)
   private int countryCode;
-
-  /**
-   * Countries can have .
-   */
-  @Column(length = 4096, nullable = false)
-  private String name;
 
   /**
    * Validation for the field definition.
@@ -76,7 +62,7 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
    * Default constructor, sets the country code to undefined.
    */
   public CountryCodeRuleWrapperDomain() {
-    this(CountryCode.UNDEFINED, null);
+    this(CountryCode.UNDEFINED, null, null);
   }
 
   /**
@@ -84,18 +70,22 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
    *
    * @param wrapper the object to copy
    */
-  public CountryCodeRuleWrapperDomain(final CountryCodeRuleWrapper wrapper) {
+  public CountryCodeRuleWrapperDomain(final CountryCodeWrapper wrapper) {
     this(null == wrapper ? CountryCode.UNDEFINED : wrapper.getCountryCode(),
-      null == wrapper ? null : wrapper.getRule());
+      null == wrapper ? null : wrapper.getDescription(), null == wrapper ? null : wrapper.getRule());
   }
 
   /**
    * Creates a new instance of the wrapper and populates it with the required settings.
    *
    * @param code a country specific identifier for the rule
+   * @param description the description to give to the rule.
    * @param validRule the rule we need to wrap with a different identifier.
    */
-  public CountryCodeRuleWrapperDomain(final CountryCode code, final ValidationRule validRule) {
+  public CountryCodeRuleWrapperDomain(final CountryCode code,
+                                      final String description, final ValidationRule validRule) {
+    super(description);
+
     if (null == code) {
       this.countryCode = CountryCode.UNDEFINED.getNumeric();
     } else {
@@ -105,21 +95,13 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
     this.setRule(validRule);
   }
 
-  public Long getIdentifier() {
-    return identifier;
-  }
-
-  public void setIdentifier(final Long id) {
-    this.identifier = id;
-  }
-
   /**
    * Compares the supplied object to this one, it checks the supplied object is a FieldDefinition and then checks
    * the definition applies validation, its name and description to see if they are matching objects.
    *
    * @param toCompare the object to compare (can be null or a child class, etc..)
    * @return false if the name/validation and description fields in a field definition are
-   * different (or it isn't a field definition).
+   *               different (or it isn't a field definition).
    */
   @Override
   public boolean equals(final Object toCompare) {
@@ -127,9 +109,8 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
     final boolean result;
     if (this == toCompare) {
       result = true;
-    } else if (toCompare instanceof CountryCodeRuleWrapper that) {
+    } else if (toCompare instanceof CountryCodeWrapper that) {
       result = super.equals(toCompare) && Objects.equals(this.getCountryCode(), that.getCountryCode())
-        && Objects.equals(this.getName(), that.getName())
         && Objects.equals(this.getRule(), that.getRule());
     } else {
       result = false;
@@ -145,7 +126,7 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
    */
   @Override
   public int hashCode() {
-    return super.hashCode() + Objects.hash(this.getCountryCode(), this.getName(), this.getRule());
+    return super.hashCode() + Objects.hash(this.getCountryCode(), this.getRule());
   }
 
   @Override
@@ -160,26 +141,6 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
     } else {
       this.countryCode = code.getNumeric();
     }
-  }
-
-  /**
-   * Retrieves the name of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
-   *
-   * @return non null value (if field definition is valid).
-   */
-  @Override
-  public String getName() {
-    return this.name;
-  }
-
-  /**
-   * Sets the name for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
-   *
-   * @param wrapperName the new name for the field definition value
-   */
-  @Override
-  public void setName(final String wrapperName) {
-    this.name = wrapperName;
   }
 
   /**
@@ -328,7 +289,7 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
     } else if (value instanceof StringValidationRule) {
       this.stringRule = new StringValidationRuleDomain((StringValidationRule) value);
     } else {
-      LOGGER.warn(String.format("appendRule - Unsupported Rule Type supplied: %s", value));
+      LOGGER.warn(String.format("setRule - Unsupported Rule Type supplied: %s", value));
     }
   }
 
@@ -339,6 +300,6 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
    */
   @Override
   public String toString() {
-    return String.format("%s - %s with Rule: %s", this.getCountryCode(), this.getName(), this.getRule());
+    return String.format("%s with Rule: %s", this.getCountryCode(), this.getRule());
   }
 }

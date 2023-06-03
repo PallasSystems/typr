@@ -1,6 +1,7 @@
 package uk.pallas.systems.typr.entities.v1;
 
 import java.util.Collection;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 
 /**
  * This class defines Complex Structured Data field definitions we can assign to various structured data schema's.
@@ -22,21 +23,24 @@ public interface FieldDefinition {
   void setAcronym(String identifier);
 
   /**
-   * List of categories assocaited with our type. These are additional ways to define a type for routing/managing a schema.
+   * List of categories assocaited with our type. These are additional ways to define a
+   * type for routing/managing a schema.
    *
    * @return an empty list if nothing is supplied.
    */
   Collection<Category> getCategories();
 
   /**
-   * Sets the list of categories assocaited with our type. These are additional ways to define a type for routing/managing a schema.
+   * Sets the list of categories assocaited with our type. These are additional ways to
+   * define a type for routing/managing a schema.
    *
    * @param values all categories associated with the type.
    */
   void setCategories(Collection<Category> values);
 
   /**
-   * Retrieves a hopefully detailed description of the field definition so we can understand what it is for and why it exists.
+   * Retrieves a hopefully detailed description of the field definition so
+   * we can understand what it is for and why it exists.
    *
    * @return a hopefull long valid string (null is possible).
    */
@@ -74,4 +78,26 @@ public interface FieldDefinition {
    * @return false if the object fails the validation match.
    */
   boolean isValid(Object toTest);
+
+  /**
+   * Retrieves a list of all rules which have confirmed the incoming object is valid.
+   *
+   * @param toTest the object to test against the rules stored within this object
+   * @return an empty list or a list of identifiers for rules.
+   */
+  Collection<String> getRulesPassed(Object toTest);
+
+  /**
+   * A list of rules this field definition can validate.
+   *
+   * @return non null value (if field definition is valid).
+   */
+  Collection<ValidationRule> getRules();
+
+  /**
+   * Sets the validation for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
+   *
+   * @param rule the rules to add to our field definition
+   */
+  void setRules(Collection<ValidationRule> rule);
 }

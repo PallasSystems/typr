@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.rest.entities.v1.CategoryDTO;
-import uk.pallas.systems.typr.rest.entities.v1.MultiValidationRuleFieldDefinitionDTO;
-import uk.pallas.systems.typr.rest.entities.v1.SingleValidationRuleFieldDefinitionDTO;
 import uk.pallas.systems.typr.services.FieldDefinitionService;
 
 /**
@@ -55,8 +53,7 @@ public class CategoriesController {
       description = "Successfully retrieved data from the database",
       content = @Content(mediaType = "application/json",
         array = @ArraySchema(schema = @Schema(description = "Validation for the field definition.",
-          oneOf = { SingleValidationRuleFieldDefinitionDTO.class,
-                    MultiValidationRuleFieldDefinitionDTO.class}))
+          oneOf = { CategoryDTO.class }))
       )
     )
   })

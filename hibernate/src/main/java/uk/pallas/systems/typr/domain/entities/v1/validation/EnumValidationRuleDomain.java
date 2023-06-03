@@ -97,26 +97,6 @@ public class EnumValidationRuleDomain extends AbstractValidationRuleDomain imple
     }
   }
 
-  @Override
-  public String getDetectRegex() {
-    return null;
-  }
-
-  @Override
-  public void setDetectRegex(final String validation) {
-
-  }
-
-  @Override
-  public String getExtractRegex() {
-    return null;
-  }
-
-  @Override
-  public void setExtractRegex(final String validation) {
-
-  }
-
   /**
    * Is the supplied test object something that matches against our field definition regular expression?
    * <p>
@@ -150,7 +130,6 @@ public class EnumValidationRuleDomain extends AbstractValidationRuleDomain imple
    * @param toTest to test is valid
    * @return false if the object fails the validation match.
    */
-  @Override
   public boolean isValid(final String toTest) {
     final boolean result;
 

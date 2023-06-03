@@ -11,12 +11,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
+import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
+import uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTO;
+import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTO;
+import uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTO;
+import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTO;
+import uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTO;
 
-public abstract class AbstractFieldDefinitionDTO implements FieldDefinition {
+public class FieldDefinitionDTO implements FieldDefinition {
   /**
    * Static Logger for the class.
    */
-  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFieldDefinitionDTO.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(FieldDefinitionDTO.class);
   /**
    * List of categories associated with our type.
    */
@@ -53,9 +64,19 @@ public abstract class AbstractFieldDefinitionDTO implements FieldDefinition {
   private String name;
 
   /**
+   * List of Validation rules for the field definition.
+   */
+  @ArraySchema(schema = @Schema(description = "List of Validation rules for the field definition.",
+    anyOf = {DoubleValidationRuleDTO.class, EnumValidationRuleDTO.class, LongValidationRuleDTO.class,
+      StringValidationRuleDTO.class}),
+    uniqueItems = true,
+    minItems = 1)
+  private final Collection<ValidationRule> rules;
+
+  /**
    * Default Class Constructor.
    */
-  public AbstractFieldDefinitionDTO() {
+  public FieldDefinitionDTO() {
     this(null);
   }
 
@@ -64,9 +85,10 @@ public abstract class AbstractFieldDefinitionDTO implements FieldDefinition {
    *
    * @param data - the object to create a duplicate from.
    */
-  public AbstractFieldDefinitionDTO(final FieldDefinition data) {
+  public FieldDefinitionDTO(final FieldDefinition data) {
     this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,
-      null != data ? data.getDescription() : null, null != data ? data.getName() : null);
+      null != data ? data.getDescription() : null, null != data ? data.getName() : null,
+      null != data ? data.getRules() : null);
   }
 
   /**
@@ -76,9 +98,10 @@ public abstract class AbstractFieldDefinitionDTO implements FieldDefinition {
    * @param cats      The categories associated with our object
    * @param desc      the description of the rule
    * @param fieldName the name for the rule
+   * @param rules     The Rules to be converted.
    */
-  public AbstractFieldDefinitionDTO(final String acryo, final Collection<Category> cats,
-                                    final String desc, final String fieldName) {
+  public FieldDefinitionDTO(final String acryo, final Collection<Category> cats,
+                            final String desc, final String fieldName, final Collection<ValidationRule> rules) {
     this.acronym = acryo;
     this.description = desc;
     this.name = fieldName;
@@ -89,6 +112,9 @@ public abstract class AbstractFieldDefinitionDTO implements FieldDefinition {
         .map(value -> new CategoryDTO(value))
         .collect(Collectors.toSet()));
     }
+
+    this.rules = new HashSet<>();
+    this.setRules(rules);
   }
 
   /**
@@ -126,6 +152,41 @@ public abstract class AbstractFieldDefinitionDTO implements FieldDefinition {
   @Override
   public int hashCode() {
     return Objects.hash(this.getAcronym(), this.getName(), this.getDescription());
+  }
+
+
+  /**
+   * Retrieves a list of all rules which have confirmed the incoming object is valid.
+   *
+   * @param toTest the object to test against the rules stored within this object
+   * @return an empty list or a list of identifiers for rules.
+   */
+  public Collection<String> getRulesPassed(final Object toTest) {
+    final Collection<String> passed = new HashSet<>();
+
+    for (final ValidationRule rule : this.getRules()) {
+      if (rule.isValid(toTest)) {
+        passed.add(rule.toString());
+      }
+    }
+
+    return passed;
+  }
+
+  /**
+   * Is the supplied test object something that matches against our field definition regular expression?
+   * <p>
+   * If validation optional is set to true this will return true, if the supplied object is null, this will always
+   * return false. Other-wise this will call toString and then match the field definition regex tp confirm the object
+   * matches our desired value.
+   *
+   * @param toTest to test is valid
+   * @return false if the object fails the validation match.
+   */
+  @Override
+  public boolean isValid(final Object toTest) {
+    final Collection<String> results = this.getRulesPassed(toTest);
+    return null != results && !results.isEmpty();
   }
 
   /**
@@ -216,5 +277,57 @@ public abstract class AbstractFieldDefinitionDTO implements FieldDefinition {
   @Override
   public void setName(final String identifier) {
     this.name = identifier;
+  }
+
+
+  /**
+   * A list of rules this field definition can validate.
+   *
+   * @return non null value (if field definition is valid).
+   */
+  public Collection<ValidationRule> getRules() {
+    final Collection<ValidationRule> results = new HashSet<>();
+
+    for (final ValidationRule rule : this.getRules()) {
+      if (rule instanceof CountryCodeWrapper) {
+        results.add(new CountryCodeRuleWrapperDTO((CountryCodeWrapper)rule));
+      } else if (rule instanceof DoubleValidationRule) {
+        results.add(new DoubleValidationRuleDTO((DoubleValidationRule)rule));
+      } else if (rule instanceof EnumValidationRule) {
+        results.add(new EnumValidationRuleDTO((EnumValidationRule)rule));
+      } else if (rule instanceof LongValidationRule) {
+        results.add(new LongValidationRuleDTO((LongValidationRule)rule));
+      } else if (rule instanceof StringValidationRule) {
+        results.add(new StringValidationRuleDTO((StringValidationRule)rule));
+      }
+    }
+
+    return results;
+  }
+
+  /**
+   * Sets the validation for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
+   *
+   * @param validationRules the rules to add to our field definition
+   */
+  public void setRules(final Collection<ValidationRule> validationRules) {
+
+    this.rules.clear();
+
+    if (null != validationRules) {
+      for (final ValidationRule rule : validationRules) {
+        if (rule instanceof CountryCodeWrapper) {
+          this.rules.add(new CountryCodeRuleWrapperDTO((CountryCodeWrapper)rule));
+        } else if (rule instanceof DoubleValidationRule) {
+          this.rules.add(new DoubleValidationRuleDTO((DoubleValidationRule)rule));
+        } else if (rule instanceof EnumValidationRule) {
+          this.rules.add(new EnumValidationRuleDTO((EnumValidationRule)rule));
+        } else if (rule instanceof LongValidationRule) {
+          this.rules.add(new LongValidationRuleDTO((LongValidationRule)rule));
+        } else if (rule instanceof StringValidationRule) {
+          this.rules.add(new StringValidationRuleDTO((StringValidationRule)rule));
+        }
+      }
+    }
   }
 }

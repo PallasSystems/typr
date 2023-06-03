@@ -20,6 +20,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
   "uk.pallas.systems.typr.domain.entities.v1.validation.number"})
 @ComponentScan("uk.pallas.systems.typr")
 public class Application {
+
+  /** Empty utility class constructor. */
+  public Application() {
+    // empty
+  }
+
   /**
    * Main entry point into Typr.
    *
@@ -29,8 +35,5 @@ public class Application {
     SpringApplication.run(Application.class, args);
   }
 
-  /** Empty utility class constructor. */
-  public Application() {
-    // empty
-  }
+
 }

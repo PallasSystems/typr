@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
-import uk.pallas.systems.typr.rest.entities.v1.MultiValidationRuleFieldDefinitionDTO;
-import uk.pallas.systems.typr.rest.entities.v1.SingleValidationRuleFieldDefinitionDTO;
-import uk.pallas.systems.typr.rest.entities.v1.utils.DTOFactory;
+import uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTO;
 import uk.pallas.systems.typr.services.FieldDefinitionService;
 
 /**
@@ -60,8 +58,7 @@ public class FieldDefinitionsController {
       description = "Successfully retrieved data from the database",
       content = @Content(mediaType = "application/json",
         array = @ArraySchema(schema = @Schema(description = "Validation for the field definition.",
-          oneOf = { SingleValidationRuleFieldDefinitionDTO.class,
-                    MultiValidationRuleFieldDefinitionDTO.class }))
+          oneOf = { FieldDefinitionDTO.class }))
       )
     )
   })
@@ -73,7 +70,7 @@ public class FieldDefinitionsController {
     }
 
     return definitions.stream().filter(result -> null != result)
-      .map(value -> DTOFactory.getFieldDefinitionDTO(value))
+      .map(value -> new FieldDefinitionDTO(value))
       .collect(Collectors.toList());
   }
 
@@ -91,8 +88,7 @@ public class FieldDefinitionsController {
       description = "Successfully retrieved data from the database",
       content = @Content(mediaType = "application/json",
         schema = @Schema(description = "Validation for the field definition.",
-          oneOf = { SingleValidationRuleFieldDefinitionDTO.class,
-                    MultiValidationRuleFieldDefinitionDTO.class})
+          oneOf = { FieldDefinitionDTO.class })
       )
     )
   })
@@ -103,7 +99,7 @@ public class FieldDefinitionsController {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No type definition found for:" + name);
     }
 
-    return DTOFactory.getFieldDefinitionDTO(result);
+    return new FieldDefinitionDTO(result);
   }
 
   /**
@@ -120,21 +116,19 @@ public class FieldDefinitionsController {
       description = "Successfully retrieved data from the database",
       content = @Content(mediaType = "application/json",
         schema = @Schema(description = "Validation for the field definition.",
-          oneOf = { SingleValidationRuleFieldDefinitionDTO.class,
-                    MultiValidationRuleFieldDefinitionDTO.class})
+          oneOf = { FieldDefinitionDTO.class })
       )
     ),
     @ApiResponse(responseCode = "500", description = "Unable to Save Definition")
   })
   public FieldDefinition putType(@Valid @RequestBody(required = true)
-                                 @Schema(oneOf = {SingleValidationRuleFieldDefinitionDTO.class,
-                                   MultiValidationRuleFieldDefinitionDTO.class}) final FieldDefinition definition) {
+                                 @Schema(oneOf = {FieldDefinitionDTO.class}) final FieldDefinition definition) {
     final FieldDefinition result = this.getServices().saveFieldDefintion(definition);
 
     if (null == result) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to Save Definition");
     }
 
-    return DTOFactory.getFieldDefinitionDTO(result);
+    return new FieldDefinitionDTO(result);
   }
 }

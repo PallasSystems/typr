@@ -53,6 +53,7 @@ public class CategoryDomain implements Category {
    *
    * @return non null value (if field definition is valid).
    */
+  @Override
   public String getName() {
     return this.name;
   }
@@ -62,6 +63,7 @@ public class CategoryDomain implements Category {
    *
    * @param identifier the new name for the field definition value
    */
+  @Override
   public void setName(final String identifier) {
     this.name = identifier;
   }
@@ -71,6 +73,7 @@ public class CategoryDomain implements Category {
    *
    * @return a hopefull long valid string (null is possible).
    */
+  @Override
   public String getDescription() {
     return this.description;
   }
@@ -80,6 +83,7 @@ public class CategoryDomain implements Category {
    *
    * @param detailedDescription the description to attach (null is ok)
    */
+  @Override
   public void setDescription(final String detailedDescription) {
     this.description = detailedDescription;
   }

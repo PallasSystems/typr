@@ -16,8 +16,6 @@ public class UnitsService {
   protected final Map<String, Unit<?>> units;
 
   public UnitsService() {
-    super();
-
     this.units = new HashMap();
 
     final Unit rateOfTurn = NonSI.DEGREE_ANGLE.divide(Units.MINUTE).asType(Frequency.class);

@@ -1,20 +1,28 @@
-package uk.pallas.systems.typr.rest.entities.v1.validation.multi;
+package uk.pallas.systems.typr.rest.entities.v1.validation.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.neovisionaries.i18n.CountryCode;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Size;
 import java.util.Objects;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
-import uk.pallas.systems.typr.entities.v1.validation.multi.CountryCodeRuleWrapper;
-import uk.pallas.systems.typr.rest.entities.v1.utils.DTOFactory;
+import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
+import uk.pallas.systems.typr.rest.entities.v1.validation.AbstractValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTO;
 
-
-public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
+public class CountryCodeRuleWrapperDTO extends AbstractValidationRuleDTO implements CountryCodeWrapper {
+  /**
+   * Static Logger for the class.
+   */
+  private static final Log LOGGER = LogFactory.getLog(CountryCodeRuleWrapperDTO.class);
 
   /**
    * Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be country specific.
@@ -23,15 +31,6 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
     description = "Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be "
       + "country specific.")
   private CountryCode countryCode;
-
-  /**
-   * Countries can have .
-   */
-  @Schema(description = "Name of the field definition e.g. post code.",
-    example = "Post Code",
-    nullable = false)
-  @Size(min = 1, max = 100)
-  private String name;
 
   /**
    * Validation for the field definition.
@@ -53,7 +52,7 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
    *
    * @param wrapper the object to copy
    */
-  public CountryCodeRuleWrapperDTO(final CountryCodeRuleWrapper wrapper) {
+  public CountryCodeRuleWrapperDTO(final CountryCodeWrapper wrapper) {
     this(null == wrapper ? CountryCode.UNDEFINED : wrapper.getCountryCode(),
       null == wrapper ? null : wrapper.getRule());
   }
@@ -80,7 +79,7 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
    *
    * @param toCompare the object to compare (can be null or a child class, etc..)
    * @return false if the name/validation and description fields in a field definition are
-   * different (or it isn't a field definition).
+   *               different (or it isn't a field definition).
    */
   @Override
   public boolean equals(final Object toCompare) {
@@ -88,9 +87,8 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
     final boolean result;
     if (this == toCompare) {
       result = true;
-    } else if (toCompare instanceof CountryCodeRuleWrapper that) {
+    } else if (toCompare instanceof CountryCodeWrapper that) {
       result = super.equals(toCompare) && Objects.equals(this.getCountryCode(), that.getCountryCode())
-        && Objects.equals(this.getName(), that.getName())
         && Objects.equals(this.getRule(), that.getRule());
     } else {
       result = false;
@@ -106,7 +104,7 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
    */
   @Override
   public int hashCode() {
-    return super.hashCode() + Objects.hash(this.getCountryCode(), this.getName(), this.getRule());
+    return super.hashCode() + Objects.hash(this.getCountryCode(), this.getRule());
   }
 
   @Override
@@ -121,26 +119,6 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
     } else {
       this.countryCode = code;
     }
-  }
-
-  /**
-   * Retrieves the name of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
-   *
-   * @return non null value (if field definition is valid).
-   */
-  @Override
-  public String getName() {
-    return this.name;
-  }
-
-  /**
-   * Sets the name for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
-   *
-   * @param identifier the new name for the field definition value
-   */
-  @Override
-  public void setName(final String identifier) {
-    this.name = identifier;
   }
 
   /**
@@ -179,7 +157,17 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
    * @param value the rules to add to our field definition
    */
   public void setRule(final ValidationRule value) {
-    this.rule = DTOFactory.getValidationRuleDTO(value);
+    if (value instanceof DoubleValidationRule) {
+      this.rule = new DoubleValidationRuleDTO((DoubleValidationRule) value);
+    } else if (value instanceof EnumValidationRule) {
+      this.rule = new EnumValidationRuleDTO((EnumValidationRule) value);
+    } else if (value instanceof LongValidationRule) {
+      this.rule = new LongValidationRuleDTO((LongValidationRule) value);
+    } else if (value instanceof StringValidationRule) {
+      this.rule = new StringValidationRuleDTO((StringValidationRule) value);
+    } else {
+      LOGGER.warn(String.format("setRule - Unsupported Rule Type supplied: %s", value));
+    }
   }
 
   /**
@@ -189,6 +177,6 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
    */
   @Override
   public String toString() {
-    return String.format("%s - %s with Rule: %s", this.getCountryCode(), this.getName(), this.getRule());
+    return String.format("%s with Rule: %s", this.getCountryCode(), this.getRule());
   }
 }

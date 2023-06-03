@@ -3,10 +3,9 @@ package uk.pallas.systems.typr.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.pallas.systems.typr.domain.CategoryRepository;
-import uk.pallas.systems.typr.domain.MultiValidationRuleFieldDefinitionRepository;
-import uk.pallas.systems.typr.domain.SingleValidationRuleFieldDefinitionRepository;
+import uk.pallas.systems.typr.domain.FieldDefinitionRespository;
 import uk.pallas.systems.typr.domain.entities.v1.CategoryDomain;
-import uk.pallas.systems.typr.domain.entities.v1.SingleValidationRuleFieldDefinitionDomain;
+import uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomain;
 import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 
@@ -23,9 +22,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
   private CategoryRepository categoryDAO;
 
   @Autowired
-  private SingleValidationRuleFieldDefinitionRepository singleDefinitionDAO;
-  @Autowired
-  private MultiValidationRuleFieldDefinitionRepository multiDefinitionDAO;
+  private FieldDefinitionRespository fieldDefDAO;
 
 
   @Override
@@ -47,8 +44,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
   public Collection<FieldDefinition> getFieldDefinitions() {
     final Collection<FieldDefinition> results = new HashSet<>();
 
-    results.addAll(this.singleDefinitionDAO.findAll());
-    results.addAll(this.multiDefinitionDAO.findAll());
+    results.addAll(this.fieldDefDAO.findAll());
 
     return results;
   }
@@ -66,7 +62,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
   public FieldDefinition getFieldDefinitionByName(final String name) {
     final FieldDefinition result;
 
-    final Optional<SingleValidationRuleFieldDefinitionDomain> defResults = this.singleDefinitionDAO.findById(name);
+    final Optional<FieldDefinitionDomain> defResults = this.fieldDefDAO.findById(name);
     if (defResults.isPresent()) {
       result = defResults.get();
     } else {
@@ -86,8 +82,8 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
     final FieldDefinition result;
 
     if (fieldDef instanceof FieldDefinition) {
-      final SingleValidationRuleFieldDefinitionDomain domain = new SingleValidationRuleFieldDefinitionDomain(fieldDef);
-      result = this.singleDefinitionDAO.save(domain);
+      final FieldDefinitionDomain domain = new FieldDefinitionDomain(fieldDef);
+      result = this.fieldDefDAO.save(domain);
     } else {
       result = null;
     }

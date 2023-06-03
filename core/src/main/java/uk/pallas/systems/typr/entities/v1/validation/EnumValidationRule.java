@@ -6,7 +6,7 @@ import java.util.Collection;
  * Some field definitions have a limited number of allowed string values and so this definition allows us to maintain
  * a list rather than a regular expression.
  */
-public interface EnumValidationRule extends StringValidationRule {
+public interface EnumValidationRule extends ValidationRule {
 
   /**
    * This retrieves all valid enumerate types held within the definition.
