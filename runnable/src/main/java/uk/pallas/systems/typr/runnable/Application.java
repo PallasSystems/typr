@@ -30,7 +30,7 @@ public class Application {
   }
 
   /** Empty utility class constructor. */
-  private Application() {
+  public Application() {
     // empty
   }
 }
