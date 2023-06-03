@@ -18,7 +18,7 @@ public final class FieldDefinitionDomainFactory {
    * Unusued utility class constructor.
    */
   private FieldDefinitionDomainFactory() {
-    super();
+    // empty
   }
 
   /**

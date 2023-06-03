@@ -2,7 +2,9 @@ package uk.pallas.systems.typr.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.pallas.systems.typr.domain.*;
+import uk.pallas.systems.typr.domain.CategoryRepository;
+import uk.pallas.systems.typr.domain.MultiValidationRuleFieldDefinitionRepository;
+import uk.pallas.systems.typr.domain.SingleValidationRuleFieldDefinitionRepository;
 import uk.pallas.systems.typr.domain.entities.v1.CategoryDomain;
 import uk.pallas.systems.typr.domain.entities.v1.SingleValidationRuleFieldDefinitionDomain;
 import uk.pallas.systems.typr.entities.v1.Category;
@@ -76,15 +78,15 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
 
   /**
    *
-   * @param definition
+   * @param fieldDef
    * @return
    */
-  public FieldDefinition saveFieldDefintion(final FieldDefinition definition) {
+  public FieldDefinition saveFieldDefintion(final FieldDefinition fieldDef) {
 
     final FieldDefinition result;
 
-    if (definition instanceof FieldDefinition) {
-      final SingleValidationRuleFieldDefinitionDomain domain = new SingleValidationRuleFieldDefinitionDomain(definition);
+    if (fieldDef instanceof FieldDefinition) {
+      final SingleValidationRuleFieldDefinitionDomain domain = new SingleValidationRuleFieldDefinitionDomain(fieldDef);
       result = this.singleDefinitionDAO.save(domain);
     } else {
       result = null;

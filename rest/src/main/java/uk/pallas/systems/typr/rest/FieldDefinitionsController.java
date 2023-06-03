@@ -44,7 +44,7 @@ public class FieldDefinitionsController {
     return services;
   }
 
-  public void setServices(FieldDefinitionService services) {
+  public void setServices(final FieldDefinitionService services) {
     this.services = services;
   }
 
@@ -60,8 +60,8 @@ public class FieldDefinitionsController {
       description = "Successfully retrieved data from the database",
       content = @Content(mediaType = "application/json",
         array = @ArraySchema(schema = @Schema(description = "Validation for the field definition.",
-          oneOf = {SingleValidationRuleFieldDefinitionDTO.class,
-            MultiValidationRuleFieldDefinitionDTO.class}))
+          oneOf = { SingleValidationRuleFieldDefinitionDTO.class,
+                    MultiValidationRuleFieldDefinitionDTO.class }))
       )
     )
   })
@@ -91,8 +91,8 @@ public class FieldDefinitionsController {
       description = "Successfully retrieved data from the database",
       content = @Content(mediaType = "application/json",
         schema = @Schema(description = "Validation for the field definition.",
-          oneOf = {SingleValidationRuleFieldDefinitionDTO.class,
-            MultiValidationRuleFieldDefinitionDTO.class})
+          oneOf = { SingleValidationRuleFieldDefinitionDTO.class,
+                    MultiValidationRuleFieldDefinitionDTO.class})
       )
     )
   })
@@ -120,8 +120,8 @@ public class FieldDefinitionsController {
       description = "Successfully retrieved data from the database",
       content = @Content(mediaType = "application/json",
         schema = @Schema(description = "Validation for the field definition.",
-          oneOf = {SingleValidationRuleFieldDefinitionDTO.class,
-            MultiValidationRuleFieldDefinitionDTO.class})
+          oneOf = { SingleValidationRuleFieldDefinitionDTO.class,
+                    MultiValidationRuleFieldDefinitionDTO.class})
       )
     ),
     @ApiResponse(responseCode = "500", description = "Unable to Save Definition")

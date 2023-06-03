@@ -16,10 +16,11 @@ public interface Category {
    *
    * @param identifier the new name for the field definition value
    */
-  void setName(final String identifier);
+  void setName(String identifier);
 
   /**
-   * Retrieves a hopefully detailed description of the field definition so we can understand what it is for and why it exists.
+   * Retrieves a hopefully detailed description of the field definition so we can understand what it is
+   * for and why it exists.
    *
    * @return a hopefull long valid string (null is possible).
    */
@@ -30,5 +31,5 @@ public interface Category {
    *
    * @param detailedDescription the description to attache (null is ok)
    */
-  void setDescription(final String detailedDescription);
+  void setDescription(String detailedDescription);
 }

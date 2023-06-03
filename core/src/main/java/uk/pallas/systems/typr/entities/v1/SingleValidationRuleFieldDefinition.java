@@ -20,6 +20,6 @@ public interface SingleValidationRuleFieldDefinition extends FieldDefinition {
    *
    * @param rule the rules to add to our field definition
    */
-  void setRule(final ValidationRule rule);
+  void setRule(ValidationRule rule);
 
 }

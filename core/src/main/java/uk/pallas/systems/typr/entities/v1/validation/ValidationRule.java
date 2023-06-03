@@ -3,7 +3,8 @@ package uk.pallas.systems.typr.entities.v1.validation;
 public interface ValidationRule {
 
   /**
-   * Retrieves a hopefully detailed description of the field definition so we can understand what it is for and why it exists.
+   * Retrieves a hopefully detailed description of the field definition so we can understand what it is for and
+   * why it exists.
    *
    * @return a hopefull long valid string (null is possible).
    */
@@ -14,7 +15,7 @@ public interface ValidationRule {
    *
    * @param detailedDescription the description to attached (null is ok)
    */
-  void setDescription(final String detailedDescription);
+  void setDescription(String detailedDescription);
 
   /**
    * Is the supplied test object something that matches against our field definition regular expression?
@@ -26,5 +27,5 @@ public interface ValidationRule {
    * @param toTest to test is valid
    * @return false if the object fails the validation match.
    */
-  boolean isValid(final Object toTest);
+  boolean isValid(Object toTest);
 }

@@ -31,7 +31,7 @@ public class LongValidationRuleDTO extends AbstractNumberValidationRuleDTO<Long>
   }
 
   /**
-   * Constructor, allows us to set the internal abstract fields
+   * Constructor, allows us to set the internal abstract fields.
    *
    * @param max The upper bound allowed for the field
    * @param min the lower bound allowed for the field

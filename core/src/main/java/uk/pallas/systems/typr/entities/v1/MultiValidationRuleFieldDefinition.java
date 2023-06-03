@@ -18,7 +18,7 @@ public interface MultiValidationRuleFieldDefinition extends FieldDefinition {
    * @param toTest the object to test against the rules stored within this object
    * @return an empty list or a list of identifiers for rules.
    */
-  Collection<String> getRulesPassed(final Object toTest);
+  Collection<String> getRulesPassed(Object toTest);
 
   /**
    * A list of rules this field definition can validate.
@@ -32,6 +32,6 @@ public interface MultiValidationRuleFieldDefinition extends FieldDefinition {
    *
    * @param rule the rules to add to our field definition
    */
-  void setRules(final Collection<RuleWrapper> rule);
+  void setRules(Collection<RuleWrapper> rule);
 
 }

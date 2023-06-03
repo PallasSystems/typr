@@ -6,7 +6,7 @@ public interface NumberValidationRule<N extends Number> extends ValidationRule {
 
   String getUnit();
 
-  void setUnit(final String unit);
+  void setUnit(String unit);
 
   /**
    * Retrieves the maximum alue that the field definition allows.
@@ -20,7 +20,7 @@ public interface NumberValidationRule<N extends Number> extends ValidationRule {
    *
    * @param maximum the maximum possible value
    */
-  void setMaximumValue(final N maximum);
+  void setMaximumValue(N maximum);
 
   /**
    * Retrieves the minimum value that the field definition allows.
@@ -34,7 +34,7 @@ public interface NumberValidationRule<N extends Number> extends ValidationRule {
    *
    * @param minimum the minimum possible valid value
    */
-  void setMinimumValue(final N minimum);
+  void setMinimumValue(N minimum);
 
   /**
    * This will compare the incoming object and see if it is a valid whole number and if the value is a valid
@@ -46,5 +46,5 @@ public interface NumberValidationRule<N extends Number> extends ValidationRule {
    * @param toTest to test is valid
    * @return false if the object isn't a number or if it falls out the expected data range.
    */
-  boolean isValid(final Number toTest);
+  boolean isValid(Number toTest);
 }

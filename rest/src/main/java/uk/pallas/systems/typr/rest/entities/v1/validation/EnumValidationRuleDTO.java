@@ -28,7 +28,7 @@ public class EnumValidationRuleDTO extends AbstractValidationRuleDTO implements 
   }
 
   /**
-   * Constructor, allows us to set the internal abstract fields
+   * Constructor, allows us to set the internal abstract fields.
    *
    * @param detailedDescription the description of the rule
    * @param data                Enumerate values we need to support.
@@ -57,7 +57,7 @@ public class EnumValidationRuleDTO extends AbstractValidationRuleDTO implements 
    *
    * @param toCompare the object to compare (can be null or a child class, etc..)
    * @return false if the name/validation and description fields in a field definition are
-   * different (or it isn't a field definition).
+   *               different (or it isn't a field definition).
    */
   @Override
   public boolean equals(final Object toCompare) {
@@ -93,12 +93,12 @@ public class EnumValidationRuleDTO extends AbstractValidationRuleDTO implements 
   }
 
   @Override
-  public void setEnumerates(Collection<String> enumerates) {
-    if (null == enumerates) {
+  public void setEnumerates(final Collection<String> enums) {
+    if (null == enums) {
       this.enumerates.clear();
     } else {
       this.enumerates.clear();
-      this.enumerates.addAll(enumerates);
+      this.enumerates.addAll(enums);
     }
   }
 
@@ -108,7 +108,7 @@ public class EnumValidationRuleDTO extends AbstractValidationRuleDTO implements 
   }
 
   @Override
-  public void setDetectRegex(String validation) {
+  public void setDetectRegex(final String validation) {
 
   }
 
@@ -118,7 +118,7 @@ public class EnumValidationRuleDTO extends AbstractValidationRuleDTO implements 
   }
 
   @Override
-  public void setExtractRegex(String validation) {
+  public void setExtractRegex(final String validation) {
 
   }
 

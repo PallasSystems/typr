@@ -30,15 +30,13 @@ public abstract class AbstractValidationRuleDomain implements ValidationRule, Cl
    * Default class constructor.
    */
   public AbstractValidationRuleDomain() {
-    super();
+    this((String)null);
   }
 
   /**
    * Class Constructor.
    */
   public AbstractValidationRuleDomain(final String detailedDescription) {
-    super();
-
     this.description = detailedDescription;
   }
 

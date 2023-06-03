@@ -90,21 +90,19 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
   }
 
   /**
-   * Creates a new instance of the wrapper and populates it with the required settings
+   * Creates a new instance of the wrapper and populates it with the required settings.
    *
    * @param code a country specific identifier for the rule
-   * @param rule the rule we need to wrap with a different identifier.
+   * @param validRule the rule we need to wrap with a different identifier.
    */
-  public CountryCodeRuleWrapperDomain(final CountryCode code, final ValidationRule rule) {
-    super();
-
+  public CountryCodeRuleWrapperDomain(final CountryCode code, final ValidationRule validRule) {
     if (null == code) {
       this.countryCode = CountryCode.UNDEFINED.getNumeric();
     } else {
       this.countryCode = code.getNumeric();
     }
 
-    this.setRule(rule);
+    this.setRule(validRule);
   }
 
   public Long getIdentifier() {
@@ -177,11 +175,11 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeRuleWrapper {
   /**
    * Sets the name for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
    *
-   * @param identifier the new name for the field definition value
+   * @param wrapperName the new name for the field definition value
    */
   @Override
-  public void setName(final String identifier) {
-    this.name = identifier;
+  public void setName(final String wrapperName) {
+    this.name = wrapperName;
   }
 
   /**

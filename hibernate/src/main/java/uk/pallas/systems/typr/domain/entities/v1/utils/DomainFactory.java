@@ -17,45 +17,48 @@ import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 
-public class DomainFactory {
-    /** Static Logger for the class. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DomainFactory.class);
+public final class DomainFactory {
+  /**
+   * Static Logger for the class.
+   */
+  private static final Logger LOGGER = LoggerFactory.getLogger(DomainFactory.class);
 
-    public static AbstractFieldDefinitionDomain getFieldDefinitionDTO(final FieldDefinition value) {
-        final AbstractFieldDefinitionDomain result;
+  /**
+   * Unusued utility class constructor.
+   */
+  private DomainFactory() {
+    super();
+  }
 
-        if (value instanceof SingleValidationRuleFieldDefinition) {
-            result = new SingleValidationRuleFieldDefinitionDomain((SingleValidationRuleFieldDefinition)value);
-        } else {
-            result = null;
-            LOGGER.warn(String.format("getFieldDefinitionDTO - Unsupported Definition supplied: %s", value));
-        }
+  public static AbstractFieldDefinitionDomain getFieldDefinitionDTO(final FieldDefinition value) {
+    final AbstractFieldDefinitionDomain result;
 
-        return result;
+    if (value instanceof SingleValidationRuleFieldDefinition) {
+      result = new SingleValidationRuleFieldDefinitionDomain((SingleValidationRuleFieldDefinition) value);
+    } else {
+      result = null;
+      LOGGER.warn(String.format("getFieldDefinitionDTO - Unsupported Definition supplied: %s", value));
     }
 
+    return result;
+  }
 
-    public static AbstractValidationRuleDomain getValidationRuleDomain(final ValidationRule value) {
-        final AbstractValidationRuleDomain result;
+  public static AbstractValidationRuleDomain getValidationRuleDomain(final ValidationRule value) {
+    final AbstractValidationRuleDomain result;
 
-        if (value instanceof DoubleValidationRule) {
-            result = new DoubleValidationRuleDomain((DoubleValidationRule)value);
-        } else if (value instanceof EnumValidationRule) {
-            result = new EnumValidationRuleDomain((EnumValidationRule)value);
-        } else if (value instanceof LongValidationRule) {
-            result = new LongValidationRuleDomain((LongValidationRule)value);
-        } else if (value instanceof StringValidationRule) {
-            result = new StringValidationRuleDomain((StringValidationRule)value);
-        } else {
-            result = null;
-            LOGGER.warn(String.format("getValidationRuleDomain - Unsupported Rule Type supplied: %s", value));
-        }
-
-        return result;
+    if (value instanceof DoubleValidationRule) {
+      result = new DoubleValidationRuleDomain((DoubleValidationRule) value);
+    } else if (value instanceof EnumValidationRule) {
+      result = new EnumValidationRuleDomain((EnumValidationRule) value);
+    } else if (value instanceof LongValidationRule) {
+      result = new LongValidationRuleDomain((LongValidationRule) value);
+    } else if (value instanceof StringValidationRule) {
+      result = new StringValidationRuleDomain((StringValidationRule) value);
+    } else {
+      result = null;
+      LOGGER.warn(String.format("getValidationRuleDomain - Unsupported Rule Type supplied: %s", value));
     }
 
-    /** Unusued utility class constructor. */
-    private DomainFactory() {
-        super();
-    }
+    return result;
+  }
 }

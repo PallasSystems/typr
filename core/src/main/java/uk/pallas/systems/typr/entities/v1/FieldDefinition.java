@@ -19,7 +19,7 @@ public interface FieldDefinition {
    *
    * @param identifier the new name for the field definition value
    */
-  void setAcronym(final String identifier);
+  void setAcronym(String identifier);
 
   /**
    * List of categories assocaited with our type. These are additional ways to define a type for routing/managing a schema.
@@ -33,7 +33,7 @@ public interface FieldDefinition {
    *
    * @param values all categories associated with the type.
    */
-  void setCategories(final Collection<Category> values);
+  void setCategories(Collection<Category> values);
 
   /**
    * Retrieves a hopefully detailed description of the field definition so we can understand what it is for and why it exists.
@@ -45,9 +45,9 @@ public interface FieldDefinition {
   /**
    * Sets the description to attach to this field definition.
    *
-   * @param detailedDescription the description to attache (null is ok)
+   * @param detailedDescription the description to attach (null is ok)
    */
-  void setDescription(final String detailedDescription);
+  void setDescription(String detailedDescription);
 
   /**
    * Retrieves the name of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
@@ -61,7 +61,7 @@ public interface FieldDefinition {
    *
    * @param identifier the new name for the field definition value
    */
-  void setName(final String identifier);
+  void setName(String identifier);
 
   /**
    * Is the supplied test object something that matches against our field definition regular expression?
@@ -73,5 +73,5 @@ public interface FieldDefinition {
    * @param toTest to test is valid
    * @return false if the object fails the validation match.
    */
-  boolean isValid(final Object toTest);
+  boolean isValid(Object toTest);
 }

@@ -20,5 +20,5 @@ public interface EnumValidationRule extends StringValidationRule {
    *
    * @param enumerates an empty list or a list of valid string entries.
    */
-  void setEnumerates(final Collection<String> enumerates);
+  void setEnumerates(Collection<String> enumerates);
 }

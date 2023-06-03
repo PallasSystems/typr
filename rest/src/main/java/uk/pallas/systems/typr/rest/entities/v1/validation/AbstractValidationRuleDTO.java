@@ -16,15 +16,13 @@ public abstract class AbstractValidationRuleDTO implements ValidationRule {
    * Default class constructor.
    */
   public AbstractValidationRuleDTO() {
-    super();
+    this((String) null);
   }
 
   /**
    * Class Constructor.
    */
   public AbstractValidationRuleDTO(final String detailedDescription) {
-    super();
-
     this.description = detailedDescription;
   }
 

@@ -39,8 +39,8 @@ public class CategoriesController {
     return services;
   }
 
-  public void setServices(FieldDefinitionService services) {
-    this.services = services;
+  public void setServices(final FieldDefinitionService fieldDefSrv) {
+    this.services = fieldDefSrv;
   }
 
   /**
@@ -55,8 +55,8 @@ public class CategoriesController {
       description = "Successfully retrieved data from the database",
       content = @Content(mediaType = "application/json",
         array = @ArraySchema(schema = @Schema(description = "Validation for the field definition.",
-          oneOf = {SingleValidationRuleFieldDefinitionDTO.class,
-            MultiValidationRuleFieldDefinitionDTO.class}))
+          oneOf = { SingleValidationRuleFieldDefinitionDTO.class,
+                    MultiValidationRuleFieldDefinitionDTO.class}))
       )
     )
   })

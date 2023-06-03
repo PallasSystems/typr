@@ -17,7 +17,7 @@ public interface StringValidationRule extends ValidationRule {
    *
    * @param validation a valid regular expression string.
    */
-  void setDetectRegex(final String validation);
+  void setDetectRegex(String validation);
 
   /**
    * The regular Expression to extract a matching regex string from a text block.
@@ -31,7 +31,7 @@ public interface StringValidationRule extends ValidationRule {
    *
    * @param validation a valid regular expression string.
    */
-  void setExtractRegex(final String validation);
+  void setExtractRegex(String validation);
 
   /**
    * Is the supplied test object something that matches against our field definition regular expression?
@@ -42,5 +42,5 @@ public interface StringValidationRule extends ValidationRule {
    * @param toTest to test is valid
    * @return false if the object fails the validation match.
    */
-  boolean isValid(final String toTest);
+  boolean isValid(String toTest);
 }

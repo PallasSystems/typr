@@ -59,21 +59,19 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
   }
 
   /**
-   * Creates a new instance of the wrapper and populates it with the required settings
+   * Creates a new instance of the wrapper and populates it with the required settings.
    *
    * @param code a country specific identifier for the rule
-   * @param rule the rule we need to wrap with a different identifier.
+   * @param validRule the rule we need to wrap with a different identifier.
    */
-  public CountryCodeRuleWrapperDTO(final CountryCode code, final ValidationRule rule) {
-    super();
-
+  public CountryCodeRuleWrapperDTO(final CountryCode code, final ValidationRule validRule) {
     if (null == code) {
       this.countryCode = CountryCode.UNDEFINED;
     } else {
       this.countryCode = code;
     }
 
-    this.rule = rule;
+    this.rule = validRule;
   }
 
   /**
@@ -154,7 +152,7 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeRuleWrapper {
    */
   @Override
   @JsonIgnore
-  public boolean isValid(Object toTest) {
+  public boolean isValid(final Object toTest) {
     final boolean result;
 
     if (null == this.getRule()) {

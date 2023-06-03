@@ -8,13 +8,13 @@ public interface FieldDefinitionService {
 
   Collection<Category> getCategories();
 
-  Category getCategoryByName(final String name);
+  Category getCategoryByName(String name);
 
   Collection<FieldDefinition> getFieldDefinitions();
 
-  Collection<FieldDefinition> getFieldDefinitionsByCategory(final String category);
+  Collection<FieldDefinition> getFieldDefinitionsByCategory(String category);
 
-  FieldDefinition getFieldDefinitionByName(final String name);
+  FieldDefinition getFieldDefinitionByName(String name);
 
-  FieldDefinition saveFieldDefintion(final FieldDefinition definition);
+  FieldDefinition saveFieldDefintion(FieldDefinition definition);
 }

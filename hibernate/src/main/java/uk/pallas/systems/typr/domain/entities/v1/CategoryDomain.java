@@ -44,14 +44,12 @@ public class CategoryDomain implements Category {
    * Class Constructor which lets us set all fields within the object.
    */
   public CategoryDomain(final String identifier, final String desc) {
-    super();
-
     this.name = identifier;
     this.description = desc;
   }
 
   /**
-   * Retrieves the name of the field definition e.g. post code, uk mobile, IPv4, etc..
+   * {@inheritDoc}
    *
    * @return non null value (if field definition is valid).
    */
@@ -60,7 +58,7 @@ public class CategoryDomain implements Category {
   }
 
   /**
-   * Sets the name for the field definition e.g. Post Code, Ipv6, MCC, etc...
+   * {@inheritDoc}
    *
    * @param identifier the new name for the field definition value
    */
@@ -69,7 +67,7 @@ public class CategoryDomain implements Category {
   }
 
   /**
-   * Retrieves a hopefully detailed description of the field definition so we can understand what it is for and why it exists.
+   * {@inheritDoc}
    *
    * @return a hopefull long valid string (null is possible).
    */
@@ -78,9 +76,9 @@ public class CategoryDomain implements Category {
   }
 
   /**
-   * Sets the description to attach to this field definition.
+   * {@inheritDoc}
    *
-   * @param detailedDescription the description to attache (null is ok)
+   * @param detailedDescription the description to attach (null is ok)
    */
   public void setDescription(final String detailedDescription) {
     this.description = detailedDescription;

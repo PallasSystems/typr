@@ -45,7 +45,7 @@ public class MultiValidationRuleFieldDefinitionDomain extends AbstractFieldDefin
   }
 
   /**
-   * Copy Constructor
+   * Copy Constructor.
    */
   public MultiValidationRuleFieldDefinitionDomain(final FieldDefinition data) {
     this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,
@@ -54,7 +54,7 @@ public class MultiValidationRuleFieldDefinitionDomain extends AbstractFieldDefin
   }
 
   /**
-   * Copy Constructor
+   * Copy Constructor.
    */
   public MultiValidationRuleFieldDefinitionDomain(final MultiValidationRuleFieldDefinition data) {
     this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,
@@ -127,7 +127,7 @@ public class MultiValidationRuleFieldDefinitionDomain extends AbstractFieldDefin
 
     if (null != values) {
       final Collection<CountryCodeRuleWrapperDomain> countryCodes = values.stream()
-        .filter(value -> (value instanceof CountryCodeRuleWrapper))
+        .filter(value -> value instanceof CountryCodeRuleWrapper)
         .map(value -> new CountryCodeRuleWrapperDomain((CountryCodeRuleWrapper) value))
         .collect(Collectors.toSet());
 

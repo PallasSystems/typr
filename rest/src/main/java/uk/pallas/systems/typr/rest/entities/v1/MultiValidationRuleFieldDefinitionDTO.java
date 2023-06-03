@@ -42,7 +42,7 @@ public class MultiValidationRuleFieldDefinitionDTO extends AbstractFieldDefiniti
   }
 
   /**
-   * Copy Constructor
+   * Copy Constructor.
    */
   public MultiValidationRuleFieldDefinitionDTO(final FieldDefinition data) {
     this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,
@@ -51,7 +51,7 @@ public class MultiValidationRuleFieldDefinitionDTO extends AbstractFieldDefiniti
   }
 
   /**
-   * Copy Constructor
+   * Copy Constructor.
    */
   public MultiValidationRuleFieldDefinitionDTO(final MultiValidationRuleFieldDefinition data) {
     this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,

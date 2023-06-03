@@ -21,7 +21,7 @@ public interface RuleWrapper {
    * @param toTest to test is valid
    * @return false if the object fails the validation match.
    */
-  boolean isValid(final Object toTest);
+  boolean isValid(Object toTest);
 
   /**
    * Retrieves the rule of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
@@ -35,5 +35,5 @@ public interface RuleWrapper {
    *
    * @param rule the rules to add to our field definition
    */
-  void setRule(final ValidationRule rule);
+  void setRule(ValidationRule rule);
 }

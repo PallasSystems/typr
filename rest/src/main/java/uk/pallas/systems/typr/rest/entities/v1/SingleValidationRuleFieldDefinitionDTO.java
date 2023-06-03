@@ -45,7 +45,7 @@ public class SingleValidationRuleFieldDefinitionDTO extends AbstractFieldDefinit
   }
 
   /**
-   * Copy Constructor
+   * Copy Constructor.
    */
   public SingleValidationRuleFieldDefinitionDTO(final FieldDefinition data) {
     this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,
@@ -54,7 +54,7 @@ public class SingleValidationRuleFieldDefinitionDTO extends AbstractFieldDefinit
   }
 
   /**
-   * Copy Constructor
+   * Copy Constructor.
    */
   public SingleValidationRuleFieldDefinitionDTO(final SingleValidationRuleFieldDefinition data) {
     this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,
@@ -85,7 +85,7 @@ public class SingleValidationRuleFieldDefinitionDTO extends AbstractFieldDefinit
    *
    * @param toCompare the object to compare (can be null or a child class, etc..)
    * @return false if the name/validation and description fields in a field definition are
-   * different (or it isn't a field definition).
+   *               different (or it isn't a field definition).
    */
   @Override
   public boolean equals(final Object toCompare) {
