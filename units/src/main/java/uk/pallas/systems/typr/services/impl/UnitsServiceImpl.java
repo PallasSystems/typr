@@ -1,9 +1,7 @@
 package uk.pallas.systems.typr.services.impl;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.measure.Unit;
 import javax.measure.quantity.Frequency;
