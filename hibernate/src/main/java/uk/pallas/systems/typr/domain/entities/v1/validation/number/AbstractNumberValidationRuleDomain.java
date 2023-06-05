@@ -2,18 +2,14 @@ package uk.pallas.systems.typr.domain.entities.v1.validation.number;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Transient;
 import java.util.Objects;
 import uk.pallas.systems.typr.domain.entities.v1.validation.AbstractValidationRuleDomain;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 import uk.pallas.systems.typr.entities.v1.validation.number.NumberValidationRule;
-import uk.pallas.systems.typr.services.UnitsService;
 
 @MappedSuperclass
 abstract class AbstractNumberValidationRuleDomain<N extends Number> extends AbstractValidationRuleDomain
   implements NumberValidationRule<N> {
-
-  @Transient
-  private final UnitsService unitService = new UnitsService();
 
   /**
    * Is there an upper range for valid value stored within the field?
@@ -59,7 +55,7 @@ abstract class AbstractNumberValidationRuleDomain<N extends Number> extends Abst
 
     this.maximumValue = max;
     this.minimumValue = min;
-    this.unit = this.unitService.isValid(unitName) ? unitName : "N/A";
+    this.unit = null == unitName || unitName.isBlank() ? ValidationRuleConstants.NO_UNITS : unitName;
   }
 
   /**
@@ -202,6 +198,6 @@ abstract class AbstractNumberValidationRuleDomain<N extends Number> extends Abst
   }
 
   public void setUnit(final String unitName) {
-    this.unit = this.unitService.isValid(unitName) ? unitName : "N/A";
+    this.unit = null == unitName || unitName.isBlank() ? ValidationRuleConstants.NO_UNITS : unitName;
   }
 }

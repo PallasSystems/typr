@@ -1,6 +1,5 @@
 package uk.pallas.systems.typr.entities.v1.validation.wrapper;
 
-import com.neovisionaries.i18n.CountryCode;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 
 public interface CountryCodeWrapper  extends ValidationRule {
@@ -9,14 +8,14 @@ public interface CountryCodeWrapper  extends ValidationRule {
    *
    * @return UNDEFINED or a valid country code.
    */
-  CountryCode getCountryCode();
+  String getCountryCode();
 
   /**
    * Sets the specific country this rule is associated with.
    *
    * @param code - UNDEFINED or a valid country code.
    */
-  void setCountryCode(CountryCode code);
+  void setCountryCode(String code);
 
   /**
    * A list of rules this field definition can validate.

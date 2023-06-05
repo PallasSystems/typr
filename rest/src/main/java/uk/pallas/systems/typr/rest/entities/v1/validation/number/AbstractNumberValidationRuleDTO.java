@@ -4,15 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import java.util.Objects;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 import uk.pallas.systems.typr.entities.v1.validation.number.NumberValidationRule;
 import uk.pallas.systems.typr.rest.entities.v1.validation.AbstractValidationRuleDTO;
-import uk.pallas.systems.typr.services.UnitsService;
 
 public abstract class AbstractNumberValidationRuleDTO<N extends Number>
   extends AbstractValidationRuleDTO implements NumberValidationRule<N> {
-
-  @JsonIgnore
-  private final UnitsService unitService = new UnitsService();
 
   /**
    * Is there an upper range for valid value stored within the field?
@@ -63,7 +60,7 @@ public abstract class AbstractNumberValidationRuleDTO<N extends Number>
 
     this.maximumValue = max;
     this.minimumValue = min;
-    this.unit = this.unitService.isValid(unitName) ? unitName : "N/A";
+    this.unit = null == unitName || unitName.isBlank() ? ValidationRuleConstants.NO_UNITS : unitName;
   }
 
   /**
@@ -206,6 +203,6 @@ public abstract class AbstractNumberValidationRuleDTO<N extends Number>
   }
 
   public void setUnit(final String unitName) {
-    this.unit = this.unitService.isValid(unitName) ? unitName : "N/A";
+    this.unit = null == unitName || unitName.isBlank() ? ValidationRuleConstants.NO_UNITS : unitName;
   }
 }

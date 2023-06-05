@@ -10,7 +10,6 @@ import java.util.Objects;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 
 @MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class AbstractValidationRuleDomain implements ValidationRule, Cloneable {
 
   /**

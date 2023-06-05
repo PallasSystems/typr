@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTO;
+import uk.pallas.systems.typr.services.CountryService;
 import uk.pallas.systems.typr.services.FieldDefinitionService;
+import uk.pallas.systems.typr.services.UnitsService;
 
 /**
  * This Defines an interface for retrieving Field Definitions stored within Typr.
@@ -38,12 +40,34 @@ public class FieldDefinitionsController {
   @Autowired
   private FieldDefinitionService services;
 
+  @Autowired
+  private UnitsService unitService;
+
+  @Autowired
+  private CountryService countryService;
+
   public FieldDefinitionService getServices() {
     return services;
   }
 
   public void setServices(final FieldDefinitionService services) {
     this.services = services;
+  }
+
+  public UnitsService getUnitService() {
+    return unitService;
+  }
+
+  public void setUnitService(UnitsService unitService) {
+    this.unitService = unitService;
+  }
+
+  public CountryService getCountryService() {
+    return countryService;
+  }
+
+  public void setCountryService(CountryService countryService) {
+    this.countryService = countryService;
   }
 
   /**
@@ -71,6 +95,8 @@ public class FieldDefinitionsController {
 
     return definitions.stream().filter(result -> null != result)
       .map(value -> new FieldDefinitionDTO(value))
+      .filter(value -> this.getUnitService().isValid(value))
+      .filter(value -> this.getCountryService().isValidISO31661Alpha3(value))
       .collect(Collectors.toList());
   }
 
@@ -97,6 +123,10 @@ public class FieldDefinitionsController {
 
     if (null == result) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No type definition found for:" + name);
+    } else if (!this.getUnitService().isValid(result)) {
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Object had incorrect unit type");
+    } else if (!this.getCountryService().isValidISO31661Alpha3(result)) {
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Object had incorrect Country code for rule");
     }
 
     return new FieldDefinitionDTO(result);
@@ -123,6 +153,15 @@ public class FieldDefinitionsController {
   })
   public FieldDefinition putType(@Valid @RequestBody(required = true)
                                  @Schema(oneOf = {FieldDefinitionDTO.class}) final FieldDefinition definition) {
+
+    if (!this.getUnitService().isValid(definition)) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Object had incorrect unit type");
+    }
+
+    if (!this.getCountryService().isValidISO31661Alpha3(definition)) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Object had incorrect Country Code");
+    }
+
     final FieldDefinition result = this.getServices().saveFieldDefintion(definition);
 
     if (null == result) {

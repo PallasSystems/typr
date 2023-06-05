@@ -1,8 +1,9 @@
 package uk.pallas.systems.typr.domain.entities.v1.validation.wrapper;
 
-import com.neovisionaries.i18n.CountryCode;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Objects;
@@ -16,23 +17,31 @@ import uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidatio
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
 
 @Entity
 @Table(name = "wrap_country_code")
-public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain implements CountryCodeWrapper {
+public class CountryCodeRuleWrapperDomain implements CountryCodeWrapper {
   /**
    * Static Logger for the class.
    */
   private static final Log LOGGER = LogFactory.getLog(CountryCodeRuleWrapperDomain.class);
 
   /**
+   * Primary key for storing validation rules.
+   */
+  @Id
+  @GeneratedValue
+  private Long identifier;
+
+  /**
    * Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be country specific.
    */
   @Column(nullable = false)
-  private int countryCode;
+  private String countryCode;
 
   /**
    * Validation for the field definition.
@@ -62,7 +71,7 @@ public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain i
    * Default constructor, sets the country code to undefined.
    */
   public CountryCodeRuleWrapperDomain() {
-    this(CountryCode.UNDEFINED, null, null);
+    this(ValidationRuleConstants.DEFAULT_COUNTRY_CODE, null);
   }
 
   /**
@@ -71,25 +80,22 @@ public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain i
    * @param wrapper the object to copy
    */
   public CountryCodeRuleWrapperDomain(final CountryCodeWrapper wrapper) {
-    this(null == wrapper ? CountryCode.UNDEFINED : wrapper.getCountryCode(),
-      null == wrapper ? null : wrapper.getDescription(), null == wrapper ? null : wrapper.getRule());
+    this(null == wrapper ? ValidationRuleConstants.DEFAULT_COUNTRY_CODE : wrapper.getCountryCode(),
+      null == wrapper ? null : wrapper.getRule());
   }
 
   /**
    * Creates a new instance of the wrapper and populates it with the required settings.
    *
    * @param code a country specific identifier for the rule
-   * @param description the description to give to the rule.
    * @param validRule the rule we need to wrap with a different identifier.
    */
-  public CountryCodeRuleWrapperDomain(final CountryCode code,
-                                      final String description, final ValidationRule validRule) {
-    super(description);
+  public CountryCodeRuleWrapperDomain(final String code, final ValidationRule validRule) {
 
     if (null == code) {
-      this.countryCode = CountryCode.UNDEFINED.getNumeric();
+      this.countryCode = ValidationRuleConstants.DEFAULT_COUNTRY_CODE;
     } else {
-      this.countryCode = code.getNumeric();
+      this.countryCode = code;
     }
 
     this.setRule(validRule);
@@ -130,17 +136,58 @@ public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain i
   }
 
   @Override
-  public CountryCode getCountryCode() {
-    return CountryCode.getByCode(this.countryCode);
+  public String getCountryCode() {
+    return this.countryCode;
   }
 
   @Override
-  public void setCountryCode(final CountryCode code) {
+  public void setCountryCode(final String code) {
     if (null == code) {
-      this.countryCode = CountryCode.UNDEFINED.getNumeric();
+      this.countryCode = ValidationRuleConstants.DEFAULT_COUNTRY_CODE;
     } else {
-      this.countryCode = code.getNumeric();
+      this.countryCode = code;
     }
+  }
+
+  /**
+   * Retrieves a hopefully detailed description of the field definition so we can understand what it is for and
+   * why it exists.
+   *
+   * @return a hopefull long valid string (null is possible).
+   */
+  @Override
+  public String getDescription() {
+
+    final String result;
+    final ValidationRule rule = this.getRule();
+    if (null == rule) {
+      result = null;
+    } else {
+      result = rule.getDescription();
+    }
+
+    return result;
+  }
+
+  /**
+   * Sets the description to attach to this field definition.
+   *
+   * @param detailedDescription the description to attache (null is ok)
+   */
+  @Override
+  public void setDescription(final String detailedDescription) {
+    final ValidationRule rule = this.getRule();
+    if (null != rule) {
+      rule.setDescription(detailedDescription);
+    }
+  }
+
+  public Long getIdentifier() {
+    return identifier;
+  }
+
+  public void setIdentifier(final Long id) {
+    this.identifier = id;
   }
 
   /**
@@ -173,7 +220,7 @@ public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain i
    * @return non null value (if field definition is valid).
    */
   public DoubleValidationRule getDoubleRule() {
-    return new DoubleValidationRuleDomain(this.doubleRule);
+    return null == this.doubleRule ? null : new DoubleValidationRuleDomain(this.doubleRule);
   }
 
   /**
@@ -191,7 +238,7 @@ public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain i
    * @return non null value (if field definition is valid).
    */
   public EnumValidationRule getEnumRule() {
-    return new EnumValidationRuleDomain(this.enumRule);
+    return null == this.enumRule ? null : new EnumValidationRuleDomain(this.enumRule);
   }
 
   /**
@@ -209,7 +256,7 @@ public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain i
    * @return non null value (if field definition is valid).
    */
   public LongValidationRule getLongRule() {
-    return new LongValidationRuleDomain(this.longRule);
+    return null == this.longRule ? null : new LongValidationRuleDomain(this.longRule);
   }
 
   /**
@@ -227,7 +274,7 @@ public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain i
    * @return non null value (if field definition is valid).
    */
   public StringValidationRule getStringRule() {
-    return new StringValidationRuleDomain(this.stringRule);
+    return null == this.stringRule ? null : new StringValidationRuleDomain(this.stringRule);
   }
 
   /**

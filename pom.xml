@@ -17,9 +17,11 @@
 
     <modules>
         <module>core</module>
+        <module>countries</module>
         <module>hibernate</module>
         <module>runnable</module>
         <module>rest</module>
+        <module>units</module>
     </modules>
 
     <scm>
