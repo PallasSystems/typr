@@ -70,7 +70,7 @@ public class CountryCodeRuleWrapperDTO extends AbstractValidationRuleDTO impleme
       this.countryCode = code;
     }
 
-    this.rule = validRule;
+    this.setRule(validRule);
   }
 
   /**
@@ -148,7 +148,22 @@ public class CountryCodeRuleWrapperDTO extends AbstractValidationRuleDTO impleme
    * @return non null value (if field definition is valid).
    */
   public ValidationRule getRule() {
-    return this.rule;
+    final ValidationRule result;
+
+    if (this.rule instanceof DoubleValidationRule) {
+      result = new DoubleValidationRuleDTO((DoubleValidationRule) this.rule);
+    } else if (this.rule instanceof EnumValidationRule) {
+      result = new EnumValidationRuleDTO((EnumValidationRule) this.rule);
+    } else if (this.rule instanceof LongValidationRule) {
+      result = new LongValidationRuleDTO((LongValidationRule) this.rule);
+    } else if (this.rule instanceof StringValidationRule) {
+      result = new StringValidationRuleDTO((StringValidationRule) this.rule);
+    } else {
+      LOGGER.warn(String.format("getRule - Unsupported Rule Type supplied: %s", this.rule));
+      result = null;
+    }
+
+    return result;
   }
 
   /**

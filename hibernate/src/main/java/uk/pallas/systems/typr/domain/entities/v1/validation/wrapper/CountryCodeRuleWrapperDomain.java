@@ -173,7 +173,7 @@ public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain i
    * @return non null value (if field definition is valid).
    */
   public DoubleValidationRule getDoubleRule() {
-    return this.doubleRule;
+    return new DoubleValidationRuleDomain(this.doubleRule);
   }
 
   /**
@@ -191,7 +191,7 @@ public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain i
    * @return non null value (if field definition is valid).
    */
   public EnumValidationRule getEnumRule() {
-    return this.enumRule;
+    return new EnumValidationRuleDomain(this.enumRule);
   }
 
   /**
@@ -209,7 +209,7 @@ public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain i
    * @return non null value (if field definition is valid).
    */
   public LongValidationRule getLongRule() {
-    return this.longRule;
+    return new LongValidationRuleDomain(this.longRule);
   }
 
   /**
@@ -227,7 +227,7 @@ public class CountryCodeRuleWrapperDomain extends AbstractValidationRuleDomain i
    * @return non null value (if field definition is valid).
    */
   public StringValidationRule getStringRule() {
-    return this.stringRule;
+    return new StringValidationRuleDomain(this.stringRule);
   }
 
   /**

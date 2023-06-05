@@ -288,7 +288,7 @@ public class FieldDefinitionDTO implements FieldDefinition {
   public Collection<ValidationRule> getRules() {
     final Collection<ValidationRule> results = new HashSet<>();
 
-    for (final ValidationRule rule : this.getRules()) {
+    for (final ValidationRule rule : this.rules) {
       if (rule instanceof CountryCodeWrapper) {
         results.add(new CountryCodeRuleWrapperDTO((CountryCodeWrapper)rule));
       } else if (rule instanceof DoubleValidationRule) {

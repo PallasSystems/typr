@@ -78,16 +78,6 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
    * @return
    */
   public FieldDefinition saveFieldDefintion(final FieldDefinition fieldDef) {
-
-    final FieldDefinition result;
-
-    if (fieldDef instanceof FieldDefinition) {
-      final FieldDefinitionDomain domain = new FieldDefinitionDomain(fieldDef);
-      result = this.fieldDefDAO.save(domain);
-    } else {
-      result = null;
-    }
-
-    return result;
+    return this.fieldDefDAO.save(new FieldDefinitionDomain(fieldDef));
   }
 }
