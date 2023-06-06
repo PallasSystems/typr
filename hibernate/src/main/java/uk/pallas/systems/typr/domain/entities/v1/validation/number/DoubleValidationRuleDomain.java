@@ -22,8 +22,7 @@ public class DoubleValidationRuleDomain extends AbstractNumberValidationRuleDoma
    * @param data the object to create a duplicate off.
    */
   public DoubleValidationRuleDomain(final DoubleValidationRule data) {
-    this(null == data ? null : data.getMaximumValue(), null == data ? null : data.getMinimumValue(),
-      null == data ? null : data.getDescription(), null == data ? null : data.getUnit());
+    super(data);
   }
 
   /**
