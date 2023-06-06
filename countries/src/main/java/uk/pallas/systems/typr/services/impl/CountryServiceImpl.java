@@ -10,12 +10,24 @@ import uk.pallas.systems.typr.services.CountryService;
 @Service
 public class CountryServiceImpl implements CountryService {
 
+  /**
+   * {@inheritDoc}
+   *
+   * @param value the value to test if it is correct.
+   * @return false if the definition is invalid or if a country code wrapper exists with an invalid code.
+   */
   @Override
   public boolean isValidISO31661Alpha3(final String value) {
     return null != CountryCode.getByAlpha3Code(value);
   }
 
 
+  /**
+   * {@inheritDoc}
+   *
+   * @param definition the value to test if it is correct.
+   * @return false if the definition is invalid or if a country code wrapper exists with an invalid code.
+   */
   @Override
   public boolean isValidISO31661Alpha3(final FieldDefinition definition) {
     final boolean result;

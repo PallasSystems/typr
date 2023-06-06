@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.measure.Unit;
 import javax.measure.quantity.Frequency;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import si.uom.NonSI;
 import si.uom.SI;
@@ -14,11 +16,15 @@ import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
-import uk.pallas.systems.typr.entities.v1.validation.number.NumberValidationRule;
 import uk.pallas.systems.typr.services.UnitsService;
 
 @Service
 public class UnitsServiceImpl implements UnitsService {
+  /**
+   * Static Logger for the class.
+   */
+  private static final Log LOGGER = LogFactory.getLog(UnitsServiceImpl.class);
+
   /** Cache of units against their names. **/
   private final Map<String, Unit<?>> units;
 
@@ -56,6 +62,10 @@ public class UnitsServiceImpl implements UnitsService {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   * @return a collection of types collected from the measurement library.
+   */
   public Collection<String> getUnits() {
     return this.units.keySet();
   }
@@ -63,7 +73,7 @@ public class UnitsServiceImpl implements UnitsService {
   public Unit<?> getUnit(final String unitName) {
     Unit<?> unit = null;
     if (null == unitName || unitName.isBlank()) {
-      //unit = null;
+      LOGGER.trace("getUnits - Invalid Unit Name was supplied");
     } else {
       unit = this.units.get(unitName);
     }
@@ -71,10 +81,22 @@ public class UnitsServiceImpl implements UnitsService {
     return unit;
   }
 
+  /**
+   * {@inheritDoc}
+   *
+   * @param unitName the name to perform a lookup on
+   * @return false if the name can't be found.
+   */
   public boolean isValid(final String unitName) {
     return ValidationRuleConstants.NO_UNITS.equals(unitName) || null != this.getUnit(unitName);
   }
 
+  /**
+   * {@inheritDoc}
+   *
+   * @param definition the object to check
+   * @return false if the name can't be found.
+   */
   @Override
   public boolean isValid(final FieldDefinition definition) {
     final boolean result;
