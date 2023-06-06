@@ -2,6 +2,7 @@ package uk.pallas.systems.typr.rest.entities.v1;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
+import java.util.Objects;
 import uk.pallas.systems.typr.entities.v1.Category;
 
 /**
@@ -44,6 +45,39 @@ public class CategoryDTO implements Category {
   public CategoryDTO(final String identifier, final String desc) {
     this.name = identifier;
     this.description = desc;
+  }
+
+  /**
+   * Compares the supplied object to this one, it checks the supplied object is a Category.
+   *
+   * @param toCompare the object to compare (can be null or a child class, etc..)
+   * @return false if the name and description fields in a category
+   */
+  @Override
+  public boolean equals(final Object toCompare) {
+
+    final boolean result;
+    if (this == toCompare) {
+      result = true;
+    } else if (toCompare instanceof Category) {
+      final Category that = (Category) toCompare;
+      result = Objects.equals(this.getName(), that.getName())
+        && Objects.equals(this.getDescription(), that.getDescription());
+    } else {
+      result = false;
+    }
+
+    return result;
+  }
+
+  /**
+   * Generates a Unique hashcode for the Category class.
+   *
+   * @return a valid integer representation of this object,
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.getName(), this.getDescription());
   }
 
   /**

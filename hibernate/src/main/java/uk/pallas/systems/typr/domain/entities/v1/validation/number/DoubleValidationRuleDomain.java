@@ -31,8 +31,8 @@ public class DoubleValidationRuleDomain extends AbstractNumberValidationRuleDoma
    * @param max The upper bound allowed for the field
    * @param min the lower bound allowed for the field
    */
-  protected DoubleValidationRuleDomain(final Double max, final Double min, final String detailedDescription,
-                                       final String unitName) {
+  public DoubleValidationRuleDomain(final Double max, final Double min, final String detailedDescription,
+                                    final String unitName) {
     super(max, min, detailedDescription, unitName);
   }
 

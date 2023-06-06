@@ -88,7 +88,7 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeWrapper {
     if (this == toCompare) {
       result = true;
     } else if (toCompare instanceof CountryCodeWrapper that) {
-      result = super.equals(toCompare) && Objects.equals(this.getCountryCode(), that.getCountryCode())
+      result = Objects.equals(this.getCountryCode(), that.getCountryCode())
         && Objects.equals(this.getRule(), that.getRule());
     } else {
       result = false;
@@ -104,7 +104,7 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeWrapper {
    */
   @Override
   public int hashCode() {
-    return super.hashCode() + Objects.hash(this.getCountryCode(), this.getRule());
+    return Objects.hash(this.getCountryCode(), this.getRule());
   }
 
   @Override

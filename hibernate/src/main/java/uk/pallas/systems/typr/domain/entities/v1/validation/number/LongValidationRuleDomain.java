@@ -32,7 +32,7 @@ public class LongValidationRuleDomain extends AbstractNumberValidationRuleDomain
    * @param max The upper bound allowed for the field
    * @param min the lower bound allowed for the field
    */
-  protected LongValidationRuleDomain(final Long max, final Long min, final String detailedDescription,
+  public LongValidationRuleDomain(final Long max, final Long min, final String detailedDescription,
                                      final String unit) {
     super(max, min, detailedDescription, unit);
   }
