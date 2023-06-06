@@ -56,8 +56,8 @@ public class UnitsServiceImpl implements UnitsService {
     }
   }
 
-  public Collection<Unit<?>> getUnits() {
-    return this.units.values();
+  public Collection<String> getUnits() {
+    return this.units.keySet();
   }
 
   public Unit<?> getUnit(final String unitName) {
