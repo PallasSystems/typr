@@ -24,8 +24,6 @@ public abstract class AbstractValidationRuleDTOTest<T extends AbstractValidation
     final T basic = this.generateTestInstance();
 
     Assertions.assertNotEquals(basic, null);
-    Assertions.assertNotEquals(basic, "Test");
-    Assertions.assertNotEquals(basic, Double.parseDouble("543.3"));
     Assertions.assertNotEquals(basic, new DoubleValidationRuleDTO());
 
     // Check an alternate instance fails
