@@ -11,8 +11,8 @@
         <version>1.0.11</version>
     </skin>
 
-    <version position="none"></version>
-    <publishDate position="none"> </publishDate>
+    <version position="none" />
+    <publishDate position="none" />
 
     <custom>
         <bootstrapSkin>

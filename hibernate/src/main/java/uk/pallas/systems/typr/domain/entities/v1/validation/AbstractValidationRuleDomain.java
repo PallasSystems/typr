@@ -3,14 +3,13 @@ package uk.pallas.systems.typr.domain.entities.v1.validation;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.MappedSuperclass;
 import java.util.Objects;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 
 @MappedSuperclass
-public abstract class AbstractValidationRuleDomain implements ValidationRule, Cloneable {
+public abstract class AbstractValidationRuleDomain implements ValidationRule {
 
   /**
    * Primary key for storing validation rules.
@@ -22,7 +21,7 @@ public abstract class AbstractValidationRuleDomain implements ValidationRule, Cl
   /**
    * Detailed description of the field definition.
    */
-  @Column(length = 4096, nullable = false)
+  @Column(length = ValidationRuleConstants.MAX_STRING_LENGTH, nullable = false)
   private String description;
 
   /**
@@ -34,6 +33,7 @@ public abstract class AbstractValidationRuleDomain implements ValidationRule, Cl
 
   /**
    * Class Constructor.
+   * @param detailedDescription Detailed description of the field definition.
    */
   public AbstractValidationRuleDomain(final String detailedDescription) {
     this.description = detailedDescription;
@@ -41,6 +41,7 @@ public abstract class AbstractValidationRuleDomain implements ValidationRule, Cl
 
   /**
    * Copy Constructor.
+   * @param data a Validation rule we are looking to create a clone of.
    */
   public AbstractValidationRuleDomain(final ValidationRule data) {
     this(null == data ? null : data.getDescription());

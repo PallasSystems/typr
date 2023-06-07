@@ -4,7 +4,6 @@ import java.util.Collection;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
-import uk.pallas.systems.typr.services.CountryService;
 import uk.pallas.systems.typr.services.UnitsService;
 
 class UnitsServiceImplTest {

@@ -2,17 +2,14 @@ package uk.pallas.systems.typr.domain.entities.v1.validation.number;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
-import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
-import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 
-class LongValidationRuleDomainTest {
+class LongValidationRuleDomainTest extends AbstractNumberValidationRuleDomainTest<LongValidationRuleDomain, Long>{
 
   @Test
   void testConstructor() {
 
-    final long max = 1000;
+    final long max = System.currentTimeMillis();
     final long min = 100;
     final String description = "Test description";
     final String unitName = "Knot";
@@ -38,6 +35,21 @@ class LongValidationRuleDomainTest {
     Assertions.assertEquals(basic, copy);
   }
 
+  @Override
+  LongValidationRuleDomain generateTestInstance() {
+    final long max = 1234;
+    final long min = 987;
+    final String description = "LongValidationRuleDomainTest-generateTestInstance";
+    final String unitName = "Knot";
+
+    return new LongValidationRuleDomain(max,min,description, unitName);
+  }
+
+  @Override
+  Long getValidNumber() {
+    return 1034L;
+  }
+
   @Test
   void testEquals() {
 
@@ -49,53 +61,5 @@ class LongValidationRuleDomainTest {
     final LongValidationRule basic = new LongValidationRuleDomain(max,min,description, unitName);
 
     Assertions.assertEquals(basic, basic);
-  }
-
-  @Test
-  void testEqualsWithInvalid() {
-
-    final long max = 99999;
-    final long min = 12222;
-    final String description = "dskhdfkjdsdhf";
-    final String unitName = "Knot";
-
-    final LongValidationRule basic = new LongValidationRuleDomain(max,min,description, unitName);
-
-
-    Assertions.assertFalse(basic.equals(null));
-    Assertions.assertFalse(basic.equals("Test"));
-    Assertions.assertFalse(basic.equals(Double.parseDouble("543.3")));
-    Assertions.assertFalse(basic.equals(new LongValidationRuleDomain()));
-
-    final DoubleValidationRule longRule = new DoubleValidationRuleDomain((double)max,(double)min,description, unitName);
-    Assertions.assertFalse(basic.equals(longRule));
-
-    final StringValidationRule stringRule = new StringValidationRuleDomain(description, "test", unitName);
-    Assertions.assertFalse(basic.equals(stringRule));
-  }
-
-
-  @Test
-  void testIsValid() {
-
-    final long max = 99999;
-    final long min = 12222;
-    final String description = "adsfsdf";
-    final String unitName = "Knot";
-
-    final LongValidationRule basic = new LongValidationRuleDomain(max,min,description, unitName);
-
-    Assertions.assertTrue(basic.isValid("22222"));
-    Assertions.assertTrue(basic.isValid(22222));
-    Assertions.assertTrue(basic.isValid(22222.54654));
-  }
-
-  @Test
-  void testIsValidWithInvalid() {
-
-    final DoubleValidationRule basic = new DoubleValidationRuleDomain();
-
-    Assertions.assertFalse(basic.isValid(null));
-    Assertions.assertFalse(basic.isValid("ABC"));
   }
 }

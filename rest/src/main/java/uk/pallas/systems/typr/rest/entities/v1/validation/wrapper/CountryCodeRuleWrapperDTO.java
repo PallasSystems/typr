@@ -12,7 +12,6 @@ import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
-import uk.pallas.systems.typr.rest.entities.v1.validation.AbstractValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTO;
@@ -27,7 +26,7 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeWrapper {
   /**
    * Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be country specific.
    */
-  @Schema(example = "UK", nullable = false,
+  @Schema(example = "UK",
     description = "Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be "
       + "country specific.")
   private String countryCode;
@@ -64,11 +63,7 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeWrapper {
    * @param validRule the rule we need to wrap with a different identifier.
    */
   public CountryCodeRuleWrapperDTO(final String code, final ValidationRule validRule) {
-    if (null == code) {
-      this.countryCode = ValidationRuleConstants.DEFAULT_COUNTRY_CODE;
-    } else {
-      this.countryCode = code;
-    }
+    this.countryCode = Objects.requireNonNullElse(code, ValidationRuleConstants.DEFAULT_COUNTRY_CODE);
 
     this.setRule(validRule);
   }
@@ -114,11 +109,7 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeWrapper {
 
   @Override
   public void setCountryCode(final String code) {
-    if (null == code) {
-      this.countryCode = ValidationRuleConstants.DEFAULT_COUNTRY_CODE;
-    } else {
-      this.countryCode = code;
-    }
+    this.countryCode = Objects.requireNonNullElse(code, ValidationRuleConstants.DEFAULT_COUNTRY_CODE);
   }
 
   /**

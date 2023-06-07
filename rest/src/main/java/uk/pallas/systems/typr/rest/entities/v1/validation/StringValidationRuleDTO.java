@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import java.util.Objects;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 
 /**
  * Defines regular expression rules for a field to confirm if the field is valid or not.
@@ -16,7 +17,7 @@ public class StringValidationRuleDTO extends AbstractValidationRuleDTO implement
    * As this is a String type, assumption is we apply Regular Express to validate the string.
    */
   @NotBlank
-  @Size(min = 0, max = 4096)
+  @Size(max = ValidationRuleConstants.MAX_STRING_LENGTH)
   @Schema(description = "As this is a String type, assumption is we apply Regular Express to validate the string.",
     example = "^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$")
   private String detectRegex;
@@ -26,7 +27,7 @@ public class StringValidationRuleDTO extends AbstractValidationRuleDTO implement
    */
   @Schema(description = "As this is a String type, assumption is we apply Regular Express to extract entities from a string block.",
     example = "[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}")
-  @Size(min = 0, max = 4096)
+  @Size(max = ValidationRuleConstants.MAX_STRING_LENGTH)
   private String extractRegex;
 
   /**

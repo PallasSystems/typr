@@ -21,6 +21,7 @@ public abstract class AbstractValidationRuleDTO implements ValidationRule {
 
   /**
    * Class Constructor.
+   * @param detailedDescription Detailed description of the field definition.
    */
   public AbstractValidationRuleDTO(final String detailedDescription) {
     this.description = detailedDescription;
@@ -28,6 +29,7 @@ public abstract class AbstractValidationRuleDTO implements ValidationRule {
 
   /**
    * Copy Constructor.
+   * @param data the validation rule we plan to copy all the values from.
    */
   public AbstractValidationRuleDTO(final ValidationRule data) {
     this(null == data ? null : data.getDescription());

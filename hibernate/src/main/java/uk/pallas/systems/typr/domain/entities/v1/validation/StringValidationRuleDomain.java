@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import java.util.Objects;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 
 @Entity
 @Table(name = "val_string_rules")
@@ -13,13 +14,13 @@ public class StringValidationRuleDomain extends AbstractValidationRuleDomain imp
   /**
    * As this is a String type, assumption is we apply Regular Express to validate the string.
    */
-  @Column(length = 4096, nullable = false)
+  @Column(length = ValidationRuleConstants.MAX_STRING_LENGTH, nullable = false)
   private String detectRegex;
 
   /**
    * As this is a String type, assumption is we apply Regular Express to extract entities from a string block.
    */
-  @Column(length = 4096, nullable = true)
+  @Column(length = ValidationRuleConstants.MAX_STRING_LENGTH)
   private String extractRegex;
 
   /**

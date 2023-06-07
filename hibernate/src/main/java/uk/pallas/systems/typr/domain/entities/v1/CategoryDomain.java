@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.Objects;
 import uk.pallas.systems.typr.entities.v1.Category;
-import uk.pallas.systems.typr.entities.v1.validation.number.NumberValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 
 /**
  * This class defines Categories which can be associated with a definition.
@@ -18,14 +18,14 @@ public class CategoryDomain implements Category {
   /**
    * Detailed description of the field definition.
    */
-  @Column(length = 4096, nullable = true)
+  @Column(length = ValidationRuleConstants.MAX_STRING_LENGTH)
   private String description;
 
   /**
    * Name of the field definition e.g. post code, uk mobile.
    */
   @Id
-  @Column(length = 4096, nullable = false)
+  @Column(length = ValidationRuleConstants.MAX_STRING_LENGTH, nullable = false)
   private String name;
 
   /**
@@ -37,6 +37,7 @@ public class CategoryDomain implements Category {
 
   /**
    * Class Copy Constructor.
+   * @param data a Category object we intend to copy all data values from
    */
   public CategoryDomain(final Category data) {
     this(null == data ? null : data.getName(), null == data ? null : data.getDescription());
@@ -44,6 +45,8 @@ public class CategoryDomain implements Category {
 
   /**
    * Class Constructor which lets us set all fields within the object.
+   * @param identifier Name of the field definition e.g. post code, uk mobile.
+   * @param desc Detailed description of the field definition.
    */
   public CategoryDomain(final String identifier, final String desc) {
     this.name = identifier;
@@ -62,8 +65,7 @@ public class CategoryDomain implements Category {
     final boolean result;
     if (this == toCompare) {
       result = true;
-    } else if (toCompare instanceof Category) {
-      final Category that = (Category) toCompare;
+    } else if (toCompare instanceof Category that) {
       result = Objects.equals(this.getName(), that.getName())
         && Objects.equals(this.getDescription(), that.getDescription());
     } else {

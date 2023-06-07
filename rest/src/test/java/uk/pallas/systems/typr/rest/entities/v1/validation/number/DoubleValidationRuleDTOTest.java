@@ -62,16 +62,16 @@ class DoubleValidationRuleDTOTest {
     final DoubleValidationRule basic = new DoubleValidationRuleDTO(max,min,description, unitName);
 
 
-    Assertions.assertFalse(basic.equals(null));
-    Assertions.assertFalse(basic.equals("Test"));
-    Assertions.assertFalse(basic.equals(Double.parseDouble("999.78")));
-    Assertions.assertFalse(basic.equals(new DoubleValidationRuleDTO()));
+    Assertions.assertNotEquals(null, basic);
+    Assertions.assertNotEquals("Test", basic);
+    Assertions.assertNotEquals(basic, Double.parseDouble("999.78"));
+    Assertions.assertNotEquals(basic, new DoubleValidationRuleDTO());
 
     final LongValidationRule longRule = new LongValidationRuleDTO((long)max,(long)min,description, unitName);
-    Assertions.assertFalse(basic.equals(longRule));
+    Assertions.assertNotEquals(basic, longRule);
 
     final StringValidationRule stringRule = new StringValidationRuleDTO(description, "test", unitName);
-    Assertions.assertFalse(basic.equals(stringRule));
+    Assertions.assertNotEquals(basic, stringRule);
   }
 
   @Test

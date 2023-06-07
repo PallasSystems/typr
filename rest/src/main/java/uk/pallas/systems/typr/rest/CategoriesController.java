@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,8 +65,8 @@ public class CategoriesController {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Categories stored within Typr");
     }
 
-    return cats.stream().filter(result -> null != result)
-      .map(value -> new CategoryDTO(value))
+    return cats.stream().filter(Objects::nonNull)
+      .map(CategoryDTO::new)
       .collect(Collectors.toList());
   }
 }

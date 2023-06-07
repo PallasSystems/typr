@@ -22,6 +22,7 @@ import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
@@ -36,18 +37,18 @@ public class FieldDefinitionDomain implements FieldDefinition {
   /**
    * List of categories assocaited with our type.
    */
-  @Column(nullable = true)
+  @Column
   @ManyToMany
   private final Collection<CategoryDomain> categories;
   /**
    * The shortened name (e.g. Acronym) of the field definition e.g. post code, uk mobile, IPv4, etc..
    */
-  @Column(length = 4096, nullable = true)
+  @Column(length = ValidationRuleConstants.MAX_STRING_LENGTH)
   private String acronym;
   /**
    * Detailed description of the field definition.
    */
-  @Column(length = 4096, nullable = true)
+  @Column(length = ValidationRuleConstants.MAX_STRING_LENGTH)
   private String description;
 
   /**
@@ -61,31 +62,31 @@ public class FieldDefinitionDomain implements FieldDefinition {
    * Validation for the field definition.
    */
   @OneToMany
-  private Collection<EnumValidationRuleDomain> enumRules;
+  private final Collection<EnumValidationRuleDomain> enumRules;
 
   /**
    * Validation for the field definition.
    */
   @OneToMany
-  private Collection<StringValidationRuleDomain> stringRules;
+  private final Collection<StringValidationRuleDomain> stringRules;
 
   /**
    * Validation for the field definition.
    */
   @OneToMany
-  private Collection<DoubleValidationRuleDomain> doubleRules;
+  private final Collection<DoubleValidationRuleDomain> doubleRules;
 
   /**
    * Validation for the field definition.
    */
   @OneToMany
-  private Collection<LongValidationRuleDomain> longRules;
+  private final Collection<LongValidationRuleDomain> longRules;
 
   /**
    * List of Validation rules for the field definition.
    */
   @OneToMany
-  private Collection<CountryCodeRuleWrapperDomain> countryCodeRules;
+  private final Collection<CountryCodeRuleWrapperDomain> countryCodeRules;
 
   /**
    * Default Class Constructor.
@@ -123,7 +124,7 @@ public class FieldDefinitionDomain implements FieldDefinition {
     this.categories = new HashSet<>();
     if (null != cats) {
       this.categories.addAll(cats.stream()
-        .map(value -> new CategoryDomain(value))
+        .map(CategoryDomain::new)
         .collect(Collectors.toSet()));
     }
 
@@ -260,7 +261,7 @@ public class FieldDefinitionDomain implements FieldDefinition {
     } else {
       this.categories.clear();
       this.categories.addAll(values.stream()
-        .map(value -> new CategoryDomain(value))
+        .map(CategoryDomain::new)
         .collect(Collectors.toSet()));
     }
   }
@@ -315,19 +316,19 @@ public class FieldDefinitionDomain implements FieldDefinition {
     final Collection<ValidationRule> results = new HashSet<>();
 
     results.addAll(this.countryCodeRules.stream()
-      .map(value -> new CountryCodeRuleWrapperDomain(value)).collect(Collectors.toSet()));
+      .map(CountryCodeRuleWrapperDomain::new).collect(Collectors.toSet()));
 
     results.addAll(this.doubleRules.stream()
-      .map(value -> new DoubleValidationRuleDomain(value)).collect(Collectors.toSet()));
+      .map(DoubleValidationRuleDomain::new).collect(Collectors.toSet()));
 
     results.addAll(this.enumRules.stream()
-      .map(value -> new EnumValidationRuleDomain(value)).collect(Collectors.toSet()));
+      .map(EnumValidationRuleDomain::new).collect(Collectors.toSet()));
 
     results.addAll(this.longRules.stream()
-      .map(value -> new LongValidationRuleDomain(value)).collect(Collectors.toSet()));
+      .map(LongValidationRuleDomain::new).collect(Collectors.toSet()));
 
     results.addAll(this.stringRules.stream()
-      .map(value -> new StringValidationRuleDomain(value)).collect(Collectors.toSet()));
+      .map(StringValidationRuleDomain::new).collect(Collectors.toSet()));
 
     return results;
   }

@@ -10,7 +10,7 @@ public abstract class AbstractValidationRuleDTOTest<T extends AbstractValidation
    * Used to generate a new instance of the class where we can test the common methods/processing between classes.
    * @return a valid fully populated object
    */
-   abstract T generateTestInstance();
+  abstract T generateTestInstance();
 
   @Test
   void testEquals() {

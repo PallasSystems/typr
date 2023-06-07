@@ -6,15 +6,9 @@ import java.util.Random;
 import java.util.Set;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomain;
-import uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomain;
-import uk.pallas.systems.typr.domain.entities.v1.validation.wrapper.CountryCodeRuleWrapperDomain;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
-import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
-import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
-import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
 
-class EnumValidationRuleDomainTest extends AbstractValidationRuleDomainTest<EnumValidationRuleDomain>{
+class EnumValidationRuleDomainTest extends AbstractValidationRuleDomainTest<EnumValidationRuleDomain> {
 
   /**
    * This will generate a collection of alphaNumeric strings to use to test various 'enumerates'.
@@ -86,7 +80,7 @@ class EnumValidationRuleDomainTest extends AbstractValidationRuleDomainTest<Enum
   @Test
   void testSetEnumerates() {
     // Create Validation rule to be attached
-    final String description = "EnumValidationRuleDomainTest-testCopyConstructor";
+    final String description = "EnumValidationRuleDomainTest-testSetEnumerates";
     final Collection<String> original = this.generateValidTestData();
     final Collection<String> replacement = this.generateValidTestData();
 
@@ -100,9 +94,8 @@ class EnumValidationRuleDomainTest extends AbstractValidationRuleDomainTest<Enum
   @Test
   void testSetEnumeratesWithInvalid() {
     // Create Validation rule to be attached
-    final String description = "EnumValidationRuleDomainTest-testCopyConstructor";
+    final String description = "EnumValidationRuleDomainTest-testSetEnumeratesWithInvalid";
     final Collection<String> original = this.generateValidTestData();
-    final Collection<String> replacement = this.generateValidTestData();
 
     final EnumValidationRule basic = new EnumValidationRuleDomain(description, original);
     Assertions.assertEquals(original, basic.getEnumerates());

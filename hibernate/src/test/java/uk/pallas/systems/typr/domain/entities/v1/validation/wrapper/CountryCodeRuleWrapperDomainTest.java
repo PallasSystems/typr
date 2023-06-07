@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import uk.pallas.systems.typr.domain.entities.v1.CategoryDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomain;
-import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
@@ -59,13 +58,13 @@ class CountryCodeRuleWrapperDomainTest {
     final CountryCodeWrapper basic = new CountryCodeRuleWrapperDomain();
 
 
-    Assertions.assertFalse(basic.equals(null));
-    Assertions.assertFalse(basic.equals("Test"));
-    Assertions.assertFalse(basic.equals(Double.parseDouble("543.3")));
-    Assertions.assertFalse(basic.equals(new CategoryDomain()));
+    Assertions.assertNotEquals(null, basic);
+    Assertions.assertNotEquals("Test", basic);
+    Assertions.assertNotEquals(basic, Double.parseDouble("543.3"), 0.0);
+    Assertions.assertNotEquals(basic, new CategoryDomain());
 
     final DoubleValidationRule doubleRule = new DoubleValidationRuleDomain();
-    Assertions.assertFalse(basic.equals(doubleRule));
+    Assertions.assertNotEquals(basic, doubleRule);
   }
 
 }

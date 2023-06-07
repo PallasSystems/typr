@@ -42,12 +42,12 @@ class CategoryDomainTest {
     final Category basic = new CategoryDomain(name, description);
 
 
-    Assertions.assertFalse(basic.equals(null));
-    Assertions.assertFalse(basic.equals("Test"));
-    Assertions.assertFalse(basic.equals(Double.parseDouble("543.3")));
-    Assertions.assertFalse(basic.equals(new CategoryDomain()));
+    Assertions.assertNotEquals(null, basic);
+    Assertions.assertNotEquals("Test", basic);
+    Assertions.assertNotEquals(basic, Double.parseDouble("543.3"));
+    Assertions.assertNotEquals(basic, new CategoryDomain());
 
     final DoubleValidationRule doubleRule = new DoubleValidationRuleDomain();
-    Assertions.assertFalse(basic.equals(doubleRule));
+    Assertions.assertNotEquals(basic, doubleRule);
   }
 }

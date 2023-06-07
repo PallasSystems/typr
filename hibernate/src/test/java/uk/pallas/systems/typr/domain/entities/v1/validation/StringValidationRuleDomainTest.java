@@ -1,13 +1,7 @@
 package uk.pallas.systems.typr.domain.entities.v1.validation;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
-import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 
 class StringValidationRuleDomainTest extends AbstractValidationRuleDomainTest<StringValidationRuleDomain>{

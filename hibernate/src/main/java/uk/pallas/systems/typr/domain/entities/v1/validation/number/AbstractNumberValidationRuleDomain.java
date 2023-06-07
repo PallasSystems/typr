@@ -23,7 +23,8 @@ abstract class AbstractNumberValidationRuleDomain<N extends Number> extends Abst
   @Column(nullable = false)
   private N minimumValue;
 
-  @Column(nullable = true)
+  /** Defines a Unit name, to be used to when the same field has different units. */
+  @Column
   private String unit;
 
   /**
@@ -47,7 +48,9 @@ abstract class AbstractNumberValidationRuleDomain<N extends Number> extends Abst
    * Constructor, allows us to set the internal abstract fields.
    *
    * @param max The upper bound allowed for the field
+   * @param detailedDescription Detailed description of the field definition.
    * @param min the lower bound allowed for the field
+   * @param unitName Defines a Unit name, to be used to when the same field has different units.
    */
   protected AbstractNumberValidationRuleDomain(final N max, final N min, final String detailedDescription,
                                                final String unitName) {
@@ -72,8 +75,7 @@ abstract class AbstractNumberValidationRuleDomain<N extends Number> extends Abst
     final boolean result;
     if (this == toCompare) {
       result = true;
-    } else if (toCompare instanceof NumberValidationRule) {
-      final NumberValidationRule that = (NumberValidationRule<?>) toCompare;
+    } else if (toCompare instanceof NumberValidationRule<?> that) {
       result = super.equals(toCompare)
         && Objects.equals(this.getMaximumValue(), that.getMaximumValue())
         && Objects.equals(this.getMinimumValue(), that.getMinimumValue())

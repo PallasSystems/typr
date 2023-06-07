@@ -14,6 +14,7 @@ import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
@@ -39,7 +40,7 @@ public class FieldDefinitionDTO implements FieldDefinition {
   /**
    * The shortened name (e.g. Acronym) of the field definition e.g. post code, uk mobile, IPv4, etc..
    */
-  @Size(min = 0, max = 4096)
+  @Size(max = ValidationRuleConstants.MAX_STRING_LENGTH)
   @Schema(description = "The shortened name (e.g. Acronym) of the field definition e.g. post code, uk mobile, "
     + "IPv4, etc..",
     example = "MCC",
@@ -51,15 +52,14 @@ public class FieldDefinitionDTO implements FieldDefinition {
   @Schema(description = "Detailed description of the field definition.",
     example = "The mobile country code consists of three decimal digits and the mobile network code consists of "
       + "two or three decimal digits ")
-  @Size(min = 0, max = 4096)
+  @Size(max = ValidationRuleConstants.MAX_STRING_LENGTH)
   private String description;
 
   /**
    * Name of the field definition e.g. post code, uk mobile.
    */
   @Schema(description = "Name of the field definition e.g. post code, uk mobile.",
-    example = "Mobile Country Code",
-    nullable = false)
+    example = "Mobile Country Code")
   @Size(min = 1, max = 100)
   private String name;
 
@@ -108,8 +108,8 @@ public class FieldDefinitionDTO implements FieldDefinition {
 
     this.categories = new HashSet<>();
     if (null != cats) {
-      this.categories.addAll(cats.stream().filter(value -> null != value)
-        .map(value -> new CategoryDTO(value))
+      this.categories.addAll(cats.stream().filter(Objects::nonNull)
+        .map(CategoryDTO::new)
         .collect(Collectors.toSet()));
     }
 
@@ -232,8 +232,8 @@ public class FieldDefinitionDTO implements FieldDefinition {
       this.categories.clear();
     } else {
       this.categories.clear();
-      this.categories.addAll(values.stream().filter(value -> null != value)
-        .map(value -> new CategoryDTO(value))
+      this.categories.addAll(values.stream().filter(Objects::nonNull)
+        .map(CategoryDTO::new)
         .collect(Collectors.toSet()));
     }
   }

@@ -52,7 +52,7 @@ public class LongValidationRuleDomain extends AbstractNumberValidationRuleDomain
       result = ((Number) toConvert).longValue();
     } else if (null != toConvert) {
       try {
-        final Double value = Double.parseDouble(toConvert.toString());
+        final Double value = Double.valueOf(toConvert.toString());
         result = value.longValue();
       } catch (final NumberFormatException exception) {
         // TODO lets catch this fail and log it.

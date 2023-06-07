@@ -34,7 +34,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
   @Override
   public Category getCategoryByName(final String name) {
     final Optional<CategoryDomain> results =  this.categoryDAO.findById(name);
-    return results.isPresent() ? results.get() : null;
+    return results.orElse(null);
   }
 
   /**
@@ -42,11 +42,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
    * @return
    */
   public Collection<FieldDefinition> getFieldDefinitions() {
-    final Collection<FieldDefinition> results = new HashSet<>();
-
-    results.addAll(this.fieldDefDAO.findAll());
-
-    return results;
+    return new HashSet<>(this.fieldDefDAO.findAll());
   }
 
   @Override
@@ -63,11 +59,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
     final FieldDefinition result;
 
     final Optional<FieldDefinitionDomain> defResults = this.fieldDefDAO.findById(name);
-    if (defResults.isPresent()) {
-      result = defResults.get();
-    } else {
-      result = null;
-    }
+    result = defResults.orElse(null);
 
     return result;
   }

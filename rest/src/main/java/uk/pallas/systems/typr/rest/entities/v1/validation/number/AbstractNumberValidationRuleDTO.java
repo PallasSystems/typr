@@ -1,6 +1,5 @@
 package uk.pallas.systems.typr.rest.entities.v1.validation.number;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import java.util.Objects;
@@ -27,7 +26,8 @@ public abstract class AbstractNumberValidationRuleDTO<N extends Number>
     example = "0")
   private N minimumValue;
 
-  @Schema(description = "Is there a lower range for valid value stored within the field?",
+  /** Used to define the units within the field, the same field might be in degrees, radians, etc.. */
+  @Schema(description = "Used to define the units within the field, the same field might be in degrees, radians, etc..",
     example = "METRE_SECOND")
   private String unit;
 
@@ -53,6 +53,8 @@ public abstract class AbstractNumberValidationRuleDTO<N extends Number>
    *
    * @param max The upper bound allowed for the field
    * @param min the lower bound allowed for the field
+   * @param detailedDescription Detailed description of the field definition.
+   * @param unitName Used to define the units within the field, the same field might be in degrees, radians, etc..
    */
   protected AbstractNumberValidationRuleDTO(final N max, final N min, final String detailedDescription,
                                             final String unitName) {

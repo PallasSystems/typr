@@ -9,7 +9,6 @@ import jakarta.persistence.Table;
 import java.util.Objects;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import uk.pallas.systems.typr.domain.entities.v1.validation.AbstractValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomain;
@@ -92,11 +91,7 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeWrapper {
    */
   public CountryCodeRuleWrapperDomain(final String code, final ValidationRule validRule) {
 
-    if (null == code) {
-      this.countryCode = ValidationRuleConstants.DEFAULT_COUNTRY_CODE;
-    } else {
-      this.countryCode = code;
-    }
+    this.countryCode = Objects.requireNonNullElse(code, ValidationRuleConstants.DEFAULT_COUNTRY_CODE);
 
     this.setRule(validRule);
   }
@@ -142,11 +137,7 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeWrapper {
 
   @Override
   public void setCountryCode(final String code) {
-    if (null == code) {
-      this.countryCode = ValidationRuleConstants.DEFAULT_COUNTRY_CODE;
-    } else {
-      this.countryCode = code;
-    }
+    this.countryCode = Objects.requireNonNullElse(code, ValidationRuleConstants.DEFAULT_COUNTRY_CODE);
   }
 
   /**

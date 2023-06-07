@@ -31,7 +31,7 @@ public class UnitsServiceImpl implements UnitsService {
   public UnitsServiceImpl() {
     this.units = new ConcurrentHashMap<>();
 
-    final Unit rateOfTurn = NonSI.DEGREE_ANGLE.divide(Units.MINUTE).asType(Frequency.class);
+    final Unit<Frequency> rateOfTurn = NonSI.DEGREE_ANGLE.divide(Units.MINUTE).asType(Frequency.class);
     this.units.put("Degree Angle per Minute", rateOfTurn);
 
     // Pull in the other units into a unified list

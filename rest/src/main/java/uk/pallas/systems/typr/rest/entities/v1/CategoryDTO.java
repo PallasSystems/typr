@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
 import java.util.Objects;
 import uk.pallas.systems.typr.entities.v1.Category;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 
 /**
  *
@@ -15,14 +16,14 @@ public class CategoryDTO implements Category {
    * Detailed description of the field definition.
    */
   @Schema(description = "Detailed description of the field definition.", example = "Field represents a good Graph Edge")
-  @Size(min = 0, max = 4096)
+  @Size(max = ValidationRuleConstants.MAX_STRING_LENGTH)
   private String description;
 
   /**
    * Name of the field definition e.g. post code, uk mobile.
    */
-  @Schema(description = "Name of the category, this is", nullable = false, example = "Edge")
-  @Size(min = 0, max = 4096)
+  @Schema(description = "Name of the category, this is", example = "Edge")
+  @Size(max = ValidationRuleConstants.MAX_STRING_LENGTH)
   private String name;
 
   /**
@@ -59,8 +60,7 @@ public class CategoryDTO implements Category {
     final boolean result;
     if (this == toCompare) {
       result = true;
-    } else if (toCompare instanceof Category) {
-      final Category that = (Category) toCompare;
+    } else if (toCompare instanceof Category that) {
       result = Objects.equals(this.getName(), that.getName())
         && Objects.equals(this.getDescription(), that.getDescription());
     } else {

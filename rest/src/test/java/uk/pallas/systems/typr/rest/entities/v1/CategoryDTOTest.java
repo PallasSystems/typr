@@ -42,12 +42,12 @@ class CategoryDTOTest {
     final Category basic = new CategoryDTO(name, description);
 
 
-    Assertions.assertFalse(basic.equals(null));
-    Assertions.assertFalse(basic.equals("Test"));
-    Assertions.assertFalse(basic.equals(Double.parseDouble("543.3")));
-    Assertions.assertFalse(basic.equals(new CategoryDTO()));
+    Assertions.assertNotEquals(null, basic);
+    Assertions.assertNotEquals("Test", basic);
+    Assertions.assertNotEquals(basic, Double.parseDouble("543.3"));
+    Assertions.assertNotEquals(basic, new CategoryDTO());
 
     final DoubleValidationRule doubleRule = new DoubleValidationRuleDTO();
-    Assertions.assertFalse(basic.equals(doubleRule));
+    Assertions.assertNotEquals(basic, doubleRule);
   }
 }

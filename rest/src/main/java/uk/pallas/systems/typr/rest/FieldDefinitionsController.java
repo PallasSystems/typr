@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -93,8 +94,8 @@ public class FieldDefinitionsController {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No definitions stored within Typr");
     }
 
-    return definitions.stream().filter(result -> null != result)
-      .map(value -> new FieldDefinitionDTO(value))
+    return definitions.stream().filter(Objects::nonNull)
+      .map(FieldDefinitionDTO::new)
       .filter(value -> this.getUnitService().isValid(value))
       .filter(value -> this.getCountryService().isValidISO31661Alpha3(value))
       .collect(Collectors.toList());
@@ -118,7 +119,7 @@ public class FieldDefinitionsController {
       )
     )
   })
-  public FieldDefinition getFieldDefinitionByName(@PathVariable(name = "name", required = true) final String name) {
+  public FieldDefinition getFieldDefinitionByName(@PathVariable(name = "name") final String name) {
     final FieldDefinition result = this.getServices().getFieldDefinitionByName(name);
 
     if (null == result) {
@@ -151,7 +152,7 @@ public class FieldDefinitionsController {
     ),
     @ApiResponse(responseCode = "500", description = "Unable to Save Definition")
   })
-  public FieldDefinition putType(@Valid @RequestBody(required = true)
+  public FieldDefinition putType(@Valid @RequestBody
                                  @Schema(oneOf = {FieldDefinitionDTO.class}) final FieldDefinition definition) {
 
     if (!this.getUnitService().isValid(definition)) {
