@@ -2,20 +2,41 @@ package uk.pallas.systems.typr.rest.entities.v1.validation.number;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
-import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
-import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTO;
 
-class DoubleValidationRuleDTOTest {
+class DoubleValidationRuleDTOTest
+  extends AbstractNumberValidationRuleDTOTest<DoubleValidationRuleDTO, Double> {
+
+  /** Used to ensure the valid number is within our defined range. by taking the current time and removing 1 minute). */
+  private static final double MILLS_IN_MINUTE = 60000;
+
+  @Override
+  DoubleValidationRuleDTO generateTestInstance() {
+    final double max = MILLS_IN_MINUTE * 2;
+    final double min = 10.0;
+    final String description = "Test description";
+    final String unitName = "Knot";
+
+    return new DoubleValidationRuleDTO(max,min,description, unitName);
+  }
+
+  /** The Max range in auto generated is the current time, so this removes 1 minute from the
+   * current time to ensure the number is lower.
+   * @return a valid double within the generateTestInstance range.
+   */
+  @Override
+  Double getValidNumber() {
+    return MILLS_IN_MINUTE;
+  }
 
   @Test
   void testConstructor() {
 
-    final double max = 9999.9;
-    final double min = 10.0;
-    final String description = "testConstructor";
-    final String unitName = "Knot";
+    final double max = 1000.0;
+    final double min = 100.0;
+    final String description = "DoubleValidationRuleDTOTest-testConstructor";
+    final String unitName = ValidationRuleConstants.NO_UNITS;
 
     final DoubleValidationRule basic = new DoubleValidationRuleDTO(max,min,description, unitName);
     Assertions.assertEquals(max, basic.getMaximumValue());
@@ -26,74 +47,9 @@ class DoubleValidationRuleDTOTest {
 
   @Test
   void testCopyConstructor() {
-
-    final double max = 12.5;
-    final double min = 9.6;
-    final String description = "testCopyConstructor";
-    final String unitName = "Knot";
-
-    final DoubleValidationRule basic = new DoubleValidationRuleDTO(max,min,description, unitName);
+    final DoubleValidationRule basic = this.generateTestInstance();
     final DoubleValidationRule copy = new DoubleValidationRuleDTO(basic);
 
     Assertions.assertEquals(basic, copy);
-  }
-
-  @Test
-  void testEquals() {
-
-    final double max = 98.4;
-    final double min = 12.6;
-    final String description = "testEquals";
-    final String unitName = "Knot";
-
-    final DoubleValidationRule basic = new DoubleValidationRuleDTO(max,min,description, unitName);
-
-    Assertions.assertEquals(basic, basic);
-  }
-
-  @Test
-  void testEqualsWithInvalid() {
-
-    final double max = 88888.4;
-    final double min = 13333.6;
-    final String description = "testEqualsWithInvalid";
-    final String unitName = "Knot";
-
-    final DoubleValidationRule basic = new DoubleValidationRuleDTO(max,min,description, unitName);
-
-
-    Assertions.assertNotEquals(null, basic);
-    Assertions.assertNotEquals("Test", basic);
-    Assertions.assertNotEquals(basic, Double.parseDouble("999.78"));
-    Assertions.assertNotEquals(basic, new DoubleValidationRuleDTO());
-
-    final LongValidationRule longRule = new LongValidationRuleDTO((long)max,(long)min,description, unitName);
-    Assertions.assertNotEquals(basic, longRule);
-
-    final StringValidationRule stringRule = new StringValidationRuleDTO(description, "test", unitName);
-    Assertions.assertNotEquals(basic, stringRule);
-  }
-
-  @Test
-  void testIsValid() {
-
-    final double max = 55555.5;
-    final double min = 33333.6;
-    final String description = "testIsValid";
-    final String unitName = "Knot";
-
-    final DoubleValidationRule basic = new DoubleValidationRuleDTO(max,min,description, unitName);
-
-    Assertions.assertTrue(basic.isValid("44444.6"));
-    Assertions.assertTrue(basic.isValid(44444.6));
-  }
-
-  @Test
-  void testIsValidWithInvalid() {
-
-    final DoubleValidationRule basic = new DoubleValidationRuleDTO();
-
-    Assertions.assertFalse(basic.isValid(null));
-    Assertions.assertFalse(basic.isValid("XYZ"));
   }
 }

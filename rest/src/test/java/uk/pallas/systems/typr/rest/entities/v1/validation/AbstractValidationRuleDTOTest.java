@@ -30,6 +30,7 @@ public abstract class AbstractValidationRuleDTOTest<T extends AbstractValidation
 
     // Check an alternate instance fails
     final T alternate = this.generateTestInstance();
+    alternate.setDescription("testEqualsWithInvalid");
     Assertions.assertNotEquals(basic, alternate);
   }
 

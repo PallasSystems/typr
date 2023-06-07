@@ -30,6 +30,7 @@ public abstract class AbstractValidationRuleDomainTest<T extends AbstractValidat
 
     // Check an alternate instance fails
     final T alternate = this.generateTestInstance();
+    alternate.setDescription("testEqualsWithInvalid");
     Assertions.assertNotEquals(basic, alternate);
   }
 

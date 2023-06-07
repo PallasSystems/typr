@@ -13,7 +13,7 @@ class DoubleValidationRuleDomainTest
 
   @Override
   DoubleValidationRuleDomain generateTestInstance() {
-    final double max = System.currentTimeMillis();
+    final double max = MILLS_IN_MINUTE * 2;
     final double min = 10.0;
     final String description = "Test description";
     final String unitName = "Knot";
@@ -27,7 +27,7 @@ class DoubleValidationRuleDomainTest
    */
   @Override
   Double getValidNumber() {
-    return (double)System.currentTimeMillis() - MILLS_IN_MINUTE;
+    return MILLS_IN_MINUTE;
   }
 
   @Test

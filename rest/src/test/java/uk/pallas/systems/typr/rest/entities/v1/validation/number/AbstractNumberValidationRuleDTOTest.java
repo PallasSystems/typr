@@ -1,13 +1,13 @@
-package uk.pallas.systems.typr.domain.entities.v1.validation.number;
+package uk.pallas.systems.typr.rest.entities.v1.validation.number;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
+import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTO;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 
-public abstract class AbstractNumberValidationRuleDomainTest
-  <T extends AbstractNumberValidationRuleDomain, N extends Number >{
+public abstract class AbstractNumberValidationRuleDTOTest
+  <T extends AbstractNumberValidationRuleDTO, N extends Number >{
 
   /**
    * Used to generate a new instance of the class where we can test the common methods/processing between classes.
@@ -32,7 +32,7 @@ public abstract class AbstractNumberValidationRuleDomainTest
     Assertions.assertNotEquals(basic, null);
     Assertions.assertNotEquals(basic, "Test");
     Assertions.assertNotEquals(basic, Double.parseDouble("543.3"));
-    Assertions.assertNotEquals(basic, new DoubleValidationRuleDomain());
+    Assertions.assertNotEquals(basic, new DoubleValidationRuleDTO());
 
     // Check an alternate instance fails
     final T alternate = this.generateTestInstance();
@@ -55,10 +55,10 @@ public abstract class AbstractNumberValidationRuleDomainTest
     final String description = "dskhdfkjdsdhf";
     final String unitName = "Knot";
     final DoubleValidationRule
-      longRule = new DoubleValidationRuleDomain(max,min,description, unitName);
+      longRule = new DoubleValidationRuleDTO(max,min,description, unitName);
     Assertions.assertNotEquals(basic, longRule);
 
-    final StringValidationRule stringRule = new StringValidationRuleDomain(description, "test", unitName);
+    final StringValidationRule stringRule = new StringValidationRuleDTO(description, "test", unitName);
     Assertions.assertNotEquals(basic, stringRule);
   }
 

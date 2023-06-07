@@ -2,17 +2,13 @@ package uk.pallas.systems.typr.rest.entities.v1.validation.number;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
-import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
-import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTO;
-
-class LongValidationRuleDTOTest {
+class LongValidationRuleDTOTest extends AbstractNumberValidationRuleDTOTest<LongValidationRuleDTO, Long> {
 
   @Test
   void testConstructor() {
 
-    final long max = 1000;
+    final long max = System.currentTimeMillis();
     final long min = 100;
     final String description = "Test description";
     final String unitName = "Knot";
@@ -38,6 +34,21 @@ class LongValidationRuleDTOTest {
     Assertions.assertEquals(basic, copy);
   }
 
+  @Override
+  LongValidationRuleDTO generateTestInstance() {
+    final long max = 1234;
+    final long min = 987;
+    final String description = "LongValidationRuleDTOTest-generateTestInstance";
+    final String unitName = "Knot";
+
+    return new LongValidationRuleDTO(max,min,description, unitName);
+  }
+
+  @Override
+  Long getValidNumber() {
+    return 1034L;
+  }
+
   @Test
   void testEquals() {
 
@@ -49,53 +60,5 @@ class LongValidationRuleDTOTest {
     final LongValidationRule basic = new LongValidationRuleDTO(max,min,description, unitName);
 
     Assertions.assertEquals(basic, basic);
-  }
-
-  @Test
-  void testEqualsWithInvalid() {
-
-    final long max = 99999;
-    final long min = 12222;
-    final String description = "dskhdfkjdsdhf";
-    final String unitName = "Knot";
-
-    final LongValidationRule basic = new LongValidationRuleDTO(max,min,description, unitName);
-
-
-    Assertions.assertNotEquals(null, basic);
-    Assertions.assertNotEquals("Test", basic);
-    Assertions.assertNotEquals(basic, Double.parseDouble("543.3"), 0.0);
-    Assertions.assertNotEquals(basic, new LongValidationRuleDTO());
-
-    final DoubleValidationRule longRule = new DoubleValidationRuleDTO((double)max,(double)min,description, unitName);
-    Assertions.assertNotEquals(basic, longRule);
-
-    final StringValidationRule stringRule = new StringValidationRuleDTO(description, "test", unitName);
-    Assertions.assertNotEquals(basic, stringRule);
-  }
-
-
-  @Test
-  void testIsValid() {
-
-    final long max = 99999;
-    final long min = 12222;
-    final String description = "adsfsdf";
-    final String unitName = "Knot";
-
-    final LongValidationRule basic = new LongValidationRuleDTO(max,min,description, unitName);
-
-    Assertions.assertTrue(basic.isValid("22222"));
-    Assertions.assertTrue(basic.isValid(22222));
-    Assertions.assertTrue(basic.isValid(22222.54654));
-  }
-
-  @Test
-  void testIsValidWithInvalid() {
-
-    final DoubleValidationRule basic = new DoubleValidationRuleDTO();
-
-    Assertions.assertFalse(basic.isValid(null));
-    Assertions.assertFalse(basic.isValid("ABC"));
   }
 }

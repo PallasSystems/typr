@@ -60,7 +60,7 @@ class CountryCodeRuleWrapperDomainTest {
 
     Assertions.assertNotEquals(null, basic);
     Assertions.assertNotEquals("Test", basic);
-    Assertions.assertNotEquals(basic, Double.parseDouble("543.3"), 0.0);
+    Assertions.assertNotEquals(basic, Double.parseDouble("543.3"));
     Assertions.assertNotEquals(basic, new CategoryDomain());
 
     final DoubleValidationRule doubleRule = new DoubleValidationRuleDomain();
