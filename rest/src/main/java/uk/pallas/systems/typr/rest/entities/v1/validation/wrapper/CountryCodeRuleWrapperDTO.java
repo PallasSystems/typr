@@ -131,11 +131,11 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeWrapper {
   public String getDescription() {
 
     final String result;
-    final ValidationRule rule = this.getRule();
-    if (null == rule) {
+    final ValidationRule validationRule = this.getRule();
+    if (null == validationRule) {
       result = null;
     } else {
-      result = rule.getDescription();
+      result = validationRule.getDescription();
     }
 
     return result;
@@ -148,9 +148,9 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeWrapper {
    */
   @Override
   public void setDescription(final String detailedDescription) {
-    final ValidationRule rule = this.getRule();
-    if (null != rule) {
-      rule.setDescription(detailedDescription);
+    final ValidationRule validationRule = this.getRule();
+    if (null != validationRule) {
+      validationRule.setDescription(detailedDescription);
     }
   }
 
