@@ -37,8 +37,8 @@ public class CountryServiceImpl implements CountryService {
     } else {
       boolean valid = true;
       for (final ValidationRule rule : definition.getRules()) {
-        if (rule instanceof CountryCodeWrapper) {
-          valid = this.isValidISO31661Alpha3(((CountryCodeWrapper) rule).getCountryCode());
+        if (rule instanceof CountryCodeWrapper countryRule) {
+          valid = this.isValidISO31661Alpha3(countryRule.getCountryCode());
         }
         // if we find an invalid rule then stop and assume the whole definition isn't valid.
         if (!valid) {

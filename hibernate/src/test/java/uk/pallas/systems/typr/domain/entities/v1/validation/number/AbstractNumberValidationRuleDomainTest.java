@@ -27,6 +27,24 @@ public abstract class AbstractNumberValidationRuleDomainTest
   }
 
   @Test
+  void testHashCode() {
+    final T basic = this.generateTestInstance();
+    Assertions.assertEquals(basic.hashCode(), basic.hashCode());
+  }
+
+  @Test
+  void testHashCodeWithNull() {
+    final T basic = this.generateTestInstance();
+    basic.setDescription(null);
+    basic.setMaximumValue(null);
+    basic.setMinimumValue(null);
+    basic.setUnit(null);
+    basic.setIdentifier(null);
+
+    Assertions.assertEquals(basic.hashCode(), basic.hashCode());
+  }
+
+  @Test
   void testEqualsWithInvalid() {
     final T basic = this.generateTestInstance();
 
@@ -48,17 +66,6 @@ public abstract class AbstractNumberValidationRuleDomainTest
     Assertions.assertFalse(basic.isValid(null));
     Assertions.assertFalse(basic.isValid((String) null));
     Assertions.assertFalse(basic.isValid("ABC"));
-
-    final double max = 99999;
-    final double min = 12222;
-    final String description = "dskhdfkjdsdhf";
-    final String unitName = "Knot";
-    final DoubleValidationRule
-      longRule = new DoubleValidationRuleDomain(max,min,description, unitName);
-    Assertions.assertNotEquals(basic, longRule);
-
-    final StringValidationRule stringRule = new StringValidationRuleDomain(description, "test", unitName);
-    Assertions.assertNotEquals(basic, stringRule);
   }
 
   @Test

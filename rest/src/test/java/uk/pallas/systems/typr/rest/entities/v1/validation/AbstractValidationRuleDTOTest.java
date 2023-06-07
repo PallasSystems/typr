@@ -40,4 +40,18 @@ public abstract class AbstractValidationRuleDTOTest<T extends AbstractValidation
     Assertions.assertFalse(basic.isValid((String) null));
     Assertions.assertFalse(basic.isValid("ABC"));
   }
+
+  @Test
+  void testHashCode() {
+    final T basic = this.generateTestInstance();
+    Assertions.assertEquals(basic.hashCode(), basic.hashCode());
+  }
+
+  @Test
+  void testHashCodeWithNull() {
+    final T basic = this.generateTestInstance();
+    basic.setDescription(null);
+
+    Assertions.assertEquals(basic.hashCode(), basic.hashCode());
+  }
 }

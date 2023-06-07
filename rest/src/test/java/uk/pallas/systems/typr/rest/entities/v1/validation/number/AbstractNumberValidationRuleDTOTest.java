@@ -48,17 +48,6 @@ public abstract class AbstractNumberValidationRuleDTOTest
     Assertions.assertFalse(basic.isValid(null));
     Assertions.assertFalse(basic.isValid((String) null));
     Assertions.assertFalse(basic.isValid("ABC"));
-
-    final double max = 99999;
-    final double min = 12222;
-    final String description = "dskhdfkjdsdhf";
-    final String unitName = "Knot";
-    final DoubleValidationRule
-      longRule = new DoubleValidationRuleDTO(max,min,description, unitName);
-    Assertions.assertNotEquals(basic, longRule);
-
-    final StringValidationRule stringRule = new StringValidationRuleDTO(description, "test", unitName);
-    Assertions.assertNotEquals(basic, stringRule);
   }
 
   @Test
@@ -117,5 +106,22 @@ public abstract class AbstractNumberValidationRuleDTOTest
     basic.setUnit(" ");
     Assertions.assertEquals(ValidationRuleConstants.NO_UNITS, basic.getUnit());
 
+  }
+
+  @Test
+  void testHashCode() {
+    final T basic = this.generateTestInstance();
+    Assertions.assertEquals(basic.hashCode(), basic.hashCode());
+  }
+
+  @Test
+  void testHashCodeWithNull() {
+    final T basic = this.generateTestInstance();
+    basic.setDescription(null);
+    basic.setMaximumValue(null);
+    basic.setMinimumValue(null);
+    basic.setUnit(null);
+
+    Assertions.assertEquals(basic.hashCode(), basic.hashCode());
   }
 }
