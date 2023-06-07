@@ -19,14 +19,6 @@ public abstract class AbstractValidationRuleDTOTest<T extends AbstractValidation
     Assertions.assertEquals(basic, basic);
   }
 
-
-  @Test
-  void testEquals() {
-    final T basic = this.generateTestInstance();
-
-    Assertions.assertEquals(basic, basic);
-  }
-
   @Test
   void testEqualsWithInvalid() {
     final T basic = this.generateTestInstance();
