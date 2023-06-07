@@ -29,10 +29,14 @@ public abstract class AbstractValidationRuleDomainTest<T extends AbstractValidat
   void testEqualsWithInvalid() {
     final T basic = this.generateTestInstance();
 
-    Assertions.assertFalse(basic.equals(null));
-    Assertions.assertFalse(basic.equals("Test"));
-    Assertions.assertFalse(basic.equals(Double.parseDouble("543.3")));
-    Assertions.assertFalse(basic.equals(new DoubleValidationRuleDomain()));
+    Assertions.assertNotEquals(basic, null);
+    Assertions.assertNotEquals(basic, "Test");
+    Assertions.assertNotEquals(basic, Double.parseDouble("543.3"));
+    Assertions.assertNotEquals(basic, new DoubleValidationRuleDomain());
+
+    // Check an alternate instance fails
+    final T alternate = this.generateTestInstance();
+    Assertions.assertNotEquals(basic, alternate);
   }
 
   @Test
@@ -40,6 +44,7 @@ public abstract class AbstractValidationRuleDomainTest<T extends AbstractValidat
     final T basic = this.generateTestInstance();
 
     Assertions.assertFalse(basic.isValid(null));
+    Assertions.assertFalse(basic.isValid((String) null));
     Assertions.assertFalse(basic.isValid("ABC"));
   }
 }

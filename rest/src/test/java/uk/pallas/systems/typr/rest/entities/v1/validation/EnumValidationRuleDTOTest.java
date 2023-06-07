@@ -76,4 +76,44 @@ class EnumValidationRuleDTOTest extends AbstractValidationRuleDTOTest<EnumValida
 
     Assertions.assertEquals(basic, copy);
   }
+
+  @Test
+  void testSetEnumerates() {
+    // Create Validation rule to be attached
+    final String description = "EnumValidationRuleDomainTest-testCopyConstructor";
+    final Collection<String> original = this.generateValidTestData();
+    final Collection<String> replacement = this.generateValidTestData();
+
+    final EnumValidationRule basic = new EnumValidationRuleDTO(description, original);
+    Assertions.assertEquals(original, basic.getEnumerates());
+
+    basic.setEnumerates(replacement);
+    Assertions.assertEquals(replacement, basic.getEnumerates());
+  }
+
+  @Test
+  void testSetEnumeratesWithInvalid() {
+    // Create Validation rule to be attached
+    final String description = "EnumValidationRuleDomainTest-testCopyConstructor";
+    final Collection<String> original = this.generateValidTestData();
+    final Collection<String> replacement = this.generateValidTestData();
+
+    final EnumValidationRule basic = new EnumValidationRuleDTO(description, original);
+    Assertions.assertEquals(original, basic.getEnumerates());
+
+    // confirm setting the enumerates to null clears them
+    basic.setEnumerates(null);
+    Assertions.assertNotNull(basic.getEnumerates());
+    Assertions.assertTrue(basic.getEnumerates().isEmpty());
+
+    // Reset the data
+    basic.setEnumerates(original);
+    Assertions.assertEquals(original, basic.getEnumerates());
+
+    // Now check an empty String is respected
+    basic.setEnumerates(new HashSet<>());
+    Assertions.assertNotNull(basic.getEnumerates());
+    Assertions.assertTrue(basic.getEnumerates().isEmpty());
+
+  }
 }
