@@ -150,11 +150,22 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeWrapper {
   public String getDescription() {
 
     final String result;
-    final ValidationRule rule = this.getRule();
-    if (null == rule) {
-      result = null;
+    if (null == this.doubleRule) {
+      if (null == this.enumRule) {
+        if (null == this.longRule) {
+          if (null == this.stringRule) {
+            result = null;
+          } else {
+            result = this.stringRule.getDescription();
+          }
+        } else {
+          result = this.longRule.getDescription();
+        }
+      } else {
+        result = this.enumRule.getDescription();
+      }
     } else {
-      result = rule.getDescription();
+      result = this.doubleRule.getDescription();
     }
 
     return result;
@@ -163,13 +174,25 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeWrapper {
   /**
    * Sets the description to attach to this field definition.
    *
-   * @param detailedDescription the description to attache (null is ok)
+   * @param detailedDescription the description to attach (null is ok)
    */
   @Override
   public void setDescription(final String detailedDescription) {
-    final ValidationRule rule = this.getRule();
-    if (null != rule) {
-      rule.setDescription(detailedDescription);
+
+    if (null == this.doubleRule) {
+      if (null == this.enumRule) {
+        if (null == this.longRule) {
+          if (null != this.stringRule) {
+            this.stringRule.setDescription(detailedDescription);
+          }
+        } else {
+          this.longRule.setDescription(detailedDescription);
+        }
+      } else {
+        this.enumRule.setDescription(detailedDescription);
+      }
+    } else {
+      this.doubleRule.setDescription(detailedDescription);
     }
   }
 
@@ -195,11 +218,23 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeWrapper {
   public boolean isValid(final Object toTest) {
     final boolean result;
 
-    if (null == this.getRule()) {
-      result = false;
-      LOGGER.warn(String.format("isValid - No Rule to test object: %s", toTest));
+    if (null == this.doubleRule) {
+      if (null == this.enumRule) {
+        if (null == this.longRule) {
+          if (null == this.stringRule) {
+            result = false;
+            LOGGER.warn(String.format("isValid - No Rule to test object: %s", toTest));
+          } else {
+            result = this.stringRule.isValid(toTest);
+          }
+        } else {
+          result = this.longRule.isValid(toTest);
+        }
+      } else {
+        result = this.enumRule.isValid(toTest);
+      }
     } else {
-      result = this.getRule().isValid(toTest);
+      result = this.doubleRule.isValid(toTest);
     }
 
     return result;
@@ -338,6 +373,6 @@ public class CountryCodeRuleWrapperDomain implements CountryCodeWrapper {
    */
   @Override
   public String toString() {
-    return String.format("%s with Rule: %s", this.getCountryCode(), this.getRule());
+    return String.format("%s with Rule: %s", this.countryCode, this.getRule());
   }
 }

@@ -122,11 +122,11 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeWrapper {
   public String getDescription() {
 
     final String result;
-    final ValidationRule validationRule = this.getRule();
-    if (null == validationRule) {
+    if (null == this.rule) {
       result = null;
+      LOGGER.info("No Rule associated with CountryCodeRuleWrapper, unable to get description");
     } else {
-      result = validationRule.getDescription();
+      result = this.rule.getDescription();
     }
 
     return result;
@@ -139,15 +139,16 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeWrapper {
    */
   @Override
   public void setDescription(final String detailedDescription) {
-    final ValidationRule validationRule = this.getRule();
-    if (null != validationRule) {
-      validationRule.setDescription(detailedDescription);
+    if (null == this.rule) {
+      LOGGER.info("No Rule associated with CountryCodeRuleWrapper, unable to set description");
+    } else {
+      this.rule.setDescription(detailedDescription);
     }
   }
 
   /**
    * This method will supply the parameter into the Validation rule the wrapper holds, if no validation rule
-   * exists this will return false. Otherwise it will return with the rules response.
+   * exists this will return false. Other-wise it will return with the rules response.
    *
    * @param toTest to test is valid
    * @return false if the object is invalid, there is no rule or
@@ -157,10 +158,10 @@ public class CountryCodeRuleWrapperDTO implements CountryCodeWrapper {
   public boolean isValid(final Object toTest) {
     final boolean result;
 
-    if (null == this.getRule()) {
+    if (null == this.rule) {
       result = false;
     } else {
-      result = this.getRule().isValid(toTest);
+      result = this.rule.isValid(toTest);
     }
 
     return result;
