@@ -20,12 +20,10 @@
     <dependency>
       <groupId>si.uom</groupId>
       <artifactId>si-units</artifactId>
-      <version>2.1</version>
     </dependency>
     <dependency>
       <groupId>javax.measure</groupId>
       <artifactId>unit-api</artifactId>
-      <version>2.2</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
@@ -39,6 +37,11 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

@@ -16,6 +16,7 @@ import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
 import uk.pallas.systems.typr.services.UnitsService;
 
 @Service
@@ -106,11 +107,7 @@ public class UnitsServiceImpl implements UnitsService {
     } else {
       boolean valid = true;
       for (final ValidationRule rule : definition.getRules()) {
-        if (rule instanceof LongValidationRule) {
-          valid = this.isValid(((LongValidationRule) rule).getUnit());
-        } else if (rule instanceof DoubleValidationRule) {
-          valid = this.isValid(((DoubleValidationRule) rule).getUnit());
-        }
+        valid = this.isValid(rule);
 
         // if we find an invalid rule then stop and assume the whole definition isn't valid.
         if (!valid) {
@@ -122,5 +119,27 @@ public class UnitsServiceImpl implements UnitsService {
     }
 
     return result;
+  }
+
+  /**
+   * Checks if a Numeric based rule is found and if the unit associated with it is valid.
+   * If the rule is wrapped this will extract and test the internal rule.
+   * @param rule the rule to extract the unit value from.
+   * @return this will return true if no numeric rule, or true if a numeric rule has a valid unit
+   */
+  private boolean isValid(final ValidationRule rule) {
+    final boolean valid;
+
+    if (rule instanceof LongValidationRule) {
+      valid = this.isValid(((LongValidationRule) rule).getUnit());
+    } else if (rule instanceof DoubleValidationRule) {
+      valid = this.isValid(((DoubleValidationRule) rule).getUnit());
+    } else if (rule instanceof CountryCodeWrapper wrapper) {
+      valid = this.isValid(wrapper.getRule());
+    } else {
+      valid = true;
+    }
+
+    return valid;
   }
 }
