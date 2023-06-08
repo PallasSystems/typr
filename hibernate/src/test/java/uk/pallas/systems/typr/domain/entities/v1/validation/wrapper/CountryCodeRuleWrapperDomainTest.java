@@ -106,7 +106,7 @@ class CountryCodeRuleWrapperDomainTest {
     final CountryCodeWrapper basic = new CountryCodeRuleWrapperDomain();
 
     Assertions.assertNotEquals(null, basic);
-    Assertions.assertNotEquals(basic, new CountryCodeRuleWrapperDomain());
+    Assertions.assertNotEquals(basic, new CountryCodeRuleWrapperDomain("GBR", new LongValidationRuleDomain()));
   }
 
 }
