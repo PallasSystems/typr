@@ -7,6 +7,7 @@ import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule
 import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
 import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTO;
+import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTO;
 
 class CountryCodeRuleWrapperDTOTest {
   @Test
@@ -102,7 +103,7 @@ class CountryCodeRuleWrapperDTOTest {
     final CountryCodeWrapper basic = new CountryCodeRuleWrapperDTO();
 
     Assertions.assertNotEquals(null, basic);
-    Assertions.assertNotEquals(basic, new CountryCodeRuleWrapperDTO());
+    Assertions.assertNotEquals(basic, new CountryCodeRuleWrapperDTO("GBR", new LongValidationRuleDTO()));
   }
 
 }
