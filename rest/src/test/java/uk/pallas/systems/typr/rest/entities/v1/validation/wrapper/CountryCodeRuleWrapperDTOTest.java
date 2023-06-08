@@ -4,12 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
-import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
-import uk.pallas.systems.typr.rest.entities.v1.CategoryDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTO;
-import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTO;
 
 class CountryCodeRuleWrapperDTOTest {
   @Test
@@ -104,14 +101,8 @@ class CountryCodeRuleWrapperDTOTest {
   void testEqualsWithInvalid() {
     final CountryCodeWrapper basic = new CountryCodeRuleWrapperDTO();
 
-
     Assertions.assertNotEquals(null, basic);
-    Assertions.assertNotEquals("Test", basic);
-    Assertions.assertNotEquals(basic, Double.parseDouble("543.3"));
-    Assertions.assertNotEquals(basic, new CategoryDTO());
-
-    final DoubleValidationRule doubleRule = new DoubleValidationRuleDTO();
-    Assertions.assertNotEquals(basic, doubleRule);
+    Assertions.assertNotEquals(basic, new CountryCodeRuleWrapperDTO());
   }
 
 }

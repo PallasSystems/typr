@@ -2,10 +2,7 @@ package uk.pallas.systems.typr.domain.entities.v1.validation.number;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
-import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
-import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 
 public abstract class AbstractNumberValidationRuleDomainTest
   <T extends AbstractNumberValidationRuleDomain, N extends Number >{

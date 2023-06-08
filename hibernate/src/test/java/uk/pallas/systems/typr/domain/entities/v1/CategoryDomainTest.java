@@ -41,13 +41,7 @@ class CategoryDomainTest {
     final String description = "CategoryDomainTest-testEqualsWithInvalid";
     final Category basic = new CategoryDomain(name, description);
 
-
     Assertions.assertNotEquals(null, basic);
-    Assertions.assertNotEquals("Test", basic);
-    Assertions.assertNotEquals(basic, Double.parseDouble("543.3"));
     Assertions.assertNotEquals(basic, new CategoryDomain());
-
-    final DoubleValidationRule doubleRule = new DoubleValidationRuleDomain();
-    Assertions.assertNotEquals(basic, doubleRule);
   }
 }

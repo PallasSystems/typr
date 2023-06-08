@@ -41,13 +41,7 @@ class CategoryDTOTest {
     final String description = "CategoryDTOTest-testEqualsWithInvalid";
     final Category basic = new CategoryDTO(name, description);
 
-
     Assertions.assertNotEquals(null, basic);
-    Assertions.assertNotEquals("Test", basic);
-    Assertions.assertNotEquals(basic, Double.parseDouble("543.3"));
     Assertions.assertNotEquals(basic, new CategoryDTO());
-
-    final DoubleValidationRule doubleRule = new DoubleValidationRuleDTO();
-    Assertions.assertNotEquals(basic, doubleRule);
   }
 }

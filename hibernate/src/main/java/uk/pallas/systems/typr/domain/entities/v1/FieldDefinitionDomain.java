@@ -348,16 +348,18 @@ public class FieldDefinitionDomain implements FieldDefinition {
 
     if (null != rules) {
       for (final ValidationRule rule : rules) {
-        if (rule instanceof CountryCodeWrapper) {
-          this.countryCodeRules.add(new CountryCodeRuleWrapperDomain((CountryCodeWrapper)rule));
-        } else if (rule instanceof DoubleValidationRule) {
-          this.doubleRules.add(new DoubleValidationRuleDomain((DoubleValidationRule)rule));
-        } else if (rule instanceof EnumValidationRule) {
-          this.enumRules.add(new EnumValidationRuleDomain((EnumValidationRule)rule));
-        } else if (rule instanceof LongValidationRule) {
-          this.longRules.add(new LongValidationRuleDomain((LongValidationRule)rule));
-        } else if (rule instanceof StringValidationRule) {
-          this.stringRules.add(new StringValidationRuleDomain((StringValidationRule)rule));
+        if (rule instanceof CountryCodeWrapper wrapper) {
+          this.countryCodeRules.add(new CountryCodeRuleWrapperDomain(wrapper));
+        } else if (rule instanceof DoubleValidationRule dblRule) {
+          this.doubleRules.add(new DoubleValidationRuleDomain(dblRule));
+        } else if (rule instanceof EnumValidationRule enumRule) {
+          this.enumRules.add(new EnumValidationRuleDomain(enumRule));
+        } else if (rule instanceof LongValidationRule longRule) {
+          this.longRules.add(new LongValidationRuleDomain(longRule));
+        } else if (rule instanceof StringValidationRule stringRule) {
+          this.stringRules.add(new StringValidationRuleDomain(stringRule));
+        } else {
+          LOGGER.info(String.format("setRules - Unknown Rule Type supplied: %s", rule));
         }
       }
     }

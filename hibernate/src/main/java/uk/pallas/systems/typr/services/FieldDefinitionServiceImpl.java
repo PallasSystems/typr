@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class FieldDefinitionServiceImpl implements FieldDefinitionService {
@@ -28,7 +27,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
   @Override
   public Collection<Category> getCategories() {
     final List<CategoryDomain> results = this.categoryDAO.findAll();
-    return results.stream().map(value -> (Category)value).collect(Collectors.toList());
+    return results.stream().map(value -> (Category)value).toList();
   }
 
   @Override

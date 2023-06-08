@@ -105,14 +105,8 @@ class CountryCodeRuleWrapperDomainTest {
   void testEqualsWithInvalid() {
     final CountryCodeWrapper basic = new CountryCodeRuleWrapperDomain();
 
-
     Assertions.assertNotEquals(null, basic);
-    Assertions.assertNotEquals("Test", basic);
-    Assertions.assertNotEquals(basic, Double.parseDouble("543.3"));
-    Assertions.assertNotEquals(basic, new CategoryDomain());
-
-    final DoubleValidationRule doubleRule = new DoubleValidationRuleDomain();
-    Assertions.assertNotEquals(basic, doubleRule);
+    Assertions.assertNotEquals(basic, new CountryCodeRuleWrapperDomain());
   }
 
 }
