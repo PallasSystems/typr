@@ -6,6 +6,18 @@ INSERT INTO Categories (name, description) VALUES ('Land', 'This relates to oper
 INSERT INTO Categories (name, description) VALUES ('Space', 'This relates to operations in space');
 INSERT INTO Categories (name, description) VALUES ('Sub-surface', 'This relates to operations below the surface of the water');
 INSERT INTO Categories (name, description) VALUES ('Surface', 'This relates to operations on the surface of the water');
+INSERT INTO Categories (name, description) VALUES ('Status', 'Indicates the status of a service/system');
+INSERT INTO Categories (name, description) VALUES ('Time', 'Indicates the field represents Time in some manor');
+
+-------------------------------------------------------------------------------
+-- Time
+-------------------------------------------------------------------------------
+-- ISO 8601 - Event Time Unix Time
+INSERT INTO val_long_rules (identifier, maximum_value, minimum_value, unit) VALUES (691181011, 2147483647, -2147483648, 'Seconds');
+INSERT INTO field_def (name, description) VALUES ('Event Time (ms)', 'Unix Time, the number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970, minus the number of leap seconds that have taken place since then');
+INSERT INTO field_def_long_rules (field_definition_domain_name, long_rules_identifier) VALUES ('Event Time (ms)', 691181011);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Event Time (ms)', 'Time');
+
 
 -------------------------------------------------------------------------------
 -- Coordinates
@@ -29,28 +41,101 @@ INSERT INTO field_def_categories (field_definition_domain_name, categories_name)
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Longitude', 'Sub-surface');
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Longitude', 'Surface');
 
+INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (7210010384, 0, 360, 'Degree Angle');
+INSERT INTO field_def (name, acronym, description) VALUES ('Heading (True North)', 'hdg', 'Heading based on the geographic north pole (this is fixed).');
+INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Heading (True North)', 7210010384);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Heading (True North)', 'Location');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Heading (True North)', 'Air');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Heading (True North)', 'Land');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Heading (True North)', 'Sub-surface');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Heading (True North)', 'Surface');
+
+INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (7210010377, 0, 360, 'Degree Angle');
+INSERT INTO field_def (name, acronym, description) VALUES ('Heading (Magnetic)', 'hdg', 'Heading based Magnetic North (this wanders).');
+INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Heading (Magnetic)', 7210010377);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Heading (Magnetic)', 'Location');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Heading (Magnetic)', 'Air');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Heading (Magnetic)', 'Land');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Heading (Magnetic)', 'Sub-surface');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Heading (Magnetic)', 'Surface');
+
 
 -------------------------------------------------------------------------------
 -- AIS Data Section
 -------------------------------------------------------------------------------
 -- Maritime Mobile Service Identity
-INSERT INTO val_string_rules (identifier, description, detect_regex) VALUES (115115123111, 'An MMSI comprises a series of nine digits, consisting of three Maritime Identification Digits (country-codes), concatenated with a specific identifier. Whenever an object is re-flagged, a new MMSI must be assigned.', '^((((2(0[1-9]|[1-9][0-9]))|([3-6][0-9]{2})|(7([0-6][0-9]|7[0-5])))[0-9]{6})|((0|8)((2(0[1-9]|[1-9][0-9]))|([3-6][0-9]{2})|(7([0-6][0-9]|7[0-5])))[0-9]{5})|((00|99|98)((2(0[1-9]|[1-9][0-9]))|([3-6][0-9]{2})|(7([0-6][0-9]|7[0-5])))[0-9]{4})|(111((2(0[1-9]|[1-9][0-9]))|([3-6][0-9]{2})|(7([0-6][0-9]|7[0-5])))[0-9]{3})|((970|972|974)[0-9]{6}))$');
+INSERT INTO val_string_rules (identifier, detect_regex) VALUES (115115123111, '((((2(0[1-9]|[1-9][0-9]))|([3-6][0-9]{2})|(7([0-6][0-9]|7[0-5])))[0-9]{6})|((0|8)((2(0[1-9]|[1-9][0-9]))|([3-6][0-9]{2})|(7([0-6][0-9]|7[0-5])))[0-9]{5})|((00|99|98)((2(0[1-9]|[1-9][0-9]))|([3-6][0-9]{2})|(7([0-6][0-9]|7[0-5])))[0-9]{4})|(111((2(0[1-9]|[1-9][0-9]))|([3-6][0-9]{2})|(7([0-6][0-9]|7[0-5])))[0-9]{3})|((970|972|974)[0-9]{6}))');
 INSERT INTO field_def (name, acronym, description) VALUES ('Maritime Mobile Service Identity', 'MMSI', 'A Maritime Mobile Service Identity (MMSI) is effectively a maritime objects international maritime telephone number, a temporarily assigned UID, issued by that objects current flag state (unlike an IMO number, which is a global forever UID).');
 INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime Mobile Service Identity', 115115123111);
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime Mobile Service Identity', 'Edge');
 
-INSERT INTO val_double_rules (identifier, description, maximum_value, minimum_value, unit) VALUES (837971, 'Speed over Ground, measured in knots', 10000, -100, 'Knot');
+INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (837971, 10000, -100, 'Knot');
 INSERT INTO field_def (name, acronym, description) VALUES ('Speed Over Ground', 'SOG', 'Speed over Ground (SOG) is the vessels speed in one hour concerning the land or any other fixed object such as buoys.');
 INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Speed Over Ground', 837971);
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Speed Over Ground', 'Sub-surface');
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Speed Over Ground', 'Surface');
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Speed Over Ground', 'Velocity');
 
-INSERT INTO val_double_rules (identifier, description, maximum_value, minimum_value, unit) VALUES (838487, 'Speed Through Water, measured in knots', 10000, -100, 'Knot');
+INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (838487, 10000, -100, 'Knot');
 INSERT INTO field_def (name, acronym, description) VALUES ('Speed Through Water', 'STW', 'Speed through Water (STW) is the vessels speed in one hour concerning the water or anything floating on water.');
 INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Speed Through Water', 838487);
-INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Speed Over Ground', 'Surface');
-INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Speed Over Ground', 'Velocity');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Speed Through Water', 'Surface');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Speed Through Water', 'Velocity');
+
+INSERT INTO val_enum_rules (identifier) VALUES (806567);
+INSERT INTO enum_validation_rule_domain_enumerates (enum_validation_rule_domain_identifier, enumerates) VALUES (806567, '0');
+INSERT INTO enum_validation_rule_domain_enumerates (enum_validation_rule_domain_identifier, enumerates) VALUES (806567, '1');
+INSERT INTO field_def (name, acronym, description) VALUES ('Position Accuracy', 'PAC', 'Position Accuracy 0 – low accuracy 1 – high accuracy.');
+INSERT INTO field_def_enum_rules (field_definition_domain_name, enum_rules_identifier) VALUES ('Position Accuracy', 806567);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Position Accuracy', 'Location');
+
+INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (827984, 720, -720, 'Degree Angle per Minute');
+INSERT INTO field_def (name, acronym, description) VALUES ('Rate of Turn', 'ROT', 'right or left, 0 to 720 degrees per minute (input from rate-of-turn indicator).');
+INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Rate of Turn', 827984);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Rate of Turn', 'Surface');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Rate of Turn', 'Velocity');
+
+INSERT INTO val_string_rules (identifier, detect_regex) VALUES (737779, '(IMO)\\d{5,7}');
+INSERT INTO field_def (name, acronym, description) VALUES ('International Maritime Organisation Number', 'IMO Number', 'The IMO ship identification number scheme was introduced in 1987 through adoption of resolution A.600(15), as a measure aimed at enhancing "maritime safety, and pollution prevention and to facilitate the prevention of maritime fraud".');
+INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('International Maritime Organisation Number', 737779);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('International Maritime Organisation Number', 'Edge');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('International Maritime Organisation Number', 'Surface');
+
+INSERT INTO val_long_rules (identifier, maximum_value, minimum_value) VALUES (7897118115, 0, 15);
+INSERT INTO field_def (name, acronym, description) VALUES ('AIS Navigation Status', 'NAVSTAT', 'AIS navigational status');
+INSERT INTO field_def_long_rules (field_definition_domain_name, long_rules_identifier) VALUES ('AIS Navigation Status', 7897118115);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('AIS Navigation Status', 'Status');
+
+INSERT INTO val_long_rules (identifier, maximum_value, minimum_value) VALUES (7897228225, 0, 99);
+INSERT INTO field_def (name, description) VALUES ('AIS Ship Type Codes', 'A vessels type can be deducted using the information contained in the AIS-transmitted messages that she is emitting. The vessels crew or the accountable officer are responsible for correctly entering this piece of information to the vessels AIS transponder. ');
+INSERT INTO field_def_long_rules (field_definition_domain_name, long_rules_identifier) VALUES ('AIS Ship Type Codes', 7897228225);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('AIS Ship Type Codes', 'Surface');
+
+INSERT INTO val_enum_rules (identifier) VALUES (65838267);
+INSERT INTO enum_validation_rule_domain_enumerates (enum_validation_rule_domain_identifier, enumerates) VALUES (65838267, 'SAT');
+INSERT INTO enum_validation_rule_domain_enumerates (enum_validation_rule_domain_identifier, enumerates) VALUES (65838267, 'TER');
+INSERT INTO field_def (name, description) VALUES ('AIS Source', 'Source of AIS data ');
+INSERT INTO field_def_enum_rules (field_definition_domain_name, enum_rules_identifier) VALUES ('AIS Source', 65838267);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('AIS Source', 'Surface');
+
+INSERT INTO val_time_rules (identifier, time_pattern) VALUES (698465, 'MM-dd HH:mm');
+INSERT INTO field_def (name, acronym, description) VALUES ('Estimated Time of Arrival', 'ETA', 'Estimated time of Arrival at a destination - month, day, hour, and minute in UTC');
+INSERT INTO field_def_time_rules (field_definition_domain_name, time_rules_identifier) VALUES ('Estimated Time of Arrival', 698465);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Estimated Time of Arrival', 'Surface');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Estimated Time of Arrival', 'Time');
+
+INSERT INTO val_string_rules (identifier, detect_regex) VALUES (838889, '\\w{1,20}');
+INSERT INTO field_def (name, description) VALUES ('Maritime Vessel Name', 'Name of the vessel.');
+INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime Vessel Name', 838889);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime Vessel Name', 'Edge');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime Vessel Name', 'Surface');
+
+INSERT INTO val_string_rules (identifier, detect_regex) VALUES (738889, '\\w{2,7}');
+INSERT INTO field_def (name, description) VALUES ('Maritime call sign', 'Maritime call signs are call signs assigned as unique identifiers to ships and boats. All radio transmissions must be individually identified by the call sign.');
+INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime call sign', 738889);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime call sign', 'Edge');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime call sign', 'Surface');
+
 
 ----------------------------------------
 -- Address Section

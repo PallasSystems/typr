@@ -9,7 +9,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +72,50 @@ public class FieldDefinitionsController {
 
   public void setCountryService(CountryService countryService) {
     this.countryService = countryService;
+  }
+
+  /**
+   * Retrieves all Field Definitions held within Typr.
+   *
+   * @return A collection of Long, Double, String, Enumerate, etc... field definitions.
+   */
+  @GetMapping("/types/id")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Successfully retrieved data from the database",
+      content = @Content(mediaType = "application/json",
+        array = @ArraySchema(schema = @Schema(description = "All Unique Identifiers within ",
+          oneOf = { String.class }))
+      )
+    )
+  })
+  public Collection<String> getTypeIds() {
+
+    final Collection <FieldDefinition> definitions = this.getServices().getFieldDefinitions();
+    if (null == definitions || definitions.isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No definitions stored within Typr");
+    }
+
+    final List<String> results = new ArrayList<>(definitions.size());
+
+    for (final FieldDefinition definition : definitions) {
+      if (null == definition.getAcronym() || definition.getAcronym().isBlank()) {
+        if (null == definition.getName() || definition.getName().isBlank()) {
+          // TODO Add logging statement
+        } else {
+          results.add(definition.getName());
+        }
+      } else if (null == definition.getName() || definition.getName().isBlank()) {
+        results.add(definition.getAcronym());
+      } else {
+        results.add(definition.getAcronym() + " - " + definition.getName());
+      }
+    }
+
+    Collections.sort(results);
+
+    return results;
   }
 
   /**

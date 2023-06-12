@@ -13,6 +13,7 @@ import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.TimeValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
@@ -20,6 +21,7 @@ import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
 import uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTO;
+import uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTO;
@@ -68,7 +70,7 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   @ArraySchema(schema = @Schema(description = "List of Validation rules for the field definition.",
     anyOf = {DoubleValidationRuleDTO.class, EnumValidationRuleDTO.class, LongValidationRuleDTO.class,
-      StringValidationRuleDTO.class}),
+      StringValidationRuleDTO.class, TimeValidationRuleDTO.class }),
     uniqueItems = true,
     minItems = 1)
   private final Collection<ValidationRule> rules;
@@ -289,16 +291,18 @@ public class FieldDefinitionDTO implements FieldDefinition {
     final Collection<ValidationRule> results = new HashSet<>();
 
     for (final ValidationRule rule : this.rules) {
-      if (rule instanceof CountryCodeWrapper) {
-        results.add(new CountryCodeRuleWrapperDTO((CountryCodeWrapper)rule));
-      } else if (rule instanceof DoubleValidationRule) {
-        results.add(new DoubleValidationRuleDTO((DoubleValidationRule)rule));
-      } else if (rule instanceof EnumValidationRule) {
-        results.add(new EnumValidationRuleDTO((EnumValidationRule)rule));
-      } else if (rule instanceof LongValidationRule) {
-        results.add(new LongValidationRuleDTO((LongValidationRule)rule));
-      } else if (rule instanceof StringValidationRule) {
-        results.add(new StringValidationRuleDTO((StringValidationRule)rule));
+      if (rule instanceof CountryCodeWrapper countryWrapper) {
+        results.add(new CountryCodeRuleWrapperDTO(countryWrapper));
+      } else if (rule instanceof DoubleValidationRule doubleRule) {
+        results.add(new DoubleValidationRuleDTO(doubleRule));
+      } else if (rule instanceof EnumValidationRule enumRule) {
+        results.add(new EnumValidationRuleDTO(enumRule));
+      } else if (rule instanceof LongValidationRule longRule) {
+        results.add(new LongValidationRuleDTO(longRule));
+      } else if (rule instanceof StringValidationRule stringRule) {
+        results.add(new StringValidationRuleDTO(stringRule));
+      } else if (rule instanceof TimeValidationRule timeRule) {
+        results.add(new TimeValidationRuleDTO(timeRule));
       }
     }
 
@@ -316,16 +320,18 @@ public class FieldDefinitionDTO implements FieldDefinition {
 
     if (null != validationRules) {
       for (final ValidationRule rule : validationRules) {
-        if (rule instanceof CountryCodeWrapper) {
-          this.rules.add(new CountryCodeRuleWrapperDTO((CountryCodeWrapper)rule));
-        } else if (rule instanceof DoubleValidationRule) {
-          this.rules.add(new DoubleValidationRuleDTO((DoubleValidationRule)rule));
-        } else if (rule instanceof EnumValidationRule) {
-          this.rules.add(new EnumValidationRuleDTO((EnumValidationRule)rule));
-        } else if (rule instanceof LongValidationRule) {
-          this.rules.add(new LongValidationRuleDTO((LongValidationRule)rule));
-        } else if (rule instanceof StringValidationRule) {
-          this.rules.add(new StringValidationRuleDTO((StringValidationRule)rule));
+        if (rule instanceof CountryCodeWrapper countryWrapper) {
+          this.rules.add(new CountryCodeRuleWrapperDTO(countryWrapper));
+        } else if (rule instanceof DoubleValidationRule doubleRule) {
+          this.rules.add(new DoubleValidationRuleDTO(doubleRule));
+        } else if (rule instanceof EnumValidationRule enumRule) {
+          this.rules.add(new EnumValidationRuleDTO(enumRule));
+        } else if (rule instanceof LongValidationRule longRule) {
+          this.rules.add(new LongValidationRuleDTO(longRule));
+        } else if (rule instanceof StringValidationRule stringRule) {
+          this.rules.add(new StringValidationRuleDTO(stringRule));
+        } else if (rule instanceof TimeValidationRule timeRule) {
+          this.rules.add(new TimeValidationRuleDTO(timeRule));
         }
       }
     }
