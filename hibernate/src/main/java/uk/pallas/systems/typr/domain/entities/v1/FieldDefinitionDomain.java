@@ -12,6 +12,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import uk.pallas.systems.typr.domain.entities.v1.validation.TimeValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.wrapper.CountryCodeRuleWrapperDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
@@ -21,6 +22,7 @@ import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.TimeValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
@@ -83,6 +85,12 @@ public class FieldDefinitionDomain implements FieldDefinition {
   private final Collection<LongValidationRuleDomain> longRules;
 
   /**
+   * Validation for the field definition.
+   */
+  @OneToMany
+  private final Collection<TimeValidationRuleDomain> timeRules;
+
+  /**
    * List of Validation rules for the field definition.
    */
   @OneToMany
@@ -133,6 +141,7 @@ public class FieldDefinitionDomain implements FieldDefinition {
     this.enumRules = new HashSet<>();
     this.longRules = new HashSet<>();
     this.stringRules = new HashSet<>();
+    this.timeRules = new HashSet<>();
 
     this.setRules(rules);
   }
@@ -330,6 +339,9 @@ public class FieldDefinitionDomain implements FieldDefinition {
     results.addAll(this.stringRules.stream()
       .map(StringValidationRuleDomain::new).collect(Collectors.toSet()));
 
+    results.addAll(this.timeRules.stream()
+      .map(TimeValidationRuleDomain::new).collect(Collectors.toSet()));
+
     return results;
   }
 
@@ -358,6 +370,8 @@ public class FieldDefinitionDomain implements FieldDefinition {
           this.longRules.add(new LongValidationRuleDomain(longRule));
         } else if (rule instanceof StringValidationRule stringRule) {
           this.stringRules.add(new StringValidationRuleDomain(stringRule));
+        } else if (rule instanceof TimeValidationRule timeRule) {
+          this.timeRules.add(new TimeValidationRuleDomain(timeRule));
         } else {
           LOGGER.info(String.format("setRules - Unknown Rule Type supplied: %s", rule));
         }

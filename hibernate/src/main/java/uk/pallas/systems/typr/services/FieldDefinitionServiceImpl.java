@@ -1,5 +1,7 @@
 package uk.pallas.systems.typr.services;
 
+import java.util.Objects;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.pallas.systems.typr.domain.CategoryRepository;

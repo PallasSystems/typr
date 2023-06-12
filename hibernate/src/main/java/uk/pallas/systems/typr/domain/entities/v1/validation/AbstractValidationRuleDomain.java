@@ -21,7 +21,7 @@ public abstract class AbstractValidationRuleDomain implements ValidationRule {
   /**
    * Detailed description of the field definition.
    */
-  @Column(length = ValidationRuleConstants.MAX_STRING_LENGTH, nullable = false)
+  @Column(length = ValidationRuleConstants.MAX_STRING_LENGTH)
   private String description;
 
   /**
