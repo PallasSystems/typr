@@ -90,7 +90,7 @@ public class TimeValidationRuleDomain extends AbstractValidationRuleDomain imple
   }
 
   /**
-   * @{inheritDoc}
+   * {@inheritDoc}
    * @return representation of the time pattern held in the rule.
    */
   public String getTimePattern() {
@@ -98,7 +98,7 @@ public class TimeValidationRuleDomain extends AbstractValidationRuleDomain imple
   }
 
   /**
-   * @{inheritDoc}
+   * {@inheritDoc}
    * @param pattern A pattern using Java annotation.
    */
   public void setTimePattern(final String pattern) {

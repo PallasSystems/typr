@@ -87,7 +87,7 @@ public class TimeValidationRuleDTO extends AbstractValidationRuleDTO implements 
   }
 
   /**
-   * @{inheritDoc}
+   * {@inheritDoc}
    * @return representation of the time pattern held in the rule.
    */
   public String getTimePattern() {
@@ -95,7 +95,7 @@ public class TimeValidationRuleDTO extends AbstractValidationRuleDTO implements 
   }
 
   /**
-   * @{inheritDoc}
+   * {@inheritDoc}
    * @param pattern A pattern using Java annotation.
    */
   public void setTimePattern(final String pattern) {
