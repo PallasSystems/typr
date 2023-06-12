@@ -2,6 +2,9 @@ package uk.pallas.systems.typr.entities.v1.validation;
 
 public final class ValidationRuleConstants {
 
+  /** ISO 8601 Time Pattern. */
+  public static final String ISO_8601_DATE = "yyyy-MM-dd'T'HH:mm:ssZZ";
+
   /** Expected maximum string length. */
   public static final int MAX_STRING_LENGTH = 4096;
 

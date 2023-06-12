@@ -3,12 +3,19 @@ package uk.pallas.systems.typr.entities.v1.validation.number;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 
 public interface NumberValidationRule<N extends Number> extends ValidationRule {
-
+  /**
+   * If the field is measured within a specific unit this will identify the unit allowing dynamic translation.
+   * @return UNDEFINED is no unit is specified/required.
+   */
   String getUnit();
 
+  /**
+   * Allows you to specify a specific unit for the numeric field value.
+   * @param unit null/invalid will result in the field being set to UNDEFINED
+   */
   void setUnit(String unit);
 
-  /**
+   /**
    * Retrieves the maximum alue that the field definition allows.
    *
    * @return null is allowed (or a valid Long value)
