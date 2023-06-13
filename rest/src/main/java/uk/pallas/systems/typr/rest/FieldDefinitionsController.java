@@ -12,8 +12,10 @@ import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTO;
 import uk.pallas.systems.typr.services.CountryService;
@@ -74,12 +77,47 @@ public class FieldDefinitionsController {
     this.countryService = countryService;
   }
 
+  private Collection<FieldDefinition> convertToDTO(final Collection<FieldDefinition> definitions) {
+    return definitions.stream().filter(Objects::nonNull)
+      .map(FieldDefinitionDTO::new)
+      .filter(value -> this.getUnitService().isValid(value))
+      .filter(value -> this.getCountryService().isValidISO31661Alpha3(value))
+      .collect(Collectors.toList());
+  }
+
   /**
    * Retrieves all Field Definitions held within Typr.
    *
    * @return A collection of Long, Double, String, Enumerate, etc... field definitions.
    */
-  @GetMapping("/types/id")
+  @GetMapping("/")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Successfully retrieved data from the database",
+      content = @Content(mediaType = "application/json",
+        array = @ArraySchema(schema = @Schema(description = "Validation for the field definition.",
+          oneOf = { FieldDefinitionDTO.class }))
+      )
+    )
+  })
+  public Collection<FieldDefinition> getTypes() {
+    // Retrieve all Type Definitions
+    final Collection<FieldDefinition> definitions = this.getServices().getFieldDefinitions();
+    if (null == definitions || definitions.isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No definitions stored within Typr");
+    }
+
+    return this.convertToDTO(definitions);
+  }
+
+  /**
+   * Retrieves the Acronym and Names from the database and returns them as a list to support various components.
+   *
+   * @return A String array holding "Acronym - Name" or "Name" for each field definition within the library
+   */
+  @GetMapping("/name")
+  @Operation(summary = "Retrieves the Acronym and Names from the database and returns them as a list to support various components.")
   @ApiResponses(value = {
     @ApiResponse(
       responseCode = "200",
@@ -90,15 +128,12 @@ public class FieldDefinitionsController {
       )
     )
   })
-  public Collection<String> getTypeIds() {
-
-    final Collection <FieldDefinition> definitions = this.getServices().getFieldDefinitions();
-    if (null == definitions || definitions.isEmpty()) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No definitions stored within Typr");
-    }
+  public Collection<String> getFieldDefinitionByNames() {
+    // Retrieve all Type Definitions
+    final Collection <FieldDefinition> definitions = this.getTypes();
 
     final List<String> results = new ArrayList<>(definitions.size());
-
+    // We want to extract the Acryonm - Name for each type
     for (final FieldDefinition definition : definitions) {
       if (null == definition.getAcronym() || definition.getAcronym().isBlank()) {
         if (null == definition.getName() || definition.getName().isBlank()) {
@@ -118,35 +153,6 @@ public class FieldDefinitionsController {
     return results;
   }
 
-  /**
-   * Retrieves all Field Definitions held within Typr.
-   *
-   * @return A collection of Long, Double, String, Enumerate, etc... field definitions.
-   */
-  @GetMapping("/types")
-  @ApiResponses(value = {
-    @ApiResponse(
-      responseCode = "200",
-      description = "Successfully retrieved data from the database",
-      content = @Content(mediaType = "application/json",
-        array = @ArraySchema(schema = @Schema(description = "Validation for the field definition.",
-          oneOf = { FieldDefinitionDTO.class }))
-      )
-    )
-  })
-  public Collection<FieldDefinition> getTypes() {
-
-    final Collection<FieldDefinition> definitions = this.getServices().getFieldDefinitions();
-    if (null == definitions || definitions.isEmpty()) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No definitions stored within Typr");
-    }
-
-    return definitions.stream().filter(Objects::nonNull)
-      .map(FieldDefinitionDTO::new)
-      .filter(value -> this.getUnitService().isValid(value))
-      .filter(value -> this.getCountryService().isValidISO31661Alpha3(value))
-      .collect(Collectors.toList());
-  }
 
   /**
    * Retrieves a Field Definition based on the full length name.
@@ -154,7 +160,7 @@ public class FieldDefinitionsController {
    * @param name The name of the field definition we want to retrieve from Typr.
    * @return A valid Field definition object if one is found within the database.
    */
-  @GetMapping("/type/name/{name}")
+  @GetMapping("/name/{name}")
   @Operation(summary = "Retrieves a Field Definition based on the full length name.")
   @ApiResponses(value = {
     @ApiResponse(
@@ -178,6 +184,72 @@ public class FieldDefinitionsController {
     }
 
     return new FieldDefinitionDTO(result);
+  }
+
+  /**
+   * Retrieves the Unique categories associated with the field definitions.
+   *
+   * @return A String array holding "Acronym - Name" or "Name" for each field definition within the library
+   */
+  @GetMapping("/category")
+  @Operation(summary = "Retrieves the Unique categories associated with the field definitions.")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Successfully retrieved data from the database",
+      content = @Content(mediaType = "application/json",
+        array = @ArraySchema(schema = @Schema(description = "All Unique Identifiers within ",
+          oneOf = { String.class }))
+      )
+    )
+  })
+  public Collection<String> getFieldDefinitionByCategories() {
+    // Retrieve all Type Definitions
+    final Collection <FieldDefinition> definitions = this.getServices().getFieldDefinitions();
+    if (null == definitions || definitions.isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No definitions stored within Typr");
+    }
+
+    // Use a set to ensure unique results
+    final Set<String> results = new HashSet<>(definitions.size());
+    // Iterate over all results and pull out the category name
+    for (final FieldDefinition definition : definitions) {
+      if (null != definition.getCategories()) {
+        for (final Category category : definition.getCategories()) {
+          results.add(category.getName());
+        }
+      }
+    }
+
+    return results;
+  }
+
+
+  /**
+   * Retrieves a Field Definition based on a specific category it is associated with.
+   *
+   * @param name The name of the Category we want associated records for.
+   * @return A valid Field definition object if one is found within the database.
+   */
+  @GetMapping("/category/{name}")
+  @Operation(summary = "Retrieves a Field Definition based on the full length name.")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Successfully retrieved data from the database",
+      content = @Content(mediaType = "application/json",
+        schema = @Schema(description = "Validation for the field definition.",
+          oneOf = { FieldDefinitionDTO.class })
+      )
+    )
+  })
+  public Collection<FieldDefinition> getFieldDefinitionByCategoryName(@PathVariable(name = "name") final String name) {
+    final Collection <FieldDefinition> definitions = this.getServices().getFieldDefinitionsByCategory(name);
+    if (null == definitions || definitions.isEmpty()) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No definitions associated with " + name);
+    }
+
+    return this.convertToDTO(definitions);
   }
 
   /**

@@ -47,7 +47,7 @@ public class CategoriesController {
    *
    * @return A collection of Long, Double, String, Enumerate, etc... field definitions.
    */
-  @GetMapping("/categories")
+ /* @GetMapping("/categories")
   @ApiResponses(value = {
     @ApiResponse(
       responseCode = "200",
@@ -68,5 +68,5 @@ public class CategoriesController {
     return cats.stream().filter(Objects::nonNull)
       .map(CategoryDTO::new)
       .collect(Collectors.toList());
-  }
+  }*/
 }
