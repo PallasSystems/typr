@@ -30,9 +30,9 @@ INSERT INTO field_def (name, description) VALUES ('Event Time', 'Unix Time, the 
 INSERT INTO field_def_long_rules (field_definition_domain_name, long_rules_identifier) VALUES ('Event Time', 691181011);
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Event Time', 'Time');
 
-INSERT INTO val_long_rules (identifier, maximum_value, minimum_value, unit) VALUES (691181011, 2147483647, -2147483648, 'Second');
+INSERT INTO val_long_rules (identifier, maximum_value, minimum_value, unit) VALUES (691181012, 2147483647, -2147483648, 'Second');
 INSERT INTO field_def (name, description) VALUES ('Interval', 'Unix Time, the number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970, minus the number of leap seconds that have taken place since then');
-INSERT INTO field_def_long_rules (field_definition_domain_name, long_rules_identifier) VALUES ('Interval', 691181011);
+INSERT INTO field_def_long_rules (field_definition_domain_name, long_rules_identifier) VALUES ('Interval', 691181012);
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Interval', 'Time');
 
 -------------------------------------------------------------------------------
@@ -149,14 +149,13 @@ INSERT INTO field_def_categories (field_definition_domain_name, categories_name)
 INSERT INTO val_string_rules (identifier, detect_regex) VALUES (848859, '\\w{2}\\s\\w{1,7}[>]+\\w{2}\\s\\w{1,7}');
 INSERT INTO field_def (name, description) VALUES ('UN/LOCODE', 'Unique code assigned by the UN to all ports, more information can be found: https://unece.org/trade/cefact/unlocode-code-list-country-and-territory.');
 INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('UN/LOCODE', 848859);
-INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('UN/LOCODE', 'Edge');
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('UN/LOCODE', 'Surface');
 
 INSERT INTO val_string_rules (identifier, detect_regex) VALUES (738889, '\\w{2,7}');
-INSERT INTO field_def (name, description) VALUES ('Maritime call sign', 'Maritime call signs are call signs assigned as unique identifiers to ships and boats. All radio transmissions must be individually identified by the call sign.');
-INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime call sign', 738889);
-INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime call sign', 'Edge');
-INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime call sign', 'Surface');
+INSERT INTO field_def (name, description) VALUES ('Maritime Call Sign', 'Maritime call signs are call signs assigned as unique identifiers to ships and boats. All radio transmissions must be individually identified by the call sign.');
+INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime Call Sign', 738889);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime Call Sign', 'Edge');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime Call Sign', 'Surface');
 
 INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (949387, 1000, 0, 'Metre');
 INSERT INTO field_def (name, acronym, description) VALUES ('Dimension to Bow', 'A', 'Dimension (meters) from AIS GPS antenna to the Bow of the vessel.');
@@ -189,37 +188,37 @@ INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_i
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Distance To Destination', 'Surface');
 
 INSERT INTO val_double_rules (identifier, maximum_value, minimum_value) VALUES (555260, 2147483647, 0);
-INSERT INTO field_def (name, acronym) VALUES ('Gross Tonnage', 'GT', 'Gross tonnage (GT, G.T. or gt) is a nonlinear measure of a ships overall internal volume. Gross tonnage is different from gross register tonnage.  Neither gross tonnage nor gross register tonnage should be confused with measures of mass or weight such as deadweight tonnage or displacement. ');
+INSERT INTO field_def (name, acronym, description) VALUES ('Gross Tonnage', 'GT', 'Gross tonnage (GT, G.T. or gt) is a nonlinear measure of a ships overall internal volume. Gross tonnage is different from gross register tonnage.  Neither gross tonnage nor gross register tonnage should be confused with measures of mass or weight such as deadweight tonnage or displacement. ');
 INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Gross Tonnage', 555260);
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Gross Tonnage', 'Surface');
 
 INSERT INTO val_double_rules (identifier, maximum_value, minimum_value) VALUES (555261, 2147483647, 0);
-INSERT INTO field_def (name, acronym) VALUES ('Net Tonnage', 'NT', 'Net tonnage (NT, N.T. or nt) is a dimensionless index calculated from the total moulded volume of the ships cargo spaces by using a mathematical formula.');
+INSERT INTO field_def (name, acronym, description) VALUES ('Net Tonnage', 'NT', 'Net tonnage (NT, N.T. or nt) is a dimensionless index calculated from the total moulded volume of the ships cargo spaces by using a mathematical formula.');
 INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Net Tonnage', 555261);
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Net Tonnage', 'Surface');
 
-INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (555261, 2147483647, 0, 'Kilogram');
-INSERT INTO field_def (name, acronym) VALUES ('Deadweight Tonnage', 'DWT', 'Deadweight tonnage (also known as deadweight; abbreviated to DWT, D.W.T., d.w.t., or dwt) or tons deadweight (DWT) is a measure of how much weight a ship can carry.');
-INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Deadweight Tonnage', 555261);
+INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (555262, 2147483647, 0, 'Kilogram');
+INSERT INTO field_def (name, acronym, description) VALUES ('Deadweight Tonnage', 'DWT', 'Deadweight tonnage (also known as deadweight; abbreviated to DWT, D.W.T., d.w.t., or dwt) or tons deadweight (DWT) is a measure of how much weight a ship can carry.');
+INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Deadweight Tonnage', 555262);
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Deadweight Tonnage', 'Surface');
 
-INSERT INTO val_string_rules (identifier, detect_regex) VALUES (838889, '\\w{1,20}');
+INSERT INTO val_string_rules (identifier, detect_regex) VALUES (838892, '\\w{1,20}');
 INSERT INTO field_def (name, description) VALUES ('Builder', 'Name of person/organisation which constructed the item');
-INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime Vessel Name', 838889);
-INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime Vessel Name', 'Edge');
-INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime Vessel Name', 'Surface');
+INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime Vessel Name', 838892);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Builder', 'Edge');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Builder', 'Surface');
 
-INSERT INTO val_string_rules (identifier, detect_regex) VALUES (838889, '\\w{1,20}');
+INSERT INTO val_string_rules (identifier, detect_regex) VALUES (838890, '\\w{1,20}');
 INSERT INTO field_def (name, description) VALUES ('Manager', 'Person/organisation who manages a specific item of hardware/service');
-INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime Vessel Name', 838889);
-INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime Vessel Name', 'Edge');
-INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime Vessel Name', 'Surface');
+INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Manager', 838890);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Manager', 'Edge');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Manager', 'Surface');
 
-INSERT INTO val_string_rules (identifier, detect_regex) VALUES (838889, '\\w{1,20}');
+INSERT INTO val_string_rules (identifier, detect_regex) VALUES (838891, '\\w{1,20}');
 INSERT INTO field_def (name, description) VALUES ('Owner', 'Person/organisation who owns a specific item of hardware/service');
-INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime Vessel Name', 838889);
-INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime Vessel Name', 'Edge');
-INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime Vessel Name', 'Surface');
+INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime Vessel Name', 838891);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Owner', 'Edge');
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Owner', 'Surface');
 
 ----------------------------------------
 -- Address Section
