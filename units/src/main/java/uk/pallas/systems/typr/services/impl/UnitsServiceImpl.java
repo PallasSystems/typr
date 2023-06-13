@@ -22,9 +22,7 @@ import uk.pallas.systems.typr.services.UnitsService;
 
 @Service
 public class UnitsServiceImpl implements UnitsService {
-  /**
-   * Static Logger for the class.
-   */
+  /** Static Logger for the class. */
   private static final Log LOGGER = LogFactory.getLog(UnitsServiceImpl.class);
 
   /** Cache of units against their names. **/
@@ -53,13 +51,23 @@ public class UnitsServiceImpl implements UnitsService {
     }
   }
 
+  /**
+   * Designed to iterate over a collection of units and add them to the services internal cache, so we can
+   * process a single list of units rather than having to check multiple places.
+   *
+   * @param units the units to process.
+   */
   private void processUnits(final Set<Unit<?>> units) {
-    for (final Unit<?> value : units) {
-      if (null != value) {
-        if (null == value.getName() || value.getName().isBlank()) {
-          this.units.put(value.toString(), value);
-        } else {
-          this.units.put(value.getName(), value);
+    if (null == units) {
+      LOGGER.error("processUnits - Called Measure Unit library and did not get an associated units");
+    } else {
+      for (final Unit<?> value : units) {
+        if (null != value) {
+          if (null == value.getName() || value.getName().isBlank()) {
+            this.units.put(value.toString(), value);
+          } else {
+            this.units.put(value.getName(), value);
+          }
         }
       }
     }
