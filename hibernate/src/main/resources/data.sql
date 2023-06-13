@@ -10,6 +10,18 @@ INSERT INTO Categories (name, description) VALUES ('Status', 'Indicates the stat
 INSERT INTO Categories (name, description) VALUES ('Time', 'Indicates the field represents Time in some manor');
 
 -------------------------------------------------------------------------------
+-- General Purpose
+-------------------------------------------------------------------------------
+INSERT INTO val_string_rules (identifier, detect_regex) VALUES (655557, '\\w{1,200}');
+INSERT INTO field_def (name, description) VALUES ('Unstructured (Short)', 'A block of short unstructured text, with no specific meaning');
+INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Unstructured (Short)', 655557);
+
+INSERT INTO val_string_rules (identifier, detect_regex) VALUES (655558, '\\w+');
+INSERT INTO field_def (name, description) VALUES ('Unstructured (Long)', 'A block of unstructured text, with no specific meaning/purpose');
+INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Unstructured (Long)', 655558);
+
+
+-------------------------------------------------------------------------------
 -- Time
 -------------------------------------------------------------------------------
 -- ISO 8601 - Event Time Unix Time
@@ -136,13 +148,31 @@ INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_i
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime call sign', 'Edge');
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime call sign', 'Surface');
 
-INSERT INTO val_string_rules (identifier, detect_regex) VALUES (655557, '\\w{1,200}');
-INSERT INTO field_def (name, description) VALUES ('Unstructured (Short)', 'A block of short unstructured text, with no specific meaning');
-INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime Vessel Name', 655557);
+INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (949387, 1000, 0, 'Metre');
+INSERT INTO field_def (name, acronym, description) VALUES ('Dimension to Bow', 'A', 'Dimension (meters) from AIS GPS antenna to the Bow of the vessel.');
+INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Dimension to Bow', 949387);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Dimension to Bow', 'Surface');
 
-INSERT INTO val_string_rules (identifier, detect_regex) VALUES (655558, '\\w+');
-INSERT INTO field_def (name, description) VALUES ('Unstructured (Long)', 'A block of unstructured text, with no specific meaning/purpose');
-INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime Vessel Name', 655558);
+INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (949398, 1000, 0, 'Metre');
+INSERT INTO field_def (name, acronym, description) VALUES ('Dimension to Stern', 'B', 'Dimension (meters) from AIS GPS antenna to the Stern of the vessel (Vessel Length = A + B).');
+INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Dimension to Stern', 949398);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Dimension to Stern', 'Surface');
+
+INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (949489, 1000, 0, 'Metre');
+INSERT INTO field_def (name, acronym, description) VALUES ('Dimension to Port', 'C', 'Dimension (meters) from AIS GPS antenna to the Port of the vessel.');
+INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Dimension to Port', 949489);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Dimension to Port', 'Surface');
+
+INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (959390, 1000, 0, 'Metre');
+INSERT INTO field_def (name, acronym, description) VALUES ('Dimension to Starboard', 'D', 'Dimension (meters) from AIS GPS antenna to the Starboard of the vessel (Vessel Width = C + D).');
+INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Dimension to Starboard', 959390);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Dimension to Starboard', 'Surface');
+
+INSERT INTO val_double_rules (identifier, maximum_value, minimum_value, unit) VALUES (959391, 1000, 0, 'Metre');
+INSERT INTO field_def (name, description) VALUES ('Draught', 'Current draught (meters) of the vessel.');
+INSERT INTO field_def_double_rules (field_definition_domain_name, double_rules_identifier) VALUES ('Draught', 959391);
+INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Draught', 'Surface');
+
 
 
 ----------------------------------------
