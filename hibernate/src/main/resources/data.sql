@@ -13,7 +13,7 @@ INSERT INTO Categories (name, description) VALUES ('Time', 'Indicates the field 
 -- Time
 -------------------------------------------------------------------------------
 -- ISO 8601 - Event Time Unix Time
-INSERT INTO val_long_rules (identifier, maximum_value, minimum_value, unit) VALUES (691181011, 2147483647, -2147483648, 'Seconds');
+INSERT INTO val_long_rules (identifier, maximum_value, minimum_value, unit) VALUES (691181011, 2147483647, -2147483648, 'Second');
 INSERT INTO field_def (name, description) VALUES ('Event Time (ms)', 'Unix Time, the number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970, minus the number of leap seconds that have taken place since then');
 INSERT INTO field_def_long_rules (field_definition_domain_name, long_rules_identifier) VALUES ('Event Time (ms)', 691181011);
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Event Time (ms)', 'Time');
@@ -135,6 +135,14 @@ INSERT INTO field_def (name, description) VALUES ('Maritime call sign', 'Maritim
 INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime call sign', 738889);
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime call sign', 'Edge');
 INSERT INTO field_def_categories (field_definition_domain_name, categories_name) VALUES ('Maritime call sign', 'Surface');
+
+INSERT INTO val_string_rules (identifier, detect_regex) VALUES (655557, '\\w{1,200}');
+INSERT INTO field_def (name, description) VALUES ('Unstructured (Short)', 'A block of short unstructured text, with no specific meaning');
+INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime Vessel Name', 655557);
+
+INSERT INTO val_string_rules (identifier, detect_regex) VALUES (655558, '\\w+');
+INSERT INTO field_def (name, description) VALUES ('Unstructured (Long)', 'A block of unstructured text, with no specific meaning/purpose');
+INSERT INTO field_def_string_rules (field_definition_domain_name, string_rules_identifier) VALUES ('Maritime Vessel Name', 655558);
 
 
 ----------------------------------------
