@@ -2,6 +2,7 @@ package uk.pallas.systems.typr.services.impl;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.measure.Unit;
 import javax.measure.quantity.Frequency;
@@ -38,26 +39,27 @@ public class UnitsServiceImpl implements UnitsService {
     // Pull in the other units into a unified list
     final SI siUnits = SI.getInstance();
     if (null != siUnits) {
-      for (final Unit<?> value : siUnits.getUnits()) {
-        if (null != value) {
-          if (null == value.getName() || value.getName().isBlank()) {
-            this.units.put(value.toString(), value);
-          } else {
-            this.units.put(value.getName(), value);
-          }
-        }
-      }
+      this.processUnits(siUnits.getUnits());
     }
 
     final NonSI nonSIUnits = NonSI.getInstance();
     if (null != nonSIUnits) {
-      for (final Unit<?> value : nonSIUnits.getUnits()) {
-        if (null != value) {
-          if (null == value.getName() || value.getName().isBlank()) {
-            this.units.put(value.toString(), value);
-          } else {
-            this.units.put(value.getName(), value);
-          }
+      this.processUnits(nonSIUnits.getUnits());
+    }
+
+    final Units units = Units.getInstance();
+    if (null != units) {
+      this.processUnits(units.getUnits());
+    }
+  }
+
+  private void processUnits(final Set<Unit<?>> units) {
+    for (final Unit<?> value : units) {
+      if (null != value) {
+        if (null == value.getName() || value.getName().isBlank()) {
+          this.units.put(value.toString(), value);
+        } else {
+          this.units.put(value.getName(), value);
         }
       }
     }
