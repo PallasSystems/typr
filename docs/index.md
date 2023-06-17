@@ -1,8 +1,7 @@
-# Typr
+# Categr
+![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/apache/maven.svg?label=License)
 
-Typr is a webservice, its goal is simply to hold information about different fields types, Post Code (UK), Latitude (Decimal Degrees), Mobile Country Code, etc.. 
-
-It then provides an API so other systems can request validation information for a field from it (allowing systems to use the same validation) and to also allow systems to supply a field and be informed on which types the provided field is valid for.
+Categr is a Data Categories microservice, it holds a central repository of categories and what those categories of data mean. This is to enable searching and grouping of data to make it easier to build services and search.
 
 ## Contributing
 

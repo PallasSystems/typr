@@ -4,35 +4,33 @@
     <parent>
         <groupId>uk.pallas.systems</groupId>
         <artifactId>parent</artifactId>
-        <version>0.2.0</version>
+        <version>0.2.1</version>
     </parent>
-    <groupId>uk.pallas.systems.typr</groupId>
+    <groupId>uk.pallas.systems.categr</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.7-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <url>https://pallassystems.github.io/typr/</url>
 
-    <name>Typr</name>
-    <description>Typr is a simple webservice, its goal is simply to hold information about different fields types, Post Code (UK), Latitude (Decimal Degrees), Mobile Country Code, etc.. The goal is to hold a description for each field, validation information for the field and ideally some logic for translation. One of the key things is a "categories" which can be assigned to a type, this is so I can say something is a good 'edge' or this is 'geo' (comes in handy for downstream processing).</description>
+    <name>Categr</name>
+    <description>Categr is a Data Categories microservice, it holds a central repository of categories and what those categories of data mean.</description>
 
     <modules>
         <module>core</module>
-        <module>countries</module>
         <module>hibernate</module>
         <module>runnable</module>
         <module>rest</module>
-        <module>units</module>
     </modules>
 
     <scm>
-        <connection>scm:git:https://github.com/PallasSystems/typr.git</connection>
-        <developerConnection>scm:git:https://github.com/PallasSystems/typr.git</developerConnection>
+        <connection>scm:git:https://github.com/PallasSystems/categr.git</connection>
+        <developerConnection>scm:git:https://github.com/PallasSystems/categr.git</developerConnection>
         <url>https://github.com/PallasSystems/typr</url>
       <tag>HEAD</tag>
   </scm>
 
     <properties>
-        <github_repository_name>typr</github_repository_name>
+        <github_repository_name>categr</github_repository_name>
         <scmpublish.content>${project.build.directory}/staging/parent</scmpublish.content>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -128,27 +126,6 @@
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>${org.springdoc.version}</version>
             </dependency>
-            <!--<dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-ui</artifactId>
-                <version>${org.springdoc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-javadoc</artifactId>
-                <version>${org.springdoc.version}</version>
-            </dependency>-->
-            <!--<dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-security</artifactId>
-                <version>${org.springdoc.version}</version>
-            </dependency> -->
-            <!-- Linked to OpenAPI/spring-boot-data-jpa, needs to be locked to a fixed version. -->
-            <!--<dependency>
-                <groupId>io.github.classgraph</groupId>
-                <artifactId>classgraph</artifactId>
-                <version>4.8.149</version>
-            </dependency> -->
             <!-- Required after JDK 1.8 -->
             <dependency>
                 <groupId>javax.servlet</groupId>
