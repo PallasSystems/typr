@@ -25,6 +25,9 @@ public class CategoriesDAO implements CategoriesDAOService {
   @Autowired
   private CategoryRepository dao;
 
+  /** Default Class Constructor. */
+  public CategoriesDAO() {}
+
   /**
    * Retrieves a handle to the Spring Data JPA DAO which allows us to perform database queries.
    * @return should never be null unless something has happened to spring.
@@ -44,25 +47,29 @@ public class CategoriesDAO implements CategoriesDAOService {
   /**
    * This will retrieve a specific CategoryDomain object using the primary key (e.g name).
    *
-   * @param name the name of the Category to retrieve.
+   * @param identifier the name of the Category to retrieve.
    * @return null if the category could not be located.
    */
   @Override
-  public Category findByName(final String name) {
+  public Category findByName(final String identifier) {
     Category result = null;
 
-    if (null == name || name.isBlank()) {
-      LOGGER.info("findByName - Invalid Name supplied");
+    if (null == identifier || identifier.isBlank()) {
+      if (LOGGER.isInfoEnabled()) {
+        LOGGER.info("findByName - Invalid Name supplied");
+      }
     } else {
       final CategoryRepository theDAO = this.getDao();
       if (null == theDAO) {
-        LOGGER.error("findByName - DAO has broken when searching: " + name);
+        if (LOGGER.isErrorEnabled()) {
+          LOGGER.error("findByName - DAO has broken when searching: " + identifier);
+        }
       } else {
-        final Optional<CategoryDomain> queryResult = theDAO.findById(name);
+        final Optional<CategoryDomain> queryResult = theDAO.findById(identifier);
         if (queryResult.isPresent()) {
           result = queryResult.get();
-        } else {
-          LOGGER.info("findByName - Unable to find entity with nane: " + name);
+        } else if (LOGGER.isInfoEnabled()) {
+          LOGGER.info("findByName - Unable to find entity with nane: " + identifier);
         }
       }
     }
@@ -80,12 +87,16 @@ public class CategoriesDAO implements CategoriesDAOService {
 
     final CategoryRepository theDAO = this.getDao();
     if (null == theDAO) {
-      LOGGER.error("findAll - DAO has broken when trying to retrieve all categories");
+      if (LOGGER.isErrorEnabled()) {
+        LOGGER.error("findAll - DAO has broken when trying to retrieve all categories");
+      }
     } else {
       try {
         results.addAll(theDAO.findAll());
       } catch (final EntityNotFoundException exception) {
-        LOGGER.info("findAll - Unable to find any entities in the data store");
+        if (LOGGER.isInfoEnabled()) {
+          LOGGER.info("findAll - Unable to find any entities in the data store");
+        }
       }
     }
 

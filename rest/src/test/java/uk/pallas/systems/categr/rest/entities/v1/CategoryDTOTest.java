@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 import uk.pallas.systems.categr.entities.v1.Category;
 
 public class CategoryDTOTest {
+
+  /** Public Constructor. */
+  public CategoryDTOTest() {}
+
   @Test
   void testConstructor() {
     final String name = "name";

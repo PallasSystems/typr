@@ -5,7 +5,17 @@ import uk.pallas.systems.categr.entities.v1.Category;
 
 public interface CategoriesDAOService {
 
-  Category findByName(String id);
+  /**
+   * This will retrieve a specific CategoryDomain object using the primary key (e.g name).
+   *
+   * @param identifier the name of the Category to retrieve.
+   * @return null if the category could not be located.
+   */
+  Category findByName(String identifier);
 
+  /**
+   * This retrieves all categories from the database and returns them.
+   * @return an empty list if there is no category data.
+   */
   Collection<Category> findAll();
 }

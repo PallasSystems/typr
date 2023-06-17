@@ -10,8 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +35,11 @@ public class CategoriesController {
   @Autowired
   private CategoriesDAOService services;
 
+  /** Default class constructor. */
+  public CategoriesController() {
+    // Do Nothing
+  }
+
   public CategoriesDAOService getServices() {
     return services;
   }
@@ -61,15 +64,15 @@ public class CategoriesController {
         )
       ),
     @ApiResponse(
-      responseCode = "404",
-      description = "No Categories stored within categr"
-    )
+        responseCode = "404",
+        description = CatgegoriesConstants.NOT_FOUND_ERROR_MSG
+      )
   })
   public Collection<CategoryDTO> getCategories() {
 
     final Collection<Category> cats = this.getServices().findAll();
     if (null == cats || cats.isEmpty()) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Categories stored within categr");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, CatgegoriesConstants.NOT_FOUND_ERROR_MSG);
     }
 
     return cats.stream().filter(Objects::nonNull)
@@ -94,14 +97,14 @@ public class CategoriesController {
       ),
     @ApiResponse(
       responseCode = "404",
-      description = "No Categories stored within categr"
+      description = CatgegoriesConstants.NOT_FOUND_ERROR_MSG
       )
   })
   public Collection<String> getCategoryNames() {
 
     final Collection<Category> cats = this.getServices().findAll();
     if (null == cats || cats.isEmpty()) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Categories stored within categr");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, CatgegoriesConstants.NOT_FOUND_ERROR_MSG);
     }
 
     return cats.stream().filter(Objects::nonNull)
@@ -111,7 +114,7 @@ public class CategoriesController {
 
   /**
    * Retrieves the Names of all categories held within Categr.
-   *
+   * @param name the Category Name (primary key for record).
    * @return A list of categories to be offered to the user
    */
   @GetMapping("/names/{name}")
@@ -127,11 +130,11 @@ public class CategoriesController {
     @ApiResponse(
       responseCode = "400",
       description = "The supplied name path variable was blank or missing"
-    ),
+      ),
     @ApiResponse(
       responseCode = "404",
-      description = "No Categories stored within categr"
-    )
+      description = "No Categories found with that name"
+      )
   })
   public Category getCategoryByName(@PathVariable(name = "name") final String name) {
 

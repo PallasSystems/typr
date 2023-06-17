@@ -8,6 +8,10 @@ import uk.pallas.systems.categr.entities.v1.Category;
  * This is a test class designed to check the various methods within a CategoryDomain class.
  */
 public class CategoryDomainTest {
+
+  /** Public Constructor. */
+  public CategoryDomainTest() {}
+
   @Test
   void testConstructor() {
     final String name = "name";

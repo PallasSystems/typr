@@ -35,6 +35,7 @@ public class CategoryDTO implements Category {
 
   /**
    * Class Copy Constructor.
+   * @param data the object to be copied into this newly created Category object.
    */
   public CategoryDTO(final Category data) {
     this(null == data ? null : data.getName(), null == data ? null : data.getDescription());
@@ -42,6 +43,8 @@ public class CategoryDTO implements Category {
 
   /**
    * Class Constructor which lets us set all fields within the object.
+   * @param identifier Name of the field definition e.g. post code, uk mobile.
+   * @param desc Detailed description of the field definition.
    */
   public CategoryDTO(final String identifier, final String desc) {
     this.name = identifier;
