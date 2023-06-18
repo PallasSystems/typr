@@ -40,10 +40,18 @@ public class CategoriesController {
     // Do Nothing
   }
 
+  /**
+   * Retrieves the DAO instance the controller will use when retrieving Category information.
+   * @return if null someone has gone wrong.
+   */
   public CategoriesDAOService getServices() {
     return services;
   }
 
+  /**
+   * Sets the DAO instance the controller will use when retrieving Category information.
+   * @param fieldDefSrv the new DAO service to be used.
+   */
   public void setServices(final CategoriesDAOService fieldDefSrv) {
     this.services = fieldDefSrv;
   }
