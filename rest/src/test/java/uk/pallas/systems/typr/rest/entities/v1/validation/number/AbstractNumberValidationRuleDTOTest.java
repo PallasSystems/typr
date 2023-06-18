@@ -81,7 +81,7 @@ public abstract class AbstractNumberValidationRuleDTOTest
   void testSetUnit() {
     final T basic = this.generateTestInstance();
 
-    final String alternate = "Example";
+    final String alternate = "testSetUnit";
     basic.setUnit(alternate);
     Assertions.assertEquals(alternate, basic.getUnit());
   }
@@ -90,7 +90,7 @@ public abstract class AbstractNumberValidationRuleDTOTest
   void testSetUnitWithInvalid() {
     final T basic = this.generateTestInstance();
 
-    final String alternate = "Example";
+    final String alternate = "testSetUnitWithInvalid";
     basic.setUnit(alternate);
     Assertions.assertEquals(alternate, basic.getUnit());
 
