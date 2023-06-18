@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTO;
 import uk.pallas.systems.typr.services.CountryService;
@@ -244,14 +243,10 @@ public class FieldDefinitionsController {
     }
 
     // Use a set to ensure unique results
-    final Set<String> results = new HashSet<>(definitions.size());
+    final Set<String> results = new HashSet<>();
     // Iterate over all results and pull out the category name
     for (final FieldDefinition definition : definitions) {
-      if (null != definition.getCategories()) {
-        for (final Category category : definition.getCategories()) {
-          results.add(category.getName());
-        }
-      }
+      results.addAll(definition.getCategories());
     }
 
     return results;
