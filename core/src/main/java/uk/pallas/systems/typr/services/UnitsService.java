@@ -17,7 +17,7 @@ public interface UnitsService {
    * @param unitName the name to perform a lookup on
    * @return false if the name can't be found.
    */
-  boolean isValid(final String unitName);
+  boolean isValid(String unitName);
 
   /**
    * Looks to see if the supplied field definition has Number validation rules with Units defined against them.
@@ -27,5 +27,5 @@ public interface UnitsService {
    * @param definition the object to check
    * @return false if the name can't be found.
    */
-  boolean isValid(final FieldDefinition definition);
+  boolean isValid(FieldDefinition definition);
 }

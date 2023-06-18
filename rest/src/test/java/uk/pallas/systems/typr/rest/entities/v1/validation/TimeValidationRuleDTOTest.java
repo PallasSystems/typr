@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import uk.pallas.systems.typr.entities.v1.validation.TimeValidationRule;
 
-class TimeValidationRuleDTOTest extends AbstractValidationRuleDTOTest<TimeValidationRuleDTO>{
+class TimeValidationRuleDTOTest extends AbstractValidationRuleDTOTest<TimeValidationRuleDTO> {
 
   /** A valid non ISO time pattern to test this works as expected. */
   private static final String RANDOM_TIME_PATTERN = "dd/MM/yyyy";
@@ -40,7 +40,7 @@ class TimeValidationRuleDTOTest extends AbstractValidationRuleDTOTest<TimeValida
   @Test
   void testIsValid() {
     // Create Validation rule to be attached
-    final String description = "TimeValidationRuleDTOTest-testConstructor";
+    final String description = "TimeValidationRuleDTOTest-testIsValid";
     final TimeValidationRule basic = new TimeValidationRuleDTO(description, RANDOM_TIME_PATTERN);
 
     // This is a valid UK Post Code

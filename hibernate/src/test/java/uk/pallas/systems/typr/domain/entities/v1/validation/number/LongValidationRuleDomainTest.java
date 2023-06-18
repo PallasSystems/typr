@@ -4,15 +4,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 
-class LongValidationRuleDomainTest extends AbstractNumberValidationRuleDomainTest<LongValidationRuleDomain, Long>{
+class LongValidationRuleDomainTest extends AbstractNumberValidationRuleDomainTest<LongValidationRuleDomain, Long> {
 
   @Test
   void testConstructor() {
 
     final long max = System.currentTimeMillis();
     final long min = 100;
-    final String description = "Test description";
-    final String unitName = "Knot";
+    final String description = "testConstructor";
+    final String unitName = "Degree Angle";
 
     final LongValidationRule basic = new LongValidationRuleDomain(max,min,description, unitName);
     Assertions.assertEquals(max, basic.getMaximumValue());
@@ -26,7 +26,7 @@ class LongValidationRuleDomainTest extends AbstractNumberValidationRuleDomainTes
 
     final long max = 1234;
     final long min = 987;
-    final String description = "Testing";
+    final String description = "testCopyConstructor";
     final String unitName = "Knot";
 
     final LongValidationRule basic = new LongValidationRuleDomain(max,min,description, unitName);

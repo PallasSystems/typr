@@ -1,6 +1,8 @@
 package uk.pallas.systems.typr.rest.entities.v1.validation.number;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 
 /**
@@ -12,6 +14,8 @@ import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
   + "and a maximum of 150.")
 public class LongValidationRuleDTO extends AbstractNumberValidationRuleDTO<Long> implements LongValidationRule {
 
+  /** Static Logger for the class. */
+  private static final Log LOGGER = LogFactory.getLog(LongValidationRuleDTO.class);
 
   /**
    * Default constructor, sets everything to null and makes validation optional.
@@ -35,6 +39,8 @@ public class LongValidationRuleDTO extends AbstractNumberValidationRuleDTO<Long>
    *
    * @param max The upper bound allowed for the field
    * @param min the lower bound allowed for the field
+   * @param detailedDescription Detailed description of the field definition.
+   * @param unitName Defines a Unit name, to be used to when the same field has different units.
    */
   public LongValidationRuleDTO(final Long max, final Long min, final String detailedDescription,
                                final String unitName) {
@@ -59,7 +65,9 @@ public class LongValidationRuleDTO extends AbstractNumberValidationRuleDTO<Long>
         final Double value = Double.valueOf(toConvert.toString());
         result = value.longValue();
       } catch (final NumberFormatException exception) {
-        // TODO lets catch this fail and log it.
+        if (LOGGER.isInfoEnabled()) {
+          LOGGER.info(String.format("getNumber - Unable to convert %s to Double", toConvert));
+        }
       }
     }
 

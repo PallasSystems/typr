@@ -32,7 +32,7 @@ public class TimeValidationRuleDTO extends AbstractValidationRuleDTO implements 
   }
 
   /**
-   * Constructor, allows us to set the internal abstract fields
+   * Constructor, allows us to set the internal abstract fields.
    *
    * @param detailedDescription the description of the rule
    * @param pattern A pattern using Java annotation.
@@ -90,6 +90,7 @@ public class TimeValidationRuleDTO extends AbstractValidationRuleDTO implements 
    * {@inheritDoc}
    * @return representation of the time pattern held in the rule.
    */
+  @Override
   public String getTimePattern() {
     return this.timePattern;
   }
@@ -98,6 +99,7 @@ public class TimeValidationRuleDTO extends AbstractValidationRuleDTO implements 
    * {@inheritDoc}
    * @param pattern A pattern using Java annotation.
    */
+  @Override
   public void setTimePattern(final String pattern) {
     if (null == pattern || pattern.isBlank()) {
       this.timePattern = ValidationRuleConstants.ISO_8601_DATE;

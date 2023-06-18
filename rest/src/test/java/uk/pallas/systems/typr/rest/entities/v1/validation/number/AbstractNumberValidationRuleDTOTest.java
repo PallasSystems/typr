@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 
 public abstract class AbstractNumberValidationRuleDTOTest
-  <T extends AbstractNumberValidationRuleDTO, N extends Number >{
+  <T extends AbstractNumberValidationRuleDTO, N extends Number> {
 
   /**
    * Used to generate a new instance of the class where we can test the common methods/processing between classes.

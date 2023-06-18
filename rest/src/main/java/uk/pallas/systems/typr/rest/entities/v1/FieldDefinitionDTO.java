@@ -100,10 +100,10 @@ public class FieldDefinitionDTO implements FieldDefinition {
    * @param cats      The categories associated with our object
    * @param desc      the description of the rule
    * @param fieldName the name for the rule
-   * @param rules     The Rules to be converted.
+   * @param validRules     The Rules to be converted.
    */
   public FieldDefinitionDTO(final String acryo, final Collection<Category> cats,
-                            final String desc, final String fieldName, final Collection<ValidationRule> rules) {
+                            final String desc, final String fieldName, final Collection<ValidationRule> validRules) {
     this.acronym = acryo;
     this.description = desc;
     this.name = fieldName;
@@ -116,7 +116,7 @@ public class FieldDefinitionDTO implements FieldDefinition {
     }
 
     this.rules = new HashSet<>();
-    this.setRules(rules);
+    this.setRules(validRules);
   }
 
   /**

@@ -2,12 +2,15 @@ package uk.pallas.systems.typr.domain.entities.v1.validation.number;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 
 @Entity
 @Table(name = "val_long_rules")
 public class LongValidationRuleDomain extends AbstractNumberValidationRuleDomain<Long> implements LongValidationRule {
-
+  /** Static Logger for the class. */
+  private static final Log LOGGER = LogFactory.getLog(LongValidationRuleDomain.class);
 
   /**
    * Default constructor, sets everything to null and makes validation optional.
@@ -31,6 +34,8 @@ public class LongValidationRuleDomain extends AbstractNumberValidationRuleDomain
    *
    * @param max The upper bound allowed for the field
    * @param min the lower bound allowed for the field
+   * @param detailedDescription Detailed description of the field definition.
+   * @param unit Defines a Unit name, to be used to when the same field has different units.
    */
   public LongValidationRuleDomain(final Long max, final Long min, final String detailedDescription,
                                      final String unit) {
@@ -55,7 +60,9 @@ public class LongValidationRuleDomain extends AbstractNumberValidationRuleDomain
         final Double value = Double.valueOf(toConvert.toString());
         result = value.longValue();
       } catch (final NumberFormatException exception) {
-        // TODO lets catch this fail and log it.
+        if (LOGGER.isInfoEnabled()) {
+          LOGGER.info(String.format("getNumber - Unable to convert %s to Double", toConvert));
+        }
       }
     }
 

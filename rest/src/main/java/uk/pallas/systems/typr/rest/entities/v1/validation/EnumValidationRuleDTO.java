@@ -15,6 +15,7 @@ import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
   + "allows us to maintain a list rather than a regular expression. ")
 public class EnumValidationRuleDTO extends AbstractValidationRuleDTO implements EnumValidationRule {
 
+  /** List of values which are allowed within the field. */
   @ArraySchema(schema = @Schema(description = "List of enumerates, which are allowed.",
     implementation = String.class, example = "UK"))
   private final Collection<String> enumerates;

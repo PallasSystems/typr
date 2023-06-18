@@ -15,7 +15,7 @@ public interface NumberValidationRule<N extends Number> extends ValidationRule {
    */
   void setUnit(String unit);
 
-   /**
+  /**
    * Retrieves the maximum alue that the field definition allows.
    *
    * @return null is allowed (or a valid Long value)

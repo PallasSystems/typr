@@ -21,7 +21,8 @@ class DoubleValidationRuleDTOTest
     return new DoubleValidationRuleDTO(max,min,description, unitName);
   }
 
-  /** The Max range in auto generated is the current time, so this removes 1 minute from the
+  /**
+   * The Max range in auto generated is the current time, so this removes 1 minute from the
    * current time to ensure the number is lower.
    * @return a valid double within the generateTestInstance range.
    */

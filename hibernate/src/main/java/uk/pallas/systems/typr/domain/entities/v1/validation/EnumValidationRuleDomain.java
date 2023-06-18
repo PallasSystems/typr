@@ -13,6 +13,7 @@ import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 @Table(name = "val_enum_rules")
 public class EnumValidationRuleDomain extends AbstractValidationRuleDomain implements EnumValidationRule {
 
+  /** List of values which are allowed within the field. */
   @ElementCollection
   private final Collection<String> enumerates = new ArrayList<>();
 

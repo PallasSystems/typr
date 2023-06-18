@@ -25,7 +25,8 @@ public class StringValidationRuleDTO extends AbstractValidationRuleDTO implement
   /**
    * As this is a String type, assumption is we apply Regular Express to extract entities from a string block.
    */
-  @Schema(description = "As this is a String type, assumption is we apply Regular Express to extract entities from a string block.",
+  @Schema(description = "As this is a String type, assumption is we apply Regular Express to extract entities "
+    + "from a string block.",
     example = "[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}")
   @Size(max = ValidationRuleConstants.MAX_STRING_LENGTH)
   private String extractRegex;
@@ -38,7 +39,7 @@ public class StringValidationRuleDTO extends AbstractValidationRuleDTO implement
   }
 
   /**
-   * Constructor, allows us to set the internal abstract fields
+   * Constructor, allows us to set the internal abstract fields.
    *
    * @param detailedDescription the description of the rule
    * @param detect              the Regular expression to validate a string

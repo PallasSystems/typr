@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 
-class EnumValidationRuleDTOTest extends AbstractValidationRuleDTOTest<EnumValidationRuleDTO>{
+public class EnumValidationRuleDTOTest extends AbstractValidationRuleDTOTest<EnumValidationRuleDTO> {
 
   /**
    * This will generate a collection of alphaNumeric strings to use to test various 'enumerates'.
@@ -80,7 +80,7 @@ class EnumValidationRuleDTOTest extends AbstractValidationRuleDTOTest<EnumValida
   @Test
   void testSetEnumerates() {
     // Create Validation rule to be attached
-    final String description = "EnumValidationRuleDomainTest-testCopyConstructor";
+    final String description = "EnumValidationRuleDomainTest-testSetEnumerates";
     final Collection<String> original = this.generateValidTestData();
     final Collection<String> replacement = this.generateValidTestData();
 
@@ -94,9 +94,8 @@ class EnumValidationRuleDTOTest extends AbstractValidationRuleDTOTest<EnumValida
   @Test
   void testSetEnumeratesWithInvalid() {
     // Create Validation rule to be attached
-    final String description = "EnumValidationRuleDomainTest-testCopyConstructor";
+    final String description = "EnumValidationRuleDomainTest-testSetEnumeratesWithInvalid";
     final Collection<String> original = this.generateValidTestData();
-    final Collection<String> replacement = this.generateValidTestData();
 
     final EnumValidationRule basic = new EnumValidationRuleDTO(description, original);
     Assertions.assertEquals(original, basic.getEnumerates());

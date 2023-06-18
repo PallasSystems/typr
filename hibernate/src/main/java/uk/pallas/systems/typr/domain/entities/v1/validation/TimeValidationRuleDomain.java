@@ -6,11 +6,9 @@ import jakarta.persistence.Table;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import uk.pallas.systems.typr.domain.entities.v1.validation.wrapper.CountryCodeRuleWrapperDomain;
 import uk.pallas.systems.typr.entities.v1.validation.TimeValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 
@@ -35,7 +33,7 @@ public class TimeValidationRuleDomain extends AbstractValidationRuleDomain imple
   }
 
   /**
-   * Constructor, allows us to set the internal abstract fields
+   * Constructor, allows us to set the internal abstract fields.
    *
    * @param detailedDescription the description of the rule
    * @param pattern A pattern using Java annotation.
@@ -93,6 +91,7 @@ public class TimeValidationRuleDomain extends AbstractValidationRuleDomain imple
    * {@inheritDoc}
    * @return representation of the time pattern held in the rule.
    */
+  @Override
   public String getTimePattern() {
     return this.timePattern;
   }
@@ -101,6 +100,7 @@ public class TimeValidationRuleDomain extends AbstractValidationRuleDomain imple
    * {@inheritDoc}
    * @param pattern A pattern using Java annotation.
    */
+  @Override
   public void setTimePattern(final String pattern) {
     if (null == pattern || pattern.isBlank()) {
       this.timePattern = ValidationRuleConstants.ISO_8601_DATE;

@@ -12,5 +12,5 @@ public interface TimeValidationRule extends ValidationRule {
    * Allows you to define a Time Date definition for a field.
    * @param pattern A pattern using Java annotation.
    */
-  void setTimePattern(final String pattern);
+  void setTimePattern(String pattern);
 }

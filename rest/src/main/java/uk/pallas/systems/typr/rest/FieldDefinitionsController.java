@@ -57,24 +57,24 @@ public class FieldDefinitionsController {
     return services;
   }
 
-  public void setServices(final FieldDefinitionService services) {
-    this.services = services;
+  public void setServices(final FieldDefinitionService service) {
+    this.services = service;
   }
 
   public UnitsService getUnitService() {
     return unitService;
   }
 
-  public void setUnitService(UnitsService unitService) {
-    this.unitService = unitService;
+  public void setUnitService(final UnitsService service) {
+    this.unitService = service;
   }
 
   public CountryService getCountryService() {
-    return countryService;
+    return this.countryService;
   }
 
-  public void setCountryService(CountryService countryService) {
-    this.countryService = countryService;
+  public void setCountryService(final CountryService service) {
+    this.countryService = service;
   }
 
   private Collection<FieldDefinition> convertToDTO(final Collection<FieldDefinition> definitions) {
@@ -99,7 +99,7 @@ public class FieldDefinitionsController {
         array = @ArraySchema(schema = @Schema(description = "Validation for the field definition.",
           oneOf = { FieldDefinitionDTO.class }))
       )
-    )
+      )
   })
   public Collection<FieldDefinition> getTypes() {
     // Retrieve all Type Definitions
@@ -117,7 +117,8 @@ public class FieldDefinitionsController {
    * @return A String array holding "Acronym - Name" or "Name" for each field definition within the library
    */
   @GetMapping("/name")
-  @Operation(summary = "Retrieves the Acronym and Names from the database and returns them as a list to support various components.")
+  @Operation(summary = "Retrieves the Acronym and Names from the database and returns them as a list to "
+    + "support various components.")
   @ApiResponses(value = {
     @ApiResponse(
       responseCode = "200",
@@ -130,7 +131,7 @@ public class FieldDefinitionsController {
   })
   public Collection<String> getFieldDefinitionByNames() {
     // Retrieve all Type Definitions
-    final Collection <FieldDefinition> definitions = this.getTypes();
+    final Collection<FieldDefinition> definitions = this.getTypes();
 
     final List<String> results = new ArrayList<>(definitions.size());
     // We want to extract the Acryonm - Name for each type
@@ -205,7 +206,7 @@ public class FieldDefinitionsController {
   })
   public Collection<String> getFieldDefinitionByCategories() {
     // Retrieve all Type Definitions
-    final Collection <FieldDefinition> definitions = this.getServices().getFieldDefinitions();
+    final Collection<FieldDefinition> definitions = this.getServices().getFieldDefinitions();
     if (null == definitions || definitions.isEmpty()) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No definitions stored within Typr");
     }
@@ -244,7 +245,7 @@ public class FieldDefinitionsController {
     )
   })
   public Collection<FieldDefinition> getFieldDefinitionByCategoryName(@PathVariable(name = "name") final String name) {
-    final Collection <FieldDefinition> definitions = this.getServices().getFieldDefinitionsByCategory(name);
+    final Collection<FieldDefinition> definitions = this.getServices().getFieldDefinitionsByCategory(name);
     if (null == definitions || definitions.isEmpty()) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No definitions associated with " + name);
     }
