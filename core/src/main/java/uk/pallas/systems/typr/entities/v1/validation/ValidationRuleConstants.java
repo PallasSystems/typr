@@ -1,5 +1,8 @@
 package uk.pallas.systems.typr.entities.v1.validation;
 
+/**
+ * Constants used within various validation rules.
+ */
 public final class ValidationRuleConstants {
 
   /** ISO 8601 Time Pattern. */

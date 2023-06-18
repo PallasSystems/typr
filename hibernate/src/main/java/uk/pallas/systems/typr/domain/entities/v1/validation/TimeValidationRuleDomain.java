@@ -12,6 +12,10 @@ import org.apache.commons.logging.LogFactory;
 import uk.pallas.systems.typr.entities.v1.validation.TimeValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 
+/**
+ * Validation rule for 'time' the assumption is there are multiple field types to hold time data and those use different
+ * patterns for time information.
+ */
 @Entity
 @Table(name = "val_time_rules")
 public class TimeValidationRuleDomain extends AbstractValidationRuleDomain implements TimeValidationRule {

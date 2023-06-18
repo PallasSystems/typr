@@ -7,6 +7,9 @@ import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
 import uk.pallas.systems.typr.services.CountryService;
 
+/**
+ * A Service to allow validation and identification of various Country code and names.
+ */
 @Service
 public class CountryServiceImpl implements CountryService {
 
