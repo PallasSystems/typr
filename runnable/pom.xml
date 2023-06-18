@@ -38,6 +38,15 @@
                             <goal>stop</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>build-docker-image</id>
+                        <goals>
+                            <goal>build-image</goal>
+                        </goals>
+                        <configuration>
+                            <imageName>typr:${project.version}</imageName>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>

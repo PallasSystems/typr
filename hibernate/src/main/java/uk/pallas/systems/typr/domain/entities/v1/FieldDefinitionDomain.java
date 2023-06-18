@@ -18,7 +18,6 @@ import uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDo
 import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomain;
-import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
@@ -41,7 +40,7 @@ public class FieldDefinitionDomain implements FieldDefinition {
    */
   @Column
   @ManyToMany
-  private final Collection<CategoryDomain> categories;
+  private final Collection<String> categories;
   /**
    * The shortened name (e.g. Acronym) of the field definition e.g. post code, uk mobile, IPv4, etc..
    */
@@ -123,7 +122,7 @@ public class FieldDefinitionDomain implements FieldDefinition {
    * @param fieldName the name for the rule
    * @param rules     the validation rules to add to the object.
    */
-  public FieldDefinitionDomain(final String acryo, final Collection<Category> cats,
+  public FieldDefinitionDomain(final String acryo, final Collection<String> cats,
                                final String desc, final String fieldName, final Collection<ValidationRule> rules) {
     this.acronym = acryo;
     this.description = desc;
@@ -131,9 +130,7 @@ public class FieldDefinitionDomain implements FieldDefinition {
 
     this.categories = new HashSet<>();
     if (null != cats) {
-      this.categories.addAll(cats.stream()
-        .map(CategoryDomain::new)
-        .collect(Collectors.toSet()));
+      this.categories.addAll(cats);
     }
 
     this.countryCodeRules = new HashSet<>();
@@ -253,7 +250,7 @@ public class FieldDefinitionDomain implements FieldDefinition {
    * @return an empty list if nothing is supplied.
    */
   @Override
-  public Collection<Category> getCategories() {
+  public Collection<String> getCategories() {
     return new HashSet<>(this.categories);
   }
 
@@ -264,14 +261,12 @@ public class FieldDefinitionDomain implements FieldDefinition {
    * @param values all categories associated with the type.
    */
   @Override
-  public void setCategories(final Collection<Category> values) {
+  public void setCategories(final Collection<String> values) {
     if (null == values) {
       this.categories.clear();
     } else {
       this.categories.clear();
-      this.categories.addAll(values.stream()
-        .map(CategoryDomain::new)
-        .collect(Collectors.toSet()));
+      this.categories.addAll(values);
     }
   }
 

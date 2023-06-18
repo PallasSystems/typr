@@ -13,30 +13,30 @@ public interface FieldDefinition {
    *
    * @return non null value (if field definition is valid).
    */
-  String getAcronym();
+  java.lang.String getAcronym();
 
   /**
    * Sets the shortened name (e.g. Acronym) for the field definition e.g. Ipv6, MCC, etc...
    *
    * @param identifier the new name for the field definition value
    */
-  void setAcronym(String identifier);
+  void setAcronym(java.lang.String identifier);
 
   /**
-   * List of categories assocaited with our type. These are additional ways to define a
+   * List of categories associated with our type. These are additional ways to define a
    * type for routing/managing a schema.
    *
    * @return an empty list if nothing is supplied.
    */
-  Collection<Category> getCategories();
+  Collection<String> getCategories();
 
   /**
-   * Sets the list of categories assocaited with our type. These are additional ways to
+   * Sets the list of categories associated with our type. These are additional ways to
    * define a type for routing/managing a schema.
    *
    * @param values all categories associated with the type.
    */
-  void setCategories(Collection<Category> values);
+  void setCategories(Collection<String> values);
 
   /**
    * Retrieves a hopefully detailed description of the field definition so
@@ -44,28 +44,28 @@ public interface FieldDefinition {
    *
    * @return a hopefull long valid string (null is possible).
    */
-  String getDescription();
+  java.lang.String getDescription();
 
   /**
    * Sets the description to attach to this field definition.
    *
    * @param detailedDescription the description to attach (null is ok)
    */
-  void setDescription(String detailedDescription);
+  void setDescription(java.lang.String detailedDescription);
 
   /**
    * Retrieves the name of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
    *
    * @return non null value (if field definition is valid).
    */
-  String getName();
+  java.lang.String getName();
 
   /**
    * Sets the name for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
    *
    * @param identifier the new name for the field definition value
    */
-  void setName(String identifier);
+  void setName(java.lang.String identifier);
 
   /**
    * Is the supplied test object something that matches against our field definition regular expression?
@@ -85,7 +85,7 @@ public interface FieldDefinition {
    * @param toTest the object to test against the rules stored within this object
    * @return an empty list or a list of identifiers for rules.
    */
-  Collection<String> getRulesPassed(Object toTest);
+  Collection<java.lang.String> getRulesPassed(Object toTest);
 
   /**
    * A list of rules this field definition can validate.
