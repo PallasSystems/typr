@@ -6,14 +6,11 @@ import jakarta.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import uk.pallas.systems.typr.entities.v1.Category;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
-import uk.pallas.systems.typr.entities.v1.validation.TimeValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
@@ -21,7 +18,6 @@ import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
 import uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTO;
-import uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTO;
@@ -35,10 +31,10 @@ public class FieldDefinitionDTO implements FieldDefinition {
    * List of categories associated with our type.
    */
   @ArraySchema(schema = @Schema(description = "List of categories associated with our type.",
-    implementation = CategoryDTO.class),
+    implementation = String.class),
     uniqueItems = true,
     minItems = 0)
-  private final Collection<Category> categories;
+  private final Collection<String> categories;
   /**
    * The shortened name (e.g. Acronym) of the field definition e.g. post code, uk mobile, IPv4, etc..
    */
@@ -70,7 +66,7 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   @ArraySchema(schema = @Schema(description = "List of Validation rules for the field definition.",
     anyOf = {DoubleValidationRuleDTO.class, EnumValidationRuleDTO.class, LongValidationRuleDTO.class,
-      StringValidationRuleDTO.class, TimeValidationRuleDTO.class }),
+      StringValidationRuleDTO.class}),
     uniqueItems = true,
     minItems = 1)
   private final Collection<ValidationRule> rules;
@@ -100,23 +96,21 @@ public class FieldDefinitionDTO implements FieldDefinition {
    * @param cats      The categories associated with our object
    * @param desc      the description of the rule
    * @param fieldName the name for the rule
-   * @param validRules     The Rules to be converted.
+   * @param rules     The Rules to be converted.
    */
-  public FieldDefinitionDTO(final String acryo, final Collection<Category> cats,
-                            final String desc, final String fieldName, final Collection<ValidationRule> validRules) {
+  public FieldDefinitionDTO(final String acryo, final Collection<String> cats,
+                            final String desc, final String fieldName, final Collection<ValidationRule> rules) {
     this.acronym = acryo;
     this.description = desc;
     this.name = fieldName;
 
     this.categories = new HashSet<>();
     if (null != cats) {
-      this.categories.addAll(cats.stream().filter(Objects::nonNull)
-        .map(CategoryDTO::new)
-        .collect(Collectors.toSet()));
+      this.categories.addAll(cats);
     }
 
     this.rules = new HashSet<>();
-    this.setRules(validRules);
+    this.setRules(rules);
   }
 
   /**
@@ -218,7 +212,7 @@ public class FieldDefinitionDTO implements FieldDefinition {
    * @return an empty list if nothing is supplied.
    */
   @Override
-  public Collection<Category> getCategories() {
+  public Collection<String> getCategories() {
     return new HashSet<>(categories);
   }
 
@@ -229,14 +223,12 @@ public class FieldDefinitionDTO implements FieldDefinition {
    * @param values all categories associated with the type.
    */
   @Override
-  public void setCategories(final Collection<Category> values) {
+  public void setCategories(final Collection<String> values) {
     if (null == values) {
       this.categories.clear();
     } else {
       this.categories.clear();
-      this.categories.addAll(values.stream().filter(Objects::nonNull)
-        .map(CategoryDTO::new)
-        .collect(Collectors.toSet()));
+      this.categories.addAll(values);
     }
   }
 
@@ -291,18 +283,16 @@ public class FieldDefinitionDTO implements FieldDefinition {
     final Collection<ValidationRule> results = new HashSet<>();
 
     for (final ValidationRule rule : this.rules) {
-      if (rule instanceof CountryCodeWrapper countryWrapper) {
-        results.add(new CountryCodeRuleWrapperDTO(countryWrapper));
-      } else if (rule instanceof DoubleValidationRule doubleRule) {
-        results.add(new DoubleValidationRuleDTO(doubleRule));
-      } else if (rule instanceof EnumValidationRule enumRule) {
-        results.add(new EnumValidationRuleDTO(enumRule));
-      } else if (rule instanceof LongValidationRule longRule) {
-        results.add(new LongValidationRuleDTO(longRule));
-      } else if (rule instanceof StringValidationRule stringRule) {
-        results.add(new StringValidationRuleDTO(stringRule));
-      } else if (rule instanceof TimeValidationRule timeRule) {
-        results.add(new TimeValidationRuleDTO(timeRule));
+      if (rule instanceof CountryCodeWrapper) {
+        results.add(new CountryCodeRuleWrapperDTO((CountryCodeWrapper)rule));
+      } else if (rule instanceof DoubleValidationRule) {
+        results.add(new DoubleValidationRuleDTO((DoubleValidationRule)rule));
+      } else if (rule instanceof EnumValidationRule) {
+        results.add(new EnumValidationRuleDTO((EnumValidationRule)rule));
+      } else if (rule instanceof LongValidationRule) {
+        results.add(new LongValidationRuleDTO((LongValidationRule)rule));
+      } else if (rule instanceof StringValidationRule) {
+        results.add(new StringValidationRuleDTO((StringValidationRule)rule));
       }
     }
 
@@ -320,18 +310,16 @@ public class FieldDefinitionDTO implements FieldDefinition {
 
     if (null != validationRules) {
       for (final ValidationRule rule : validationRules) {
-        if (rule instanceof CountryCodeWrapper countryWrapper) {
-          this.rules.add(new CountryCodeRuleWrapperDTO(countryWrapper));
-        } else if (rule instanceof DoubleValidationRule doubleRule) {
-          this.rules.add(new DoubleValidationRuleDTO(doubleRule));
-        } else if (rule instanceof EnumValidationRule enumRule) {
-          this.rules.add(new EnumValidationRuleDTO(enumRule));
-        } else if (rule instanceof LongValidationRule longRule) {
-          this.rules.add(new LongValidationRuleDTO(longRule));
-        } else if (rule instanceof StringValidationRule stringRule) {
-          this.rules.add(new StringValidationRuleDTO(stringRule));
-        } else if (rule instanceof TimeValidationRule timeRule) {
-          this.rules.add(new TimeValidationRuleDTO(timeRule));
+        if (rule instanceof CountryCodeWrapper) {
+          this.rules.add(new CountryCodeRuleWrapperDTO((CountryCodeWrapper)rule));
+        } else if (rule instanceof DoubleValidationRule) {
+          this.rules.add(new DoubleValidationRuleDTO((DoubleValidationRule)rule));
+        } else if (rule instanceof EnumValidationRule) {
+          this.rules.add(new EnumValidationRuleDTO((EnumValidationRule)rule));
+        } else if (rule instanceof LongValidationRule) {
+          this.rules.add(new LongValidationRuleDTO((LongValidationRule)rule));
+        } else if (rule instanceof StringValidationRule) {
+          this.rules.add(new StringValidationRuleDTO((StringValidationRule)rule));
         }
       }
     }
