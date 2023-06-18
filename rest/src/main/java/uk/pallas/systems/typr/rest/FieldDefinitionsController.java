@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +42,9 @@ import uk.pallas.systems.typr.services.UnitsService;
 @RequestMapping("api/type/v1")
 @OpenAPIDefinition(info = @Info(title = "Typr Field API"))
 public class FieldDefinitionsController {
+
+  /** Static Logger for the class. */
+  private static final Log LOGGER = LogFactory.getLog(FieldDefinitionsController.class);
 
   /**
    * The backend service to retrieve.
@@ -129,29 +134,56 @@ public class FieldDefinitionsController {
       )
     )
   })
-  public Collection<String> getFieldDefinitionByNames() {
+  public Collection<String> getFieldDefinitionNames() {
     // Retrieve all Type Definitions
     final Collection<FieldDefinition> definitions = this.getTypes();
 
     final List<String> results = new ArrayList<>(definitions.size());
-    // We want to extract the Acryonm - Name for each type
+    // We want to extract the Acronym - Name for each type
     for (final FieldDefinition definition : definitions) {
-      if (null == definition.getAcronym() || definition.getAcronym().isBlank()) {
-        if (null == definition.getName() || definition.getName().isBlank()) {
-          // TODO Add logging statement
-        } else {
-          results.add(definition.getName());
+      // Validate the field definition
+      if (this.getUnitService().isValid(definition)) {
+        if (this.getCountryService().isValidISO31661Alpha3(definition)) {
+          final String name = this.getDefinitionName(definition.getAcronym(), definition.getName());
+
+          if (null == name || name.isBlank()) {
+            if (LOGGER.isWarnEnabled()) {
+              LOGGER.warn("getDefinitionName - No Name or Arconym for field: " + definition);
+            }
+          } else {
+            results.add(name);
+          }
         }
-      } else if (null == definition.getName() || definition.getName().isBlank()) {
-        results.add(definition.getAcronym());
-      } else {
-        results.add(definition.getAcronym() + " - " + definition.getName());
       }
     }
 
     Collections.sort(results);
 
     return results;
+  }
+
+  /**
+   * Attempts to extract a human readble name for a supplied field definition.
+   * @param acronym the acronym returned by a field definition
+   * @param name the name returned by a field definition
+   * @return an empty string if acronym and name are blank.
+   */
+  private String getDefinitionName(final String acronym, final String name) {
+    final String result;
+
+    if (null == acronym || acronym.isBlank()) {
+      if (null == name || name.isBlank()) {
+        result = "";
+      } else {
+        result = name;
+      }
+    } else if (null == name || name.isBlank()) {
+      result = acronym;
+    } else {
+      result = acronym + " - " + name;
+    }
+
+    return result;
   }
 
 
@@ -204,7 +236,7 @@ public class FieldDefinitionsController {
       )
     )
   })
-  public Collection<String> getFieldDefinitionByCategories() {
+  public Collection<String> getFieldDefinitionCategories() {
     // Retrieve all Type Definitions
     final Collection<FieldDefinition> definitions = this.getServices().getFieldDefinitions();
     if (null == definitions || definitions.isEmpty()) {
