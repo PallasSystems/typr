@@ -62,7 +62,7 @@ class FieldDefinitionDTOTest {
     final FieldDefinition copy = new FieldDefinitionDTO(basic);
 
     Assertions.assertEquals(basic, copy);
-    Assertions.assertEquals(copy, copy);
+    Assertions.assertTrue(copy.equals(copy));
     Assertions.assertEquals(basic.hashCode(), copy.hashCode());
   }
 
