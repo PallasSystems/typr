@@ -45,9 +45,9 @@ public class UnitsServiceImpl implements UnitsService {
       this.processUnits(nonSIUnits.getUnits());
     }
 
-    final Units units = Units.getInstance();
-    if (null != units) {
-      this.processUnits(units.getUnits());
+    final Units unitsInstance = Units.getInstance();
+    if (null != unitsInstance) {
+      this.processUnits(unitsInstance.getUnits());
     }
   }
 
@@ -57,11 +57,11 @@ public class UnitsServiceImpl implements UnitsService {
    *
    * @param units the units to process.
    */
-  private void processUnits(final Set<Unit<?>> units) {
-    if (null == units) {
+  private void processUnits(final Set<Unit<?>> values) {
+    if (null == values) {
       LOGGER.error("processUnits - Called Measure Unit library and did not get an associated units");
     } else {
-      for (final Unit<?> value : units) {
+      for (final Unit<?> value : values) {
         if (null != value) {
           if (null == value.getName() || value.getName().isBlank()) {
             this.units.put(value.toString(), value);
@@ -77,6 +77,7 @@ public class UnitsServiceImpl implements UnitsService {
    * {@inheritDoc}
    * @return a collection of types collected from the measurement library.
    */
+  @Override
   public Collection<String> getUnits() {
     return this.units.keySet();
   }
@@ -98,6 +99,7 @@ public class UnitsServiceImpl implements UnitsService {
    * @param unitName the name to perform a lookup on
    * @return false if the name can't be found.
    */
+  @Override
   public boolean isValid(final String unitName) {
     return ValidationRuleConstants.NO_UNITS.equals(unitName) || null != this.getUnit(unitName);
   }

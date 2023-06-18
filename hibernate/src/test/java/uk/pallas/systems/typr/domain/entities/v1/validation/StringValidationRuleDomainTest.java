@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 
-class StringValidationRuleDomainTest extends AbstractValidationRuleDomainTest<StringValidationRuleDomain>{
+class StringValidationRuleDomainTest extends AbstractValidationRuleDomainTest<StringValidationRuleDomain> {
 
   private static final String UK_POST_CODE_DETECT_REGEX = "([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\\s?[0-9][A-Za-z]{2})";
 
@@ -13,7 +13,6 @@ class StringValidationRuleDomainTest extends AbstractValidationRuleDomainTest<St
   @Override
   StringValidationRuleDomain generateTestInstance() {
     final String description = "StringValidationRuleDomainTest";
-    final String extractRegex = "";
     return new StringValidationRuleDomain(description, UK_POST_CODE_DETECT_REGEX, UK_POST_CODE_EXTRACT_REGEX);
   }
 
@@ -44,7 +43,7 @@ class StringValidationRuleDomainTest extends AbstractValidationRuleDomainTest<St
   @Test
   void testIsValid() {
     // Create Validation rule to be attached
-    final String description = "StringValidationRuleDomainTest-testConstructor";
+    final String description = "StringValidationRuleDomainTest-testIsValid";
     final StringValidationRule
       basic = new StringValidationRuleDomain(description, UK_POST_CODE_DETECT_REGEX, UK_POST_CODE_EXTRACT_REGEX);
 

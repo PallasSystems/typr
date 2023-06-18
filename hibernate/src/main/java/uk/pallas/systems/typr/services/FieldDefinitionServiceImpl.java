@@ -1,12 +1,9 @@
 package uk.pallas.systems.typr.services;
 
-import java.util.Objects;
-import java.util.stream.Collectors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.pallas.systems.typr.domain.CategoryRepository;
 import uk.pallas.systems.typr.domain.FieldDefinitionRespository;
 import uk.pallas.systems.typr.domain.entities.v1.CategoryDomain;
 import uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomain;
@@ -15,7 +12,6 @@ import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -30,11 +26,11 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
   private FieldDefinitionRespository fieldDefDAO;
 
   public FieldDefinitionRespository getFieldDefDAO() {
-    return fieldDefDAO;
+    return this.fieldDefDAO;
   }
 
-  public void setFieldDefDAO(FieldDefinitionRespository fieldDefDAO) {
-    this.fieldDefDAO = fieldDefDAO;
+  public void setFieldDefDAO(final FieldDefinitionRespository service) {
+    this.fieldDefDAO = service;
   }
 
   /**

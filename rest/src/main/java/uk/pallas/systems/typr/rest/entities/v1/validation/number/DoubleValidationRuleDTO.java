@@ -1,6 +1,8 @@
 package uk.pallas.systems.typr.rest.entities.v1.validation.number;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
 
 /**
@@ -11,7 +13,8 @@ import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule
   + "value the field can be (e.g. Direction could have a Min 0.0 and Max 360.0. So then when a System supplied "
   + "342.5 we know its valid.")
 public class DoubleValidationRuleDTO extends AbstractNumberValidationRuleDTO<Double> implements DoubleValidationRule {
-
+  /** Static Logger for the class. */
+  private static final Log LOGGER = LogFactory.getLog(DoubleValidationRuleDTO.class);
   /**
    * Default constructor, sets everything to null and makes validation optional.
    */
@@ -34,6 +37,8 @@ public class DoubleValidationRuleDTO extends AbstractNumberValidationRuleDTO<Dou
    *
    * @param max The upper bound allowed for the field
    * @param min the lower bound allowed for the field
+   * @param detailedDescription Detailed description of the field definition.
+   * @param unitName Defines a Unit name, to be used to when the same field has different units.
    */
   public DoubleValidationRuleDTO(final Double max, final Double min, final String detailedDescription,
                                  final String unitName) {
@@ -57,7 +62,9 @@ public class DoubleValidationRuleDTO extends AbstractNumberValidationRuleDTO<Dou
       try {
         result = Double.parseDouble(toConvert.toString());
       } catch (final NumberFormatException exception) {
-        // TODO lets catch this fail and log it.
+        if (LOGGER.isInfoEnabled()) {
+          LOGGER.info(String.format("getNumber - Unable to convert %s to Double", toConvert));
+        }
       }
     }
 

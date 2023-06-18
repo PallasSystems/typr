@@ -31,7 +31,7 @@ public class StringValidationRuleDomain extends AbstractValidationRuleDomain imp
   }
 
   /**
-   * Constructor, allows us to set the internal abstract fields
+   * Constructor, allows us to set the internal abstract fields.
    *
    * @param detailedDescription the description of the rule
    * @param detect              the Regular expression to validate a string

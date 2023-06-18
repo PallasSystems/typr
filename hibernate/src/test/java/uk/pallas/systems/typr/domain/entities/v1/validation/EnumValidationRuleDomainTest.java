@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 
-class EnumValidationRuleDomainTest extends AbstractValidationRuleDomainTest<EnumValidationRuleDomain> {
+public class EnumValidationRuleDomainTest extends AbstractValidationRuleDomainTest<EnumValidationRuleDomain> {
 
   /**
    * This will generate a collection of alphaNumeric strings to use to test various 'enumerates'.

@@ -13,7 +13,7 @@ public interface CountryService {
    * @param definition the definition to test if it is correct.
    * @return false if the definition is invalid or if a country code wrapper exists with an invalid code.
    */
-  boolean isValidISO31661Alpha3(final FieldDefinition definition);
+  boolean isValidISO31661Alpha3(FieldDefinition definition);
 
   /**
    * Used to confirm if the supplied value is a valid ISO 3166 Country code.
@@ -21,5 +21,5 @@ public interface CountryService {
    * @param value the value to test if it is correct.
    * @return false if the value is invalid or contains an invalid code.
    */
-  boolean isValidISO31661Alpha3(final String value);
+  boolean isValidISO31661Alpha3(String value);
 }

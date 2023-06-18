@@ -3,13 +3,11 @@ package uk.pallas.systems.typr.rest.entities.v1;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import uk.pallas.systems.typr.entities.v1.Category;
-import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
-import uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTO;
 
 class CategoryDTOTest {
   @Test
   void testConstructor() {
-    final String name = "name";
+    final String name = "testConstructor";
     final String description = "CategoryDTOTest-testConstructor";
     final Category basic = new CategoryDTO(name, description);
     Assertions.assertEquals(name, basic.getName());
@@ -18,7 +16,7 @@ class CategoryDTOTest {
 
   @Test
   void testCopyConstructor() {
-    final String name = "name";
+    final String name = "testCopyConstructor";
     final String description = "CategoryDTOTest-testCopyConstructor";
     final Category basic = new CategoryDTO(name, description);
     final Category copy = new CategoryDTO(basic);
@@ -28,7 +26,7 @@ class CategoryDTOTest {
 
   @Test
   void testEquals() {
-    final String name = "name";
+    final String name = "testEquals";
     final String description = "CategoryDTOTest-testEquals";
     final Category basic = new CategoryDTO(name, description);
 
@@ -37,7 +35,7 @@ class CategoryDTOTest {
 
   @Test
   void testEqualsWithInvalid() {
-    final String name = "name";
+    final String name = "testEqualsWithInvalid";
     final String description = "CategoryDTOTest-testEqualsWithInvalid";
     final Category basic = new CategoryDTO(name, description);
 

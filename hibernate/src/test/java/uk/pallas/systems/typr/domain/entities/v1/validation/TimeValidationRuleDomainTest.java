@@ -2,11 +2,9 @@ package uk.pallas.systems.typr.domain.entities.v1.validation;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.TimeValidationRule;
-import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 
-class TimeValidationRuleDomainTest extends AbstractValidationRuleDomainTest<TimeValidationRuleDomain>{
+class TimeValidationRuleDomainTest extends AbstractValidationRuleDomainTest<TimeValidationRuleDomain> {
 
   /** A valid non ISO time pattern to test this works as expected. */
   private static final String RANDOM_TIME_PATTERN = "dd/MM/yy";

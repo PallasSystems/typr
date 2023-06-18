@@ -2,7 +2,6 @@ package uk.pallas.systems.typr.domain.entities.v1.validation.wrapper;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import uk.pallas.systems.typr.domain.entities.v1.CategoryDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomain;
 import uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomain;
@@ -11,7 +10,7 @@ import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule
 import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
 
-class CountryCodeRuleWrapperDomainTest {
+public class CountryCodeRuleWrapperDomainTest {
   @Test
   void testConstructor() {
 
@@ -19,10 +18,10 @@ class CountryCodeRuleWrapperDomainTest {
     final long max = 99999;
     final long min = 12222;
     final String description = "CountryCodeRuleWrapperDomainTest-testConstructor";
-    final String unitName = "Knot";
+    final String unitName = "Degree Angle";
     final LongValidationRule rule = new LongValidationRuleDomain(max,min,description, unitName);
     // A valid Country code
-    final String countryCode = "GBR";
+    final String countryCode = "BGD";
     // Use the constructor to confirm it works as expected.
     final CountryCodeWrapper basic = new CountryCodeRuleWrapperDomain(countryCode, rule);
 
@@ -80,7 +79,7 @@ class CountryCodeRuleWrapperDomainTest {
     final String extract = "extract-testEquals";
     final StringValidationRule rule = new StringValidationRuleDomain(description, detect, extract);
     //
-    final CountryCodeWrapper formed = new CountryCodeRuleWrapperDomain("GBR", rule);
+    final CountryCodeWrapper formed = new CountryCodeRuleWrapperDomain("IRL", rule);
     Assertions.assertEquals(formed, formed);
     Assertions.assertNotEquals(basic, formed);
   }
@@ -91,12 +90,12 @@ class CountryCodeRuleWrapperDomainTest {
     final CountryCodeWrapper basic = new CountryCodeRuleWrapperDomain();
     Assertions.assertEquals(basic.hashCode(), basic.hashCode());
 
-    final String description = "CountryCodeRuleWrapperDomainTest-testEquals";
-    final String detect = "detect-testEquals";
-    final String extract = "extract-testEquals";
+    final String description = "CountryCodeRuleWrapperDomainTest-testHashCode";
+    final String detect = "detect-testHashCode";
+    final String extract = "extract-testHashCode";
     final StringValidationRule rule = new StringValidationRuleDomain(description, detect, extract);
     //
-    final CountryCodeWrapper formed = new CountryCodeRuleWrapperDomain("GBR", rule);
+    final CountryCodeWrapper formed = new CountryCodeRuleWrapperDomain("RWA", rule);
     Assertions.assertEquals(formed.hashCode(), formed.hashCode());
     Assertions.assertNotEquals(basic.hashCode(), formed.hashCode());
   }
@@ -106,7 +105,7 @@ class CountryCodeRuleWrapperDomainTest {
     final CountryCodeWrapper basic = new CountryCodeRuleWrapperDomain();
 
     Assertions.assertNotEquals(null, basic);
-    Assertions.assertNotEquals(basic, new CountryCodeRuleWrapperDomain("GBR", new LongValidationRuleDomain()));
+    Assertions.assertNotEquals(basic, new CountryCodeRuleWrapperDomain("GRC", new LongValidationRuleDomain()));
   }
 
 }

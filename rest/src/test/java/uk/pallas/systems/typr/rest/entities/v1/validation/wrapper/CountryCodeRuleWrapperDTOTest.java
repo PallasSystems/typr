@@ -9,13 +9,14 @@ import uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDT
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTO;
 import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTO;
 
-class CountryCodeRuleWrapperDTOTest {
+public class CountryCodeRuleWrapperDTOTest {
+
   @Test
   void testConstructor() {
     // Create Validation rule to be attached
-    final String description = "CountryCodeRuleWrapperDomainTest-testDescription";
-    final String detect = "detect-testDescription";
-    final String extract = "extract-testDescription";
+    final String description = "CountryCodeRuleWrapperDomainTest-testConstructor";
+    final String detect = "detect-testConstructor";
+    final String extract = "extract-testConstructor";
     final StringValidationRule rule = new StringValidationRuleDTO(description, detect, extract);
     // A valid Country code
     final String countryCode = "GBR";
@@ -50,7 +51,7 @@ class CountryCodeRuleWrapperDTOTest {
     final double max = 5555.5;
     final double min = 222.3;
     final String description = "CountryCodeRuleWrapperDTOTest-testDescription";
-    final String unitName = "Knot";
+    final String unitName = "Nautical Mile";
     final DoubleValidationRule rule = new DoubleValidationRuleDTO(max,min,description, unitName);
     Assertions.assertEquals(description, rule.getDescription());
     // Now create the wrapper.
@@ -77,7 +78,7 @@ class CountryCodeRuleWrapperDTOTest {
     final String extract = "extract-testEquals";
     final StringValidationRule rule = new StringValidationRuleDTO(description, detect, extract);
     //
-    final CountryCodeWrapper formed = new CountryCodeRuleWrapperDTO("GBR", rule);
+    final CountryCodeWrapper formed = new CountryCodeRuleWrapperDTO("ARM", rule);
     Assertions.assertEquals(formed, formed);
     Assertions.assertNotEquals(basic, formed);
   }
@@ -88,12 +89,12 @@ class CountryCodeRuleWrapperDTOTest {
     final CountryCodeWrapper basic = new CountryCodeRuleWrapperDTO();
     Assertions.assertEquals(basic.hashCode(), basic.hashCode());
 
-    final String description = "CountryCodeRuleWrapperDTOTest-testEquals";
-    final String detect = "detect-testEquals";
-    final String extract = "extract-testEquals";
+    final String description = "CountryCodeRuleWrapperDTOTest-testHashCode";
+    final String detect = "detect-testHashCode";
+    final String extract = "extract-testHashCode";
     final StringValidationRule rule = new StringValidationRuleDTO(description, detect, extract);
     //
-    final CountryCodeWrapper formed = new CountryCodeRuleWrapperDTO("GBR", rule);
+    final CountryCodeWrapper formed = new CountryCodeRuleWrapperDTO("GIB", rule);
     Assertions.assertEquals(formed.hashCode(), formed.hashCode());
     Assertions.assertNotEquals(basic.hashCode(), formed.hashCode());
   }
@@ -103,7 +104,7 @@ class CountryCodeRuleWrapperDTOTest {
     final CountryCodeWrapper basic = new CountryCodeRuleWrapperDTO();
 
     Assertions.assertNotEquals(null, basic);
-    Assertions.assertNotEquals(basic, new CountryCodeRuleWrapperDTO("GBR", new LongValidationRuleDTO()));
+    Assertions.assertNotEquals(basic, new CountryCodeRuleWrapperDTO("PSE", new LongValidationRuleDTO()));
   }
 
 }
