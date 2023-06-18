@@ -110,7 +110,7 @@ class FieldDefinitionDomainTest {
 
   @Test
   void testGetRulesPassedWithInvalid() {
-     final FieldDefinition basic = this.generateTestObject();
+    final FieldDefinition basic = this.generateTestObject();
 
     // Supply a value which is within our target range, this should pass and return the toString
     // of the rule we created above.

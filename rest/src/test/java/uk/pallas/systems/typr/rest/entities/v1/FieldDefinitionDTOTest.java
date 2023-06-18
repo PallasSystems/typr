@@ -16,9 +16,9 @@ class FieldDefinitionDTOTest {
    * @return a valid and completly formed Field Definition.
    */
   private FieldDefinition generateTestObject() {
-    final String fieldName = "FieldDefinitionDomainTest-generateTestObject";
+    final String fieldName = "FieldDefinitionDomainTest-generateTestObject-name";
     final String acronym = "FDDT-gto";
-    final String description = "FieldDefinitionDomainTest-generateTestObject";
+    final String description = "FieldDefinitionDomainTest-generateTestObject-description";
 
     final long max = 10000;
     final long min = 100;
