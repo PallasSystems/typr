@@ -90,10 +90,20 @@ class FieldDefinitionDTOTest {
 
     // Supply a value which is within our target range, this should pass and return the toString
     // of the rule we created above.
-    final Collection<String> passed = basic.getRulesPassed(555);
-    Assertions.assertNotNull(passed);
-    Assertions.assertFalse(passed.isEmpty());
-    Assertions.assertEquals(basic.getRules().size(), passed.size());
+    Assertions.assertTrue(basic.isValid(555));
+    Assertions.assertTrue(basic.isValid("666"));
+  }
+
+  @Test
+  void testIsValidWithInvalid() {
+    final FieldDefinition basic = this.generateTestObject();
+
+    // Supply a value which is within our target range, this should pass and return the toString
+    // of the rule we created above.
+    Assertions.assertFalse(basic.isValid(null));
+    Assertions.assertFalse(basic.isValid(Double.MIN_VALUE));
+    Assertions.assertFalse(basic.isValid(Long.MAX_VALUE));
+    Assertions.assertFalse(basic.isValid("ABC"));
   }
 
   @Test
@@ -114,8 +124,20 @@ class FieldDefinitionDTOTest {
 
     // Supply a value which is within our target range, this should pass and return the toString
     // of the rule we created above.
-    final Collection<String> passed = basic.getRulesPassed(null);
-    Assertions.assertNotNull(passed);
-    Assertions.assertTrue(passed.isEmpty());
+    final Collection<String> nullPassed = basic.getRulesPassed(null);
+    Assertions.assertNotNull(nullPassed);
+    Assertions.assertTrue(nullPassed.isEmpty());
+
+    final Collection<String> belowRangePassed = basic.getRulesPassed(Double.MIN_VALUE);
+    Assertions.assertNotNull(belowRangePassed);
+    Assertions.assertTrue(belowRangePassed.isEmpty());
+
+    final Collection<String> aboveRangePassed = basic.getRulesPassed(Long.MAX_VALUE);
+    Assertions.assertNotNull(aboveRangePassed);
+    Assertions.assertTrue(aboveRangePassed.isEmpty());
+
+    final Collection<String> nonNumberPassed = basic.getRulesPassed("abc");
+    Assertions.assertNotNull(nonNumberPassed);
+    Assertions.assertTrue(nonNumberPassed.isEmpty());
   }
 }
