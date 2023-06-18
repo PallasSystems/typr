@@ -1,5 +1,9 @@
 package uk.pallas.systems.typr.entities.v1.validation;
 
+/**
+ * A field definition can have multiple validation rules applied to it, this provides an interface
+ * to allow those to be managed via composition.
+ */
 public interface ValidationRule {
 
   /**

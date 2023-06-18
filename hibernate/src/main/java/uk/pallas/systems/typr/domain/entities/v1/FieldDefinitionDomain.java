@@ -1,6 +1,7 @@
 package uk.pallas.systems.typr.domain.entities.v1;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -38,8 +39,7 @@ public class FieldDefinitionDomain implements FieldDefinition {
   /**
    * List of categories assocaited with our type.
    */
-  @Column
-  @ManyToMany
+  @ElementCollection
   private final Collection<String> categories;
   /**
    * The shortened name (e.g. Acronym) of the field definition e.g. post code, uk mobile, IPv4, etc..

@@ -7,6 +7,9 @@ import java.util.Objects;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 
+/**
+ * Validation rules to confirm the contents of a field match an expected string design.
+ */
 @Entity
 @Table(name = "val_string_rules")
 public class StringValidationRuleDomain extends AbstractValidationRuleDomain implements StringValidationRule {
