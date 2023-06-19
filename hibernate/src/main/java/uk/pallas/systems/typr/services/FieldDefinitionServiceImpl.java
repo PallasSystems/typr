@@ -25,7 +25,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
   }
 
   @Override
-  public Collection<FieldDefinition> getFieldDefinitionsByCategory(final java.lang.String string) {
+  public Collection<FieldDefinition> getFieldDefinitionsByCategory(final String string) {
     return null;
   }
 
@@ -34,7 +34,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
    * @param name
    * @return
    */
-  public FieldDefinition getFieldDefinitionByName(final java.lang.String name) {
+  public FieldDefinition getFieldDefinitionByName(final String name) {
     final FieldDefinition result;
 
     final Optional<FieldDefinitionDomain> defResults = this.fieldDefDAO.findById(name);

@@ -3,6 +3,9 @@ package uk.pallas.systems.typr.services;
 import java.util.Collection;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 
+/**
+ * A wrapper for the SI Measurements library, so it can be called by various spring services.
+ */
 public interface UnitsService {
 
   /**
