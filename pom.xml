@@ -33,7 +33,10 @@
 
     <properties>
         <github_repository_name>typr</github_repository_name>
+        <github_organisation>pallassystems</github_organisation>
+
         <scmpublish.content>${project.build.directory}/staging/parent</scmpublish.content>
+
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <!-- Plugin dependencies. -->
@@ -76,7 +79,13 @@
                     <version>${org.springframework.boot.version}</version>
                     <configuration>
                         <jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments>
+                        <imageName>ghcr.io/${github_organisation}/typr:${project.version}</imageName>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>0.43.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
