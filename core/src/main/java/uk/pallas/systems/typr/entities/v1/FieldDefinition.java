@@ -13,14 +13,14 @@ public interface FieldDefinition {
    *
    * @return non null value (if field definition is valid).
    */
-  java.lang.String getAcronym();
+  String getAcronym();
 
   /**
    * Sets the shortened name (e.g. Acronym) for the field definition e.g. Ipv6, MCC, etc...
    *
    * @param identifier the new name for the field definition value
    */
-  void setAcronym(java.lang.String identifier);
+  void setAcronym(String identifier);
 
   /**
    * List of categories associated with our type. These are additional ways to define a
@@ -44,28 +44,28 @@ public interface FieldDefinition {
    *
    * @return a hopefull long valid string (null is possible).
    */
-  java.lang.String getDescription();
+  String getDescription();
 
   /**
    * Sets the description to attach to this field definition.
    *
    * @param detailedDescription the description to attach (null is ok)
    */
-  void setDescription(java.lang.String detailedDescription);
+  void setDescription(String detailedDescription);
 
   /**
    * Retrieves the name of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
    *
    * @return non null value (if field definition is valid).
    */
-  java.lang.String getName();
+  String getName();
 
   /**
    * Sets the name for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
    *
    * @param identifier the new name for the field definition value
    */
-  void setName(java.lang.String identifier);
+  void setName(String identifier);
 
   /**
    * Is the supplied test object something that matches against our field definition regular expression?
@@ -85,7 +85,7 @@ public interface FieldDefinition {
    * @param toTest the object to test against the rules stored within this object
    * @return an empty list or a list of identifiers for rules.
    */
-  Collection<java.lang.String> getRulesPassed(Object toTest);
+  Collection<String> getRulesPassed(Object toTest);
 
   /**
    * A list of rules this field definition can validate.
