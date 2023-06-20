@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractValidationRuleDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">rest</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.rest.entities.v1.validation</a> &gt; <span class="el_source">AbstractValidationRuleDTO.java</span></div><h1>AbstractValidationRuleDTO.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.rest.entities.v1.validation;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.Objects;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+
+public abstract class AbstractValidationRuleDTO implements ValidationRule {
+  /**
+   * Detailed description of the field definition.
+   */
+  @Schema(description = &quot;Detailed description of the field definition.&quot;,
+    example = &quot;This rule has been configured to apply a UK Postcode regular expression to the system&quot;)
+  private String description;
+
+  /**
+   * Default class constructor.
+   */
+  public AbstractValidationRuleDTO() {
+<span class="nc" id="L19">    this((String) null);</span>
+<span class="nc" id="L20">  }</span>
+
+  /**
+   * Class Constructor.
+   * @param detailedDescription Detailed description of the field definition.
+   */
+<span class="fc" id="L26">  public AbstractValidationRuleDTO(final String detailedDescription) {</span>
+<span class="fc" id="L27">    this.description = detailedDescription;</span>
+<span class="fc" id="L28">  }</span>
+
+  /**
+   * Copy Constructor.
+   * @param data the validation rule we plan to copy all the values from.
+   */
+  public AbstractValidationRuleDTO(final ValidationRule data) {
+<span class="nc bnc" id="L35" title="All 2 branches missed.">    this(null == data ? null : data.getDescription());</span>
+<span class="nc" id="L36">  }</span>
+
+  /**
+   * Retrieves a hopefully detailed description of the field definition so we can understand what it is for and why
+   * it exists.
+   *
+   * @return a hopefull long valid string (null is possible).
+   */
+  @Override
+  public String getDescription() {
+<span class="fc" id="L46">    return this.description;</span>
+  }
+
+  /**
+   * Sets the description to attach to this field definition.
+   *
+   * @param detailedDescription the description to attache (null is ok)
+   */
+  @Override
+  public void setDescription(final String detailedDescription) {
+<span class="fc" id="L56">    this.description = detailedDescription;</span>
+<span class="fc" id="L57">  }</span>
+
+  /**
+   * Compares the supplied object to this one, it checks the supplied object is a FieldDefinition and then checks
+   * the definition applies validation, its name and description to see if they are matching objects.
+   *
+   * @param toCompare the object to compare (can be null or a child class, etc..)
+   * @return false if the name/validation and description fields in a field definition are
+   *               different (or it isn't a field definition).
+   */
+  @Override
+  public boolean equals(final Object toCompare) {
+
+    final boolean result;
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">    if (this == toCompare) {</span>
+<span class="nc" id="L72">      result = true;</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">    } else if (toCompare instanceof ValidationRule that) {</span>
+<span class="fc" id="L74">      result = Objects.equals(this.getDescription(), that.getDescription());</span>
+    } else {
+<span class="nc" id="L76">      result = false;</span>
+    }
+
+<span class="fc" id="L79">    return result;</span>
+  }
+
+  /**
+   * Generates a Unique hashcode for the field definition class.
+   *
+   * @return a valid integer representation of this object,
+   */
+  @Override
+  public int hashCode() {
+<span class="fc" id="L89">    return Objects.hash(this.getDescription());</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

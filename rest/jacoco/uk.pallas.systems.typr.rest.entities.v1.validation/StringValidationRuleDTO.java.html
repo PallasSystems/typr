@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StringValidationRuleDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">rest</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.rest.entities.v1.validation</a> &gt; <span class="el_source">StringValidationRuleDTO.java</span></div><h1>StringValidationRuleDTO.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.rest.entities.v1.validation;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import java.util.Objects;
+import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
+
+/**
+ * Defines regular expression rules for a field to confirm if the field is valid or not.
+ */
+@Schema(description = &quot;Defines regular expression rules for a field to confirm if the field is valid or not.&quot;)
+public class StringValidationRuleDTO extends AbstractValidationRuleDTO implements StringValidationRule {
+
+  /**
+   * As this is a String type, assumption is we apply Regular Express to validate the string.
+   */
+  @NotBlank
+  @Size(max = ValidationRuleConstants.MAX_STRING_LENGTH)
+  @Schema(description = &quot;As this is a String type, assumption is we apply Regular Express to validate the string.&quot;,
+    example = &quot;^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$&quot;)
+  private String detectRegex;
+
+  /**
+   * As this is a String type, assumption is we apply Regular Express to extract entities from a string block.
+   */
+  @Schema(description = &quot;As this is a String type, assumption is we apply Regular Express to extract entities &quot;
+    + &quot;from a string block.&quot;,
+    example = &quot;[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}&quot;)
+  @Size(max = ValidationRuleConstants.MAX_STRING_LENGTH)
+  private String extractRegex;
+
+  /**
+   * Default constructor, sets everything to null and makes validation optional.
+   */
+  public StringValidationRuleDTO() {
+<span class="nc" id="L38">    this(null, null, null);</span>
+<span class="nc" id="L39">  }</span>
+
+  /**
+   * Constructor, allows us to set the internal abstract fields.
+   *
+   * @param detailedDescription the description of the rule
+   * @param detect              the Regular expression to validate a string
+   * @param extract             regular expression to extract a valid value from the string
+   */
+  public StringValidationRuleDTO(final String detailedDescription, final String detect, final String extract) {
+<span class="fc" id="L49">    super(detailedDescription);</span>
+
+<span class="fc" id="L51">    this.detectRegex = detect;</span>
+<span class="fc" id="L52">    this.extractRegex = extract;</span>
+<span class="fc" id="L53">  }</span>
+
+  /**
+   * Copy Constructor, passes up to parent Copy Constructor.
+   *
+   * @param data the object to create a duplicate off.
+   */
+  public StringValidationRuleDTO(final StringValidationRule data) {
+<span class="pc bpc" id="L61" title="2 of 4 branches missed.">    this(null == data ? null : data.getDescription(), null == data ? null : data.getDetectRegex(),</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">      null == data ? null : data.getExtractRegex());</span>
+<span class="fc" id="L63">  }</span>
+
+  /**
+   * Compares the supplied object to this one, it checks the supplied object is a FieldDefinition and then checks
+   * the definition applies validation, its name and description to see if they are matching objects.
+   *
+   * @param toCompare the object to compare (can be null or a child class, etc..)
+   * @return false if the name/validation and description fields in a field definition are
+   *               different (or it isn't a field definition).
+   */
+  @Override
+  public boolean equals(final Object toCompare) {
+
+    final boolean result;
+<span class="fc bfc" id="L77" title="All 2 branches covered.">    if (this == toCompare) {</span>
+<span class="fc" id="L78">      result = true;</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">    } else if (toCompare instanceof StringValidationRule that) {</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">      result = super.equals(toCompare)</span>
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        &amp;&amp; Objects.equals(this.getDetectRegex(), that.getDetectRegex())</span>
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        &amp;&amp; Objects.equals(this.getExtractRegex(), that.getExtractRegex());</span>
+    } else {
+<span class="fc" id="L84">      result = false;</span>
+    }
+
+<span class="fc" id="L87">    return result;</span>
+  }
+
+  /**
+   * Generates a Unique hashcode for the field definition class.
+   *
+   * @return a valid integer representation of this object,
+   */
+  @Override
+  public int hashCode() {
+<span class="fc" id="L97">    return Objects.hash(super.hashCode(), this.getDetectRegex(), this.getExtractRegex());</span>
+  }
+
+  /**
+   * The regular Expression to apply to a string defined by this field definition, to confirm a given string is valid.
+   *
+   * @return non null regular expression that can be used by Java Regex system.
+   */
+  public String getDetectRegex() {
+<span class="fc" id="L106">    return this.detectRegex;</span>
+  }
+
+  /**
+   * The regular Expression to apply to a string defined by this field definition, to confirm a given string is valid.
+   *
+   * @param validation a valid regular expression string.
+   */
+  public void setDetectRegex(final String validation) {
+<span class="nc" id="L115">    this.detectRegex = validation;</span>
+<span class="nc" id="L116">  }</span>
+
+  /**
+   * The regular Expression to extract a matching regex string from a text block.
+   *
+   * @return non null regular expression that can be used by Java Regex system.
+   */
+  public String getExtractRegex() {
+<span class="fc" id="L124">    return this.extractRegex;</span>
+  }
+
+  /**
+   * Allows us to set the regular expression to extract the term from a text block.
+   *
+   * @param validation a valid regular expression string.
+   */
+  public void setExtractRegex(final String validation) {
+<span class="nc" id="L133">    this.extractRegex = validation;</span>
+<span class="nc" id="L134">  }</span>
+
+  /**
+   * Is the supplied test object something that matches against our field definition regular expression?
+   * &lt;p&gt;
+   * If validation optional is set to true this will return true, if the supplied object is null, this will always
+   * return false. Otherwise this will call toString and then match the field definition regex tp confirm the object
+   * matches our desired value.
+   *
+   * @param toTest to test is valid
+   * @return false if the object fails the validation match.
+   */
+  @Override
+  public boolean isValid(final Object toTest) {
+    final boolean result;
+
+<span class="fc bfc" id="L150" title="All 2 branches covered.">    if (toTest instanceof String) {</span>
+      // Use to string as it leaves things the most flexible in our regex comparison.
+<span class="fc" id="L152">      result = this.isValid((String) toTest);</span>
+    } else {
+<span class="fc" id="L154">      result = false;</span>
+    }
+
+<span class="fc" id="L157">    return result;</span>
+  }
+
+  /**
+   * Is the supplied test object something that matches against our field definition regular expression?
+   * &lt;p&gt;
+   * If validation optional is set to true this will return true, if the supplied object is null, this will always
+   * return false. Otherwise it will call matches on the supplied string.
+   *
+   * @param toTest to test is valid
+   * @return false if the object fails the validation match.
+   */
+  @Override
+  public boolean isValid(final String toTest) {
+    final boolean result;
+
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">    if (null == toTest) {</span>
+<span class="nc" id="L174">      result = false;</span>
+    } else {
+<span class="fc" id="L176">      result = toTest.matches(this.getDetectRegex());</span>
+    }
+
+<span class="fc" id="L179">    return result;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

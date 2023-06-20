@@ -1,0 +1,12 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+rest,uk.pallas.systems.typr.rest.entities.v1,FieldDefinitionDTO,110,282,20,42,22,58,21,28,4,14
+rest,uk.pallas.systems.typr.rest,FieldDefinitionsController,158,151,34,16,31,38,26,17,4,14
+rest,uk.pallas.systems.typr.rest,CategoriesController,10,0,0,0,4,0,3,0,3,0
+rest,uk.pallas.systems.typr.rest.entities.v1.validation.number,AbstractNumberValidationRuleDTO,35,178,12,30,5,38,10,24,2,11
+rest,uk.pallas.systems.typr.rest.entities.v1.validation.number,LongValidationRuleDTO,0,87,1,13,0,19,1,11,0,5
+rest,uk.pallas.systems.typr.rest.entities.v1.validation.number,DoubleValidationRuleDTO,12,72,2,12,3,15,2,10,0,5
+rest,uk.pallas.systems.typr.rest.entities.v1.validation,EnumValidationRuleDTO,12,127,6,16,3,29,7,13,1,8
+rest,uk.pallas.systems.typr.rest.entities.v1.validation,TimeValidationRuleDTO,14,127,6,14,3,28,7,12,1,8
+rest,uk.pallas.systems.typr.rest.entities.v1.validation,StringValidationRuleDTO,23,114,6,14,7,25,9,12,3,8
+rest,uk.pallas.systems.typr.rest.entities.v1.validation,AbstractValidationRuleDTO,20,40,4,2,6,11,5,5,2,5
+rest,uk.pallas.systems.typr.rest.entities.v1.validation.wrapper,CountryCodeRuleWrapperDTO,70,201,10,24,12,44,12,19,3,11

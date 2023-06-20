@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="generator" content="#generatedBy()" />
-    <title>Typr &#x2013; Surefire Report</title>
+    <title>Typr – Surefire Report</title>
     <link rel="icon" href="./img/favicons/favicon.ico">
     <!-- CSS Stylesheets, site.css is included so downstream projects can override them as appropriate. -->
     <link rel="stylesheet" href="./css/bootstrap.min.css" />
@@ -100,6 +100,8 @@
                    <a href="project-reports.html" id="Project ReportsDropdownLink" title="Project Reports"  class="dropdown-item" >Project Reports</a>
                    <ul id="Project DocumentationMenuSubMenuDropdown" class="dropdown-menu submenu">
                      <li class="nav-item dropdown-item">
+                       <a href="checkstyle-aggregate.html" id="CheckstyleDropdownLink" title="Checkstyle"  class="dropdown-item" >Checkstyle</a>                     </li>
+                     <li class="nav-item dropdown-item">
                        <a href="cpd.html" id="CPDDropdownLink" title="CPD"  class="dropdown-item" >CPD</a>                     </li>
                      <li class="nav-item dropdown-item">
                        <a href="pmd.html" id="PMDDropdownLink" title="PMD"  class="dropdown-item" >PMD</a>                     </li>
@@ -113,6 +115,8 @@
                        <a href="dev-activity.html" id="Developer ActivityDropdownLink" title="Developer Activity"  class="dropdown-item" >Developer Activity</a>                     </li>
                      <li class="nav-item dropdown-item">
                        <a href="xref/index.html" id="Source XrefDropdownLink" title="Source Xref"  class="dropdown-item" >Source Xref</a>                     </li>
+                     <li class="nav-item dropdown-item">
+                       <a href="xref-test/index.html" id="Test Source XrefDropdownLink" title="Test Source Xref"  class="dropdown-item" >Test Source Xref</a>                     </li>
                      <li class="nav-item dropdown-item">
                        <a title="Surefire Report" class="dropdown-item">Surefire Report</a>                     </li>
                    </ul>
@@ -147,9 +151,10 @@ function toggleDisplay(elementId) {
  }
 //]]>
 </script><section>
-<h1>Surefire Report</h1></section><section>
-<h1>Summary</h1><a name="Summary"></a><br />
-<table class="bodyTable bodyTableBorder">
+<h1>Surefire Report</h1></section><section><a id="Summary"></a>
+<h1>Summary</h1>
+<p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><br />
+<table class="table table-striped">
 <tr class="a">
 <th>Tests</th>
 <th>Errors</th>
@@ -158,13 +163,956 @@ function toggleDisplay(elementId) {
 <th>Success Rate</th>
 <th>Time</th></tr>
 <tr class="b">
+<td style="text-align: left;">138</td>
 <td style="text-align: left;">0</td>
 <td style="text-align: left;">0</td>
 <td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">7.993</td></tr></table><br />
+<p>Note: failures are anticipated and checked for with assertions while errors are unanticipated.</p><br /></section><section><a id="Package_List"></a>
+<h1>Package List</h1>
+<p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><br />
+<table class="table table-striped">
+<tr class="a">
+<th>Package</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.services.impl">uk.pallas.systems.typr.services.impl</a></td>
+<td style="text-align: left;">9</td>
 <td style="text-align: left;">0</td>
-<td style="text-align: left;">0%</td>
-<td style="text-align: left;">0</td></tr></table><br />
-<p>Note: failures are anticipated and checked for with assertions while errors are unanticipated.</p><br /></section>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">4.822</td></tr>
+<tr class="a">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation">uk.pallas.systems.typr.rest.entities.v1.validation</a></td>
+<td style="text-align: left;">25</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.103</td></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.wrapper">uk.pallas.systems.typr.rest.entities.v1.validation.wrapper</a></td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.018</td></tr>
+<tr class="a">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1">uk.pallas.systems.typr.domain.entities.v1</a></td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.334</td></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.number">uk.pallas.systems.typr.rest.entities.v1.validation.number</a></td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.039</td></tr>
+<tr class="a">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation">uk.pallas.systems.typr.domain.entities.v1.validation</a></td>
+<td style="text-align: left;">25</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.152</td></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.number">uk.pallas.systems.typr.domain.entities.v1.validation.number</a></td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.06</td></tr>
+<tr class="a">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.wrapper">uk.pallas.systems.typr.domain.entities.v1.validation.wrapper</a></td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.031</td></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1">uk.pallas.systems.typr.rest.entities.v1</a></td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.221</td></tr>
+<tr class="a">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest">uk.pallas.systems.typr.rest</a></td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">2.213</td></tr></table><br />
+<p>Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.</p><section><a id="uk.pallas.systems.typr.services.impl"></a>
+<h2>uk.pallas.systems.typr.services.impl</h2>
+<table class="table table-striped">
+<tr class="a">
+<th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.services.impl.CountryServiceImplTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.services.impl.CountryServiceImplTest">CountryServiceImplTest</a></td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">2.282</td></tr>
+<tr class="a">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.services.impl.UnitsServiceImplTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.services.impl.UnitsServiceImplTest">UnitsServiceImplTest</a></td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">2.54</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest.entities.v1.validation"></a>
+<h2>uk.pallas.systems.typr.rest.entities.v1.validation</h2>
+<table class="table table-striped">
+<tr class="a">
+<th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTOTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTOTest">TimeValidationRuleDTOTest</a></td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.043</td></tr>
+<tr class="a">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTOTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTOTest">EnumValidationRuleDTOTest</a></td>
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.049</td></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTOTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTOTest">StringValidationRuleDTOTest</a></td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.011</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest.entities.v1.validation.wrapper"></a>
+<h2>uk.pallas.systems.typr.rest.entities.v1.validation.wrapper</h2>
+<table class="table table-striped">
+<tr class="a">
+<th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTOTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTOTest">CountryCodeRuleWrapperDTOTest</a></td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.018</td></tr></table></section><section><a id="uk.pallas.systems.typr.domain.entities.v1"></a>
+<h2>uk.pallas.systems.typr.domain.entities.v1</h2>
+<table class="table table-striped">
+<tr class="a">
+<th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomainTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomainTest">FieldDefinitionDomainTest</a></td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.334</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest.entities.v1.validation.number"></a>
+<h2>uk.pallas.systems.typr.rest.entities.v1.validation.number</h2>
+<table class="table table-striped">
+<tr class="a">
+<th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest">LongValidationRuleDTOTest</a></td>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.019</td></tr>
+<tr class="a">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest">DoubleValidationRuleDTOTest</a></td>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.02</td></tr></table></section><section><a id="uk.pallas.systems.typr.domain.entities.v1.validation"></a>
+<h2>uk.pallas.systems.typr.domain.entities.v1.validation</h2>
+<table class="table table-striped">
+<tr class="a">
+<th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomainTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomainTest">EnumValidationRuleDomainTest</a></td>
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.093</td></tr>
+<tr class="a">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomainTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomainTest">StringValidationRuleDomainTest</a></td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.011</td></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.TimeValidationRuleDomainTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.TimeValidationRuleDomainTest">TimeValidationRuleDomainTest</a></td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.048</td></tr></table></section><section><a id="uk.pallas.systems.typr.domain.entities.v1.validation.number"></a>
+<h2>uk.pallas.systems.typr.domain.entities.v1.validation.number</h2>
+<table class="table table-striped">
+<tr class="a">
+<th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest">DoubleValidationRuleDomainTest</a></td>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.036</td></tr>
+<tr class="a">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest">LongValidationRuleDomainTest</a></td>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.024</td></tr></table></section><section><a id="uk.pallas.systems.typr.domain.entities.v1.validation.wrapper"></a>
+<h2>uk.pallas.systems.typr.domain.entities.v1.validation.wrapper</h2>
+<table class="table table-striped">
+<tr class="a">
+<th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.wrapper.CountryCodeRuleWrapperDomainTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.wrapper.CountryCodeRuleWrapperDomainTest">CountryCodeRuleWrapperDomainTest</a></td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.031</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest.entities.v1"></a>
+<h2>uk.pallas.systems.typr.rest.entities.v1</h2>
+<table class="table table-striped">
+<tr class="a">
+<th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTOTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTOTest">FieldDefinitionDTOTest</a></td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">0.221</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest"></a>
+<h2>uk.pallas.systems.typr.rest</h2>
+<table class="table table-striped">
+<tr class="a">
+<th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.FieldDefinitionsControllerTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td style="text-align: left;"><a href="#uk.pallas.systems.typr.rest.FieldDefinitionsControllerTest">FieldDefinitionsControllerTest</a></td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">100%</td>
+<td style="text-align: left;">2.213</td></tr></table></section><br /></section><section><a id="Test_Cases"></a>
+<h1>Test Cases</h1>
+<p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><section><a id="uk.pallas.systems.typr.services.impl.CountryServiceImplTest"></a>
+<h2>CountryServiceImplTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.services.impl.CountryServiceImplTest.testIsValidISO31661Alpha3FieldDef"></a>testIsValidISO31661Alpha3FieldDef</td>
+<td style="text-align: left;">2.194</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.services.impl.CountryServiceImplTest.testIsValidISO31661Alpha3FieldDefWithNoWrapper"></a>testIsValidISO31661Alpha3FieldDefWithNoWrapper</td>
+<td style="text-align: left;">0.005</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.services.impl.CountryServiceImplTest.testIsValidISO31661Alpha3StringWithInvalid"></a>testIsValidISO31661Alpha3StringWithInvalid</td>
+<td style="text-align: left;">0.005</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.services.impl.CountryServiceImplTest.testIsValidISO31661Alpha3FieldDefWithNull"></a>testIsValidISO31661Alpha3FieldDefWithNull</td>
+<td style="text-align: left;">0.003</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.services.impl.CountryServiceImplTest.testIsValidISO31661Alpha3FieldDefWithInvalidCountryCode"></a>testIsValidISO31661Alpha3FieldDefWithInvalidCountryCode</td>
+<td style="text-align: left;">0.005</td></tr></table></section><section><a id="uk.pallas.systems.typr.domain.entities.v1.validation.wrapper.CountryCodeRuleWrapperDomainTest"></a>
+<h2>CountryCodeRuleWrapperDomainTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.wrapper.CountryCodeRuleWrapperDomainTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0.004</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.wrapper.CountryCodeRuleWrapperDomainTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0.002</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.wrapper.CountryCodeRuleWrapperDomainTest.testHashCode"></a>testHashCode</td>
+<td style="text-align: left;">0.003</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.wrapper.CountryCodeRuleWrapperDomainTest.testEquals"></a>testEquals</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.wrapper.CountryCodeRuleWrapperDomainTest.testDescription"></a>testDescription</td>
+<td style="text-align: left;">0.002</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.wrapper.CountryCodeRuleWrapperDomainTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0.002</td></tr></table></section><section><a id="uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomainTest"></a>
+<h2>EnumValidationRuleDomainTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomainTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0.031</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomainTest.testHashCodeWithNull"></a>testHashCodeWithNull</td>
+<td style="text-align: left;">0.012</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomainTest.testHashCode"></a>testHashCode</td>
+<td style="text-align: left;">0.005</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomainTest.testEquals"></a>testEquals</td>
+<td style="text-align: left;">0.004</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomainTest.testIsValidWithInvalid"></a>testIsValidWithInvalid</td>
+<td style="text-align: left;">0.009</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomainTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0.005</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomainTest.testSetEnumeratesWithInvalid"></a>testSetEnumeratesWithInvalid</td>
+<td style="text-align: left;">0.005</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomainTest.testSetEnumerates"></a>testSetEnumerates</td>
+<td style="text-align: left;">0.011</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomainTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0.003</td></tr></table></section><section><a id="uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomainTest"></a>
+<h2>StringValidationRuleDomainTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomainTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomainTest.testHashCodeWithNull"></a>testHashCodeWithNull</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomainTest.testHashCode"></a>testHashCode</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomainTest.testEquals"></a>testEquals</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomainTest.testIsValidWithInvalid"></a>testIsValidWithInvalid</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomainTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomainTest.testIsValid"></a>testIsValid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomainTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0</td></tr></table></section><section><a id="uk.pallas.systems.typr.domain.entities.v1.validation.TimeValidationRuleDomainTest"></a>
+<h2>TimeValidationRuleDomainTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.TimeValidationRuleDomainTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.TimeValidationRuleDomainTest.testHashCodeWithNull"></a>testHashCodeWithNull</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.TimeValidationRuleDomainTest.testHashCode"></a>testHashCode</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.TimeValidationRuleDomainTest.testEquals"></a>testEquals</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.TimeValidationRuleDomainTest.testIsValidWithInvalid"></a>testIsValidWithInvalid</td>
+<td style="text-align: left;">0.03</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.TimeValidationRuleDomainTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.TimeValidationRuleDomainTest.testIsValid"></a>testIsValid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.TimeValidationRuleDomainTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0.001</td></tr></table></section><section><a id="uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest"></a>
+<h2>DoubleValidationRuleDomainTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest.testIsValidWithNullMax"></a>testIsValidWithNullMax</td>
+<td style="text-align: left;">0.005</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest.testIsValidWithNullMin"></a>testIsValidWithNullMin</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0.002</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest.testHashCodeWithNull"></a>testHashCodeWithNull</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest.testSetUnitWithInvalid"></a>testSetUnitWithInvalid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest.testHashCode"></a>testHashCode</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest.testEquals"></a>testEquals</td>
+<td style="text-align: left;">0.01</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest.testSetUnit"></a>testSetUnit</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest.testIsValid"></a>testIsValid</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest.testIsValidWithInvalid"></a>testIsValidWithInvalid</td>
+<td style="text-align: left;">0.005</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomainTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0</td></tr></table></section><section><a id="uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomainTest"></a>
+<h2>FieldDefinitionDomainTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomainTest.testCopyConstructorWithInvalid"></a>testCopyConstructorWithInvalid</td>
+<td style="text-align: left;">0.238</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomainTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0.005</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomainTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0.007</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomainTest.testGetRulesPassedWithInvalid"></a>testGetRulesPassedWithInvalid</td>
+<td style="text-align: left;">0.013</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomainTest.testGetRulesPassed"></a>testGetRulesPassed</td>
+<td style="text-align: left;">0.004</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomainTest.testIsValid"></a>testIsValid</td>
+<td style="text-align: left;">0.002</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomainTest.testIsValidWithInvalid"></a>testIsValidWithInvalid</td>
+<td style="text-align: left;">0.003</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomainTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0.002</td></tr></table></section><section><a id="uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest"></a>
+<h2>LongValidationRuleDomainTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest.testIsValidWithNullMax"></a>testIsValidWithNullMax</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest.testIsValidWithNullMin"></a>testIsValidWithNullMin</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest.testHashCodeWithNull"></a>testHashCodeWithNull</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest.testSetUnitWithInvalid"></a>testSetUnitWithInvalid</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest.testHashCode"></a>testHashCode</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest.testSetUnit"></a>testSetUnit</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest.testIsValid"></a>testIsValid</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest.testIsValidWithInvalid"></a>testIsValidWithInvalid</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0.009</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest.testEquals"></a>testEquals</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomainTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0.001</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest"></a>
+<h2>LongValidationRuleDTOTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest.testIsValidWithNullMax"></a>testIsValidWithNullMax</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest.testIsValidWithNullMin"></a>testIsValidWithNullMin</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest.testHashCodeWithNull"></a>testHashCodeWithNull</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest.testSetUnitWithInvalid"></a>testSetUnitWithInvalid</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest.testHashCode"></a>testHashCode</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest.testSetUnit"></a>testSetUnit</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest.testIsValid"></a>testIsValid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest.testIsValidWithInvalid"></a>testIsValidWithInvalid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest.testEquals"></a>testEquals</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationRuleDTOTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTOTest"></a>
+<h2>TimeValidationRuleDTOTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTOTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTOTest.testHashCodeWithNull"></a>testHashCodeWithNull</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTOTest.testHashCode"></a>testHashCode</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTOTest.testEquals"></a>testEquals</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTOTest.testIsValidWithInvalid"></a>testIsValidWithInvalid</td>
+<td style="text-align: left;">0.027</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTOTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTOTest.testIsValid"></a>testIsValid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.TimeValidationRuleDTOTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0.001</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTOTest"></a>
+<h2>EnumValidationRuleDTOTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTOTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0.007</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTOTest.testHashCodeWithNull"></a>testHashCodeWithNull</td>
+<td style="text-align: left;">0.005</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTOTest.testHashCode"></a>testHashCode</td>
+<td style="text-align: left;">0.003</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTOTest.testEquals"></a>testEquals</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTOTest.testIsValidWithInvalid"></a>testIsValidWithInvalid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTOTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0.007</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTOTest.testSetEnumeratesWithInvalid"></a>testSetEnumeratesWithInvalid</td>
+<td style="text-align: left;">0.004</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTOTest.testSetEnumerates"></a>testSetEnumerates</td>
+<td style="text-align: left;">0.01</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.EnumValidationRuleDTOTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0.003</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest"></a>
+<h2>DoubleValidationRuleDTOTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest.testIsValidWithNullMax"></a>testIsValidWithNullMax</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest.testIsValidWithNullMin"></a>testIsValidWithNullMin</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest.testHashCodeWithNull"></a>testHashCodeWithNull</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest.testSetUnitWithInvalid"></a>testSetUnitWithInvalid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest.testHashCode"></a>testHashCode</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest.testEquals"></a>testEquals</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest.testSetUnit"></a>testSetUnit</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest.testIsValid"></a>testIsValid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest.testIsValidWithInvalid"></a>testIsValidWithInvalid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.number.DoubleValidationRuleDTOTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTOTest"></a>
+<h2>CountryCodeRuleWrapperDTOTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTOTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0.003</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTOTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTOTest.testHashCode"></a>testHashCode</td>
+<td style="text-align: left;">0.002</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTOTest.testEquals"></a>testEquals</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTOTest.testDescription"></a>testDescription</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTOTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0.001</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest.FieldDefinitionsControllerTest"></a>
+<h2>FieldDefinitionsControllerTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.FieldDefinitionsControllerTest.testGetTypes"></a>testGetTypes</td>
+<td style="text-align: left;">2.158</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.FieldDefinitionsControllerTest.testGetFieldDefinitionByNamesWithInvalid"></a>testGetFieldDefinitionByNamesWithInvalid</td>
+<td style="text-align: left;">0.018</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.FieldDefinitionsControllerTest.testGetFieldDefinitionByNames"></a>testGetFieldDefinitionByNames</td>
+<td style="text-align: left;">0.015</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTOTest"></a>
+<h2>StringValidationRuleDTOTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTOTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTOTest.testHashCodeWithNull"></a>testHashCodeWithNull</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTOTest.testHashCode"></a>testHashCode</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTOTest.testEquals"></a>testEquals</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTOTest.testIsValidWithInvalid"></a>testIsValidWithInvalid</td>
+<td style="text-align: left;">0</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTOTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTOTest.testIsValid"></a>testIsValid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.validation.StringValidationRuleDTOTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0.001</td></tr></table></section><section><a id="uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTOTest"></a>
+<h2>FieldDefinitionDTOTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTOTest.testCopyConstructorWithInvalid"></a>testCopyConstructorWithInvalid</td>
+<td style="text-align: left;">0.145</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTOTest.testEqualsWithInvalid"></a>testEqualsWithInvalid</td>
+<td style="text-align: left;">0.025</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTOTest.testCopyConstructor"></a>testCopyConstructor</td>
+<td style="text-align: left;">0.002</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTOTest.testGetRulesPassedWithInvalid"></a>testGetRulesPassedWithInvalid</td>
+<td style="text-align: left;">0.009</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTOTest.testGetRulesPassed"></a>testGetRulesPassed</td>
+<td style="text-align: left;">0.002</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTOTest.testIsValid"></a>testIsValid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTOTest.testIsValidWithInvalid"></a>testIsValidWithInvalid</td>
+<td style="text-align: left;">0.001</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.rest.entities.v1.FieldDefinitionDTOTest.testConstructor"></a>testConstructor</td>
+<td style="text-align: left;">0.001</td></tr></table></section><section><a id="uk.pallas.systems.typr.services.impl.UnitsServiceImplTest"></a>
+<h2>UnitsServiceImplTest</h2>
+<table class="table table-striped">
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.services.impl.UnitsServiceImplTest.testGetUnits"></a>testGetUnits</td>
+<td style="text-align: left;">0.314</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.services.impl.UnitsServiceImplTest.testIsValidFieldDefWrapped"></a>testIsValidFieldDefWrapped</td>
+<td style="text-align: left;">2.155</td></tr>
+<tr class="a">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.services.impl.UnitsServiceImplTest.testIsValidFieldDefWithInvalid"></a>testIsValidFieldDefWithInvalid</td>
+<td style="text-align: left;">0.01</td></tr>
+<tr class="b">
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" /></td>
+<td style="text-align: left;"><a id="TC_uk.pallas.systems.typr.services.impl.UnitsServiceImplTest.testIsValidStringWithInvalid"></a>testIsValidStringWithInvalid</td>
+<td style="text-align: left;">0.01</td></tr></table></section><br /></section>
       </div>
     </main>
 

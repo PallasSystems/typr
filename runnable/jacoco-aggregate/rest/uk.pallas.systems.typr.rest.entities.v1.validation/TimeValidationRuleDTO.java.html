@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>TimeValidationRuleDTO.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">runnable</a> &gt; <a href="../index.html" class="el_bundle">rest</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.rest.entities.v1.validation</a> &gt; <span class="el_source">TimeValidationRuleDTO.java</span></div><h1>TimeValidationRuleDTO.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.rest.entities.v1.validation;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Objects;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import uk.pallas.systems.typr.entities.v1.validation.TimeValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
+
+public class TimeValidationRuleDTO extends AbstractValidationRuleDTO implements TimeValidationRule {
+
+  /** Static Logger for the class. */
+<span class="fc" id="L18">  private static final Log LOGGER = LogFactory.getLog(TimeValidationRuleDTO.class);</span>
+
+  /** A time pattern using Java annotation. */
+  @NotBlank
+  @Size(max = ValidationRuleConstants.MAX_STRING_LENGTH)
+  @Schema(description = &quot;Follows the Java Time Pattern format for SimpleDateFormat&quot;,
+    example = &quot;dd/MM/yy&quot;)
+  private String timePattern;
+
+  /**
+   * Default constructor, description to null and .
+   */
+  public TimeValidationRuleDTO() {
+<span class="nc" id="L31">    this(ValidationRuleConstants.ISO_8601_DATE, null);</span>
+<span class="nc" id="L32">  }</span>
+
+  /**
+   * Constructor, allows us to set the internal abstract fields.
+   *
+   * @param detailedDescription the description of the rule
+   * @param pattern A pattern using Java annotation.
+   */
+  public TimeValidationRuleDTO(final String detailedDescription, final String pattern) {
+<span class="fc" id="L41">    super(detailedDescription);</span>
+
+<span class="fc" id="L43">    this.setTimePattern(pattern);</span>
+<span class="fc" id="L44">  }</span>
+
+  /**
+   * Copy Constructor, passes up to parent Copy Constructor.
+   *
+   * @param data the object to create a duplicate off.
+   */
+  public TimeValidationRuleDTO(final TimeValidationRule data) {
+<span class="pc bpc" id="L52" title="2 of 4 branches missed.">    this(null == data ? null : data.getDescription(), null == data ? null : data.getTimePattern());</span>
+<span class="fc" id="L53">  }</span>
+
+  /**
+   * Compares the supplied object to this one, it checks the supplied object is a FieldDefinition and then checks
+   * the definition applies validation, its name and description to see if they are matching objects.
+   *
+   * @param toCompare the object to compare (can be null or a child class, etc..)
+   * @return false if the name/validation and description fields in a field definition are
+   *               different (or it isn't a field definition).
+   */
+  @Override
+  public boolean equals(final Object toCompare) {
+
+    final boolean result;
+<span class="fc bfc" id="L67" title="All 2 branches covered.">    if (this == toCompare) {</span>
+<span class="fc" id="L68">      result = true;</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">    } else if (toCompare instanceof TimeValidationRule that) {</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">      result = super.equals(toCompare)</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        &amp;&amp; Objects.equals(this.getTimePattern(), that.getTimePattern());</span>
+    } else {
+<span class="fc" id="L73">      result = false;</span>
+    }
+
+<span class="fc" id="L76">    return result;</span>
+  }
+
+  /**
+   * Generates a Unique hashcode for the field definition class.
+   *
+   * @return a valid integer representation of this object,
+   */
+  @Override
+  public int hashCode() {
+<span class="fc" id="L86">    return Objects.hash(super.hashCode(), this.getTimePattern());</span>
+  }
+
+  /**
+   * {@inheritDoc}
+   * @return representation of the time pattern held in the rule.
+   */
+  @Override
+  public String getTimePattern() {
+<span class="fc" id="L95">    return this.timePattern;</span>
+  }
+
+  /**
+   * {@inheritDoc}
+   * @param pattern A pattern using Java annotation.
+   */
+  @Override
+  public void setTimePattern(final String pattern) {
+<span class="pc bpc" id="L104" title="2 of 4 branches missed.">    if (null == pattern || pattern.isBlank()) {</span>
+<span class="nc" id="L105">      this.timePattern = ValidationRuleConstants.ISO_8601_DATE;</span>
+    } else {
+<span class="fc" id="L107">      this.timePattern = pattern;</span>
+    }
+<span class="fc" id="L109">  }</span>
+
+  /**
+   * Checks the incoming object is based on a string and can be converted into a date using the time pattern
+   * supplied with the object.
+   *
+   * @param toTest to test is valid
+   * @return false if the supplied object can't be converted.
+   */
+  @Override
+  public boolean isValid(final Object toTest) {
+
+<span class="fc" id="L121">    final DateFormat formattter = new SimpleDateFormat(this.getTimePattern());</span>
+<span class="fc" id="L122">    formattter.setLenient(false);</span>
+
+<span class="fc" id="L124">    boolean result = false;</span>
+    try {
+<span class="fc bfc" id="L126" title="All 2 branches covered.">      if (toTest instanceof String dateString) {</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">        result = null != formattter.parse(dateString);</span>
+      }
+<span class="fc" id="L129">    } catch (final ParseException exception) {</span>
+<span class="fc" id="L130">      LOGGER.error(</span>
+<span class="fc" id="L131">        String.format(&quot;Unable to parse: %s to test for date with pattern: %s&quot;, toTest, this.getTimePattern()));</span>
+<span class="fc" id="L132">    }</span>
+
+<span class="fc" id="L134">    return result;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

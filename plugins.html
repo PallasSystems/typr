@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="generator" content="#generatedBy()" />
-    <title>Typr &#x2013; Project Plugins</title>
+    <title>Typr – Project Plugins</title>
     <link rel="icon" href="./img/favicons/favicon.ico">
     <!-- CSS Stylesheets, site.css is included so downstream projects can override them as appropriate. -->
     <link rel="stylesheet" href="./css/bootstrap.min.css" />
@@ -100,6 +100,8 @@
                    <a href="project-reports.html" id="Project ReportsDropdownLink" title="Project Reports"  class="dropdown-item" >Project Reports</a>
                    <ul id="Project DocumentationMenuSubMenuDropdown" class="dropdown-menu submenu">
                      <li class="nav-item dropdown-item">
+                       <a href="checkstyle-aggregate.html" id="CheckstyleDropdownLink" title="Checkstyle"  class="dropdown-item" >Checkstyle</a>                     </li>
+                     <li class="nav-item dropdown-item">
                        <a href="cpd.html" id="CPDDropdownLink" title="CPD"  class="dropdown-item" >CPD</a>                     </li>
                      <li class="nav-item dropdown-item">
                        <a href="pmd.html" id="PMDDropdownLink" title="PMD"  class="dropdown-item" >PMD</a>                     </li>
@@ -113,6 +115,8 @@
                        <a href="dev-activity.html" id="Developer ActivityDropdownLink" title="Developer Activity"  class="dropdown-item" >Developer Activity</a>                     </li>
                      <li class="nav-item dropdown-item">
                        <a href="xref/index.html" id="Source XrefDropdownLink" title="Source Xref"  class="dropdown-item" >Source Xref</a>                     </li>
+                     <li class="nav-item dropdown-item">
+                       <a href="xref-test/index.html" id="Test Source XrefDropdownLink" title="Test Source Xref"  class="dropdown-item" >Test Source Xref</a>                     </li>
                      <li class="nav-item dropdown-item">
                        <a href="surefire-report.html" id="Surefire ReportDropdownLink" title="Surefire Report"  class="dropdown-item" >Surefire Report</a>                     </li>
                    </ul>
@@ -141,11 +145,11 @@
 <tr class="a">
 <td style="text-align: left;">org.apache.maven.plugins</td>
 <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-dependency-plugin/">maven-dependency-plugin</a></td>
-<td>3.4.0</td></tr>
+<td>3.5.0</td></tr>
 <tr class="b">
 <td style="text-align: left;">org.apache.maven.plugins</td>
 <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-deploy-plugin/">maven-deploy-plugin</a></td>
-<td>3.0.0</td></tr>
+<td>3.1.1</td></tr>
 <tr class="a">
 <td style="text-align: left;">org.apache.maven.plugins</td>
 <td><a class="externalLink" href="http://maven.apache.org/plugins/maven-install-plugin/">maven-install-plugin</a></td>
@@ -153,11 +157,11 @@
 <tr class="b">
 <td style="text-align: left;">org.apache.maven.plugins</td>
 <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-resources-plugin/">maven-resources-plugin</a></td>
-<td>3.3.0</td></tr>
+<td>3.3.1</td></tr>
 <tr class="a">
 <td style="text-align: left;">org.apache.maven.plugins</td>
 <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-site-plugin/">maven-site-plugin</a></td>
-<td>4.0.0-M4</td></tr></table></section><section>
+<td>4.0.0-M7</td></tr></table></section><section>
 <h1>Project Report Plugins</h1><a id="Project_Report_Plugins"></a>
 <table class="table table-striped">
 <tr class="a">
@@ -174,28 +178,32 @@
 <td>2.3</td></tr>
 <tr class="b">
 <td style="text-align: left;">org.apache.maven.plugins</td>
-<td><a class="externalLink" href="https://maven.apache.org/jxr/maven-jxr-plugin/">maven-jxr-plugin</a></td>
+<td><a class="externalLink" href="https://maven.apache.org/plugins/maven-checkstyle-plugin/">maven-checkstyle-plugin</a></td>
 <td>3.3.0</td></tr>
 <tr class="a">
 <td style="text-align: left;">org.apache.maven.plugins</td>
-<td><a class="externalLink" href="https://maven.apache.org/plugins/maven-pmd-plugin/">maven-pmd-plugin</a></td>
-<td>3.19.0</td></tr>
+<td><a class="externalLink" href="https://maven.apache.org/jxr/maven-jxr-plugin/">maven-jxr-plugin</a></td>
+<td>3.3.0</td></tr>
 <tr class="b">
 <td style="text-align: left;">org.apache.maven.plugins</td>
-<td><a class="externalLink" href="https://maven.apache.org/plugins/maven-project-info-reports-plugin/">maven-project-info-reports-plugin</a></td>
-<td>3.4.1</td></tr>
+<td><a class="externalLink" href="https://maven.apache.org/plugins/maven-pmd-plugin/">maven-pmd-plugin</a></td>
+<td>3.20.0</td></tr>
 <tr class="a">
 <td style="text-align: left;">org.apache.maven.plugins</td>
-<td><a class="externalLink" href="https://maven.apache.org/surefire/maven-surefire-report-plugin/">maven-surefire-report-plugin</a></td>
-<td>3.0.0-M7</td></tr>
+<td><a class="externalLink" href="https://maven.apache.org/plugins/maven-project-info-reports-plugin/">maven-project-info-reports-plugin</a></td>
+<td>3.4.3</td></tr>
 <tr class="b">
+<td style="text-align: left;">org.apache.maven.plugins</td>
+<td><a class="externalLink" href="https://maven.apache.org/surefire/maven-surefire-report-plugin/">maven-surefire-report-plugin</a></td>
+<td>3.0.0</td></tr>
+<tr class="a">
 <td style="text-align: left;">org.codehaus.mojo</td>
 <td><a class="externalLink" href="https://www.mojohaus.org/taglist-maven-plugin/">taglist-maven-plugin</a></td>
 <td>3.0.0</td></tr>
-<tr class="a">
+<tr class="b">
 <td style="text-align: left;">org.jacoco</td>
 <td><a class="externalLink" href="https://www.jacoco.org/jacoco/trunk/doc/maven.html">jacoco-maven-plugin</a></td>
-<td>0.8.8</td></tr></table></section>
+<td>0.8.9</td></tr></table></section>
       </div>
     </main>
 

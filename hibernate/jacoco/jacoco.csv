@@ -1,0 +1,11 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+hibernate,uk.pallas.systems.typr.domain.entities.v1.validation,StringValidationRuleDomain,23,114,6,14,7,25,9,12,3,8
+hibernate,uk.pallas.systems.typr.domain.entities.v1.validation,EnumValidationRuleDomain,12,127,6,16,3,29,7,13,1,8
+hibernate,uk.pallas.systems.typr.domain.entities.v1.validation,AbstractValidationRuleDomain,23,44,4,2,7,13,6,6,3,6
+hibernate,uk.pallas.systems.typr.domain.entities.v1.validation,TimeValidationRuleDomain,14,127,6,14,3,28,7,12,1,8
+hibernate,uk.pallas.systems.typr.domain.entities.v1.validation.wrapper,CountryCodeRuleWrapperDomain,162,264,22,38,34,57,27,27,9,15
+hibernate,uk.pallas.systems.typr.services,FieldDefinitionServiceImpl,33,0,0,0,7,0,5,0,5,0
+hibernate,uk.pallas.systems.typr.domain.entities.v1.validation.number,AbstractNumberValidationRuleDomain,4,209,4,38,2,39,5,29,1,12
+hibernate,uk.pallas.systems.typr.domain.entities.v1.validation.number,LongValidationRuleDomain,0,87,1,13,0,19,1,11,0,5
+hibernate,uk.pallas.systems.typr.domain.entities.v1.validation.number,DoubleValidationRuleDomain,12,43,2,4,3,14,2,6,0,5
+hibernate,uk.pallas.systems.typr.domain.entities.v1,FieldDefinitionDomain,106,399,18,38,20,80,19,27,4,14

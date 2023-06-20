@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="generator" content="#generatedBy()" />
-    <title>hibernate &#x2013; SpotBugs Bug Detector Report</title>
+    <title>hibernate – SpotBugs Bug Detector Report</title>
     <link rel="icon" href="./img/favicons/favicon.ico">
     <!-- CSS Stylesheets, site.css is included so downstream projects can override them as appropriate. -->
     <link rel="stylesheet" href="./css/bootstrap.min.css" />
@@ -46,8 +46,8 @@
 <th>Errors</th>
 <th>Missing Classes</th></tr>
 <tr class="b">
-<td>16</td>
-<td>15</td>
+<td>11</td>
+<td>1</td>
 <td>0</td>
 <td>0</td></tr></table></section><section>
 <h1>Files</h1>
@@ -56,21 +56,9 @@
 <th>Class</th>
 <th>Bugs</th></tr>
 <tr class="b">
-<td><a href="#uk.pallas.systems.typr.domain.entities.v1.MultiValidationRuleFieldDefinitionDomain">uk.pallas.systems.typr.domain.entities.v1.MultiValidationRuleFieldDefinitionDomain</a></td>
-<td>1</td></tr>
-<tr class="a">
-<td><a href="#uk.pallas.systems.typr.domain.entities.v1.SingleValidationRuleFieldDefinitionDomain">uk.pallas.systems.typr.domain.entities.v1.SingleValidationRuleFieldDefinitionDomain</a></td>
-<td>4</td></tr>
-<tr class="b">
-<td><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.FieldDefinitionDomainFactory">uk.pallas.systems.typr.domain.entities.v1.validation.FieldDefinitionDomainFactory</a></td>
-<td>4</td></tr>
-<tr class="a">
-<td><a href="#uk.pallas.systems.typr.domain.entities.v1.validation.multi.CountryCodeRuleWrapperDomain">uk.pallas.systems.typr.domain.entities.v1.validation.multi.CountryCodeRuleWrapperDomain</a></td>
-<td>4</td></tr>
-<tr class="b">
-<td><a href="#uk.pallas.systems.typr.services.FieldDefinitionServicesImpl">uk.pallas.systems.typr.services.FieldDefinitionServicesImpl</a></td>
-<td>2</td></tr></table></section><a name="uk.pallas.systems.typr.domain.entities.v1.MultiValidationRuleFieldDefinitionDomain"></a><section>
-<h2>uk.pallas.systems.typr.domain.entities.v1.MultiValidationRuleFieldDefinitionDomain</h2>
+<td><a href="#uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomain">uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomain</a></td>
+<td>1</td></tr></table></section><a name="uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomain"></a><section>
+<h2>uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomain</h2>
 <table class="table table-striped">
 <tr class="a">
 <th>Bug</th>
@@ -79,126 +67,10 @@
 <th>Line</th>
 <th>Priority</th></tr>
 <tr class="b">
-<td>Redundant nullcheck of results, which is known to be non-null in uk.pallas.systems.typr.domain.entities.v1.MultiValidationRuleFieldDefinitionDomain.isValid(Object)</td>
+<td>Redundant nullcheck of results, which is known to be non-null in uk.pallas.systems.typr.domain.entities.v1.FieldDefinitionDomain.isValid(Object)</td>
 <td>STYLE</td>
 <td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE">RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/MultiValidationRuleFieldDefinitionDomain.html#L97">97</a></td>
-<td>Low</td></tr></table></section><a name="uk.pallas.systems.typr.domain.entities.v1.SingleValidationRuleFieldDefinitionDomain"></a><section>
-<h2>uk.pallas.systems.typr.domain.entities.v1.SingleValidationRuleFieldDefinitionDomain</h2>
-<table class="table table-striped">
-<tr class="a">
-<th>Bug</th>
-<th>Category</th>
-<th>Details</th>
-<th>Line</th>
-<th>Priority</th></tr>
-<tr class="b">
-<td>uk.pallas.systems.typr.domain.entities.v1.SingleValidationRuleFieldDefinitionDomain.getDoubleRule() may expose internal representation by returning SingleValidationRuleFieldDefinitionDomain.doubleRule</td>
-<td>MALICIOUS_CODE</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#EI_EXPOSE_REP">EI_EXPOSE_REP</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/SingleValidationRuleFieldDefinitionDomain.html#L161">161</a></td>
-<td>Medium</td></tr>
-<tr class="a">
-<td>uk.pallas.systems.typr.domain.entities.v1.SingleValidationRuleFieldDefinitionDomain.getEnumRule() may expose internal representation by returning SingleValidationRuleFieldDefinitionDomain.enumRule</td>
-<td>MALICIOUS_CODE</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#EI_EXPOSE_REP">EI_EXPOSE_REP</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/SingleValidationRuleFieldDefinitionDomain.html#L179">179</a></td>
-<td>Medium</td></tr>
-<tr class="b">
-<td>uk.pallas.systems.typr.domain.entities.v1.SingleValidationRuleFieldDefinitionDomain.getLongRule() may expose internal representation by returning SingleValidationRuleFieldDefinitionDomain.longRule</td>
-<td>MALICIOUS_CODE</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#EI_EXPOSE_REP">EI_EXPOSE_REP</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/SingleValidationRuleFieldDefinitionDomain.html#L197">197</a></td>
-<td>Medium</td></tr>
-<tr class="a">
-<td>uk.pallas.systems.typr.domain.entities.v1.SingleValidationRuleFieldDefinitionDomain.getStringRule() may expose internal representation by returning SingleValidationRuleFieldDefinitionDomain.stringRule</td>
-<td>MALICIOUS_CODE</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#EI_EXPOSE_REP">EI_EXPOSE_REP</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/SingleValidationRuleFieldDefinitionDomain.html#L215">215</a></td>
-<td>Medium</td></tr></table></section><a name="uk.pallas.systems.typr.domain.entities.v1.validation.FieldDefinitionDomainFactory"></a><section>
-<h2>uk.pallas.systems.typr.domain.entities.v1.validation.FieldDefinitionDomainFactory</h2>
-<table class="table table-striped">
-<tr class="a">
-<th>Bug</th>
-<th>Category</th>
-<th>Details</th>
-<th>Line</th>
-<th>Priority</th></tr>
-<tr class="b">
-<td>instanceof will always return true for all non-null values in uk.pallas.systems.typr.domain.entities.v1.validation.FieldDefinitionDomainFactory.getCategoryDomain(Category), since all uk.pallas.systems.typr.entities.v1.Category are instances of uk.pallas.systems.typr.entities.v1.Category</td>
-<td>STYLE</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#BC_VACUOUS_INSTANCEOF">BC_VACUOUS_INSTANCEOF</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/validation/FieldDefinitionDomainFactory.html#L42">42</a></td>
-<td>Medium</td></tr>
-<tr class="a">
-<td>instanceof will always return true for all non-null values in uk.pallas.systems.typr.domain.entities.v1.validation.FieldDefinitionDomainFactory.getFieldDefinitionDomain(FieldDefinition), since all uk.pallas.systems.typr.entities.v1.FieldDefinition are instances of uk.pallas.systems.typr.entities.v1.FieldDefinition</td>
-<td>STYLE</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#BC_VACUOUS_INSTANCEOF">BC_VACUOUS_INSTANCEOF</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/validation/FieldDefinitionDomainFactory.html#L25">25</a></td>
-<td>Medium</td></tr>
-<tr class="b">
-<td>uk.pallas.systems.typr.domain.entities.v1.validation.FieldDefinitionDomainFactory.getCategoryDomain(Category) does an unnecessary type check using instanceof operator when it can be determined statically</td>
-<td>CORRECTNESS</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#SIO_SUPERFLUOUS_INSTANCEOF">SIO_SUPERFLUOUS_INSTANCEOF</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/validation/FieldDefinitionDomainFactory.html#L42">42</a></td>
-<td>Low</td></tr>
-<tr class="a">
-<td>uk.pallas.systems.typr.domain.entities.v1.validation.FieldDefinitionDomainFactory.getFieldDefinitionDomain(FieldDefinition) does an unnecessary type check using instanceof operator when it can be determined statically</td>
-<td>CORRECTNESS</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#SIO_SUPERFLUOUS_INSTANCEOF">SIO_SUPERFLUOUS_INSTANCEOF</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/validation/FieldDefinitionDomainFactory.html#L25">25</a></td>
-<td>Low</td></tr></table></section><a name="uk.pallas.systems.typr.domain.entities.v1.validation.multi.CountryCodeRuleWrapperDomain"></a><section>
-<h2>uk.pallas.systems.typr.domain.entities.v1.validation.multi.CountryCodeRuleWrapperDomain</h2>
-<table class="table table-striped">
-<tr class="a">
-<th>Bug</th>
-<th>Category</th>
-<th>Details</th>
-<th>Line</th>
-<th>Priority</th></tr>
-<tr class="b">
-<td>uk.pallas.systems.typr.domain.entities.v1.validation.multi.CountryCodeRuleWrapperDomain.getDoubleRule() may expose internal representation by returning CountryCodeRuleWrapperDomain.doubleRule</td>
-<td>MALICIOUS_CODE</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#EI_EXPOSE_REP">EI_EXPOSE_REP</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/validation/multi/CountryCodeRuleWrapperDomain.html#L204">204</a></td>
-<td>Medium</td></tr>
-<tr class="a">
-<td>uk.pallas.systems.typr.domain.entities.v1.validation.multi.CountryCodeRuleWrapperDomain.getEnumRule() may expose internal representation by returning CountryCodeRuleWrapperDomain.enumRule</td>
-<td>MALICIOUS_CODE</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#EI_EXPOSE_REP">EI_EXPOSE_REP</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/validation/multi/CountryCodeRuleWrapperDomain.html#L222">222</a></td>
-<td>Medium</td></tr>
-<tr class="b">
-<td>uk.pallas.systems.typr.domain.entities.v1.validation.multi.CountryCodeRuleWrapperDomain.getLongRule() may expose internal representation by returning CountryCodeRuleWrapperDomain.longRule</td>
-<td>MALICIOUS_CODE</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#EI_EXPOSE_REP">EI_EXPOSE_REP</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/validation/multi/CountryCodeRuleWrapperDomain.html#L240">240</a></td>
-<td>Medium</td></tr>
-<tr class="a">
-<td>uk.pallas.systems.typr.domain.entities.v1.validation.multi.CountryCodeRuleWrapperDomain.getStringRule() may expose internal representation by returning CountryCodeRuleWrapperDomain.stringRule</td>
-<td>MALICIOUS_CODE</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#EI_EXPOSE_REP">EI_EXPOSE_REP</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/validation/multi/CountryCodeRuleWrapperDomain.html#L258">258</a></td>
-<td>Medium</td></tr></table></section><a name="uk.pallas.systems.typr.services.FieldDefinitionServicesImpl"></a><section>
-<h2>uk.pallas.systems.typr.services.FieldDefinitionServicesImpl</h2>
-<table class="table table-striped">
-<tr class="a">
-<th>Bug</th>
-<th>Category</th>
-<th>Details</th>
-<th>Line</th>
-<th>Priority</th></tr>
-<tr class="b">
-<td>instanceof will always return true for all non-null values in uk.pallas.systems.typr.services.FieldDefinitionServicesImpl.saveFieldDefintion(FieldDefinition), since all uk.pallas.systems.typr.entities.v1.FieldDefinition are instances of uk.pallas.systems.typr.entities.v1.FieldDefinition</td>
-<td>STYLE</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#BC_VACUOUS_INSTANCEOF">BC_VACUOUS_INSTANCEOF</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/services/FieldDefinitionServicesImpl.html#L83">83</a></td>
-<td>Medium</td></tr>
-<tr class="a">
-<td>uk.pallas.systems.typr.services.FieldDefinitionServicesImpl.saveFieldDefintion(FieldDefinition) does an unnecessary type check using instanceof operator when it can be determined statically</td>
-<td>CORRECTNESS</td>
-<td><a class="externalLink" href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html#SIO_SUPERFLUOUS_INSTANCEOF">SIO_SUPERFLUOUS_INSTANCEOF</a></td>
-<td><a href="./xref/uk/pallas/systems/typr/services/FieldDefinitionServicesImpl.html#L83">83</a></td>
+<td><a href="./xref/uk/pallas/systems/typr/domain/entities/v1/FieldDefinitionDomain.html#L223">223</a></td>
 <td>Low</td></tr></table></section>
       </div>
     </main>

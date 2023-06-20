@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UnitsServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">units</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.services.impl</a> &gt; <span class="el_source">UnitsServiceImpl.java</span></div><h1>UnitsServiceImpl.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.services.impl;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import javax.measure.Unit;
+import javax.measure.quantity.Frequency;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Service;
+import si.uom.NonSI;
+import si.uom.SI;
+import tech.units.indriya.unit.Units;
+import uk.pallas.systems.typr.entities.v1.FieldDefinition;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
+import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
+import uk.pallas.systems.typr.services.UnitsService;
+
+@Service
+public class UnitsServiceImpl implements UnitsService {
+  /** Static Logger for the class. */
+<span class="fc" id="L26">  private static final Log LOGGER = LogFactory.getLog(UnitsServiceImpl.class);</span>
+
+  /** Cache of units against their names. **/
+  private final Map&lt;String, Unit&lt;?&gt;&gt; units;
+
+<span class="fc" id="L31">  public UnitsServiceImpl() {</span>
+<span class="fc" id="L32">    this.units = new ConcurrentHashMap&lt;&gt;();</span>
+
+<span class="fc" id="L34">    final Unit&lt;Frequency&gt; rateOfTurn = NonSI.DEGREE_ANGLE.divide(Units.MINUTE).asType(Frequency.class);</span>
+<span class="fc" id="L35">    this.units.put(&quot;Degree Angle per Minute&quot;, rateOfTurn);</span>
+
+    // Pull in the other units into a unified list
+<span class="fc" id="L38">    final SI siUnits = SI.getInstance();</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">    if (null != siUnits) {</span>
+<span class="fc" id="L40">      this.processUnits(siUnits.getUnits());</span>
+    }
+
+<span class="fc" id="L43">    final NonSI nonSIUnits = NonSI.getInstance();</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">    if (null != nonSIUnits) {</span>
+<span class="fc" id="L45">      this.processUnits(nonSIUnits.getUnits());</span>
+    }
+
+<span class="fc" id="L48">    final Units unitsInstance = Units.getInstance();</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">    if (null != unitsInstance) {</span>
+<span class="fc" id="L50">      this.processUnits(unitsInstance.getUnits());</span>
+    }
+<span class="fc" id="L52">  }</span>
+
+  /**
+   * Designed to iterate over a collection of units and add them to the services internal cache, so we can
+   * process a single list of units rather than having to check multiple places.
+   *
+   * @param units the units to process.
+   */
+  private void processUnits(final Set&lt;Unit&lt;?&gt;&gt; values) {
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">    if (null == values) {</span>
+<span class="nc" id="L62">      LOGGER.error(&quot;processUnits - Called Measure Unit library and did not get an associated units&quot;);</span>
+    } else {
+<span class="fc bfc" id="L64" title="All 2 branches covered.">      for (final Unit&lt;?&gt; value : values) {</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (null != value) {</span>
+<span class="pc bpc" id="L66" title="1 of 4 branches missed.">          if (null == value.getName() || value.getName().isBlank()) {</span>
+<span class="fc" id="L67">            this.units.put(value.toString(), value);</span>
+          } else {
+<span class="fc" id="L69">            this.units.put(value.getName(), value);</span>
+          }
+        }
+<span class="fc" id="L72">      }</span>
+    }
+<span class="fc" id="L74">  }</span>
+
+  /**
+   * {@inheritDoc}
+   * @return a collection of types collected from the measurement library.
+   */
+  @Override
+  public Collection&lt;String&gt; getUnits() {
+<span class="fc" id="L82">    return this.units.keySet();</span>
+  }
+
+  public Unit&lt;?&gt; getUnit(final String unitName) {
+<span class="fc" id="L86">    Unit&lt;?&gt; unit = null;</span>
+<span class="fc bfc" id="L87" title="All 4 branches covered.">    if (null == unitName || unitName.isBlank()) {</span>
+<span class="fc" id="L88">      LOGGER.trace(&quot;getUnits - Invalid Unit Name was supplied&quot;);</span>
+    } else {
+<span class="fc" id="L90">      unit = this.units.get(unitName);</span>
+    }
+
+<span class="fc" id="L93">    return unit;</span>
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @param unitName the name to perform a lookup on
+   * @return false if the name can't be found.
+   */
+  @Override
+  public boolean isValid(final String unitName) {
+<span class="pc bpc" id="L104" title="1 of 4 branches missed.">    return ValidationRuleConstants.NO_UNITS.equals(unitName) || null != this.getUnit(unitName);</span>
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @param definition the object to check
+   * @return false if the name can't be found.
+   */
+  @Override
+  public boolean isValid(final FieldDefinition definition) {
+    final boolean result;
+
+<span class="pc bpc" id="L117" title="2 of 6 branches missed.">    if (null == definition || null == definition.getRules() || definition.getRules().isEmpty()) {</span>
+<span class="fc" id="L118">      result = false;</span>
+    } else {
+<span class="fc" id="L120">      boolean valid = true;</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">      for (final ValidationRule rule : definition.getRules()) {</span>
+<span class="fc" id="L122">        valid = this.isValid(rule);</span>
+
+        // if we find an invalid rule then stop and assume the whole definition isn't valid.
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if (!valid) {</span>
+<span class="nc" id="L126">          break;</span>
+        }
+<span class="fc" id="L128">      }</span>
+
+<span class="fc" id="L130">      result = valid;</span>
+    }
+
+<span class="fc" id="L133">    return result;</span>
+  }
+
+  /**
+   * Checks if a Numeric based rule is found and if the unit associated with it is valid.
+   * If the rule is wrapped this will extract and test the internal rule.
+   * @param rule the rule to extract the unit value from.
+   * @return this will return true if no numeric rule, or true if a numeric rule has a valid unit
+   */
+  private boolean isValid(final ValidationRule rule) {
+    final boolean valid;
+
+<span class="fc bfc" id="L145" title="All 2 branches covered.">    if (rule instanceof LongValidationRule) {</span>
+<span class="fc" id="L146">      valid = this.isValid(((LongValidationRule) rule).getUnit());</span>
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">    } else if (rule instanceof DoubleValidationRule) {</span>
+<span class="nc" id="L148">      valid = this.isValid(((DoubleValidationRule) rule).getUnit());</span>
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">    } else if (rule instanceof CountryCodeWrapper wrapper) {</span>
+<span class="fc" id="L150">      valid = this.isValid(wrapper.getRule());</span>
+    } else {
+<span class="nc" id="L152">      valid = true;</span>
+    }
+
+<span class="fc" id="L155">    return valid;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

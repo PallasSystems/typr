@@ -2,169 +2,150 @@
 
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
+import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 
 /**
  * Some field definitions have a limited number of allowed string values and so this definition allows us to maintain
  * a list rather than a regular expression.
  */
 @Schema(description = &quot;Some field definitions have a limited number of allowed string values and so this definition &quot;
-                      + &quot;allows us to maintain a list rather than a regular expression. &quot;)
+  + &quot;allows us to maintain a list rather than a regular expression. &quot;)
 public class EnumValidationRuleDTO extends AbstractValidationRuleDTO implements EnumValidationRule {
 
-    @ArraySchema(schema = @Schema(description = &quot;List of enumerates, which are allowed.&quot;,
-            implementation= String.class, example=&quot;UK&quot;))
-    private Collection&lt; String &gt; enumerates;
+  /** List of values which are allowed within the field. */
+  @ArraySchema(schema = @Schema(description = &quot;List of enumerates, which are allowed.&quot;,
+    implementation = String.class, example = &quot;UK&quot;))
+  private final Collection&lt;String&gt; enumerates;
 
 
-    /**
-     * Default constructor, sets everything to null and makes validation optional.
-     */
-    public EnumValidationRuleDTO() {
-<span class="nc" id="L28">        this(null, null);</span>
-<span class="nc" id="L29">    }</span>
+  /**
+   * Default constructor, sets everything to null and makes validation optional.
+   */
+  public EnumValidationRuleDTO() {
+<span class="nc" id="L28">    this(null, null);</span>
+<span class="nc" id="L29">  }</span>
 
-    /**
-     * Constructor, allows us to set the internal abstract fields
-     * @param detailedDescription the description of the rule
-     * @param data Enumerate values we need to support.
-     */
-    public EnumValidationRuleDTO(final String detailedDescription, final Collection&lt;String&gt; data) {
-<span class="nc" id="L37">        super(detailedDescription);</span>
+  /**
+   * Constructor, allows us to set the internal abstract fields.
+   *
+   * @param detailedDescription the description of the rule
+   * @param data                Enumerate values we need to support.
+   */
+  public EnumValidationRuleDTO(final String detailedDescription, final Collection&lt;String&gt; data) {
+<span class="fc" id="L38">    super(detailedDescription);</span>
 
-<span class="nc" id="L39">        this.enumerates = new HashSet&lt;&gt;();</span>
-<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (null != data) {</span>
-<span class="nc" id="L41">            this.enumerates.addAll(data);</span>
-        }
-<span class="nc" id="L43">    }</span>
+<span class="fc" id="L40">    this.enumerates = new HashSet&lt;&gt;();</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">    if (null != data) {</span>
+<span class="fc" id="L42">      this.enumerates.addAll(data);</span>
+    }
+<span class="fc" id="L44">  }</span>
 
-    /**
-     * Copy Constructor, passes up to parent Copy Constructor.
-     * @param data the object to create a duplicate off.
-     */
-    public EnumValidationRuleDTO(final EnumValidationRule data) {
-<span class="nc bnc" id="L50" title="All 4 branches missed.">        this(null == data ? null : data.getDescription(), null == data ? null : data.getEnumerates());</span>
-<span class="nc" id="L51">    }</span>
+  /**
+   * Copy Constructor, passes up to parent Copy Constructor.
+   *
+   * @param data the object to create a duplicate off.
+   */
+  public EnumValidationRuleDTO(final EnumValidationRule data) {
+<span class="pc bpc" id="L52" title="2 of 4 branches missed.">    this(null == data ? null : data.getDescription(), null == data ? null : data.getEnumerates());</span>
+<span class="fc" id="L53">  }</span>
 
-    /**
-     * Compares the supplied object to this one, it checks the supplied object is a FieldDefinition and then checks
-     * the definition applies validation, its name and description to see if they are matching objects.
-     *
-     * @param toCompare the object to compare (can be null or a child class, etc..)
-     * @return false if the name/validation and description fields in a field definition are
-     *        different (or it isn't a field definition).
-     */
-    @Override
-    public boolean equals(final Object toCompare) {
+  /**
+   * Compares the supplied object to this one, it checks the supplied object is a FieldDefinition and then checks
+   * the definition applies validation, its name and description to see if they are matching objects.
+   *
+   * @param toCompare the object to compare (can be null or a child class, etc..)
+   * @return false if the name/validation and description fields in a field definition are
+   *               different (or it isn't a field definition).
+   */
+  @Override
+  public boolean equals(final Object toCompare) {
 
-        final boolean result;
-<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (this == toCompare) {</span>
-<span class="nc" id="L66">            result = true;</span>
-<span class="nc bnc" id="L67" title="All 2 branches missed.">        } else if (toCompare instanceof EnumValidationRule) {</span>
-<span class="nc" id="L68">            final EnumValidationRule that = (EnumValidationRule) toCompare;</span>
-<span class="nc bnc" id="L69" title="All 2 branches missed.">            result = super.equals(toCompare)</span>
-<span class="nc bnc" id="L70" title="All 2 branches missed.">                    &amp;&amp; this.getEnumerates().containsAll(that.getEnumerates())</span>
-<span class="nc bnc" id="L71" title="All 2 branches missed.">                    &amp;&amp; that.getEnumerates().containsAll(this.getEnumerates());</span>
-<span class="nc" id="L72">        } else {</span>
-<span class="nc" id="L73">            result = false;</span>
-        }
-
-<span class="nc" id="L76">        return result;</span>
+    final boolean result;
+<span class="fc bfc" id="L67" title="All 2 branches covered.">    if (this == toCompare) {</span>
+<span class="fc" id="L68">      result = true;</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">    } else if (toCompare instanceof EnumValidationRule that) {</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">      result = super.equals(toCompare)</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        &amp;&amp; this.getEnumerates().containsAll(that.getEnumerates())</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        &amp;&amp; that.getEnumerates().containsAll(this.getEnumerates());</span>
+    } else {
+<span class="fc" id="L74">      result = false;</span>
     }
 
-    /**
-     * Generates a Unique hashcode for the field definition class.
-     * @return a valid integer representation of this object,
-     */
-    @Override
-    public int hashCode() {
-<span class="nc" id="L85">        return Objects.hash(super.hashCode(), this.getEnumerates());</span>
+<span class="fc" id="L77">    return result;</span>
+  }
+
+  /**
+   * Generates a Unique hashcode for the field definition class.
+   *
+   * @return a valid integer representation of this object,
+   */
+  @Override
+  public int hashCode() {
+<span class="fc" id="L87">    return Objects.hash(super.hashCode(), this.getEnumerates());</span>
+  }
+
+
+  @Override
+  public Collection&lt;String&gt; getEnumerates() {
+<span class="fc" id="L93">    return new HashSet&lt;&gt;(this.enumerates);</span>
+  }
+
+  @Override
+  public void setEnumerates(final Collection&lt;String&gt; enums) {
+<span class="fc bfc" id="L98" title="All 2 branches covered.">    if (null == enums) {</span>
+<span class="fc" id="L99">      this.enumerates.clear();</span>
+    } else {
+<span class="fc" id="L101">      this.enumerates.clear();</span>
+<span class="fc" id="L102">      this.enumerates.addAll(enums);</span>
+    }
+<span class="fc" id="L104">  }</span>
+
+  /**
+   * Is the supplied test object something that matches against our field definition regular expression?
+   * &lt;p&gt;
+   * If validation optional is set to true this will return true, if the supplied object is null, this will always
+   * return false. Otherwise this will call toString and then match the field definition regex tp confirm the object
+   * matches our desired value.
+   *
+   * @param toTest to test is valid
+   * @return false if the object fails the validation match.
+   */
+  @Override
+  public boolean isValid(final Object toTest) {
+    final boolean result;
+
+<span class="fc bfc" id="L120" title="All 2 branches covered.">    if (toTest instanceof String) {</span>
+      // Use to string as it leaves things the most flexible in our regex comparison.
+<span class="fc" id="L122">      result = this.isValid((String) toTest);</span>
+    } else {
+<span class="fc" id="L124">      result = false;</span>
     }
 
+<span class="fc" id="L127">    return result;</span>
+  }
 
-    @Override
-    public Collection&lt;String&gt; getEnumerates() {
-<span class="nc" id="L91">        return new HashSet&lt;&gt;(this.enumerates);</span>
+  /**
+   * Is the supplied test object something that matches against our field definition regular expression?
+   * &lt;p&gt;
+   * If validation optional is set to true this will return true, if the supplied object is null, this will always
+   * return false. Otherwise it will call matches on the supplied string.
+   *
+   * @param toTest to test is valid
+   * @return false if the object fails the validation match.
+   */
+  public boolean isValid(final String toTest) {
+    final boolean result;
+
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">    if (null == toTest) {</span>
+<span class="nc" id="L143">      result = false;</span>
+    } else {
+<span class="fc" id="L145">      result = this.getEnumerates().contains(toTest);</span>
     }
 
-    @Override
-    public void setEnumerates(Collection&lt;String&gt; enumerates) {
-<span class="nc bnc" id="L96" title="All 2 branches missed.">        if (null == enumerates) {</span>
-<span class="nc" id="L97">            this.enumerates.clear();</span>
-        } else {
-<span class="nc" id="L99">            this.enumerates.clear();</span>
-<span class="nc" id="L100">            this.enumerates.addAll(enumerates);</span>
-        }
-<span class="nc" id="L102">    }</span>
-
-    @Override
-    public String getDetectRegex() {
-<span class="nc" id="L106">        return null;</span>
-    }
-
-    @Override
-    public void setDetectRegex(String validation) {
-
-<span class="nc" id="L112">    }</span>
-
-    @Override
-    public String getExtractRegex() {
-<span class="nc" id="L116">        return null;</span>
-    }
-
-    @Override
-    public void setExtractRegex(String validation) {
-
-<span class="nc" id="L122">    }</span>
-
-    /**
-     * Is the supplied test object something that matches against our field definition regular expression?
-     *
-     * If validation optional is set to true this will return true, if the supplied object is null, this will always
-     * return false. Otherwise this will call toString and then match the field definition regex tp confirm the object
-     * matches our desired value.
-     *
-     * @param toTest to test is valid
-     * @return false if the object fails the validation match.
-     */
-    @Override
-    public boolean isValid(final Object toTest) {
-        final boolean result;
-
-<span class="nc bnc" id="L138" title="All 2 branches missed.">        if (toTest instanceof String) {</span>
-            // Use to string as it leaves things the most flexible in our regex comparison.
-<span class="nc" id="L140">            result = this.isValid((String)toTest);</span>
-        } else {
-<span class="nc" id="L142">            result = false;</span>
-        }
-
-<span class="nc" id="L145">        return result;</span>
-    }
-
-    /**
-     * Is the supplied test object something that matches against our field definition regular expression?
-     *
-     * If validation optional is set to true this will return true, if the supplied object is null, this will always
-     * return false. Otherwise it will call matches on the supplied string.
-     *
-     * @param toTest to test is valid
-     * @return false if the object fails the validation match.
-     */
-    @Override
-    public boolean isValid(final String toTest) {
-        final boolean result;
-
-<span class="nc bnc" id="L161" title="All 2 branches missed.">        if (null == toTest) {</span>
-<span class="nc" id="L162">            result = false;</span>
-        } else {
-<span class="nc" id="L164">            result = this.getEnumerates().contains(toTest);</span>
-        }
-
-<span class="nc" id="L167">        return result;</span>
-    }
+<span class="fc" id="L148">    return result;</span>
+  }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

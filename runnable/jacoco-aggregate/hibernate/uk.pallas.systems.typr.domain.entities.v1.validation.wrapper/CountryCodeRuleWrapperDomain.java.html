@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CountryCodeRuleWrapperDomain.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">runnable</a> &gt; <a href="../index.html" class="el_bundle">hibernate</a> &gt; <a href="index.source.html" class="el_package">uk.pallas.systems.typr.domain.entities.v1.validation.wrapper</a> &gt; <span class="el_source">CountryCodeRuleWrapperDomain.java</span></div><h1>CountryCodeRuleWrapperDomain.java</h1><pre class="source lang-java linenums">package uk.pallas.systems.typr.domain.entities.v1.validation.wrapper;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import java.util.Objects;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import uk.pallas.systems.typr.domain.entities.v1.validation.EnumValidationRuleDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.StringValidationRuleDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.number.DoubleValidationRuleDomain;
+import uk.pallas.systems.typr.domain.entities.v1.validation.number.LongValidationRuleDomain;
+import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
+import uk.pallas.systems.typr.entities.v1.validation.number.DoubleValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.number.LongValidationRule;
+import uk.pallas.systems.typr.entities.v1.validation.wrapper.CountryCodeWrapper;
+
+@Entity
+@Table(name = &quot;wrap_country_code&quot;)
+public class CountryCodeRuleWrapperDomain implements CountryCodeWrapper {
+  /**
+   * Static Logger for the class.
+   */
+<span class="fc" id="L30">  private static final Log LOGGER = LogFactory.getLog(CountryCodeRuleWrapperDomain.class);</span>
+
+  /**
+   * Primary key for storing validation rules.
+   */
+  @Id
+  @GeneratedValue
+  private Long identifier;
+
+  /**
+   * Some rules (e.g. post code, zip code, etc.. are unique to a specific country, allows us to be country specific.
+   */
+  @Column(nullable = false)
+  private String countryCode;
+
+  /**
+   * Validation for the field definition.
+   */
+  @OneToOne
+  private EnumValidationRuleDomain enumRule;
+
+  /**
+   * Validation for the field definition.
+   */
+  @OneToOne
+  private StringValidationRuleDomain stringRule;
+
+  /**
+   * Validation for the field definition.
+   */
+  @OneToOne
+  private DoubleValidationRuleDomain doubleRule;
+
+  /**
+   * Validation for the field definition.
+   */
+  @OneToOne
+  private LongValidationRuleDomain longRule;
+
+  /**
+   * Default constructor, sets the country code to undefined.
+   */
+  public CountryCodeRuleWrapperDomain() {
+<span class="fc" id="L73">    this(ValidationRuleConstants.DEFAULT_COUNTRY_CODE, null);</span>
+<span class="fc" id="L74">  }</span>
+
+  /**
+   * Copy constructor, creates a duplicate of the object supplied.
+   *
+   * @param wrapper the object to copy
+   */
+  public CountryCodeRuleWrapperDomain(final CountryCodeWrapper wrapper) {
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">    this(null == wrapper ? ValidationRuleConstants.DEFAULT_COUNTRY_CODE : wrapper.getCountryCode(),</span>
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">      null == wrapper ? null : wrapper.getRule());</span>
+<span class="fc" id="L84">  }</span>
+
+  /**
+   * Creates a new instance of the wrapper and populates it with the required settings.
+   *
+   * @param code a country specific identifier for the rule
+   * @param validRule the rule we need to wrap with a different identifier.
+   */
+<span class="fc" id="L92">  public CountryCodeRuleWrapperDomain(final String code, final ValidationRule validRule) {</span>
+
+<span class="fc" id="L94">    this.countryCode = Objects.requireNonNullElse(code, ValidationRuleConstants.DEFAULT_COUNTRY_CODE);</span>
+
+<span class="fc" id="L96">    this.setRule(validRule);</span>
+<span class="fc" id="L97">  }</span>
+
+  /**
+   * Compares the supplied object to this one, it checks the supplied object is a FieldDefinition and then checks
+   * the definition applies validation, its name and description to see if they are matching objects.
+   *
+   * @param toCompare the object to compare (can be null or a child class, etc..)
+   * @return false if the name/validation and description fields in a field definition are
+   *               different (or it isn't a field definition).
+   */
+  @Override
+  public boolean equals(final Object toCompare) {
+
+    final boolean result;
+<span class="fc bfc" id="L111" title="All 2 branches covered.">    if (this == toCompare) {</span>
+<span class="fc" id="L112">      result = true;</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">    } else if (toCompare instanceof CountryCodeWrapper that) {</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">      result = Objects.equals(this.getCountryCode(), that.getCountryCode())</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">        &amp;&amp; Objects.equals(this.getRule(), that.getRule());</span>
+    } else {
+<span class="nc" id="L117">      result = false;</span>
+    }
+
+<span class="fc" id="L120">    return result;</span>
+  }
+
+  /**
+   * Generates a Unique hashcode for the field definition class.
+   *
+   * @return a valid integer representation of this object,
+   */
+  @Override
+  public int hashCode() {
+<span class="fc" id="L130">    return Objects.hash(this.getCountryCode(), this.getRule());</span>
+  }
+
+  @Override
+  public String getCountryCode() {
+<span class="fc" id="L135">    return this.countryCode;</span>
+  }
+
+  @Override
+  public void setCountryCode(final String code) {
+<span class="nc" id="L140">    this.countryCode = Objects.requireNonNullElse(code, ValidationRuleConstants.DEFAULT_COUNTRY_CODE);</span>
+<span class="nc" id="L141">  }</span>
+
+  /**
+   * Retrieves a hopefully detailed description of the field definition so we can understand what it is for and
+   * why it exists.
+   *
+   * @return a hopefull long valid string (null is possible).
+   */
+  @Override
+  public String getDescription() {
+
+    final String result;
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">    if (null == this.doubleRule) {</span>
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">      if (null == this.enumRule) {</span>
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        if (null == this.longRule) {</span>
+<span class="fc bfc" id="L156" title="All 2 branches covered.">          if (null == this.stringRule) {</span>
+<span class="fc" id="L157">            result = null;</span>
+          } else {
+<span class="fc" id="L159">            result = this.stringRule.getDescription();</span>
+          }
+        } else {
+<span class="nc" id="L162">          result = this.longRule.getDescription();</span>
+        }
+      } else {
+<span class="nc" id="L165">        result = this.enumRule.getDescription();</span>
+      }
+    } else {
+<span class="nc" id="L168">      result = this.doubleRule.getDescription();</span>
+    }
+
+<span class="fc" id="L171">    return result;</span>
+  }
+
+  /**
+   * Sets the description to attach to this field definition.
+   *
+   * @param detailedDescription the description to attach (null is ok)
+   */
+  @Override
+  public void setDescription(final String detailedDescription) {
+
+<span class="pc bpc" id="L182" title="1 of 2 branches missed.">    if (null == this.doubleRule) {</span>
+<span class="pc bpc" id="L183" title="1 of 2 branches missed.">      if (null == this.enumRule) {</span>
+<span class="pc bpc" id="L184" title="1 of 2 branches missed.">        if (null == this.longRule) {</span>
+<span class="pc bpc" id="L185" title="1 of 2 branches missed.">          if (null != this.stringRule) {</span>
+<span class="fc" id="L186">            this.stringRule.setDescription(detailedDescription);</span>
+          }
+        } else {
+<span class="nc" id="L189">          this.longRule.setDescription(detailedDescription);</span>
+        }
+      } else {
+<span class="nc" id="L192">        this.enumRule.setDescription(detailedDescription);</span>
+      }
+    } else {
+<span class="nc" id="L195">      this.doubleRule.setDescription(detailedDescription);</span>
+    }
+<span class="fc" id="L197">  }</span>
+
+  public Long getIdentifier() {
+<span class="nc" id="L200">    return identifier;</span>
+  }
+
+  public void setIdentifier(final Long id) {
+<span class="nc" id="L204">    this.identifier = id;</span>
+<span class="nc" id="L205">  }</span>
+
+  /**
+   * Is the supplied test object something that matches against our field definition regular expression?
+   * &lt;p&gt;
+   * If validation optional is set to true this will return true, if the supplied object is null, this will always
+   * return false. Other-wise this will call toString and then match the field definition regex tp confirm the object
+   * matches our desired value.
+   *
+   * @param toTest to test is valid
+   * @return false if the object fails the validation match.
+   */
+  @Override
+  public boolean isValid(final Object toTest) {
+    final boolean result;
+
+<span class="nc bnc" id="L221" title="All 2 branches missed.">    if (null == this.doubleRule) {</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">      if (null == this.enumRule) {</span>
+<span class="nc bnc" id="L223" title="All 2 branches missed.">        if (null == this.longRule) {</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">          if (null == this.stringRule) {</span>
+<span class="nc" id="L225">            result = false;</span>
+<span class="nc" id="L226">            LOGGER.warn(String.format(&quot;isValid - No Rule to test object: %s&quot;, toTest));</span>
+          } else {
+<span class="nc" id="L228">            result = this.stringRule.isValid(toTest);</span>
+          }
+        } else {
+<span class="nc" id="L231">          result = this.longRule.isValid(toTest);</span>
+        }
+      } else {
+<span class="nc" id="L234">        result = this.enumRule.isValid(toTest);</span>
+      }
+    } else {
+<span class="nc" id="L237">      result = this.doubleRule.isValid(toTest);</span>
+    }
+
+<span class="nc" id="L240">    return result;</span>
+  }
+
+  /**
+   * Retrieves the rule of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
+   *
+   * @return non null value (if field definition is valid).
+   */
+  public DoubleValidationRule getDoubleRule() {
+<span class="fc bfc" id="L249" title="All 2 branches covered.">    return null == this.doubleRule ? null : new DoubleValidationRuleDomain(this.doubleRule);</span>
+  }
+
+  /**
+   * Sets the validation for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
+   *
+   * @param value the rules to add to our field definition
+   */
+  public void setDoubleRule(final DoubleValidationRule value) {
+<span class="nc" id="L258">    this.doubleRule = new DoubleValidationRuleDomain(value);</span>
+<span class="nc" id="L259">  }</span>
+
+  /**
+   * Retrieves the rule of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
+   *
+   * @return non null value (if field definition is valid).
+   */
+  public EnumValidationRule getEnumRule() {
+<span class="pc bpc" id="L267" title="1 of 2 branches missed.">    return null == this.enumRule ? null : new EnumValidationRuleDomain(this.enumRule);</span>
+  }
+
+  /**
+   * Sets the validation for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
+   *
+   * @param value the rules to add to our field definition
+   */
+  public void setEnumRule(final EnumValidationRule value) {
+<span class="nc" id="L276">    this.enumRule = new EnumValidationRuleDomain(value);</span>
+<span class="nc" id="L277">  }</span>
+
+  /**
+   * Retrieves the rule of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
+   *
+   * @return non null value (if field definition is valid).
+   */
+  public LongValidationRule getLongRule() {
+<span class="fc bfc" id="L285" title="All 2 branches covered.">    return null == this.longRule ? null : new LongValidationRuleDomain(this.longRule);</span>
+  }
+
+  /**
+   * Sets the validation for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
+   *
+   * @param value the rules to add to our field definition
+   */
+  public void setLongRule(final LongValidationRule value) {
+<span class="nc" id="L294">    this.longRule = new LongValidationRuleDomain(value);</span>
+<span class="nc" id="L295">  }</span>
+
+  /**
+   * Retrieves the rule of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
+   *
+   * @return non null value (if field definition is valid).
+   */
+  public StringValidationRule getStringRule() {
+<span class="fc bfc" id="L303" title="All 2 branches covered.">    return null == this.stringRule ? null : new StringValidationRuleDomain(this.stringRule);</span>
+  }
+
+  /**
+   * Sets the validation for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
+   *
+   * @param value the rules to add to our field definition
+   */
+  public void setStringRule(final StringValidationRule value) {
+<span class="nc" id="L312">    this.stringRule = new StringValidationRuleDomain(value);</span>
+<span class="nc" id="L313">  }</span>
+
+  /**
+   * Retrieves the rule of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
+   *
+   * @return non null value (if field definition is valid).
+   */
+  public ValidationRule getRule() {
+    final ValidationRule result;
+
+<span class="fc bfc" id="L323" title="All 2 branches covered.">    if (null == this.getDoubleRule()) {</span>
+<span class="pc bpc" id="L324" title="1 of 2 branches missed.">      if (null == this.getEnumRule()) {</span>
+<span class="fc bfc" id="L325" title="All 2 branches covered.">        if (null == this.getLongRule()) {</span>
+<span class="fc bfc" id="L326" title="All 2 branches covered.">          if (null == this.getStringRule()) {</span>
+<span class="fc" id="L327">            result = null;</span>
+          } else {
+<span class="fc" id="L329">            result = this.getStringRule();</span>
+          }
+        } else {
+<span class="fc" id="L332">          result = this.getLongRule();</span>
+        }
+      } else {
+<span class="nc" id="L335">        result = this.getEnumRule();</span>
+      }
+    } else {
+<span class="fc" id="L338">      result = this.getDoubleRule();</span>
+    }
+
+<span class="fc" id="L341">    return result;</span>
+  }
+
+  /**
+   * Sets the validation for the field definition e.g. Post Code, Ipv6, Mobile Country Code, etc...
+   *
+   * @param value the rules to add to our field definition
+   */
+  public void setRule(final ValidationRule value) {
+
+<span class="fc" id="L351">    this.doubleRule = null;</span>
+<span class="fc" id="L352">    this.enumRule = null;</span>
+<span class="fc" id="L353">    this.longRule = null;</span>
+<span class="fc" id="L354">    this.stringRule = null;</span>
+
+<span class="fc bfc" id="L356" title="All 2 branches covered.">    if (value instanceof DoubleValidationRule) {</span>
+<span class="fc" id="L357">      this.doubleRule = new DoubleValidationRuleDomain((DoubleValidationRule) value);</span>
+<span class="pc bpc" id="L358" title="1 of 2 branches missed.">    } else if (value instanceof EnumValidationRule) {</span>
+<span class="nc" id="L359">      this.enumRule = new EnumValidationRuleDomain((EnumValidationRule) value);</span>
+<span class="fc bfc" id="L360" title="All 2 branches covered.">    } else if (value instanceof LongValidationRule) {</span>
+<span class="fc" id="L361">      this.longRule = new LongValidationRuleDomain((LongValidationRule) value);</span>
+<span class="fc bfc" id="L362" title="All 2 branches covered.">    } else if (value instanceof StringValidationRule) {</span>
+<span class="fc" id="L363">      this.stringRule = new StringValidationRuleDomain((StringValidationRule) value);</span>
+    } else {
+<span class="fc" id="L365">      LOGGER.warn(String.format(&quot;setRule - Unsupported Rule Type supplied: %s&quot;, value));</span>
+    }
+<span class="fc" id="L367">  }</span>
+
+  /**
+   * Defines the Country code and rule name under the to string and supplies Rule details.
+   *
+   * @return a valid String with field set assuming they are not null.
+   */
+  @Override
+  public String toString() {
+<span class="nc" id="L376">    return String.format(&quot;%s with Rule: %s&quot;, this.countryCode, this.getRule());</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

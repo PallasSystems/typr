@@ -14,20 +14,22 @@
 <a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_javadoccomment"> * Some field definitions have a limited number of allowed string values and so this definition allows us to maintain</em>
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_javadoccomment"> * a list rather than a regular expression.</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L9" href="#L9">9</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">interface</strong> <a name="EnumValidationRule" href="../../../../../../../uk/pallas/systems/typr/entities/v1/validation/EnumValidationRule.html#EnumValidationRule">EnumValidationRule</a> <strong class="jxr_keyword">extends</strong> <a name="StringValidationRule" href="../../../../../../../uk/pallas/systems/typr/entities/v1/validation/StringValidationRule.html#StringValidationRule">StringValidationRule</a> {
+<a class="jxr_linenumber" name="L9" href="#L9">9</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">interface</strong> <a name="EnumValidationRule" href="../../../../../../../uk/pallas/systems/typr/entities/v1/validation/EnumValidationRule.html#EnumValidationRule">EnumValidationRule</a> <strong class="jxr_keyword">extends</strong> <a name="ValidationRule" href="../../../../../../../uk/pallas/systems/typr/entities/v1/validation/ValidationRule.html#ValidationRule">ValidationRule</a> {
 <a class="jxr_linenumber" name="L10" href="#L10">10</a>  
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>    <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_javadoccomment">   * This retrieves all valid enumerate types held within the definition.</em>
-<a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_javadoccomment">   * @return an empty list or a list of valid string entries.</em>
-<a class="jxr_linenumber" name="L14" href="#L14">14</a>  <em class="jxr_javadoccomment">   */</em>
-<a class="jxr_linenumber" name="L15" href="#L15">15</a>    Collection&lt;String&gt; getEnumerates();
-<a class="jxr_linenumber" name="L16" href="#L16">16</a>  
-<a class="jxr_linenumber" name="L17" href="#L17">17</a>    <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <em class="jxr_javadoccomment">   * This sets all valid enumerate types held within the definition.</em>
-<a class="jxr_linenumber" name="L19" href="#L19">19</a>  <em class="jxr_javadoccomment">   * @param enumerates an empty list or a list of valid string entries.</em>
-<a class="jxr_linenumber" name="L20" href="#L20">20</a>  <em class="jxr_javadoccomment">   */</em>
-<a class="jxr_linenumber" name="L21" href="#L21">21</a>    <strong class="jxr_keyword">void</strong> setEnumerates(<strong class="jxr_keyword">final</strong> Collection&lt;String&gt; enumerates);
-<a class="jxr_linenumber" name="L22" href="#L22">22</a>  }
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_javadoccomment">   *</em>
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>  <em class="jxr_javadoccomment">   * @return an empty list or a list of valid string entries.</em>
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_javadoccomment">   */</em>
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>    Collection&lt;String&gt; getEnumerates();
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>  
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>    <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>  <em class="jxr_javadoccomment">   * This sets all valid enumerate types held within the definition.</em>
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>  <em class="jxr_javadoccomment">   *</em>
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>  <em class="jxr_javadoccomment">   * @param enumerates an empty list or a list of valid string entries.</em>
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>  <em class="jxr_javadoccomment">   */</em>
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>    <strong class="jxr_keyword">void</strong> setEnumerates(Collection&lt;String&gt; enumerates);
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2022&#x2013;2023 <a href="https://www.pallas.uk">Pallas Systems</a>. All rights reserved.</div>
