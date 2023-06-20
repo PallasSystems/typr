@@ -4,7 +4,7 @@
     <parent>
         <groupId>uk.pallas.systems</groupId>
         <artifactId>parent</artifactId>
-        <version>0.2.0</version>
+        <version>0.2.2</version>
     </parent>
     <groupId>uk.pallas.systems.typr</groupId>
     <artifactId>parent</artifactId>
@@ -33,15 +33,12 @@
 
     <properties>
         <github_repository_name>typr</github_repository_name>
-        <github_organisation>pallassystems</github_organisation>
-
         <scmpublish.content>${project.build.directory}/staging/parent</scmpublish.content>
-
+        <!-- Compiler Options. -->
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <!-- Plugin dependencies. -->
         <org.springdoc.maven.plugin.version>1.4</org.springdoc.maven.plugin.version>
-        <spotbugs-maven-plugin.version>4.7.3.4</spotbugs-maven-plugin.version>
         <com.github.therapi.version>0.15.0</com.github.therapi.version>
         <!-- Dependencies. -->
         <org.springframework.boot.version>3.0.6</org.springframework.boot.version>
