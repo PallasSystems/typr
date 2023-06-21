@@ -24,7 +24,7 @@
                     <configuration>
                         <images>
                             <image>
-                                <name>${github_organisation}/typr</name>
+                                <name>${github_organisation}/${github_repository_name}</name>
                                 <registry>ghcr.io</registry>
                                 <build>
                                     <from>eclipse-temurin:17-jdk-alpine</from>
