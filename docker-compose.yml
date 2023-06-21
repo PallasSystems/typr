@@ -3,7 +3,7 @@ version: "3.4"
 services:
   typr:
     container_name: typr
-    image: ${github_organisation:-pallassystems}/typr:${TYPR_VERSION:-0.0.7-SNAPSHOT}
+    image: ${github_organisation:-pallassystems}/typr:${TYPR_VERSION:-0.0.9-SNAPSHOT}
     ports:
       - 8080:8080
     environment:
