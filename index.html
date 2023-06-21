@@ -133,9 +133,11 @@
       <div class="container rounded">
 <section>
 <h1>Typr</h1>
-<p>Typr is a webservice, its goal is simply to hold information about different fields types, Post Code (UK), Latitude (Decimal Degrees), Mobile Country Code, etc..</p>
-<p>It then provides an API so other systems can request validation information for a field from it (allowing systems to use the same validation) and to also allow systems to supply a field and be informed on which types the provided field is valid for.</p><section>
-<h2>Contributing</h2>
+<p>Typr is a catalog of fields types, it provides a definition for each field with validation criteria, units, and associated information links.</p>
+<p>Most platforms will define data schema's using primitive datatypes (e.g. int, string, char, etc..). NoSQL data stores such as <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html" class="externalLink">Elastic Search</a> provide a more comprehensive list of field types for data schema's.</p>
+<p>This project allows systems to build on this concept, by creating a catalog that other systems can use when defining data schemas.</p>
+<p>Systems can use this information to validate and store data for a specific field within a schema.</p><section>
+<h2>Develop and Contribute</h2>
 <p>We welcome questions, ideas, issues and code contributions to this project.</p>
 <p>Use the <a href="https://github.com/PallasSystems/typr/issues" class="externalLink">issues page</a> to get in touch with the community.</p>
 <p>If you would like to make a code contribution please fork the repository and create a
