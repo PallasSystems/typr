@@ -1,10 +1,14 @@
 # Typr
 
-Typr is a webservice, its goal is simply to hold information about different fields types, Post Code (UK), Latitude (Decimal Degrees), Mobile Country Code, etc.. 
+Typr is a catalog of fields types, it provides a definition for each field with validation criteria, units, and associated information links.
 
-It then provides an API so other systems can request validation information for a field from it (allowing systems to use the same validation) and to also allow systems to supply a field and be informed on which types the provided field is valid for.
+Most platforms will define data schema's using primitive datatypes (e.g. int, string, char, etc..). NoSQL data stores such as [Elastic Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html) provide a more comprehensive list of field types for data schema's.
 
-## Contributing
+This project allows systems to build on this concept, by creating a catalog that other systems can use when defining data schemas.
+
+Systems can use this information to validate and store data for a specific field within a schema.
+
+## Develop and Contribute
 
 We welcome questions, ideas, issues and code contributions to this project.
 
