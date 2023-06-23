@@ -3,13 +3,13 @@ version: "3.4"
 services:
   typr:
     container_name: typr
-    image: ${github_organisation:-pallassystems}/typr:${TYPR_VERSION:-0.0.9-SNAPSHOT}
+    image: ghcr.io/${github_organisation:-pallassystems}/typr:${TYPR_VERSION:-0.0.10}
     ports:
-      - 8080:8080
+      - 8090:8080
     environment:
-      spring.datasource.url: "jdbc:postgresql://${POSTGRES_HOSTNAME:-database}:${POSTGRES_PORT:-5432}/${POSTGRES_DB:-typr}"
-      spring.datasource.username: ${POSTGRES_USER:-typrUsr}
-      spring.datasource.password: ${POSTGRES_PASSWORD:-ChangeMe}
+      spring.datasource.url: "jdbc:postgresql://${TYPR_POSTGRES_HOSTNAME:-typr_database}:${TYPR_POSTGRES_PORT:-5432}/${TYPR_POSTGRES_DB:-typr}"
+      spring.datasource.username: ${TYPR_POSTGRES_USER:-typrUsr}
+      spring.datasource.password: ${TYPR_POSTGRES_PASSWORD:-ChangeMe}
       spring.datasource.driver-class-name: "org.postgresql.Driver"
       spring.jpa.database-platform: "org.hibernate.dialect.PostgreSQLDialect"
       spring.jpa.hibernate.ddl-auto: "create-drop"
@@ -18,31 +18,37 @@ services:
       spring.sql.init.mode: "always"
     networks:
       - frontend
-      - backend
+      - typr_backend
     depends_on:
-      - database
+      - typr_database
 
-  database:
+  typr_database:
     container_name: typr-db
-    image: postgres:${POSTGRES_VERSION:-13}-alpine
+    image: postgres:${TYPR_POSTGRES_TAG:-15-alpine}
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-typr}
+      POSTGRES_DB: ${TYPR_POSTGRES_DB:-typr}
       # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ChangeMe}
-      POSTGRES_USER: ${POSTGRES_USER:-typrUsr}
+      POSTGRES_PASSWORD: ${TYPR_POSTGRES_PASSWORD:-ChangeMe}
+      POSTGRES_USER: ${TYPR_POSTGRES_USER:-typrUsr}
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready --dbname=${TYPR_POSTGRES_DB:-typr} --username=${TYPR_POSTGRES_USER:-typrUsr}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
-      - backend
+      - typr_backend
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      - "${TYPR_POSTGRES_PORT:-5432}:5432"
     volumes:
-      - db-data:/var/lib/postgresql/data:rw
+      - typr-data:/var/lib/postgresql/data:rw
 
 networks:
   frontend:
     driver: bridge
     internal: false
-  backend:
+  typr_backend:
     internal: true
 
 volumes:
-  db-data:
+  typr-data:
