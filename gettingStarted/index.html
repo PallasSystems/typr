@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="generator" content="#generatedBy()" />
 
-    <title>Typr</title>
+    <title>Typr – Install</title>
 
         <link rel="icon" href=".././img/favicons/favicon.ico">
     <!-- CSS Stylesheets, site.css is included so downstream projects can override them as appropriate. -->
@@ -269,64 +269,26 @@
         <div class="container mt-3 rounded">
                   
     
-    <div id="intro" class="my-3 text-center container">
-  
-<div class="my-2 row">
     <section>
-<h1>Pallas Maven Super POM</h1>
-  </div>
-  
-<div class="my-2 row">
-    <section><section><section><section>
-<h5> 
-      Typr is a catalog of fields types, it provides a definition for each field with validation criteria, units, and associated information links.</h5>
-    </section><section>
-<h5>Most platforms will define data schema's using primitive datatypes (e.g. int, string, char, etc..). NoSQL data stores such as [Elastic Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html) provide a more comprehensive list of field types for data schema's.</h5>
-    </section><section>
-<h5>This project allows systems to build on this concept, by creating a catalog that other systems can use when defining data schemas.</h5>
-    </section><section>
-<h5>Systems can use this information to validate and store data for a specific field within a schema.</h5>
-  </div>
-  
-<div class="row">
-    
-<div class="col">
-      
-<div class="d-grid gap-2 my-2">
-        <a href="./gettingStarted/index.html" style="min-height: 4em;" class="btn btn-dark">
-          
-<p class="home_muti_line_btn">Getting Started</p>
-        </a>
-      </div>
-    </div>
-    
-<div class="col">
-      
-<div class="d-grid gap-2 my-2">
-        <a href="./documentation/developer_guides/developer_guide.md" style="min-height: 4em;" class="btn btn-dark">
-          
-<p class="home_btn">Developer Guides</p>
-        </a>
-      </div>
-    </div>
-    
-<div class="col">
-      
-<div class="d-grid gap-2 my-2">
-        <a href="./project-info" style="min-height: 4em;" class="btn btn-dark">
-          
-<p class="home_btn">Project Information</p>
-        </a>
-      </div>
-    </div>
-  </div>
-  
-<div class="my-2 row">
-    
-<p>Current Version: 1.0.8</p>
-  </div>
-</div>
-</section></section></section></section></section>
+<h1>Install</h1>
+<p>To include the resources pack you will need to add the following code to the Parent POM file:</p>
+
+<div class="verbatim">
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+  &lt;parent&gt;
+    &lt;groupId&gt;uk.pallas.systems&lt;/groupId&gt;
+    &lt;artifactId&gt;parent&lt;/artifactId&gt;
+    &lt;version&gt;1.0.3&lt;/version&gt;
+  &lt;/parent&gt;
+
+  &lt;properties&gt;
+    &lt;github_repository_name&gt;typr&lt;/github_repository_name&gt;
+    &lt;scmpublish.content&gt;${project.build.directory}/staging/parent&lt;/scmpublish.content&gt;
+  &lt;/properties&gt;
+
+&lt;/project&gt;
+</code></pre></div></section>
       </div>
     </main>
 
