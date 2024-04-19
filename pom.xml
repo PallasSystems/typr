@@ -4,7 +4,7 @@
     <parent>
         <groupId>uk.pallas.systems</groupId>
         <artifactId>parent</artifactId>
-        <version>0.2.2</version>
+        <version>1.0.8</version>
     </parent>
     <groupId>uk.pallas.systems.typr</groupId>
     <artifactId>parent</artifactId>
