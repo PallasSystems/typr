@@ -8,7 +8,7 @@
     <skin>
         <groupId>io.github.stevecrox.maven.skins</groupId>
         <artifactId>bootstrap-site-skin</artifactId>
-        <version>1.0.16</version>
+        <version>1.4.3</version>
     </skin>
 
     <version position="none" />
@@ -18,47 +18,46 @@
         <bootstrapSkin>
             <contact>
                 <email>info@pallas.uk</email>
-                <mobile>+44 7861 530488</mobile>
             </contact>
             <facebook>
                 <groupId>350073883439443</groupId>
             </facebook>
-            <footer>
-                <style>page-footer font-small pt-4 bg-dark text-light</style>
-            </footer>
+            <linkedin>
+                <accountId>pallas-systems-ltd</accountId>
+            </linkedin>
+            <twitter>
+                <accountId>PallasUK</accountId>
+            </twitter>
             <gitHub>
-                <projectId>PallasSystems/typr</projectId>
+                <organisation>PallasSystems</organisation>
+                <repository>maven-parent</repository>
             </gitHub>
             <navbar>
                 <enabled>true</enabled>
                 <icon>
-                    <alt>SUPER POM to simplify development of Maven based projects for Freeman.</alt>
-                    <href>${project.url}</href>
+                    <alt>Super POM to be used on all Pallas Systems projects.</alt>
+                    <href>./index.html</href>
                     <src>./images/pallas-image.png</src>
+                    <width>68px</width>
+                    <height>52px</height>
                 </icon>
             </navbar>
-            <twitter>
-                <accountId>PallasUK</accountId>
-            </twitter>
+            <projectbar>
+                <skipBreadcrumb>true</skipBreadcrumb>
+                <style>navbar_suffix_menu border-top navbar-dark bg-dark container-fluid</style>
+            </projectbar>
         </bootstrapSkin>
     </custom>
 
     <body>
-        <menu name="Overview">
-            <item name="Welcome" href="./overview/welcome.html" />
-            <item name="Getting Started" href="./overview/getting_started.html" />
-            <item name="FAQ" href="./overview/faq.html" />
+        <links>
+            <item name="Getting Started" href="./gettingStarted/index.html"/>
+        </links>
+        <menu name="Developer Guides">
+            <item name="Build" href="./documentation/developer_guides/developer_guide.html"/>
+            <item name="Documentation" href="./documentation/developer_guides/developer_guide.md"/>
+            <item name="Release" href="./developers/technical/release_project.html"/>
         </menu>
-        <menu name="Contributing">
-            <item name="Developer Guides" href="index.html">
-                <item name="Building Typr" href="./developers/technical/building_project.html"/>
-                <item name="Development Process" href="./developers/technical/development_workflow.html" />
-            </item>
-            <item name="Maintainer Guides" href="index.html">
-                <item name="Releasing Typr" href="./developers/technical/release_project.html"/>
-                <item name="Release Management" href="./developers/technical/release_project.html" />
-            </item>
-        </menu>
-        <menu ref="reports" />
+        <menu ref="reports"/>
     </body>
 </project>

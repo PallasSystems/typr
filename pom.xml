@@ -92,13 +92,6 @@
                                 <goal>build</goal>
                             </goals>
                         </execution>
-                        <execution>
-                            <id>deploy-docker-image</id>
-                            <phase>deploy</phase>
-                            <goals>
-                                <goal>push</goal>
-                            </goals>
-                        </execution>
                     </executions>
                 </plugin>
             </plugins>
