@@ -3,11 +3,8 @@
     <h1>Typr</h1>
   </div>
   <div class="my-2 row">
-    <h5> 
-      Typr is a catalog of fields types, it provides a definition for each field with validation criteria, units, and associated information links.</h5>
-    <h5>Most platforms will define data schema's using primitive datatypes (e.g. int, string, char, etc..). NoSQL data stores such as [Elastic Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html) provide a more comprehensive list of field types for data schema's.</h5>
-    <h5>This project allows systems to build on this concept, by creating a catalog that other systems can use when defining data schemas.</h5>
-    <h5>Systems can use this information to validate and store data for a specific field within a schema.</h5>
+    <h5>Typr is a catalog of fields types and schemas to enable the validation of incoming data and support dynamic translation between various data formats.</h5>
+    <h4>Typr is built on Spring Framework and Spring Data, exposing type and schema information through a series of REST Controllers and so can be ported to a variety of databases and security mechanisims.</h4>
   </div>
   <div class="row">
     <div class="col">
