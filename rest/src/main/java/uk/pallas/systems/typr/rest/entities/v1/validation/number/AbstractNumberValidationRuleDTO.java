@@ -80,7 +80,7 @@ public abstract class AbstractNumberValidationRuleDTO<N extends Number>
     if (this == toCompare) {
       result = true;
     } else if (toCompare instanceof NumberValidationRule) {
-      final NumberValidationRule that = (NumberValidationRule<?>) toCompare;
+      final NumberValidationRule<?> that = (NumberValidationRule<?>) toCompare;
       result = super.equals(toCompare)
         && Objects.equals(this.getMaximumValue(), that.getMaximumValue())
         && Objects.equals(this.getMinimumValue(), that.getMinimumValue())

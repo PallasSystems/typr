@@ -6,8 +6,6 @@ import jakarta.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
@@ -23,10 +21,6 @@ import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationR
 import uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTO;
 
 public class FieldDefinitionDTO implements FieldDefinition {
-  /**
-   * Static Logger for the class.
-   */
-  private static final Logger LOGGER = LoggerFactory.getLogger(FieldDefinitionDTO.class);
   /**
    * List of categories associated with our type.
    */

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRuleConstants;
 
 public abstract class AbstractNumberValidationRuleDTOTest
-  <T extends AbstractNumberValidationRuleDTO, N extends Number> {
+  <T extends AbstractNumberValidationRuleDTO<N>, N extends Number> {
 
   /**
    * Used to generate a new instance of the class where we can test the common methods/processing between classes.
@@ -33,8 +33,6 @@ public abstract class AbstractNumberValidationRuleDTOTest
     // Check an alternate instance fails
     final T alternate = this.generateTestInstance();
     alternate.setDescription("testEqualsWithInvalid");
-    alternate.setMaximumValue(Integer.MAX_VALUE);
-    alternate.setMinimumValue(Integer.MIN_VALUE);
     Assertions.assertNotEquals(basic, alternate);
   }
 
