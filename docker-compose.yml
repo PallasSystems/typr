@@ -21,10 +21,12 @@ services:
       - typr_backend
     depends_on:
       - typr_database
+      # Added to ensure security is embedded within the application
+      - keycloak
 
   typr_database:
     container_name: typr-db
-    image: postgres:${TYPR_POSTGRES_TAG:-15-alpine}
+    image: postgres:${TYPR_POSTGRES_TAG:-16-alpine}
     environment:
       POSTGRES_DB: ${TYPR_POSTGRES_DB:-typr}
       # You should definitely change the password in production
@@ -47,12 +49,65 @@ services:
     volumes:
       - typr-data:/var/lib/postgresql/data:rw
 
+  # KeyCloak has been added to ensure typr embeds an identity providers
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:23.0.6
+    ports:
+      - 8100:8080
+    command: start
+    environment:
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8100
+      KC_HOSTNAME_STRICT_BACKCHANNEL: "false"
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT_HTTPS: "false"
+      KC_HEALTH_ENABLED: "true"
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN-keycloak}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD-ChangeMe}
+      KC_DB: postgres
+      KC_DB_URL: "jdbc:postgresql://${KEYCLOAK_POSTGRES_HOSTNAME:-keycloak_database}/${KEYCLOAK_POSTGRES_DB:-keycloak}"
+      KC_DB_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD:-ChangeMe}
+      KC_DB_USERNAME: ${KEYCLOAK_POSTGRES_USER:-keycloakUsr}
+    restart: "always"
+    depends_on:
+      - keycloak_database
+    networks:
+      - frontend
+      - keycloak_backend
+
+  keycloak_database:
+    container_name: keycloak-db
+    image: postgres:${KEYCLOAK_POSTGRES_TAG:-16-alpine}
+    environment:
+      POSTGRES_DB: ${KEYCLOAK_POSTGRES_DB:-keycloak}
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD:-ChangeMe}
+      POSTGRES_USER: ${KEYCLOAK_POSTGRES_USER:-keycloakUsr}
+    restart: always
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready --dbname=${KEYCLOAK_POSTGRES_DB:-keycloak} --username=${KEYCLOAK_POSTGRES_USER:-keycloakUsr}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - keycloak_backend
+    volumes:
+      - keycloak-data:/var/lib/postgresql/data:rw
+
 networks:
   frontend:
     driver: bridge
     internal: false
   typr_backend:
     internal: true
+  keycloak_backend:
+    internal: true
 
 volumes:
   typr-data:
+  keycloak-data:
