@@ -6,8 +6,6 @@ import jakarta.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.entities.v1.validation.EnumValidationRule;
 import uk.pallas.systems.typr.entities.v1.validation.StringValidationRule;
@@ -23,10 +21,6 @@ import uk.pallas.systems.typr.rest.entities.v1.validation.number.LongValidationR
 import uk.pallas.systems.typr.rest.entities.v1.validation.wrapper.CountryCodeRuleWrapperDTO;
 
 public class FieldDefinitionDTO implements FieldDefinition {
-  /**
-   * Static Logger for the class.
-   */
-<span class="fc" id="L29">  private static final Logger LOGGER = LoggerFactory.getLogger(FieldDefinitionDTO.class);</span>
   /**
    * List of categories associated with our type.
    */
@@ -75,8 +69,8 @@ public class FieldDefinitionDTO implements FieldDefinition {
    * Default Class Constructor.
    */
   public FieldDefinitionDTO() {
-<span class="fc" id="L78">    this(null);</span>
-<span class="fc" id="L79">  }</span>
+<span class="fc" id="L72">    this(null);</span>
+<span class="fc" id="L73">  }</span>
 
   /**
    * Copy Constructor.
@@ -84,10 +78,10 @@ public class FieldDefinitionDTO implements FieldDefinition {
    * @param data - the object to create a duplicate from.
    */
   public FieldDefinitionDTO(final FieldDefinition data) {
-<span class="fc bfc" id="L87" title="All 4 branches covered.">    this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,</span>
-<span class="fc bfc" id="L88" title="All 4 branches covered.">      null != data ? data.getDescription() : null, null != data ? data.getName() : null,</span>
-<span class="fc bfc" id="L89" title="All 2 branches covered.">      null != data ? data.getRules() : null);</span>
-<span class="fc" id="L90">  }</span>
+<span class="fc bfc" id="L81" title="All 4 branches covered.">    this(null != data ? data.getAcronym() : null, null != data ? data.getCategories() : null,</span>
+<span class="fc bfc" id="L82" title="All 4 branches covered.">      null != data ? data.getDescription() : null, null != data ? data.getName() : null,</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">      null != data ? data.getRules() : null);</span>
+<span class="fc" id="L84">  }</span>
 
   /**
    * Class Constructor.
@@ -99,19 +93,19 @@ public class FieldDefinitionDTO implements FieldDefinition {
    * @param rules     The Rules to be converted.
    */
   public FieldDefinitionDTO(final String acryo, final Collection&lt;String&gt; cats,
-<span class="fc" id="L102">                            final String desc, final String fieldName, final Collection&lt;ValidationRule&gt; rules) {</span>
-<span class="fc" id="L103">    this.acronym = acryo;</span>
-<span class="fc" id="L104">    this.description = desc;</span>
-<span class="fc" id="L105">    this.name = fieldName;</span>
+<span class="fc" id="L96">                            final String desc, final String fieldName, final Collection&lt;ValidationRule&gt; rules) {</span>
+<span class="fc" id="L97">    this.acronym = acryo;</span>
+<span class="fc" id="L98">    this.description = desc;</span>
+<span class="fc" id="L99">    this.name = fieldName;</span>
 
-<span class="fc" id="L107">    this.categories = new HashSet&lt;&gt;();</span>
-<span class="fc bfc" id="L108" title="All 2 branches covered.">    if (null != cats) {</span>
-<span class="fc" id="L109">      this.categories.addAll(cats);</span>
+<span class="fc" id="L101">    this.categories = new HashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">    if (null != cats) {</span>
+<span class="fc" id="L103">      this.categories.addAll(cats);</span>
     }
 
-<span class="fc" id="L112">    this.rules = new HashSet&lt;&gt;();</span>
-<span class="fc" id="L113">    this.setRules(rules);</span>
-<span class="fc" id="L114">  }</span>
+<span class="fc" id="L106">    this.rules = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L107">    this.setRules(rules);</span>
+<span class="fc" id="L108">  }</span>
 
   /**
    * Compares the supplied object to this one, it checks the supplied object is a FieldDefinition and then checks
@@ -125,19 +119,19 @@ public class FieldDefinitionDTO implements FieldDefinition {
   public boolean equals(final Object toCompare) {
 
     final boolean result;
-<span class="fc bfc" id="L128" title="All 2 branches covered.">    if (this == toCompare) {</span>
-<span class="fc" id="L129">      result = true;</span>
-<span class="pc bpc" id="L130" title="1 of 2 branches missed.">    } else if (toCompare instanceof FieldDefinition that) {</span>
-<span class="fc bfc" id="L131" title="All 2 branches covered.">      result = Objects.equals(this.getName(), that.getName())</span>
-<span class="pc bpc" id="L132" title="1 of 2 branches missed.">        &amp;&amp; Objects.equals(this.getAcronym(), that.getAcronym())</span>
-<span class="pc bpc" id="L133" title="1 of 2 branches missed.">        &amp;&amp; Objects.equals(this.getDescription(), that.getDescription())</span>
-<span class="pc bpc" id="L134" title="1 of 2 branches missed.">        &amp;&amp; this.getCategories().containsAll(that.getCategories())</span>
-<span class="pc bpc" id="L135" title="1 of 2 branches missed.">        &amp;&amp; that.getCategories().containsAll(this.getCategories());</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">    if (this == toCompare) {</span>
+<span class="fc" id="L123">      result = true;</span>
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">    } else if (toCompare instanceof FieldDefinition that) {</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">      result = Objects.equals(this.getName(), that.getName())</span>
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        &amp;&amp; Objects.equals(this.getAcronym(), that.getAcronym())</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">        &amp;&amp; Objects.equals(this.getDescription(), that.getDescription())</span>
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        &amp;&amp; this.getCategories().containsAll(that.getCategories())</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">        &amp;&amp; that.getCategories().containsAll(this.getCategories());</span>
     } else {
-<span class="nc" id="L137">      result = false;</span>
+<span class="nc" id="L131">      result = false;</span>
     }
 
-<span class="fc" id="L140">    return result;</span>
+<span class="fc" id="L134">    return result;</span>
   }
 
   /**
@@ -147,7 +141,7 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   @Override
   public int hashCode() {
-<span class="fc" id="L150">    return Objects.hash(this.getAcronym(), this.getName(), this.getDescription());</span>
+<span class="fc" id="L144">    return Objects.hash(this.getAcronym(), this.getName(), this.getDescription());</span>
   }
 
 
@@ -158,15 +152,15 @@ public class FieldDefinitionDTO implements FieldDefinition {
    * @return an empty list or a list of identifiers for rules.
    */
   public Collection&lt;String&gt; getRulesPassed(final Object toTest) {
-<span class="fc" id="L161">    final Collection&lt;String&gt; passed = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L155">    final Collection&lt;String&gt; passed = new HashSet&lt;&gt;();</span>
 
-<span class="fc bfc" id="L163" title="All 2 branches covered.">    for (final ValidationRule rule : this.getRules()) {</span>
-<span class="fc bfc" id="L164" title="All 2 branches covered.">      if (rule.isValid(toTest)) {</span>
-<span class="fc" id="L165">        passed.add(rule.toString());</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">    for (final ValidationRule rule : this.getRules()) {</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">      if (rule.isValid(toTest)) {</span>
+<span class="fc" id="L159">        passed.add(rule.toString());</span>
       }
-<span class="fc" id="L167">    }</span>
+<span class="fc" id="L161">    }</span>
 
-<span class="fc" id="L169">    return passed;</span>
+<span class="fc" id="L163">    return passed;</span>
   }
 
   /**
@@ -181,8 +175,8 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   @Override
   public boolean isValid(final Object toTest) {
-<span class="fc" id="L184">    final Collection&lt;String&gt; results = this.getRulesPassed(toTest);</span>
-<span class="pc bpc" id="L185" title="1 of 4 branches missed.">    return null != results &amp;&amp; !results.isEmpty();</span>
+<span class="fc" id="L178">    final Collection&lt;String&gt; results = this.getRulesPassed(toTest);</span>
+<span class="pc bpc" id="L179" title="1 of 4 branches missed.">    return null != results &amp;&amp; !results.isEmpty();</span>
   }
 
   /**
@@ -192,7 +186,7 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   @Override
   public String getAcronym() {
-<span class="fc" id="L195">    return acronym;</span>
+<span class="fc" id="L189">    return acronym;</span>
   }
 
   /**
@@ -202,8 +196,8 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   @Override
   public void setAcronym(final String identifier) {
-<span class="nc" id="L205">    this.acronym = identifier;</span>
-<span class="nc" id="L206">  }</span>
+<span class="nc" id="L199">    this.acronym = identifier;</span>
+<span class="nc" id="L200">  }</span>
 
   /**
    * List of categories assocaited with our type. These are additional ways to define a type for routing/managing a
@@ -213,7 +207,7 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   @Override
   public Collection&lt;String&gt; getCategories() {
-<span class="fc" id="L216">    return new HashSet&lt;&gt;(categories);</span>
+<span class="fc" id="L210">    return new HashSet&lt;&gt;(categories);</span>
   }
 
   /**
@@ -224,13 +218,13 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   @Override
   public void setCategories(final Collection&lt;String&gt; values) {
-<span class="nc bnc" id="L227" title="All 2 branches missed.">    if (null == values) {</span>
-<span class="nc" id="L228">      this.categories.clear();</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">    if (null == values) {</span>
+<span class="nc" id="L222">      this.categories.clear();</span>
     } else {
-<span class="nc" id="L230">      this.categories.clear();</span>
-<span class="nc" id="L231">      this.categories.addAll(values);</span>
+<span class="nc" id="L224">      this.categories.clear();</span>
+<span class="nc" id="L225">      this.categories.addAll(values);</span>
     }
-<span class="nc" id="L233">  }</span>
+<span class="nc" id="L227">  }</span>
 
   /**
    * Retrieves a hopefully detailed description of the field definition so we can understand what it is for and
@@ -240,7 +234,7 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   @Override
   public String getDescription() {
-<span class="fc" id="L243">    return description;</span>
+<span class="fc" id="L237">    return description;</span>
   }
 
   /**
@@ -250,8 +244,8 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   @Override
   public void setDescription(final String detailedDescription) {
-<span class="nc" id="L253">    this.description = detailedDescription;</span>
-<span class="nc" id="L254">  }</span>
+<span class="nc" id="L247">    this.description = detailedDescription;</span>
+<span class="nc" id="L248">  }</span>
 
   /**
    * Retrieves the name of the field definition e.g. post code, uk mobile, IPv4 Address, etc..
@@ -260,7 +254,7 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   @Override
   public String getName() {
-<span class="fc" id="L263">    return this.name;</span>
+<span class="fc" id="L257">    return this.name;</span>
   }
 
   /**
@@ -270,8 +264,8 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   @Override
   public void setName(final String identifier) {
-<span class="nc" id="L273">    this.name = identifier;</span>
-<span class="nc" id="L274">  }</span>
+<span class="nc" id="L267">    this.name = identifier;</span>
+<span class="nc" id="L268">  }</span>
 
 
   /**
@@ -280,23 +274,23 @@ public class FieldDefinitionDTO implements FieldDefinition {
    * @return non null value (if field definition is valid).
    */
   public Collection&lt;ValidationRule&gt; getRules() {
-<span class="fc" id="L283">    final Collection&lt;ValidationRule&gt; results = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L277">    final Collection&lt;ValidationRule&gt; results = new HashSet&lt;&gt;();</span>
 
-<span class="fc bfc" id="L285" title="All 2 branches covered.">    for (final ValidationRule rule : this.rules) {</span>
-<span class="pc bpc" id="L286" title="1 of 2 branches missed.">      if (rule instanceof CountryCodeWrapper) {</span>
-<span class="nc" id="L287">        results.add(new CountryCodeRuleWrapperDTO((CountryCodeWrapper)rule));</span>
-<span class="pc bpc" id="L288" title="1 of 2 branches missed.">      } else if (rule instanceof DoubleValidationRule) {</span>
-<span class="nc" id="L289">        results.add(new DoubleValidationRuleDTO((DoubleValidationRule)rule));</span>
-<span class="pc bpc" id="L290" title="1 of 2 branches missed.">      } else if (rule instanceof EnumValidationRule) {</span>
-<span class="nc" id="L291">        results.add(new EnumValidationRuleDTO((EnumValidationRule)rule));</span>
-<span class="pc bpc" id="L292" title="1 of 2 branches missed.">      } else if (rule instanceof LongValidationRule) {</span>
-<span class="fc" id="L293">        results.add(new LongValidationRuleDTO((LongValidationRule)rule));</span>
-<span class="nc bnc" id="L294" title="All 2 branches missed.">      } else if (rule instanceof StringValidationRule) {</span>
-<span class="nc" id="L295">        results.add(new StringValidationRuleDTO((StringValidationRule)rule));</span>
+<span class="fc bfc" id="L279" title="All 2 branches covered.">    for (final ValidationRule rule : this.rules) {</span>
+<span class="pc bpc" id="L280" title="1 of 2 branches missed.">      if (rule instanceof CountryCodeWrapper) {</span>
+<span class="nc" id="L281">        results.add(new CountryCodeRuleWrapperDTO((CountryCodeWrapper)rule));</span>
+<span class="pc bpc" id="L282" title="1 of 2 branches missed.">      } else if (rule instanceof DoubleValidationRule) {</span>
+<span class="nc" id="L283">        results.add(new DoubleValidationRuleDTO((DoubleValidationRule)rule));</span>
+<span class="pc bpc" id="L284" title="1 of 2 branches missed.">      } else if (rule instanceof EnumValidationRule) {</span>
+<span class="nc" id="L285">        results.add(new EnumValidationRuleDTO((EnumValidationRule)rule));</span>
+<span class="pc bpc" id="L286" title="1 of 2 branches missed.">      } else if (rule instanceof LongValidationRule) {</span>
+<span class="fc" id="L287">        results.add(new LongValidationRuleDTO((LongValidationRule)rule));</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">      } else if (rule instanceof StringValidationRule) {</span>
+<span class="nc" id="L289">        results.add(new StringValidationRuleDTO((StringValidationRule)rule));</span>
       }
-<span class="fc" id="L297">    }</span>
+<span class="fc" id="L291">    }</span>
 
-<span class="fc" id="L299">    return results;</span>
+<span class="fc" id="L293">    return results;</span>
   }
 
   /**
@@ -306,23 +300,23 @@ public class FieldDefinitionDTO implements FieldDefinition {
    */
   public void setRules(final Collection&lt;ValidationRule&gt; validationRules) {
 
-<span class="fc" id="L309">    this.rules.clear();</span>
+<span class="fc" id="L303">    this.rules.clear();</span>
 
-<span class="fc bfc" id="L311" title="All 2 branches covered.">    if (null != validationRules) {</span>
-<span class="fc bfc" id="L312" title="All 2 branches covered.">      for (final ValidationRule rule : validationRules) {</span>
-<span class="pc bpc" id="L313" title="1 of 2 branches missed.">        if (rule instanceof CountryCodeWrapper) {</span>
-<span class="nc" id="L314">          this.rules.add(new CountryCodeRuleWrapperDTO((CountryCodeWrapper)rule));</span>
-<span class="pc bpc" id="L315" title="1 of 2 branches missed.">        } else if (rule instanceof DoubleValidationRule) {</span>
-<span class="nc" id="L316">          this.rules.add(new DoubleValidationRuleDTO((DoubleValidationRule)rule));</span>
-<span class="pc bpc" id="L317" title="1 of 2 branches missed.">        } else if (rule instanceof EnumValidationRule) {</span>
-<span class="nc" id="L318">          this.rules.add(new EnumValidationRuleDTO((EnumValidationRule)rule));</span>
-<span class="pc bpc" id="L319" title="1 of 2 branches missed.">        } else if (rule instanceof LongValidationRule) {</span>
-<span class="fc" id="L320">          this.rules.add(new LongValidationRuleDTO((LongValidationRule)rule));</span>
-<span class="nc bnc" id="L321" title="All 2 branches missed.">        } else if (rule instanceof StringValidationRule) {</span>
-<span class="nc" id="L322">          this.rules.add(new StringValidationRuleDTO((StringValidationRule)rule));</span>
+<span class="fc bfc" id="L305" title="All 2 branches covered.">    if (null != validationRules) {</span>
+<span class="fc bfc" id="L306" title="All 2 branches covered.">      for (final ValidationRule rule : validationRules) {</span>
+<span class="pc bpc" id="L307" title="1 of 2 branches missed.">        if (rule instanceof CountryCodeWrapper) {</span>
+<span class="nc" id="L308">          this.rules.add(new CountryCodeRuleWrapperDTO((CountryCodeWrapper)rule));</span>
+<span class="pc bpc" id="L309" title="1 of 2 branches missed.">        } else if (rule instanceof DoubleValidationRule) {</span>
+<span class="nc" id="L310">          this.rules.add(new DoubleValidationRuleDTO((DoubleValidationRule)rule));</span>
+<span class="pc bpc" id="L311" title="1 of 2 branches missed.">        } else if (rule instanceof EnumValidationRule) {</span>
+<span class="nc" id="L312">          this.rules.add(new EnumValidationRuleDTO((EnumValidationRule)rule));</span>
+<span class="pc bpc" id="L313" title="1 of 2 branches missed.">        } else if (rule instanceof LongValidationRule) {</span>
+<span class="fc" id="L314">          this.rules.add(new LongValidationRuleDTO((LongValidationRule)rule));</span>
+<span class="nc bnc" id="L315" title="All 2 branches missed.">        } else if (rule instanceof StringValidationRule) {</span>
+<span class="nc" id="L316">          this.rules.add(new StringValidationRuleDTO((StringValidationRule)rule));</span>
         }
-<span class="fc" id="L324">      }</span>
+<span class="fc" id="L318">      }</span>
     }
-<span class="fc" id="L326">  }</span>
+<span class="fc" id="L320">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

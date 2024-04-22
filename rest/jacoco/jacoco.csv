@@ -1,5 +1,5 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-rest,uk.pallas.systems.typr.rest.entities.v1,FieldDefinitionDTO,110,282,20,42,22,58,21,28,4,14
+rest,uk.pallas.systems.typr.rest.entities.v1,FieldDefinitionDTO,110,278,20,42,22,57,21,27,4,13
 rest,uk.pallas.systems.typr.rest,FieldDefinitionsController,158,152,34,16,31,38,26,17,4,14
 rest,uk.pallas.systems.typr.rest,CategoriesController,10,0,0,0,4,0,3,0,3,0
 rest,uk.pallas.systems.typr.rest.entities.v1.validation.number,AbstractNumberValidationRuleDTO,35,178,12,30,5,38,10,24,2,11

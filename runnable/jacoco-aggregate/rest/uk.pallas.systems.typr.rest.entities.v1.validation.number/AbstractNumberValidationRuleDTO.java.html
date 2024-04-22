@@ -80,7 +80,7 @@ public abstract class AbstractNumberValidationRuleDTO&lt;N extends Number&gt;
 <span class="fc bfc" id="L80" title="All 2 branches covered.">    if (this == toCompare) {</span>
 <span class="fc" id="L81">      result = true;</span>
 <span class="fc bfc" id="L82" title="All 2 branches covered.">    } else if (toCompare instanceof NumberValidationRule) {</span>
-<span class="fc" id="L83">      final NumberValidationRule that = (NumberValidationRule&lt;?&gt;) toCompare;</span>
+<span class="fc" id="L83">      final NumberValidationRule&lt;?&gt; that = (NumberValidationRule&lt;?&gt;) toCompare;</span>
 <span class="fc bfc" id="L84" title="All 2 branches covered.">      result = super.equals(toCompare)</span>
 <span class="pc bpc" id="L85" title="1 of 2 branches missed.">        &amp;&amp; Objects.equals(this.getMaximumValue(), that.getMaximumValue())</span>
 <span class="pc bpc" id="L86" title="1 of 2 branches missed.">        &amp;&amp; Objects.equals(this.getMinimumValue(), that.getMinimumValue())</span>

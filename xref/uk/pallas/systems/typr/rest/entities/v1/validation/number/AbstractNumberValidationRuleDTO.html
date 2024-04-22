@@ -88,7 +88,7 @@
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>      <strong class="jxr_keyword">if</strong> (<strong class="jxr_keyword">this</strong> == toCompare) {
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>        result = <strong class="jxr_keyword">true</strong>;
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>      } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (toCompare instanceof <a name="NumberValidationRule" href="../../../../../../../../../uk/pallas/systems/typr/entities/v1/validation/number/NumberValidationRule.html#NumberValidationRule">NumberValidationRule</a>) {
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>        <strong class="jxr_keyword">final</strong> <a name="NumberValidationRule" href="../../../../../../../../../uk/pallas/systems/typr/entities/v1/validation/number/NumberValidationRule.html#NumberValidationRule">NumberValidationRule</a> that = (NumberValidationRule&lt;?&gt;) toCompare;
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>        <strong class="jxr_keyword">final</strong> NumberValidationRule&lt;?&gt; that = (NumberValidationRule&lt;?&gt;) toCompare;
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>        result = <strong class="jxr_keyword">super</strong>.equals(toCompare)
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>          &amp;&amp; Objects.equals(<strong class="jxr_keyword">this</strong>.getMaximumValue(), that.getMaximumValue())
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          &amp;&amp; Objects.equals(<strong class="jxr_keyword">this</strong>.getMinimumValue(), that.getMinimumValue())
