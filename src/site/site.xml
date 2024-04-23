@@ -30,7 +30,7 @@
             </twitter>
             <gitHub>
                 <organisation>PallasSystems</organisation>
-                <repository>maven-parent</repository>
+                <repository>typr</repository>
             </gitHub>
             <navbar>
                 <enabled>true</enabled>
