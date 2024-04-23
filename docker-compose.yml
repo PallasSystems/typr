@@ -2,102 +2,39 @@ version: "3.4"
 
 services:
   typr:
-    container_name: typr
-    image: ghcr.io/${github_organisation:-pallassystems}/typr:${TYPR_VERSION:-0.1.1-SNAPSHOT}
-    ports:
-      - 8090:8080
-    environment:
-      spring.datasource.url: "jdbc:postgresql://${TYPR_POSTGRES_HOSTNAME:-typr_database}:${TYPR_POSTGRES_PORT:-5432}/${TYPR_POSTGRES_DB:-typr}"
-      spring.datasource.username: ${TYPR_POSTGRES_USER:-typrUsr}
-      spring.datasource.password: ${TYPR_POSTGRES_PASSWORD:-ChangeMe}
-      spring.datasource.driver-class-name: "org.postgresql.Driver"
-      spring.jpa.database-platform: "org.hibernate.dialect.PostgreSQLDialect"
-      spring.jpa.hibernate.ddl-auto: "create-drop"
-      spring.jpa.show-sql: "false"
-      spring.jpa.defer-datasource-initialization: "true"
-      spring.sql.init.mode: "always"
-    networks:
-      - frontend
-      - typr_backend
+    extends:
+      file: compose/compose.typr.yml
+      service: typr
     depends_on:
       - typr_database
-      # Added to ensure security is embedded within the application
-      - keycloak
 
   typr_database:
-    container_name: typr-db
-    image: postgres:${TYPR_POSTGRES_TAG:-16-alpine}
-    environment:
-      POSTGRES_DB: ${TYPR_POSTGRES_DB:-typr}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${TYPR_POSTGRES_PASSWORD:-ChangeMe}
-      POSTGRES_USER: ${TYPR_POSTGRES_USER:-typrUsr}
-    restart: always
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "pg_isready --dbname=${TYPR_POSTGRES_DB:-typr} --username=${TYPR_POSTGRES_USER:-typrUsr}",
-        ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    networks:
-      - typr_backend
-    ports:
-      - "${TYPR_POSTGRES_PORT:-5432}:5432"
-    volumes:
-      - typr-data:/var/lib/postgresql/data:rw
+    extends:
+      file: compose/compose.typr.yml
+      service: typr_database
 
-  # KeyCloak has been added to ensure typr embeds an identity providers
   keycloak:
-    container_name: keycloak
-    image: quay.io/keycloak/keycloak:23.0.6
-    ports:
-      - 8100:8080
-    command: start
-    environment:
-      KC_HOSTNAME: localhost
-      KC_HOSTNAME_PORT: 8100
-      KC_HOSTNAME_STRICT_BACKCHANNEL: "false"
-      KC_HTTP_ENABLED: "true"
-      KC_HOSTNAME_STRICT_HTTPS: "false"
-      KC_HEALTH_ENABLED: "true"
-      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN-keycloak}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD-ChangeMe}
-      KC_DB: postgres
-      KC_DB_URL: "jdbc:postgresql://${KEYCLOAK_POSTGRES_HOSTNAME:-keycloak_database}/${KEYCLOAK_POSTGRES_DB:-keycloak}"
-      KC_DB_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD:-ChangeMe}
-      KC_DB_USERNAME: ${KEYCLOAK_POSTGRES_USER:-keycloakUsr}
-    restart: "always"
-    depends_on:
-      - keycloak_database
+    extends:
+      file: compose/compose.keycloak.yml
+      service: keycloak
     networks:
       - frontend
-      - keycloak_backend
-
-  keycloak_database:
-    container_name: keycloak-db
-    image: postgres:${KEYCLOAK_POSTGRES_TAG:-16-alpine}
-    environment:
-      POSTGRES_DB: ${KEYCLOAK_POSTGRES_DB:-keycloak}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD:-ChangeMe}
-      POSTGRES_USER: ${KEYCLOAK_POSTGRES_USER:-keycloakUsr}
-    restart: always
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "pg_isready --dbname=${KEYCLOAK_POSTGRES_DB:-keycloak} --username=${KEYCLOAK_POSTGRES_USER:-keycloakUsr}",
-        ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    networks:
       - keycloak_backend
     volumes:
       - keycloak-data:/var/lib/postgresql/data:rw
+      - type: bind
+        source: ./compose/keycloak/typr.json
+        target: /opt/keycloak/data/import/typr.json
+        read_only: false
+    depends_on:
+      - keycloak_database
+
+  keycloak_database:
+    extends:
+      file: compose/compose.keycloak.yml
+      service: keycloak_database
+    networks:
+      - keycloak_backend
 
 networks:
   frontend:
@@ -109,5 +46,5 @@ networks:
     internal: true
 
 volumes:
-  typr-data:
   keycloak-data:
+  typr-data:

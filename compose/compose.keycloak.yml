@@ -1,0 +1,53 @@
+version: "3.4"
+
+services:
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:24.0
+    ports:
+      - 8100:8080
+    command: start
+    environment:
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8100
+      KC_HOSTNAME_STRICT_BACKCHANNEL: "false"
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT_HTTPS: "false"
+      KC_HEALTH_ENABLED: "true"
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN-keycloak}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD-ChangeMe}
+      KC_DB: postgres
+      KC_DB_URL: "jdbc:postgresql://${KEYCLOAK_POSTGRES_HOSTNAME:-keycloak_database}/${KEYCLOAK_POSTGRES_DB:-keycloak}"
+      KC_DB_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD:-ChangeMe}
+      KC_DB_USERNAME: ${KEYCLOAK_POSTGRES_USER:-keycloakUsr}
+    restart: "always"
+    networks:
+      - frontend
+      - keycloak_backend
+
+  keycloak_database:
+    container_name: keycloak-db
+    image: postgres:${KEYCLOAK_POSTGRES_TAG:-16-alpine}
+    environment:
+      POSTGRES_DB: ${KEYCLOAK_POSTGRES_DB:-keycloak}
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD:-ChangeMe}
+      POSTGRES_USER: ${KEYCLOAK_POSTGRES_USER:-keycloakUsr}
+    restart: always
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready --dbname=${KEYCLOAK_POSTGRES_DB:-keycloak} --username=${KEYCLOAK_POSTGRES_USER:-keycloakUsr}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - keycloak_backend
+    volumes:
+      - keycloak-data:/var/lib/postgresql/data:rw
+      - type: bind
+        source: ./keycloak/typr.json
+        target: /opt/keycloak/data/import/typr.json
+        read_only: false

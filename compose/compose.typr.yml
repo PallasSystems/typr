@@ -1,0 +1,46 @@
+version: "3.4"
+
+services:
+  typr:
+    container_name: typr
+    image: ghcr.io/${github_organisation:-pallassystems}/typr:${TYPR_VERSION:-0.1.1-SNAPSHOT}
+    ports:
+      - 8090:8080
+    environment:
+      spring.datasource.url: "jdbc:postgresql://${TYPR_POSTGRES_HOSTNAME:-typr_database}:${TYPR_POSTGRES_PORT:-5432}/${TYPR_POSTGRES_DB:-typr}"
+      spring.datasource.username: ${TYPR_POSTGRES_USER:-typrUsr}
+      spring.datasource.password: ${TYPR_POSTGRES_PASSWORD:-ChangeMe}
+      spring.datasource.driver-class-name: "org.postgresql.Driver"
+      spring.jpa.database-platform: "org.hibernate.dialect.PostgreSQLDialect"
+      spring.jpa.hibernate.ddl-auto: "create-drop"
+      spring.jpa.show-sql: "false"
+      spring.jpa.defer-datasource-initialization: "true"
+      spring.sql.init.mode: "always"
+    networks:
+      - frontend
+      - typr_backend
+
+  typr_database:
+    container_name: typr-db
+    image: postgres:${TYPR_POSTGRES_TAG:-16-alpine}
+    environment:
+      POSTGRES_DB: ${TYPR_POSTGRES_DB:-typr}
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: ${TYPR_POSTGRES_PASSWORD:-ChangeMe}
+      POSTGRES_USER: ${TYPR_POSTGRES_USER:-typrUsr}
+    restart: always
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready --dbname=${TYPR_POSTGRES_DB:-typr} --username=${TYPR_POSTGRES_USER:-typrUsr}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - typr_backend
+    ports:
+      - "${TYPR_POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - typr-data:/var/lib/postgresql/data:rw
