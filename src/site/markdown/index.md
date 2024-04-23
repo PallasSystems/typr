@@ -4,7 +4,7 @@
   </div>
   <div class="my-2 row">
     <h5>Typr is a catalog of fields types and schemas to enable the validation of incoming data and support dynamic translation between various data formats.</h5>
-    <h4>Typr is built on Spring Framework and Spring Data, exposing type and schema information through a series of REST Controllers and so can be ported to a variety of databases and security mechanisims.</h4>
+    <h5>Typr is built on Spring Framework and Spring Data, exposing type and schema information through a series of REST Controllers and so can be ported to a variety of databases and security mechanisims.</h5>
   </div>
   <div class="row">
     <div class="col">
@@ -30,6 +30,6 @@
     </div>
   </div>
   <div class="my-2 row">
-    <p>Current Version: 1.0.8</p>
+    <p>Current Version: 0.1.3</p>
   </div>
 </div>
