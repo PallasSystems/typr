@@ -40,7 +40,7 @@
         <!-- Plugin dependencies. -->
         <org.springdoc.maven.plugin.version>1.4</org.springdoc.maven.plugin.version>
         <com.github.therapi.version>0.15.0</com.github.therapi.version>
-        <docker-maven-plugin.version>0.44.0</docker-maven-plugin.version>
+        <docker-maven-plugin.version>0.45.0</docker-maven-plugin.version>
         <!-- Dependencies. -->
         <org.springframework.boot.version>3.2.5</org.springframework.boot.version>
         <org.springdoc.version>2.6.0</org.springdoc.version>
