@@ -24,6 +24,10 @@ services:
     networks:
       - frontend
       - keycloak_backend
+    volumes:
+      - type: bind
+        source: ./keycloak/typr.json
+        target: /opt/keycloak/data/import/typr.json
 
   keycloak_database:
     container_name: keycloak-db
@@ -47,7 +51,3 @@ services:
       - keycloak_backend
     volumes:
       - keycloak-data:/var/lib/postgresql/data:rw
-      - type: bind
-        source: ./keycloak/typr.json
-        target: /opt/keycloak/data/import/typr.json
-        read_only: false
