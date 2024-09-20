@@ -42,7 +42,7 @@
         <com.github.therapi.version>0.15.0</com.github.therapi.version>
         <docker-maven-plugin.version>0.45.0</docker-maven-plugin.version>
         <!-- Dependencies. -->
-        <org.springframework.boot.version>3.3.2</org.springframework.boot.version>
+        <org.springframework.boot.version>3.3.4</org.springframework.boot.version>
         <org.springdoc.version>2.6.0</org.springdoc.version>
         <com.neovisionaries.version>1.29</com.neovisionaries.version>
         <si.uom.version>2.1</si.uom.version>
