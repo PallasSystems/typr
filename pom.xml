@@ -50,7 +50,7 @@
         <javax.servlet.version>4.0.1</javax.servlet.version>
         <!-- Database dependencies. -->
         <org.postgresql.version>42.7.4</org.postgresql.version>
-        <org.hsqldb.version>2.7.3</org.hsqldb.version>
+        <org.hsqldb.version>2.7.4</org.hsqldb.version>
         <!-- Test Dependencies. -->
         <org.mockito.version>5.12.0</org.mockito.version>
     </properties>
