@@ -45,7 +45,7 @@
         <org.springframework.boot.version>3.3.5</org.springframework.boot.version>
         <org.springdoc.version>2.6.0</org.springdoc.version>
         <com.neovisionaries.version>1.29</com.neovisionaries.version>
-        <si.uom.version>2.1</si.uom.version>
+        <si.uom.version>2.2</si.uom.version>
         <javax.measure.version>2.2</javax.measure.version>
         <javax.servlet.version>4.0.1</javax.servlet.version>
         <!-- Database dependencies. -->
