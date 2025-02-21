@@ -21,11 +21,3 @@ jobs:
     secrets: inherit
     with:
       JAVA_VERSION: 21
-      MAVEN_CLI_OPTS: |-
-        --batch-mode \
-        --show-version \
-        -DaltDeploymentRepository=github::https://maven.pkg.github.com/PallasSystems/typr/ \
-        -DaltReleaseDeploymentRepository=github::https://maven.pkg.github.com/PallasSystems/typr/ \          
-        -DaltSnapshotDeploymentRepository=github::https://maven.pkg.github.com/PallasSystems/typr/ \
-        -DconnectionUrl=github::https://github.com/PallasSystems/typr \
-        -DdeveloperConnectionUrl=github::https://github.com/PallasSystems/typr.git
