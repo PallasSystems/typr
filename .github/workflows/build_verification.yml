@@ -7,8 +7,15 @@ on:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  actions: read
+  checks: write
+  issues: read
+  packages: read
+  pull-requests: write
+
 jobs:
   call-build-verification-workflow:
     uses: PallasSystems/infrastructure-ci/.github/workflows/java_maven_workflow.yml@main
     secrets: inherit
-    
