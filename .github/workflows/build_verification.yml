@@ -22,7 +22,8 @@ jobs:
     with:
       JAVA_VERSION: 21
       MAVEN_CLI_OPTS: |-
-        --settings /tmp/java_maven_settings.xml \
+        --batch-mode \
+        --show-version \
         -DaltDeploymentRepository=github::https://maven.pkg.github.com/PallasSystems/typr/ \
         -DaltReleaseDeploymentRepository=github::https://maven.pkg.github.com/PallasSystems/typr/ \          
         -DaltSnapshotDeploymentRepository=github::https://maven.pkg.github.com/PallasSystems/typr/ \
