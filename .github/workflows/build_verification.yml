@@ -9,5 +9,5 @@ on:
 
 jobs:
   call-workflow-passing-data:
-    uses: PallasSystems/infrastructure-ci/.github/workflows/java_maven_build_verification.yml@main
+    uses: PallasSystems/infrastructure-ci/.github/workflows/java_maven_workflow.yml@main
     secrets: inherit
