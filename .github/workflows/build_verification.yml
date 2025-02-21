@@ -22,3 +22,13 @@ jobs:
   call-build-verification-workflow:
     uses: PallasSystems/infrastructure-ci/.github/workflows/java_maven_workflow.yml@main
     secrets: inherit
+    with:
+      MAVEN_CLI_OPTS: 
+        --batch-mode \
+        --show-version \
+        --settings /tmp/java_maven_settings.xml \
+        -DaltDeploymentRepository=github::https://maven.pkg.github.com/PallasSystems/typr/ \
+        -DaltReleaseDeploymentRepository=github::https://maven.pkg.github.com/PallasSystems/typr/ \          
+        -DaltSnapshotDeploymentRepository=github::https://maven.pkg.github.com/PallasSystems/typr/ \
+        -DconnectionUrl=github::https://github.com/PallasSystems/typr \
+        -DdeveloperConnectionUrl=github::https://github.com/PallasSystems/typr.git
