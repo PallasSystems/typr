@@ -15,15 +15,13 @@ permissions:
   packages: read
   pull-requests: write
 
-env:
-  JAVA_VERSION: 21
-
 jobs:
   call-build-verification-workflow:
     uses: PallasSystems/infrastructure-ci/.github/workflows/java_maven_workflow.yml@main
     secrets: inherit
     with:
-      MAVEN_CLI_OPTS: 
+      JAVA_VERSION: 21
+      MAVEN_CLI_OPTS: |-
         --batch-mode \
         --show-version \
         --settings /tmp/java_maven_settings.xml \
