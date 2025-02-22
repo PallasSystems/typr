@@ -1,4 +1,4 @@
-name: Build Verification of Node.JS project
+name: Build Verification of Java/Maven project
 
 on:
   push:
