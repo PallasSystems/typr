@@ -282,7 +282,7 @@
 <tr class="b">
 <td>39</td>
 <td>0</td>
-<td>33</td>
+<td>44</td>
 <td>0</td></tr></table></section><section><a id="Files"></a>
 <h2>Files</h2>
 <table class="table table-striped">
@@ -339,7 +339,7 @@
 <tr class="a">
 <td><a href="#uk.2Fpallas.2Fsystems.2Ftypr.2Fservices.2Fimpl.2FUnitsServiceImpl.java">uk/pallas/systems/typr/services/impl/UnitsServiceImpl.java</a></td>
 <td>0</td>
-<td>2</td>
+<td>13</td>
 <td>0</td></tr></table></section><section><a id="Rules"></a>
 <h2>Rules</h2>
 <table class="table table-striped">
@@ -355,27 +355,39 @@
 <td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
 <tr class="a">
 <td></td>
-<td><a class="externalLink" href="https://checkstyle.org/checks/coding/hiddenfield.html">HiddenField</a></td>
-<td>1</td>
-<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
-<tr class="b">
-<td></td>
-<td><a class="externalLink" href="https://checkstyle.org/checks/coding/magicnumber.html">MagicNumber</a></td>
-<td>2</td>
-<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
-<tr class="a">
-<td></td>
-<td><a class="externalLink" href="https://checkstyle.org/checks/coding/missingctor.html">MissingCtor</a></td>
+<td><a class="externalLink" href="https://checkstyle.org/checks/coding/finallocalvariable.html">FinalLocalVariable</a>
+<ul>
+<li>tokens: <code>&quot;VARIABLE_DEF,PARAMETER_DEF&quot;</code></li></ul></td>
 <td>4</td>
 <td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
 <tr class="b">
 <td></td>
+<td><a class="externalLink" href="https://checkstyle.org/checks/coding/hiddenfield.html">HiddenField</a></td>
+<td>1</td>
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
+<tr class="a">
+<td></td>
+<td><a class="externalLink" href="https://checkstyle.org/checks/coding/magicnumber.html">MagicNumber</a></td>
+<td>2</td>
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
+<tr class="b">
+<td></td>
+<td><a class="externalLink" href="https://checkstyle.org/checks/coding/missingctor.html">MissingCtor</a></td>
+<td>4</td>
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
+<tr class="a">
+<td></td>
 <td><a class="externalLink" href="https://checkstyle.org/checks/coding/multiplestringliterals.html">MultipleStringLiterals</a></td>
 <td>2</td>
 <td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
-<tr class="a">
+<tr class="b">
 <td>design</td>
 <td><a class="externalLink" href="https://checkstyle.org/checks/design/hideutilityclassconstructor.html">HideUtilityClassConstructor</a></td>
+<td>1</td>
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
+<tr class="a">
+<td>imports</td>
+<td><a class="externalLink" href="https://checkstyle.org/checks/imports/unusedimports.html">UnusedImports</a></td>
 <td>1</td>
 <td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
 <tr class="b">
@@ -397,7 +409,7 @@
 <tr class="b">
 <td>javadoc</td>
 <td><a class="externalLink" href="https://checkstyle.org/checks/javadoc/invalidjavadocposition.html">InvalidJavadocPosition</a></td>
-<td>1</td>
+<td>3</td>
 <td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
 <tr class="a">
 <td></td>
@@ -421,6 +433,11 @@
 <td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
 <tr class="a">
 <td>misc</td>
+<td><a class="externalLink" href="https://checkstyle.org/checks/misc/finalparameters.html">FinalParameters</a></td>
+<td>4</td>
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr>
+<tr class="b">
+<td></td>
 <td><a class="externalLink" href="https://checkstyle.org/checks/misc/uncommentedmain.html">UncommentedMain</a></td>
 <td>1</td>
 <td><img src="images/icon_warning_sml.gif" />&#160;Warning</td></tr></table></section><section><a id="Details"></a>
@@ -693,16 +710,82 @@
 <th>Line</th></tr>
 <tr class="b">
 <td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
+<td>imports</td>
+<td>UnusedImports</td>
+<td>Unused import - javax.measure.quantity.Length.</td>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L9">9</a></td></tr>
+<tr class="a">
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
 <td>javadoc</td>
-<td>JavadocMethod</td>
-<td>Unused @param tag for 'units'.</td>
-<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L58">58</a></td></tr>
+<td>InvalidJavadocPosition</td>
+<td>Javadoc comment is placed in the wrong location.</td>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L67">67</a></td></tr>
+<tr class="b">
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
+<td>javadoc</td>
+<td>InvalidJavadocPosition</td>
+<td>Javadoc comment is placed in the wrong location.</td>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L73">73</a></td></tr>
+<tr class="a">
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
+<td>misc</td>
+<td>FinalParameters</td>
+<td>Parameter value should be final.</td>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L89">89</a></td></tr>
+<tr class="b">
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
+<td>coding</td>
+<td>FinalLocalVariable</td>
+<td>Variable 'value' should be declared final.</td>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L89">89</a></td></tr>
+<tr class="a">
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
+<td>misc</td>
+<td>FinalParameters</td>
+<td>Parameter name should be final.</td>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L89">89</a></td></tr>
+<tr class="b">
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
+<td>coding</td>
+<td>FinalLocalVariable</td>
+<td>Variable 'name' should be declared final.</td>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L89">89</a></td></tr>
+<tr class="a">
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
+<td>misc</td>
+<td>FinalParameters</td>
+<td>Parameter text should be final.</td>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L89">89</a></td></tr>
+<tr class="b">
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
+<td>coding</td>
+<td>FinalLocalVariable</td>
+<td>Variable 'text' should be declared final.</td>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L89">89</a></td></tr>
+<tr class="a">
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
+<td>misc</td>
+<td>FinalParameters</td>
+<td>Parameter isLabel should be final.</td>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L89">89</a></td></tr>
+<tr class="b">
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
+<td>coding</td>
+<td>FinalLocalVariable</td>
+<td>Variable 'isLabel' should be declared final.</td>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L89">89</a></td></tr>
 <tr class="a">
 <td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
 <td>javadoc</td>
 <td>JavadocMethod</td>
+<td>Unused @param tag for 'units'.</td>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L112">112</a></td></tr>
+<tr class="b">
+<td><img src="images/icon_warning_sml.gif" />&#160;Warning</td>
+<td>javadoc</td>
+<td>JavadocMethod</td>
 <td>Expected @param tag for 'values'.</td>
-<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L60">60</a></td></tr></table></section></section></section>
+<td><a href="./xref/uk/pallas/systems/typr/services/impl/UnitsServiceImpl.html#L114">114</a></td></tr></table></section></section></section>
       </div>
     </main>
 
