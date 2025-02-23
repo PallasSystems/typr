@@ -8,7 +8,7 @@
     </parent>
     <groupId>uk.pallas.systems.typr</groupId>
     <artifactId>parent</artifactId>
-    <version>0.1.5-SNAPSHOT</version>
+    <version>0.1.6-SNAPSHOT</version>
     <packaging>pom</packaging>
     <url>https://pallassystems.github.io/typr/</url>
     <name>Typr</name>
