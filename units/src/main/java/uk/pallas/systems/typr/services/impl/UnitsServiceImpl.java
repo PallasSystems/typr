@@ -6,11 +6,17 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.measure.Unit;
 import javax.measure.quantity.Frequency;
+import javax.measure.quantity.Length;
+import javax.measure.quantity.Speed;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
 import si.uom.NonSI;
 import si.uom.SI;
+import tech.units.indriya.format.SimpleUnitFormat;
 import tech.units.indriya.unit.Units;
 import uk.pallas.systems.typr.entities.v1.FieldDefinition;
 import uk.pallas.systems.typr.entities.v1.validation.ValidationRule;
@@ -49,6 +55,54 @@ public class UnitsServiceImpl implements UnitsService {
     if (null != unitsInstance) {
       this.processUnits(unitsInstance.getUnits());
     }
+
+    this.addNonSiCommonUnits();
+  }
+
+  /**
+   * The measurement library has removed some units from its design. This adds some of those
+   * units back in.
+   */
+  private void addNonSiCommonUnits() {
+    /**
+     * A unit of length equal to <code>1852.0 m</code> (standard name
+     * <code>nmi</code>).
+     */
+    final Unit<?> nauticalMile = this.addUnit(SI.METRE.multiply(1852), "Nautical mile", "nmi", true);
+
+    /**
+     * A unit of velocity expressing the number of {@link #NAUTICAL_MILE nautical
+     * miles} per {@link #HOUR hour} (abbreviation <code>kn</code>).
+     */
+    this.addUnit(nauticalMile.divide(SI.HOUR).asType(Speed.class), "Knot", "kn", true);
+  }
+
+  /**
+   * Used to add a unit into the Unit Service for other components to make use of.
+   * 
+   * @param value the unit to be added to the service.
+   * @param name the name of the unit
+   * @param text the unit descriptor (e.g. kph)
+   * @param isLabel is there a unit descriptor.
+   * @return the reference to the unit that was supplied.
+   */
+  private Unit<?> addUnit(Unit<?> value, String name, String text, boolean isLabel) {
+
+    if (null == value) {
+      LOGGER.error("addUnit - Called Measure Unit library and did not get an associated units");
+    } else {
+      if (isLabel && StringUtils.hasText(text)) {
+        SimpleUnitFormat.getInstance().label(value, text);
+      } 
+    
+      if (StringUtils.hasText(name)) {
+        this.units.put(name, value);
+      } else {
+        this.units.put(value.toString(), value);
+      }
+    }
+
+    return value;
   }
 
   /**
