@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="generator" content="#generatedBy()" />
 
-    <title>Typr – Software Development Workflow</title>
+    <title>Software Development Workflow – Typr</title>
 
         <link rel="icon" href="../.././img/favicons/favicon.ico">
     <!-- CSS Stylesheets, site.css is included so downstream projects can override them as appropriate. -->
@@ -157,7 +157,7 @@
                                       <li class="nav-item dropdown-item">
                                                       <a href="../../xref-test/index.html" id="Test Source XrefDropdownLink" title="Test Source Xref"  class="dropdown-item" >Test Source Xref</a>                          </li>
                                       <li class="nav-item dropdown-item">
-                                                      <a href="../../surefire-report.html" id="SurefireDropdownLink" title="Surefire"  class="dropdown-item" >Surefire</a>                          </li>
+                                                      <a href="../../surefire.html" id="SurefireDropdownLink" title="Surefire"  class="dropdown-item" >Surefire</a>                          </li>
                                   </ul>
               </li>
                               </ul>
@@ -245,7 +245,7 @@
                                       <li class="nav-item dropdown-item">
                                                       <a href="../../xref-test/index.html" id="Test Source XrefDropdownLink" title="Test Source Xref"  class="dropdown-item" >Test Source Xref</a>                          </li>
                                       <li class="nav-item dropdown-item">
-                                                      <a href="../../surefire-report.html" id="SurefireDropdownLink" title="Surefire"  class="dropdown-item" >Surefire</a>                          </li>
+                                                      <a href="../../surefire.html" id="SurefireDropdownLink" title="Surefire"  class="dropdown-item" >Surefire</a>                          </li>
                                   </ul>
               </li>
                               </ul>
@@ -269,13 +269,13 @@
         <div class="container mt-3 rounded">
                   
     
-    <section>
+    <section><a id="Software_Development_Workflow"></a>
 <h1>Software Development Workflow</h1>
 <p>This section will outline how software will be developed, all feature development will take place in a dedicated branch instead of the main branch.</p>
-<p>The dedicated branch will be generated from a feature/defect ticket (e.g. using the create branch functionality within Github). The feature branch will be based on the <code>main</code> branch and must go through a pull request before the contents are merged into the <code>main</code> branch.</p><section>
+<p>The dedicated branch will be generated from a feature/defect ticket (e.g. using the create branch functionality within Github). The feature branch will be based on the <code>main</code> branch and must go through a pull request before the contents are merged into the <code>main</code> branch.</p><section><a id="Pull_Requests"></a>
 <h2>Pull Requests</h2>
 <p>Once someone completes a feature it should not be immediately merged into <code>main</code>, instead the appropriate feature branch should be pushed to the GitHub repository and a Pull Request to merge the feature into <code>main</code> branch should be opened.</p>
-<p>Developers within the team should then review the pull request and provide feedback and changes should be made based on this. The feature branch should not be merged into <code>main</code> until at least 1 team member has approved it. All Pull Requests should be built and analysed by the appropriate Continious Integration (CI) with feedback on the changed code being supplied to the Pull Request. No feature branch should be merged into <code>main</code> unless it successfully builds with no test failures.</p><section>
+<p>Developers within the team should then review the pull request and provide feedback and changes should be made based on this. The feature branch should not be merged into <code>main</code> until at least 1 team member has approved it. All Pull Requests should be built and analysed by the appropriate Continious Integration (CI) with feedback on the changed code being supplied to the Pull Request. No feature branch should be merged into <code>main</code> unless it successfully builds with no test failures.</p><section><a id="Build_Verification"></a>
 <h3>Build Verification</h3>
 <p>The CI will run the following code analysis tools on the source code and collect the results within SonarCloud. If Certain rule tolerances are breached SonarCloud should cause the build to fail.</p>
 <table class="table table-striped">
@@ -302,7 +302,7 @@
 <td>SpotBugs</td>
 <td>Title</td></tr></tbody>
 </table>
-</section><section>
+</section><section><a id="Peer_Review_Review"></a>
 <h3>Peer Review Review</h3>
 <p>Code review should focus on the following:</p></section></section></section>
       </div>
@@ -350,7 +350,7 @@
             <div id="copyrightDiv" class="pt-3">
               <p>&#169;
                   
-          2022&#x2013;2024
+          2022&#x2013;2025
     
                   <a href="https://www.pallas.uk">Pallas Systems</a>
                           </p>

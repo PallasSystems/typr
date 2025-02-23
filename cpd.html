@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="generator" content="#generatedBy()" />
 
-    <title>Typr – CPD Results</title>
+    <title>CPD Results – Typr</title>
 
         <link rel="icon" href="./img/favicons/favicon.ico">
     <!-- CSS Stylesheets, site.css is included so downstream projects can override them as appropriate. -->
@@ -157,7 +157,7 @@
                                       <li class="nav-item dropdown-item">
                                                       <a href="xref-test/index.html" id="Test Source XrefDropdownLink" title="Test Source Xref"  class="dropdown-item" >Test Source Xref</a>                          </li>
                                       <li class="nav-item dropdown-item">
-                                                      <a href="surefire-report.html" id="SurefireDropdownLink" title="Surefire"  class="dropdown-item" >Surefire</a>                          </li>
+                                                      <a href="surefire.html" id="SurefireDropdownLink" title="Surefire"  class="dropdown-item" >Surefire</a>                          </li>
                                   </ul>
               </li>
                               </ul>
@@ -245,7 +245,7 @@
                                       <li class="nav-item dropdown-item">
                                                       <a href="xref-test/index.html" id="Test Source XrefDropdownLink" title="Test Source Xref"  class="dropdown-item" >Test Source Xref</a>                          </li>
                                       <li class="nav-item dropdown-item">
-                                                      <a href="surefire-report.html" id="SurefireDropdownLink" title="Surefire"  class="dropdown-item" >Surefire</a>                          </li>
+                                                      <a href="surefire.html" id="SurefireDropdownLink" title="Surefire"  class="dropdown-item" >Surefire</a>                          </li>
                                   </ul>
               </li>
                               </ul>
@@ -271,7 +271,7 @@
     
     <section>
 <h1>CPD Results</h1><a id="CPD_Results"></a>
-<p>The following document contains the results of PMD's  <a class="externalLink" href="https://pmd.github.io/latest/pmd_userdocs_cpd.html">CPD</a> 6.55.0.</p><section>
+<p>The following document contains the results of PMD's  <a class="externalLink" href="https://pmd.github.io/latest/pmd_userdocs_cpd.html">CPD</a> 7.3.0.</p><section>
 <h2>Duplications</h2><a id="Duplications"></a>
 <table class="table table-striped">
 <tr class="a">
@@ -288,7 +288,6 @@
 <td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/validation/number/AbstractNumberValidationRuleDTO.html#L84">84</a></td></tr>
 <tr class="b">
 <td colspan="3" style="text-align: left;">
-<div class="verbatim">
 <pre>result = super.equals(toCompare)
         &amp;&amp; Objects.equals(this.getMaximumValue(), that.getMaximumValue())
         &amp;&amp; Objects.equals(this.getMinimumValue(), that.getMinimumValue())
@@ -415,7 +414,7 @@
   public void setUnit(final String unitName) {
     this.unit = null == unitName || unitName.isBlank() ? ValidationRuleConstants.NO_UNITS : unitName;
   }
-}</pre></div></td></tr></table>
+}</pre></td></tr></table>
 <table class="table table-striped">
 <tr class="a">
 <th>File</th>
@@ -431,7 +430,6 @@
 <td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/validation/StringValidationRuleDTO.html#L60">60</a></td></tr>
 <tr class="b">
 <td colspan="3" style="text-align: left;">
-<div class="verbatim">
 <pre>public StringValidationRuleDomain(final StringValidationRule data) {
     this(null == data ? null : data.getDescription(), null == data ? null : data.getDetectRegex(),
       null == data ? null : data.getExtractRegex());
@@ -553,7 +551,7 @@
 
     return result;
   }
-}</pre></div></td></tr></table>
+}</pre></td></tr></table>
 <table class="table table-striped">
 <tr class="a">
 <th>File</th>
@@ -569,7 +567,6 @@
 <td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/validation/EnumValidationRuleDTO.html#L51">51</a></td></tr>
 <tr class="b">
 <td colspan="3" style="text-align: left;">
-<div class="verbatim">
 <pre>public EnumValidationRuleDomain(final EnumValidationRule data) {
     this(null == data ? null : data.getDescription(), null == data ? null : data.getEnumerates());
   }
@@ -669,7 +666,7 @@
 
     return result;
   }
-}</pre></div></td></tr></table>
+}</pre></td></tr></table>
 <table class="table table-striped">
 <tr class="a">
 <th>File</th>
@@ -685,7 +682,6 @@
 <td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/validation/TimeValidationRuleDTO.html#L51">51</a></td></tr>
 <tr class="b">
 <td colspan="3" style="text-align: left;">
-<div class="verbatim">
 <pre>public TimeValidationRuleDomain(final TimeValidationRule data) {
     this(null == data ? null : data.getDescription(), null == data ? null : data.getTimePattern());
   }
@@ -771,7 +767,7 @@
 
     return result;
   }
-}</pre></div></td></tr></table>
+}</pre></td></tr></table>
 <table class="table table-striped">
 <tr class="a">
 <th>File</th>
@@ -787,7 +783,6 @@
 <td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/validation/wrapper/CountryCodeRuleWrapperDTO.html#L65">65</a></td></tr>
 <tr class="b">
 <td colspan="3" style="text-align: left;">
-<div class="verbatim">
 <pre>public CountryCodeRuleWrapperDomain(final String code, final ValidationRule validRule) {
 
     this.countryCode = Objects.requireNonNullElse(code, ValidationRuleConstants.DEFAULT_COUNTRY_CODE);
@@ -849,7 +844,7 @@
   public String getDescription() {
 
     final String result;
-    if (null == this.doubleRule) {</pre></div></td></tr></table>
+    if (null == this.doubleRule) {</pre></td></tr></table>
 <table class="table table-striped">
 <tr class="a">
 <th>File</th>
@@ -865,7 +860,6 @@
 <td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/FieldDefinitionDTO.html#L106">106</a></td></tr>
 <tr class="b">
 <td colspan="3" style="text-align: left;">
-<div class="verbatim">
 <pre>this.timeRules = new HashSet&lt;&gt;();
 
     this.setRules(rules);
@@ -890,7 +884,7 @@
         &amp;&amp; Objects.equals(this.getAcronym(), that.getAcronym())
         &amp;&amp; Objects.equals(this.getDescription(), that.getDescription())
         &amp;&amp; this.getCategories().containsAll(that.getCategories())
-        &amp;&amp; that.getCategories().containsAll(this.getCategories())</pre></div></td></tr></table>
+        &amp;&amp; that.getCategories().containsAll(this.getCategories())</pre></td></tr></table>
 <table class="table table-striped">
 <tr class="a">
 <th>File</th>
@@ -906,7 +900,6 @@
 <td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/validation/number/DoubleValidationRuleDTO.html#L43">43</a></td></tr>
 <tr class="b">
 <td colspan="3" style="text-align: left;">
-<div class="verbatim">
 <pre>public DoubleValidationRuleDomain(final Double max, final Double min, final String detailedDescription,
                                     final String unitName) {
     super(max, min, detailedDescription, unitName);
@@ -937,7 +930,7 @@
 
     return result;
   }
-}</pre></div></td></tr></table>
+}</pre></td></tr></table>
 <table class="table table-striped">
 <tr class="a">
 <th>File</th>
@@ -953,7 +946,6 @@
 <td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/validation/AbstractValidationRuleDTO.html#L36">36</a></td></tr>
 <tr class="b">
 <td colspan="3" style="text-align: left;">
-<div class="verbatim">
 <pre>}
 
   /**
@@ -1009,7 +1001,7 @@
   public int hashCode() {
     return Objects.hash(this.getDescription());
   }
-}</pre></div></td></tr></table>
+}</pre></td></tr></table>
 <table class="table table-striped">
 <tr class="a">
 <th>File</th>
@@ -1025,7 +1017,6 @@
 <td><a href="./xref/uk/pallas/systems/typr/rest/entities/v1/validation/number/LongValidationRuleDTO.html#L47">47</a></td></tr>
 <tr class="b">
 <td colspan="3" style="text-align: left;">
-<div class="verbatim">
 <pre>super(max, min, detailedDescription, unit);
   }
 
@@ -1055,7 +1046,7 @@
 
     return result;
   }
-}</pre></div></td></tr></table></section></section>
+}</pre></td></tr></table></section></section>
       </div>
     </main>
 
@@ -1101,7 +1092,7 @@
             <div id="copyrightDiv" class="pt-3">
               <p>&#169;
                   
-          2022&#x2013;2024
+          2022&#x2013;2025
     
                   <a href="https://www.pallas.uk">Pallas Systems</a>
                           </p>
