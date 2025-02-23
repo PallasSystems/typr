@@ -11,7 +11,6 @@
     <version>0.1.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <url>https://pallassystems.github.io/typr/</url>
-
     <name>Typr</name>
     <description>Typr is a simple webservice, its goal is simply to hold information about different fields types, Post Code (UK), Latitude (Decimal Degrees), Mobile Country Code, etc.. The goal is to hold a description for each field, validation information for the field and ideally some logic for translation. One of the key things is a "categories" which can be assigned to a type, this is so I can say something is a good 'edge' or this is 'geo' (comes in handy for downstream processing).</description>
 
